@@ -1,0 +1,233 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Panduan Pemustaka",
+    items: [
+        {"label": "FAQ & Panduan", "href": "/faq"},
+        {"label": "Tata Tertib", "href": "/tata-tertib"},
+        {"label": "Jam Layanan", "href": "/jam-layanan"},
+        {"label": "Kontak", "href": "/kontak"},
+    ]
+};
+
+const faqData = [
+    {
+        kategori: "Keanggotaan & Registrasi",
+        icon: "flat-color-icons:businessman",
+        color: "#168940",
+        bg: "#F0FDF4",
+        items: [
+            {
+                q: "Bagaimana cara mendaftar menjadi anggota perpustakaan?",
+                a: "Daftarkan diri Anda melalui sistem K-Online (Keanggotaan Online). Siapkan scan KTM yang masih berlaku, pas foto 3x4, dan bukti pembayaran SPP semester berjalan. Setelah mengisi formulir online, datang ke Meja Sirkulasi untuk cetak kartu (maks. 3×24 jam kerja).",
+                link: "/k-online",
+                linkLabel: "Buka Halaman K-Online"
+            },
+            {
+                q: "Apakah mahasiswa baru langsung bisa meminjam buku?",
+                a: "Mahasiswa baru perlu mendaftar sebagai anggota terlebih dahulu. Setelah kartu anggota aktif, Anda bisa langsung meminjam buku. Perpustakaan juga menyelenggarakan Kelas Literasi Maba di awal tahun ajaran untuk memandu Anda.",
+                link: "/literasi",
+                linkLabel: "Info Kelas Literasi Maba"
+            },
+            {
+                q: "Berapa lama masa berlaku kartu anggota?",
+                a: "Kartu anggota berlaku selama Anda masih terdaftar sebagai mahasiswa aktif IAIN Sorong. Lakukan perpanjangan setiap awal semester dengan menunjukkan bukti pembayaran SPP terbaru ke Meja Sirkulasi.",
+            },
+        ]
+    },
+    {
+        kategori: "Peminjaman & Pengembalian",
+        icon: "flat-color-icons:bookmark",
+        color: "#3182CE",
+        bg: "#EBF8FF",
+        items: [
+            {
+                q: "Berapa jumlah buku yang bisa dipinjam sekaligus?",
+                a: "Mahasiswa S1 dapat meminjam maksimal 3 eksemplar buku dalam waktu bersamaan. Dosen dan tenaga kependidikan mendapatkan kuota lebih tinggi, yakni hingga 5 eksemplar.",
+            },
+            {
+                q: "Berapa lama masa pinjam buku?",
+                a: "Masa pinjam buku adalah 7 hari kalender. Dapat diperpanjang satu kali selama 7 hari lagi secara mandiri melalui akun SORPUS Anda, selama tidak ada pemustaka lain yang mengantre buku tersebut.",
+                link: "http://opac.iainsorong.ac.id",
+                linkLabel: "Login ke SORPUS untuk Perpanjangan"
+            },
+            {
+                q: "Berapa denda keterlambatan pengembalian buku?",
+                a: "Denda keterlambatan dikenakan sebesar Rp 500 per eksemplar per hari. Pelunasan denda wajib diselesaikan sebelum dapat meminjam buku kembali dan merupakan syarat Bebas Pustaka.",
+            },
+            {
+                q: "Bagaimana cara mengecek apakah buku tersedia sebelum datang ke perpustakaan?",
+                a: "Gunakan SORPUS (OPAC) yang dapat diakses secara online 24 jam. Masukkan judul, pengarang, atau kata kunci buku. Status 'Tersedia' berarti buku ada di rak; 'Dipinjam' berarti sedang dipinjam pemustaka lain.",
+                link: "http://opac.iainsorong.ac.id",
+                linkLabel: "Buka SORPUS/OPAC"
+            },
+        ]
+    },
+    {
+        kategori: "Layanan Digital & E-Resources",
+        icon: "flat-color-icons:globe",
+        color: "#805AD5",
+        bg: "#FAF5FF",
+        items: [
+            {
+                q: "Bagaimana cara mengakses jurnal Scopus dan Sinta secara gratis?",
+                a: "Perpustakaan IAIN Sorong menyediakan akses ke 70 database e-resources dari berbagai penerbit. Akses sebagian database memerlukan jaringan kampus. Untuk panduan lengkap penelusuran jurnal, ikuti Kelas KILAU atau hubungi kami via WhatsApp.",
+                link: "/koleksi/e-resources",
+                linkLabel: "Lihat Semua Database E-Resources"
+            },
+            {
+                q: "Apakah repositori skripsi bisa diakses publik?",
+                a: "Ya. Seluruh skripsi dan karya ilmiah yang telah disetujui dapat diakses bebas melalui repositori institusi IAIN Sorong. Gunakan kotak pencarian di halaman utama website ini untuk mencari judul skripsi.",
+                link: "https://repositori.iainsorong.ac.id/",
+                linkLabel: "Buka Repository Ilmiah"
+            },
+            {
+                q: "Bagaimana cara mengunggah skripsi ke repositori?",
+                a: "Unggah secara mandiri ke sistem EPrints Repositori IAIN Sorong. Setelah unggah, simpan bukti (screenshot/email konfirmasi) sebagai salah satu syarat Bebas Pustaka. Hubungi kami jika mengalami kendala teknis.",
+                link: "/bebas-pustaka",
+                linkLabel: "Syarat Bebas Pustaka"
+            },
+        ]
+    },
+    {
+        kategori: "Bebas Pustaka & Administrasi",
+        icon: "flat-color-icons:todo",
+        color: "#DD6B20",
+        bg: "#FFFAF0",
+        items: [
+            {
+                q: "Apa itu Surat Keterangan Bebas Pustaka?",
+                a: "Surat Keterangan Bebas Pustaka adalah dokumen resmi yang dikeluarkan perpustakaan sebagai bukti bahwa mahasiswa tidak memiliki tanggungan administrasi (pinjaman buku, denda) kepada perpustakaan. Surat ini wajib dilampirkan saat ujian skripsi, wisuda, atau pengajuan cuti akademik.",
+                link: "/bebas-pustaka",
+                linkLabel: "Cara Mengajukan Bebas Pustaka"
+            },
+            {
+                q: "Berapa lama proses penerbitan Surat Bebas Pustaka?",
+                a: "Setelah semua persyaratan dipenuhi dan diverifikasi oleh petugas, Surat Keterangan Bebas Pustaka dapat diterbitkan dalam 1×24 jam hari kerja. Pengajuan dapat dilakukan melalui WhatsApp atau datang langsung ke loket.",
+            },
+            {
+                q: "Apakah Bebas Pustaka bisa diajukan secara online?",
+                a: "Pengajuan awal dapat dilakukan via WhatsApp untuk pengecekan status pinjaman. Namun, penyerahan skripsi fisik dan pengambilan surat tetap harus dilakukan secara langsung di perpustakaan.",
+                link: "https://wa.me/6282194132703",
+                linkLabel: "Chat WhatsApp Perpustakaan"
+            },
+        ]
+    },
+];
+---
+
+<LayoutSidebar title="FAQ & Panduan Pemustaka" sidebarMenu={sidebarMenu}>
+
+    <!-- Hero -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] p-8 mb-12 shadow-sm flex flex-col md:flex-row items-center gap-8 relative overflow-hidden hover:border-[#BBF7D0] transition-all group">
+        <div class="absolute right-0 top-0 w-32 h-32 bg-[#F0FDF4] rounded-bl-full opacity-40"></div>
+        <div class="relative z-10 w-16 h-16 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center shrink-0">
+            <iconify-icon icon="flat-color-icons:faq" width="2rem"></iconify-icon>
+        </div>
+        <div class="relative z-10 flex-1">
+            <div class="text-xs font-bold text-[#168940] uppercase tracking-widest mb-2">Pusat Bantuan Pemustaka</div>
+            <h2 class="text-2xl font-semibold text-[#222222] mb-2 m-0 tracking-tight">Pertanyaan yang Sering Diajukan (FAQ)</h2>
+            <p class="font-serif text-[15px] text-[#444444] m-0 leading-relaxed max-w-2xl">
+                Kami mengumpulkan pertanyaan terbanyak dari pemustaka dan menyusunnya menjadi panduan praktis yang bisa Anda baca kapan saja, 24 jam sehari.
+            </p>
+        </div>
+        <!-- Quick Contact -->
+        <div class="relative z-10 shrink-0">
+            <a href="https://wa.me/6282194132703" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#168940] text-white font-semibold px-5 py-3 rounded-[4px] hover:bg-[#0B4226] transition-colors text-sm no-underline shadow-sm">
+                <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
+                Tanya Langsung
+            </a>
+        </div>
+    </div>
+
+    <!-- FAQ Accordion per Kategori -->
+    <div class="space-y-10">
+        {faqData.map((kategori, ki) => (
+            <div>
+                <!-- Kategori Header -->
+                <div class="flex items-center gap-3 mb-5 pb-4 border-b border-[#dadada]">
+                    <div class="w-10 h-10 rounded-[8px] flex items-center justify-center border border-[#dadada]" style={`background-color: ${kategori.bg};`}>
+                        <iconify-icon icon={kategori.icon} width="1.3rem"></iconify-icon>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#222222] m-0 tracking-tight">{kategori.kategori}</h3>
+                </div>
+
+                <!-- FAQ Items -->
+                <div class="space-y-3">
+                    {kategori.items.map((item, idx) => (
+                        <details class="group bg-white border border-[#dadada] rounded-[8px] overflow-hidden hover:border-[#BBF7D0] transition-colors shadow-sm">
+                            <summary class="flex items-center justify-between gap-4 p-5 cursor-pointer list-none select-none">
+                                <div class="flex items-start gap-3">
+                                    <span class="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0 mt-0.5" style={`background-color: ${kategori.color};`}>{idx + 1}</span>
+                                    <span class="font-semibold text-[#222222] text-sm md:text-base leading-snug">{item.q}</span>
+                                </div>
+                                <iconify-icon icon="lucide:chevron-down" class="text-[#168940] shrink-0 transition-transform duration-200 group-open:rotate-180"></iconify-icon>
+                            </summary>
+                            <div class="px-5 pb-5 pt-0 border-t border-[#dadada]">
+                                <div class="pl-9">
+                                    <p class="font-serif text-[#444444] text-[15px] leading-relaxed m-0 mt-4">{item.a}</p>
+                                    {item.link && (
+                                        <a href={item.link} class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-[#168940] hover:text-[#0B4226] no-underline" target={item.link.startsWith('http') ? '_blank' : '_self'} rel={item.link.startsWith('http') ? 'noopener noreferrer' : ''}>
+                                            <iconify-icon icon="lucide:arrow-right" class="text-[#EAB308]"></iconify-icon>
+                                            {item.linkLabel}
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </details>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <!-- Panduan Video -->
+    <div class="mt-14 bg-white border border-[#dadada] rounded-[8px] p-7 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 bg-[#FFF5F5] border border-red-200 rounded-[8px] flex items-center justify-center">
+                <iconify-icon icon="logos:youtube-icon" width="1.3rem"></iconify-icon>
+            </div>
+            <h3 class="text-xl font-semibold text-[#222222] m-0 tracking-tight">Panduan Video Tutorial</h3>
+        </div>
+        <p class="font-serif text-sm text-[#444444] mb-6 m-0 leading-relaxed max-w-2xl">
+            Kami menyiapkan panduan dalam format video untuk memudahkan Anda menggunakan berbagai fitur perpustakaan. Video tersedia 24 jam di channel YouTube kami.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+                { judul: "Cara Mencari Buku di SORPUS OPAC", durasi: "3:45" },
+                { judul: "Cara Mendaftar Anggota K-Online", durasi: "2:20" },
+                { judul: "Cara Mengakses Database E-Resources", durasi: "5:10" },
+            ].map((video) => (
+                <div class="bg-[#F8FAFC] border border-[#dadada] rounded-[8px] p-4 flex items-center gap-3 hover:border-red-200 hover:bg-[#FFF5F5] transition-all group cursor-pointer">
+                    <div class="w-10 h-10 bg-red-100 rounded-[4px] flex items-center justify-center shrink-0 group-hover:bg-red-600 transition-colors">
+                        <iconify-icon icon="flat-color-icons:play" width="1.2rem"></iconify-icon>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-[#222222] text-sm m-0 leading-snug group-hover:text-red-700 transition-colors">{video.judul}</p>
+                        <span class="font-mono text-xs text-[#888888]">{video.durasi}</span>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+
+    <!-- Masih Ada Pertanyaan? -->
+    <div class="mt-8 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+        <div>
+            <h4 class="font-semibold text-[#222222] m-0 mb-1">Tidak menemukan jawaban yang Anda cari?</h4>
+            <p class="font-serif text-sm text-[#444444] m-0">Tim pustakawan kami siap membantu Anda secara langsung pada jam layanan perpustakaan.</p>
+        </div>
+        <div class="flex gap-3 shrink-0">
+            <a href="https://wa.me/6282194132703" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#168940] text-white font-semibold px-5 py-2.5 rounded-[4px] hover:bg-[#0B4226] transition-colors text-sm no-underline">
+                <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
+                WhatsApp
+            </a>
+            <a href="mailto:perpustakaan@iainsorong.ac.id" class="inline-flex items-center gap-2 bg-white border border-[#dadada] text-[#444444] font-semibold px-5 py-2.5 rounded-[4px] hover:border-[#BBF7D0] transition-colors text-sm no-underline">
+                <iconify-icon icon="flat-color-icons:letter"></iconify-icon>
+                Email
+            </a>
+        </div>
+    </div>
+
+</LayoutSidebar>

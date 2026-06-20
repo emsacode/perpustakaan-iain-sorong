@@ -1,0 +1,139 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Galeri & Media",
+    items: [
+        {"label": "Galeri Foto", "href": "/galeri"},
+        {"label": "Fasilitas Lantai 1", "href": "/fasilitas/lantai-1"},
+        {"label": "Fasilitas Lantai Atas", "href": "/fasilitas/lantai-atas"},
+    ]
+};
+
+// Kategori galeri berdasarkan tipe konten (Placemaking, Interacting, Showcasing)
+const galeriKategori = [
+    {
+        id: "gedung",
+        label: "Gedung & Ruangan",
+        icon: "flat-color-icons:building",
+        deskripsi: "Visualisasi estetik ruang fisik perpustakaan",
+        items: [
+            { judul: "Gedung Perpustakaan IAIN Sorong", kategori: "Placemaking", ikon: "flat-color-icons:company" },
+            { judul: "Ruang Koleksi Lantai Atas", kategori: "Placemaking", ikon: "flat-color-icons:library" },
+            { judul: "Pojok Baca & Lobi", kategori: "Placemaking", ikon: "flat-color-icons:reading" },
+            { judul: "Ruang Home Theater", kategori: "Placemaking", ikon: "flat-color-icons:video-projector" },
+            { judul: "Ruang Multimedia", kategori: "Placemaking", ikon: "flat-color-icons:electronics" },
+            { judul: "Musala & Tempat Wudu", kategori: "Placemaking", ikon: "flat-color-icons:place" },
+        ]
+    },
+    {
+        id: "kegiatan",
+        label: "Kegiatan & Event",
+        icon: "flat-color-icons:camera",
+        deskripsi: "Dokumentasi kegiatan, seminar, dan pelatihan literasi",
+        items: [
+            { judul: "Kelas Literasi Mahasiswa Baru", kategori: "Interacting", ikon: "flat-color-icons:graduation-cap" },
+            { judul: "Coaching Clinic KILAU", kategori: "Interacting", ikon: "flat-color-icons:conference-call" },
+            { judul: "Workshop Manajemen Referensi", kategori: "Interacting", ikon: "flat-color-icons:collaboration" },
+            { judul: "Bedah Buku & Diskusi Panel", kategori: "Interacting", ikon: "flat-color-icons:bookmark" },
+            { judul: "Kunjungan Perpustakaan", kategori: "Interacting", ikon: "flat-color-icons:invite" },
+            { judul: "Pembukaan BI Corner", kategori: "Interacting", ikon: "flat-color-icons:positive-dynamic" },
+        ]
+    },
+    {
+        id: "koleksi",
+        label: "Koleksi Unggulan",
+        icon: "flat-color-icons:bookmark",
+        deskripsi: "Koleksi tematik dan referensi istimewa perpustakaan",
+        items: [
+            { judul: "Koleksi Kitab Kuning", kategori: "Showcasing", ikon: "flat-color-icons:document" },
+            { judul: "Koleksi Referensi Papua", kategori: "Showcasing", ikon: "flat-color-icons:globe" },
+            { judul: "Koleksi Buku Baru", kategori: "Showcasing", ikon: "flat-color-icons:plus" },
+            { judul: "BI Corner IAIN Sorong", kategori: "Showcasing", ikon: "flat-color-icons:ratings" },
+        ]
+    }
+];
+---
+
+<LayoutSidebar title="Galeri Foto" sidebarMenu={sidebarMenu}>
+
+    <!-- Hero Banner -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] p-8 mb-12 shadow-sm flex flex-col md:flex-row items-center gap-8 relative overflow-hidden group hover:border-[#BBF7D0] transition-all">
+        <div class="absolute right-0 top-0 w-48 h-48 bg-[#F0FDF4] rounded-bl-full opacity-40 z-0"></div>
+        <div class="relative z-10 w-16 h-16 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center shrink-0">
+            <iconify-icon icon="flat-color-icons:camera" width="2rem"></iconify-icon>
+        </div>
+        <div class="relative z-10 flex-1">
+            <div class="text-xs font-bold text-[#EAB308] uppercase tracking-widest mb-2">Dokumentasi Visual</div>
+            <h2 class="text-2xl font-semibold text-[#222222] mb-2 m-0 tracking-tight">Galeri Foto Perpustakaan</h2>
+            <p class="font-serif text-[15px] text-[#444444] m-0 leading-relaxed max-w-2xl">
+                Jelajahi keindahan dan kehidupan di Perpustakaan IAIN Sorong — dari suasana ruang baca yang tenang, hingga semangat kegiatan literasi yang menggerakkan civitas akademika.
+            </p>
+        </div>
+    </div>
+
+    <!-- Notice: Foto Asli Dibutuhkan -->
+    <div class="bg-[#FFFBEB] border border-[#FDE68A] rounded-[8px] p-5 mb-10 flex gap-4 items-start shadow-sm">
+        <iconify-icon icon="flat-color-icons:idea" class="shrink-0 mt-0.5"></iconify-icon>
+        <div>
+            <h4 class="font-semibold text-[#92400E] m-0 mb-1">Galeri Foto Sedang Dikembangkan</h4>
+            <p class="font-serif text-sm text-[#78350F] m-0 leading-relaxed">
+                Kami sedang mengumpulkan dokumentasi foto asli gedung dan kegiatan perpustakaan. Untuk sementara, galeri menampilkan kategori dan deskripsi foto yang akan segera tersedia. Hubungi kami untuk menyumbang foto berkualitas tinggi.
+            </p>
+        </div>
+    </div>
+
+    <!-- Galeri per Kategori -->
+    <div class="space-y-12">
+        {galeriKategori.map((kategori) => (
+            <div>
+                <!-- Kategori Header -->
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-[#dadada]">
+                    <div class="w-10 h-10 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center">
+                        <iconify-icon icon={kategori.icon} width="1.3rem"></iconify-icon>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-[#222222] m-0 tracking-tight">{kategori.label}</h3>
+                        <p class="font-serif text-sm text-[#666666] m-0">{kategori.deskripsi}</p>
+                    </div>
+                </div>
+
+                <!-- Grid Foto (Placeholder Cards) -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {kategori.items.map((item) => (
+                        <div class="group bg-white border border-[#dadada] rounded-[8px] overflow-hidden hover:border-[#BBF7D0] hover:shadow-md transition-all cursor-pointer">
+                            <!-- Foto Placeholder -->
+                            <div class="aspect-video bg-[#F8FAFC] flex flex-col items-center justify-center border-b border-[#dadada] group-hover:bg-[#F0FDF4] transition-colors relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#F0FDF4] to-[#F8FAFC] opacity-60"></div>
+                                <iconify-icon icon={item.ikon} width="2.5rem" class="relative z-10 opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"></iconify-icon>
+                                <span class="relative z-10 text-[10px] font-semibold text-[#888888] uppercase tracking-wider mt-2 group-hover:text-[#168940] transition-colors">Foto Segera Hadir</span>
+                            </div>
+                            <!-- Caption -->
+                            <div class="p-3">
+                                <p class="font-semibold text-[#222222] text-sm m-0 leading-snug group-hover:text-[#168940] transition-colors">{item.judul}</p>
+                                <span class="text-[10px] font-semibold text-[#888888] uppercase tracking-wider">{item.kategori}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <!-- CTA Kontribusi Foto -->
+    <div class="mt-14 bg-[#0B4226] rounded-[8px] p-8 text-white flex flex-col md:flex-row items-center gap-8 shadow-sm relative overflow-hidden">
+        <div class="absolute right-0 bottom-0 w-48 h-48 bg-[#168940] rounded-tl-full opacity-20"></div>
+        <div class="relative z-10 flex-1">
+            <div class="text-[#86EFAC] text-xs font-bold uppercase tracking-widest mb-2">Kontribusi Komunitas</div>
+            <h3 class="text-xl font-semibold mb-2 m-0 tracking-tight">Punya Foto Kegiatan Perpustakaan?</h3>
+            <p class="font-serif text-[#BBF7D0] text-sm m-0 leading-relaxed max-w-xl">
+                Kami mengundang civitas akademika IAIN Sorong untuk mengirimkan foto dokumentasi kegiatan perpustakaan. Foto terbaik akan ditampilkan di galeri resmi ini.
+            </p>
+        </div>
+        <a href="mailto:perpustakaan@iainsorong.ac.id?subject=Kontribusi%20Foto%20Galeri" class="relative z-10 shrink-0 inline-flex items-center gap-2 bg-white text-[#0B4226] font-semibold px-6 py-3 rounded-[4px] hover:bg-[#F0FDF4] transition-colors text-sm no-underline">
+            <iconify-icon icon="flat-color-icons:letter"></iconify-icon>
+            Kirim Foto via Email
+        </a>
+    </div>
+
+</LayoutSidebar>

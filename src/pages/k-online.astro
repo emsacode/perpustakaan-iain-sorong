@@ -1,0 +1,81 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Layanan & Koleksi",
+    items: [{"label": "Sistem Otomasi (SORPUS)", "href": "/sorpus"}, {"label": "Keanggotaan Online", "href": "/k-online"}, {"label": "IAIN Sorong Press", "href": "/iainsorong-press"}]
+};
+---
+
+<LayoutSidebar title="Keanggotaan Online" sidebarMenu={sidebarMenu}>
+    
+    <!-- Hero Banner for K-Online -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] overflow-hidden mb-12 shadow-sm relative group hover:border-[#BBF7D0] transition-all flex flex-col md:flex-row">
+        <!-- Decoration -->
+        <div class="absolute right-0 top-0 w-32 h-32 bg-[#F0FDF4] rounded-bl-full opacity-50 z-0"></div>
+        
+        <div class="w-full md:w-64 bg-[#F8FAFC] border-b md:border-b-0 md:border-r border-[#dadada] p-8 flex flex-col items-center justify-center shrink-0 relative z-10 group-hover:bg-[#F0FDF4] transition-colors">
+            <!-- ID Card Mockup -->
+            <div class="w-32 h-20 bg-white rounded-[4px] border border-[#dadada] shadow-sm p-3 flex flex-col justify-between transform -rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                <div class="flex justify-between items-start">
+                    <div class="w-4 h-4 bg-[#F8FAFC] rounded-full border border-[#dadada]"></div>
+                    <iconify-icon icon="flat-color-icons:business-contact" ></iconify-icon>
+                </div>
+                <div class="flex justify-between items-end">
+                    <div class="text-[8px] text-[#94a3b8] font-mono">2024.12.XXX</div>
+                    <div class="w-4 h-4 bg-[#F8FAFC] border border-[#dadada] rounded-[2px]"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meta text -->
+        <div class="p-8 md:p-10 flex-1 relative z-10">
+            <div class="uppercase tracking-widest text-xs font-bold text-[#EAB308] mb-3">Pendaftaran Anggota</div>
+            <h2 class="text-3xl font-semibold text-[#222222] mb-3 tracking-tight m-0">K-Online</h2>
+            <p class="font-serif text-[#444444] text-[15px] mb-6 m-0 leading-relaxed max-w-md">Pendaftaran Kartu Anggota Perpustakaan kini bisa dilakukan dari mana saja tanpa perlu mengantre.</p>
+            <div class="flex flex-wrap items-center gap-4">
+                <a href="https://opac.iainsorong.ac.id/index.php?p=member" target="_blank" rel="noopener noreferrer" class="bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-6 rounded-[4px] shadow-sm transition-colors flex items-center gap-2 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308] text-sm no-underline">
+                    <iconify-icon icon="flat-color-icons:add-male-user-group" ></iconify-icon>
+                    Daftar Anggota Baru
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Requirements Section -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-12">
+        <h3 class="text-xl font-semibold text-[#222222] border-b border-[#dadada] pb-4 mb-6 flex items-center gap-3 m-0 tracking-tight">
+            <iconify-icon icon="flat-color-icons:list" ></iconify-icon>
+            Syarat Pendaftaran
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-4">
+                <div class="flex gap-3 items-start">
+                    <iconify-icon icon="flat-color-icons:ok" class="mt-0.5 shrink-0"></iconify-icon>
+                    <p class="font-serif text-[#444444] text-sm m-0 leading-relaxed">Scan Kartu Tanda Mahasiswa (KTM) yang masih berlaku (Format: JPG/PNG).</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <iconify-icon icon="flat-color-icons:ok" class="mt-0.5 shrink-0"></iconify-icon>
+                    <p class="font-serif text-[#444444] text-sm m-0 leading-relaxed">Pas Foto berwarna terbaru berukuran 3x4 (Format: JPG/PNG).</p>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="flex gap-3 items-start">
+                    <iconify-icon icon="flat-color-icons:ok" class="mt-0.5 shrink-0"></iconify-icon>
+                    <p class="font-serif text-[#444444] text-sm m-0 leading-relaxed">Bukti pembayaran/registrasi SPP semester berjalan.</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <iconify-icon icon="flat-color-icons:ok" class="mt-0.5 shrink-0"></iconify-icon>
+                    <p class="font-serif text-[#444444] text-sm m-0 leading-relaxed">Mengisi formulir data diri secara lengkap dan benar.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 bg-[#EFF6FF] p-5 rounded-[8px] border border-[#BFDBFE] flex gap-4 items-start shadow-sm">
+            <iconify-icon icon="flat-color-icons:info" class="mt-0.5 shrink-0"></iconify-icon>
+            <p class="font-serif text-blue-900 text-sm m-0 leading-relaxed">Setelah mengisi formulir K-Online, silakan datang ke Meja Sirkulasi untuk proses cetak kartu (maksimal 3x24 jam hari kerja).</p>
+        </div>
+    </div>
+
+</LayoutSidebar>

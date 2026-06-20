@@ -1,0 +1,229 @@
+---
+// OperationalHours.astro
+---
+<section id="aturan" class="py-16 bg-white border-b border-[#dadada]">
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl lg:text-3xl tracking-tight font-semibold text-[#222222] mb-8 text-center">
+      Informasi Penting Pemustaka
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <!-- Jam Layanan -->
+      <div class="">
+        <h3 class="text-lg font-semibold text-[#168940] border-b border-[#dadada] pb-2 mb-4 flex items-center gap-2 tracking-tight">
+          <iconify-icon icon="lucide:calendar" class="text-[#805AD5]"></iconify-icon>
+          Jam Layanan Operasional
+        </h3>
+        <div class="bg-transparent w-full">
+          <div class="flex justify-between items-start gap-[14px] mb-[18px]">
+            <div>
+              <div class="text-[10.5px] font-semibold text-gray-500 tracking-[0.08em] uppercase mb-[6px]">Status saat ini</div>
+              <div class="flex items-center gap-[8px] text-[18px] font-semibold text-[#222222]">
+                <div id="op-status-dot-container" class="shrink-0">
+                  <!-- Dot will be injected via JS -->
+                </div>
+                <span id="op-status-text">Memuat...</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <div id="op-live-clock" class="text-[26px] font-bold text-[#168940] tracking-[-0.02em] leading-none font-mono">--:--</div>
+              <div id="op-live-day" class="text-[11.5px] text-gray-500 mt-1">--, WIB</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-7 gap-[6px]">
+            <!-- Sen -->
+            <div id="day-pill-1" class="text-center py-[10px] px-1 rounded-[10px] bg-[#F0FDF4] text-[#444444] border border-[#dadada] transition-colors duration-200">
+              <div class="text-[11px] font-semibold opacity-90">Sen</div>
+              <div class="text-[12px] font-semibold mt-1 font-mono tracking-tighter">08–19.30</div>
+            </div>
+            <!-- Sel -->
+            <div id="day-pill-2" class="text-center py-[10px] px-1 rounded-[10px] bg-[#F0FDF4] text-[#444444] border border-[#dadada] transition-colors duration-200">
+              <div class="text-[11px] font-semibold opacity-90">Sel</div>
+              <div class="text-[12px] font-semibold mt-1 font-mono tracking-tighter">08–19.30</div>
+            </div>
+            <!-- Rab -->
+            <div id="day-pill-3" class="text-center py-[10px] px-1 rounded-[10px] bg-[#F0FDF4] text-[#444444] border border-[#dadada] transition-colors duration-200">
+              <div class="text-[11px] font-semibold opacity-90">Rab</div>
+              <div class="text-[12px] font-semibold mt-1 font-mono tracking-tighter">08–19.30</div>
+            </div>
+            <!-- Kam -->
+            <div id="day-pill-4" class="text-center py-[10px] px-1 rounded-[10px] bg-[#F0FDF4] text-[#444444] border border-[#dadada] transition-colors duration-200">
+              <div class="text-[11px] font-semibold opacity-90">Kam</div>
+              <div class="text-[12px] font-semibold mt-1 font-mono tracking-tighter">08–15.30</div>
+            </div>
+            <!-- Jum -->
+            <div id="day-pill-5" class="text-center py-[10px] px-1 rounded-[10px] bg-[#F0FDF4] text-[#444444] border border-[#dadada] transition-colors duration-200 relative group">
+              <div class="text-[11px] font-semibold opacity-90">Jum</div>
+              <div class="text-[12px] font-semibold mt-1 font-mono tracking-tighter" id="jum-hours">08–16<span class="text-[#EAB308]">*</span></div>
+              <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max px-2 py-1 bg-gray-800 text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                Istirahat: 11.00 - 13.00
+              </div>
+            </div>
+            <!-- Sab -->
+            <div id="day-pill-6" class="text-center py-[10px] px-1 rounded-[10px] bg-[#F5F5F5] text-gray-500 border border-[#dadada] transition-colors duration-200">
+              <div class="text-[11px] font-semibold opacity-90">Sab</div>
+              <div class="text-[12px] font-semibold mt-1 font-mono">—</div>
+            </div>
+            <!-- Min -->
+            <div id="day-pill-0" class="text-center py-[10px] px-1 rounded-[10px] bg-[#F5F5F5] text-gray-500 border border-[#dadada] transition-colors duration-200">
+              <div class="text-[11px] font-semibold opacity-90">Min</div>
+              <div class="text-[12px] font-semibold mt-1 font-mono">—</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Ketentuan Singkat -->
+      <div class="">
+        <h3 class="text-lg font-semibold text-[#168940] border-b border-[#dadada] pb-2 mb-4 flex items-center gap-2 tracking-tight">
+          <iconify-icon icon="lucide:shield-alert" class="text-[#319795]"></iconify-icon>
+          Tata Tertib Utama
+        </h3>
+        <ul class="space-y-3 font-serif text-sm text-[#444444]">
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#EAB308] mt-2 shrink-0"></span>
+            <span>
+              Wajib menunjukkan Kartu Tanda Mahasiswa (KTM) / Kartu
+              Anggota saat masuk.
+            </span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#EAB308] mt-2 shrink-0"></span>
+            <span>
+              Menitipkan tas/jaket di loker. Benda berharga (laptop, HP,
+              dompet) harap dibawa.
+            </span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#EAB308] mt-2 shrink-0"></span>
+            <span class="">
+              Dilarang makan, merokok, atau menggunakan vape di seluruh
+              area baca (kecuali kantin).
+            </span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#EAB308] mt-2 shrink-0"></span>
+            <span class="">
+              Buku yang selesai dibaca cukup diletakkan di meja/troli,
+              <strong class="">jangan kembalikan ke rak sendiri</strong>
+              .
+            </span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#EAB308] mt-2 shrink-0"></span>
+            <span>
+              <strong>Dilarang keras memfoto/memotret</strong>
+              isi halaman karya ilmiah (Skripsi, Tesis, Jurnal). Silakan
+              gunakan layanan fotokopi resmi.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Jam Operasional Logic
+function updateOperationalStatus() {
+  const now = new Date();
+  
+  // Create Date object for current time in WIB (UTC+7) or WIT (UTC+9)?
+  // IAIN Sorong is in Papua (WIT = UTC+9). Let's assume the user accesses locally or we use client time.
+  const day = now.getDay();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const time = hours + minutes / 60;
+  
+  const statusDotContainer = document.getElementById('op-status-dot-container');
+  const statusText = document.getElementById('op-status-text');
+  
+  if (!statusDotContainer || !statusText) return;
+  
+  let isOpen = false;
+  
+  // Mon-Wed (1-3): 08:00 - 19:30
+  if (day >= 1 && day <= 3) {
+    if (time >= 8 && time < 19.5) isOpen = true;
+  }
+  // Thu (4): 08:00 - 15:30
+  else if (day === 4) {
+    if (time >= 8 && time < 15.5) isOpen = true;
+  }
+  // Fri (5): 08:00 - 16:00 (Break 11:00 - 13:00)
+  else if (day === 5) {
+    if ((time >= 8 && time < 11) || (time >= 13 && time < 16)) isOpen = true;
+  }
+  
+  if (isOpen) {
+    statusDotContainer.innerHTML = '<span class="block w-2.5 h-2.5 rounded-full bg-[#168940] shadow-[0_0_0_4px_rgba(22,137,64,0.2)]"></span>';
+    statusText.textContent = "Buka Sekarang";
+  } else {
+    statusDotContainer.innerHTML = '<span class="block w-2.5 h-2.5 rounded-full bg-[#D93025] shadow-[0_0_0_4px_rgba(217,48,37,0.2)]"></span>';
+    statusText.textContent = "Sedang Tutup";
+  }
+  
+  // Highlight current day pill
+  for (let i = 0; i <= 6; i++) {
+    const pill = document.getElementById('day-pill-' + i);
+    if (pill) {
+      if (i === day) {
+        pill.classList.remove('bg-[#F0FDF4]', 'bg-[#F5F5F5]', 'border-[#dadada]', 'text-gray-500', 'text-[#444444]');
+        pill.classList.add('bg-[#168940]', 'text-white', 'border-[#168940]', 'shadow-md');
+      } else {
+        pill.classList.remove('bg-[#168940]', 'text-white', 'border-[#168940]', 'shadow-md');
+        // Restore default styles based on day
+        if (i === 0 || i === 6) {
+          pill.classList.add('bg-[#F5F5F5]', 'text-gray-500', 'border-[#dadada]');
+        } else {
+          pill.classList.add('bg-[#F0FDF4]', 'text-[#444444]', 'border-[#dadada]');
+        }
+      }
+    }
+  }
+}
+
+function updateLiveClock() {
+  const clockEl = document.getElementById('op-live-clock');
+  const dayEl = document.getElementById('op-live-day');
+  if (!clockEl || !dayEl) return;
+  
+  const now = new Date();
+  
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  clockEl.textContent = `${hours}:${minutes}`;
+  
+  const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+  const dayName = days[now.getDay()];
+  
+  const formatter = new Intl.DateTimeFormat('id-ID', {
+      timeZoneName: 'short'
+  });
+  const parts = formatter.formatToParts(now);
+  const tzPart = parts.find(part => part.type === 'timeZoneName');
+  const tzStr = tzPart ? tzPart.value : 'WIB';
+
+  dayEl.textContent = `${dayName}, ${tzStr}`;
+}
+
+// Initial calls
+setInterval(() => {
+  updateLiveClock();
+  updateOperationalStatus();
+}, 1000);
+
+// Call immediately on mount
+setTimeout(() => {
+  updateLiveClock();
+  updateOperationalStatus();
+}, 100);
+
+// Fix for Astro View Transitions if enabled later
+document.addEventListener('astro:page-load', () => {
+    updateLiveClock();
+    updateOperationalStatus();
+});
+</script>

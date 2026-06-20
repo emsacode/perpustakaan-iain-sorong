@@ -1,0 +1,121 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Literasi & Publikasi",
+    items: [{"label": "Kelas Literasi & KILAU", "href": "/literasi"}, {"label": "Podcast Perpustakaan", "href": "/podcast"}, {"label": "Desiderata", "href": "/desiderata"}]
+};
+---
+
+<LayoutSidebar title="Kelas Literasi & KILAU" sidebarMenu={sidebarMenu}>
+    
+    <!-- Hero / Featured Banner -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] overflow-hidden mb-12 shadow-sm flex flex-col md:flex-row relative group hover:border-[#BBF7D0] transition-all">
+        <!-- Decoration -->
+        <div class="absolute right-0 top-0 w-32 h-32 bg-[#F0FDF4] rounded-bl-full opacity-50 z-0"></div>
+        
+        <!-- Thumbnail Cover -->
+        <div class="w-full md:w-64 bg-[#F8FAFC] border-b md:border-b-0 md:border-r border-[#dadada] p-8 flex flex-col items-center justify-center shrink-0 relative z-10 group-hover:bg-[#F0FDF4] transition-colors">
+            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#dadada] mb-4">
+                <iconify-icon icon="flat-color-icons:rating" ></iconify-icon>
+            </div>
+            <div class="font-bold tracking-widest text-[#222222] text-xl">KILAU</div>
+        </div>
+
+        <!-- Meta text -->
+        <div class="p-8 md:p-10 flex-1 relative z-10">
+            <div class="uppercase tracking-widest text-xs font-bold text-[#EAB308] mb-3">Program Unggulan</div>
+            <h2 class="text-3xl font-semibold text-[#222222] mb-3 tracking-tight m-0">KILAU</h2>
+            <p class="font-serif text-[#444444] text-[15px] mb-6 m-0">Klinik Literasi & Ulasan Perpustakaan</p>
+            <div class="flex items-center gap-4">
+                <button class="bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-6 rounded-[4px] shadow-sm transition-colors flex items-center gap-2 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308] text-sm">
+                    <iconify-icon icon="flat-color-icons:play" ></iconify-icon>
+                    Daftar Sekarang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <p class="font-serif text-[15px] text-[#444444] leading-relaxed mb-12 border-b border-[#dadada] pb-8">
+        Zaman sekarang, tantangannya bukan lagi "kurangnya informasi", tetapi "bagaimana menyeleksi informasi yang valid". Program <strong class="text-[#168940]">Kelas Literasi & KILAU</strong> hadir untuk membekali civitas academica IAIN Sorong dengan keahlian literasi informasi tingkat lanjut.
+    </p>
+
+    <!-- Playlist / Episode List Style -->
+    <div class="space-y-8">
+        
+        <!-- Track 1: Kelas Maba -->
+        <div class="group">
+            <h3 class="text-xl font-semibold text-[#222222] mb-4 flex items-center gap-3 tracking-tight">
+                <span class="w-8 h-8 rounded-[4px] bg-[#F8FAFC] border border-[#dadada] flex items-center justify-center text-sm font-semibold text-[#666666]">1</span>
+                Kelas Literasi Mahasiswa Baru (Maba)
+            </h3>
+            <div class="pl-11">
+                <p class="font-serif text-[#444444] text-sm mb-4 leading-relaxed">Program wajib bagi mahasiswa baru yang diadakan setiap awal tahun ajaran. Mahasiswa akan dilatih menguasai fasilitas perpustakaan dasar.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="bg-white border border-[#dadada] rounded-[4px] p-4 flex items-center gap-3 hover:bg-[#F8FAFC] hover:border-[#BBF7D0] transition-all">
+                        <iconify-icon icon="flat-color-icons:company" ></iconify-icon>
+                        <span class="text-sm font-semibold text-[#222222] m-0">Orientasi Fisik Gedung</span>
+                    </div>
+                    <div class="bg-white border border-[#dadada] rounded-[4px] p-4 flex items-center gap-3 hover:bg-[#F8FAFC] hover:border-[#BBF7D0] transition-all">
+                        <iconify-icon icon="flat-color-icons:server" ></iconify-icon>
+                        <span class="text-sm font-semibold text-[#222222] m-0">Katalog OPAC</span>
+                    </div>
+                    <div class="bg-white border border-[#dadada] rounded-[4px] p-4 flex items-center gap-3 hover:bg-[#F8FAFC] hover:border-[#BBF7D0] transition-all">
+                        <iconify-icon icon="flat-color-icons:document" ></iconify-icon>
+                        <span class="text-sm font-semibold text-[#222222] m-0">Etika Pemustaka</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full h-px bg-[#dadada]"></div>
+
+        <!-- Track 2: KILAU -->
+        <div class="group">
+            <h3 class="text-xl font-semibold text-[#222222] mb-4 flex items-center gap-3 tracking-tight">
+                <span class="w-8 h-8 rounded-[4px] bg-[#F8FAFC] border border-[#dadada] flex items-center justify-center text-sm font-semibold text-[#666666]">2</span>
+                Materi Coaching Clinic KILAU
+            </h3>
+            <div class="pl-11">
+                <p class="font-serif text-[#444444] text-sm mb-4 leading-relaxed">KILAU merupakan layanan <em>coaching clinic</em> berskala kecil (5-10 orang) atau pendampingan individual yang fokus pada kemampuan riset akademik lanjut.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    
+                    <div class="bg-white rounded-[8px] p-5 border border-[#dadada] hover:border-[#BBF7D0] hover:shadow-sm transition-all">
+                        <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] text-[#168940] border border-[#dadada] flex items-center justify-center mb-4">
+                            <iconify-icon icon="flat-color-icons:file" ></iconify-icon>
+                        </div>
+                        <h4 class="font-semibold text-[#222222] mb-2 m-0">Manajemen Referensi</h4>
+                        <p class="font-serif text-[13px] text-[#666666] leading-relaxed m-0">Pelatihan penggunaan perangkat lunak sitasi seperti Mendeley, Zotero, atau EndNote agar penulisan daftar pustaka otomatis dan rapi.</p>
+                    </div>
+
+                    <div class="bg-white rounded-[8px] p-5 border border-[#dadada] hover:border-[#BBF7D0] hover:shadow-sm transition-all">
+                        <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] text-[#168940] border border-[#dadada] flex items-center justify-center mb-4">
+                            <iconify-icon icon="flat-color-icons:globe" ></iconify-icon>
+                        </div>
+                        <h4 class="font-semibold text-[#222222] mb-2 m-0">Akses E-Resources</h4>
+                        <p class="font-serif text-[13px] text-[#666666] leading-relaxed m-0">Teknik jitu mencari jurnal internasional (Scopus, WoS) & nasional (Sinta), serta menembus paywall database langganan kampus.</p>
+                    </div>
+
+                    <div class="bg-white rounded-[8px] p-5 border border-[#dadada] hover:border-[#BBF7D0] hover:shadow-sm transition-all">
+                        <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] text-[#168940] border border-[#dadada] flex items-center justify-center mb-4">
+                            <iconify-icon icon="flat-color-icons:print" ></iconify-icon>
+                        </div>
+                        <h4 class="font-semibold text-[#222222] mb-2 m-0">Cek Plagiasi</h4>
+                        <p class="font-serif text-[13px] text-[#666666] leading-relaxed m-0">Layanan pendampingan pengecekan tingkat kemiripan naskah akademik (Turnitin/Plagiarism Checker) standar skripsi.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Alert Note -->
+    <div class="mt-12 bg-[#F0FDF4] p-5 rounded-[8px] border border-[#dadada] flex gap-4 items-start shadow-sm">
+        <iconify-icon icon="flat-color-icons:info" class="shrink-0 mt-0.5"></iconify-icon>
+        <p class="font-serif text-sm text-[#222222] m-0 leading-relaxed">Pendaftaran Kelas KILAU dapat diajukan secara kolektif oleh ketua kelas atau HMJ secara langsung ke loket meja sirkulasi perpustakaan.</p>
+    </div>
+
+</LayoutSidebar>

@@ -1,0 +1,562 @@
+[
+  {
+    "no": 1,
+    "name": "Cambridge Core",
+    "desc": "Platform for Cambridge University Press's academic content, bringing together book and journal content.",
+    "logo": "/images/db-logos/cambridge_core.png",
+    "link": "https://www.cambridge.org/core",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 2,
+    "name": "EBSCOhost",
+    "desc": "Database aggregator including Academic Search Complete (multidisciplinary) and Business Source Complete (business & economics).",
+    "logo": "/images/db-logos/ebscohost.png",
+    "link": "https://search.ebscohost.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 3,
+    "name": "Emerald Insight",
+    "desc": "Full Collection with 309 journals and over 249,000 articles across 13 subjects including Management, Engineering & Information.",
+    "logo": "/images/db-logos/emerald_insight.png",
+    "link": "https://www.emerald.com/insight",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 4,
+    "name": "Nature",
+    "desc": "Leading weekly international scientific journal, providing access to Nature Research publications.",
+    "logo": "/images/db-logos/nature.png",
+    "link": "https://www.nature.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 5,
+    "name": "Nature Complete",
+    "desc": "Access to 96 Nature journals (except 2023 new titles) with full text from 2007 to present.",
+    "logo": "/images/db-logos/nature_complete.png",
+    "link": "https://www.nature.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 6,
+    "name": "Oxford Academic",
+    "desc": "Oxford Journals Collection covering Medicine, Life Sciences, Humanities, Law, Mathematics, Physical Sciences, and Social Sciences.",
+    "logo": "/images/db-logos/oxford_academic.jpg",
+    "link": "https://academic.oup.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 7,
+    "name": "ProQuest",
+    "desc": "Access to newspapers, dissertations, academic journals, TV/radio broadcasts, company reports, books, and government documents.",
+    "logo": "/images/db-logos/proquest.png",
+    "link": "https://www.proquest.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 8,
+    "name": "SAGE Journals",
+    "desc": "Over 700 journals spanning Humanities, Social Sciences, and Science, Technology, and Medicine.",
+    "logo": "/images/db-logos/sage_journals.png",
+    "link": "https://journals.sagepub.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 9,
+    "name": "SAGE Research Methods",
+    "desc": "Comprehensive methodology content with 1,000+ books, case studies, datasets, videos, and Methods Map tool.",
+    "logo": "/images/db-logos/sage_research_methods.png",
+    "link": "https://methods.sagepub.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 10,
+    "name": "ScienceDirect",
+    "desc": "Database from Elsevier with Freedom Collection package containing ~2,233 journal titles with fulltext from 2004 to present.",
+    "logo": "/images/db-logos/sciencedirect.png",
+    "link": "https://www.sciencedirect.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 11,
+    "name": "SciVal",
+    "desc": "Research performance visualization tool for benchmarking, strategic partnerships, and trend analysis.",
+    "logo": "/images/db-logos/scival.jpg",
+    "link": "https://www.scival.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 12,
+    "name": "Scopus",
+    "desc": "Navigation database with abstracts and citations from peer-reviewed literature for tracking institutional research productivity.",
+    "logo": "/images/db-logos/scopus.png",
+    "link": "https://www.scopus.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 13,
+    "name": "Springerlink",
+    "desc": "Covers Biomedical Sciences, Business, Chemistry, Computer Science, Earth Sciences, Economics, Engineering, Environmental Sciences, Life Sciences, Mathematics, Medicine, Physics, Psychology, Social Sciences, and Statistics.",
+    "logo": "/images/db-logos/springerlink.jpg",
+    "link": "https://link.springer.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 14,
+    "name": "Statista",
+    "desc": "Market data from 22,500+ sources including government institutions, international organizations, and trade journals.",
+    "logo": "/images/db-logos/statista.png",
+    "link": "https://www.statista.com",
+    "category": "Database & E-Journal"
+  },
+  {
+    "no": 15,
+    "name": "BJOG",
+    "desc": "International Journal of Obstetrics and Gynaecology, publishing peer-reviewed work in all areas of women's health.",
+    "logo": "/images/db-logos/bjog.png",
+    "link": "https://obgyn.onlinelibrary.wiley.com/journal/14710528",
+    "category": "Jurnal Spesifik"
+  },
+  {
+    "no": 16,
+    "name": "The BMJ",
+    "desc": "International peer-reviewed medical journal with continuous publication model, featuring original research, education, news, and comment articles.",
+    "logo": "/images/db-logos/the_bmj.png",
+    "link": "https://www.bmj.com",
+    "category": "Jurnal Spesifik"
+  },
+  {
+    "no": 17,
+    "name": "Cochrane Library",
+    "desc": "Collection of six databases containing high-quality, independent evidence to inform healthcare decision-making.",
+    "logo": "/images/db-logos/cochrane_library.png",
+    "link": "https://www.cochranelibrary.com",
+    "category": "Jurnal Spesifik"
+  },
+  {
+    "no": 18,
+    "name": "Immunological Reviews",
+    "desc": "Each volume devoted to a single topic of immunological research, covering advances in basic immunology and clinical applications.",
+    "logo": "/images/db-logos/immunological_reviews.png",
+    "link": "https://onlinelibrary.wiley.com/journal/1600065x",
+    "category": "Jurnal Spesifik"
+  },
+  {
+    "no": 19,
+    "name": "Journal of Clinical Periodontology",
+    "desc": "Official publication of the European Federation of Periodontology covering physiology, pathology, diagnosis, epidemiology, and therapy of periodontal disease.",
+    "logo": "/images/db-logos/journal_of_clinical_periodontology.jpg",
+    "link": "https://onlinelibrary.wiley.com/journal/1600051x",
+    "category": "Jurnal Spesifik"
+  },
+  {
+    "no": 20,
+    "name": "Journal of Internal Medicine (JIM)",
+    "desc": "Publishes original clinical work in general and internal medicine and its sub-specialties with original articles, reviews, and case reports.",
+    "logo": "/images/db-logos/journal_of_internal_medicine_jim.png",
+    "link": "https://onlinelibrary.wiley.com/journal/13652796",
+    "category": "Jurnal Spesifik"
+  },
+  {
+    "no": 21,
+    "name": "Periodontology 2000",
+    "desc": "Series of monographs for periodontists and general practitioners, with three monographs published each year.",
+    "logo": "/images/db-logos/periodontology_2000.jpg",
+    "link": "https://onlinelibrary.wiley.com/journal/16000757",
+    "category": "Jurnal Spesifik"
+  },
+  {
+    "no": 22,
+    "name": "ACSESS Digital Library",
+    "desc": "Complete collection of all content published by American Society of Agronomy, Crop Science Society of America, and Soil Science Society of America.",
+    "logo": "/images/db-logos/acsess_digital_library.png",
+    "link": "https://dl.sciencesocieties.org",
+    "category": "Pertanian & Pangan"
+  },
+  {
+    "no": 23,
+    "name": "American Journal of Agricultural Economics",
+    "desc": "Forum for creative and scholarly work on economics of agriculture, food, natural resources, environment, and rural community development.",
+    "logo": "/images/db-logos/american_journal_of_agricultural_economics.png",
+    "link": "https://academic.oup.com/ajae",
+    "category": "Pertanian & Pangan"
+  },
+  {
+    "no": 24,
+    "name": "American Journal of Primatology",
+    "desc": "Official journal of the American Society of Primatologists, published monthly with archival access from 1996-2020.",
+    "logo": "/images/db-logos/american_journal_of_primatology.jpg",
+    "link": "https://onlinelibrary.wiley.com/journal/10982345",
+    "category": "Pertanian & Pangan"
+  },
+  {
+    "no": 25,
+    "name": "Taylor & Francis Biological, Earth, Environmental & Food Sciences",
+    "desc": "Over 40 journals covering Biological, Earth, Environmental & Food Sciences, with 114 journals listed in Web of Science.",
+    "logo": "/images/db-logos/taylor_francis_biological_earth_environmental_food_sciences.png",
+    "link": "https://www.tandfonline.com",
+    "category": "Pertanian & Pangan"
+  },
+  {
+    "no": 26,
+    "name": "Journal of Agronomy and Crop Science",
+    "desc": "Publishes original papers, short communications, and reviews on abiotic plant stress including drought, salinity, temperature extremes, and flooding.",
+    "logo": "/images/db-logos/journal_of_agronomy_and_crop_science.jpg",
+    "link": "https://onlinelibrary.wiley.com/journal/1439037x",
+    "category": "Pertanian & Pangan"
+  },
+  {
+    "no": 27,
+    "name": "Journal of Food Science",
+    "desc": "Peer-reviewed publication serving as an international forum for vital research and developments in food science.",
+    "logo": "/images/db-logos/journal_of_food_science.jpg",
+    "link": "https://onlinelibrary.wiley.com/journal/17503841",
+    "category": "Pertanian & Pangan"
+  },
+  {
+    "no": 28,
+    "name": "Accounting and Business Research",
+    "desc": "Publishes papers containing substantial and original contribution to knowledge in accounting, corporate governance, auditing, and taxation.",
+    "logo": "/images/db-logos/accounting_and_business_research.png",
+    "link": "https://www.tandfonline.com/toc/rabr20/current",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 29,
+    "name": "Bulletin of Indonesian Economic Studies (BIES)",
+    "desc": "Refereed journal since 1965 providing research on the Indonesian economy with comprehensive 'Survey of recent developments'.",
+    "logo": "/images/db-logos/bulletin_of_indonesian_economic_studies_bies.png",
+    "link": "https://www.tandfonline.com/toc/cbie20/current",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 30,
+    "name": "Economic Development and Cultural Change",
+    "desc": "Studies using modern theoretical and empirical approaches examining determinants and effects of economic development and cultural change.",
+    "logo": "/images/db-logos/economic_development_and_cultural_change.png",
+    "link": "https://www.journals.uchicago.edu/toc/edcc/current",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 31,
+    "name": "European Journal of Work and Organizational Psychology",
+    "desc": "High-quality scientific articles improving understanding of phenomena in work and organizational settings.",
+    "logo": "/images/db-logos/european_journal_of_work_and_organizational_psychology.png",
+    "link": "https://www.tandfonline.com/toc/pewo20/current",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 32,
+    "name": "Financial Accountability & Management",
+    "desc": "International academic journal on financial accountability, accounting, and financial/resource management of governmental and non-profit organizations.",
+    "logo": "/images/db-logos/financial_accountability_management.jpg",
+    "link": "https://onlinelibrary.wiley.com/journal/14680408",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 33,
+    "name": "HeinOnline",
+    "desc": "Premier online research platform with 197+ million pages of multidisciplinary periodicals, government documents, international resources, and case law.",
+    "logo": "/images/db-logos/heinonline.jpg",
+    "link": "https://heinonline.org",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 34,
+    "name": "Journal of Environmental Economics and Management",
+    "desc": "Publishes theoretical and empirical papers on natural resource and environmental issues, linking economic systems with environmental systems.",
+    "logo": "/images/db-logos/journal_of_environmental_economics_and_management.png",
+    "link": "https://www.sciencedirect.com/journal/journal-of-environmental-economics-and-management",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 35,
+    "name": "The Journal of Finance",
+    "desc": "Most widely cited academic journal on finance, official publication of The American Finance Association, published six times a year.",
+    "logo": "/images/db-logos/the_journal_of_finance.png",
+    "link": "https://onlinelibrary.wiley.com/journal/15406261",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 36,
+    "name": "Journal of Gender Studies",
+    "desc": "Interdisciplinary journal publishing articles on gender and sex from a feminist perspective covering Social, Natural and Health Sciences, Arts, Humanities, and Literature.",
+    "logo": "/images/db-logos/journal_of_gender_studies.jpg",
+    "link": "https://www.tandfonline.com/toc/cjgs20/current",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 37,
+    "name": "Journal of Health Economics",
+    "desc": "Articles on economics of health and medical care including production of health, demand/utilization, financing, measurement, and behavioral models.",
+    "logo": "/images/db-logos/journal_of_health_economics.jpg",
+    "link": "https://www.sciencedirect.com/journal/journal-of-health-economics",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 38,
+    "name": "Journal of Public Economics",
+    "desc": "Encourages original scientific contributions on public economics with emphasis on modern economic theory and quantitative analysis.",
+    "logo": "/images/db-logos/journal_of_public_economics.jpg",
+    "link": "https://www.sciencedirect.com/journal/journal-of-public-economics",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 39,
+    "name": "Journal of Urban Economics",
+    "desc": "Focal point for publication of research papers in urban economics, welcoming theoretical, empirical, positive, and normative papers.",
+    "logo": "/images/db-logos/journal_of_urban_economics.png",
+    "link": "https://www.sciencedirect.com/journal/journal-of-urban-economics",
+    "category": "Sosial & Ekonomi"
+  },
+  {
+    "no": 40,
+    "name": "Globethics.net",
+    "desc": "Global network of individuals and institutions interested in applied ethics, offering access to digital ethics library and collaborative research.",
+    "logo": "/images/db-logos/globethics_net.jpg",
+    "link": "https://www.globethics.net",
+    "category": "Humaniora & Multidisiplin"
+  },
+  {
+    "no": 41,
+    "name": "IMF eLibrary",
+    "desc": "Access to International Financial Statistics, Direction of Trade, Balance of Payments, and Government Finance Statistics data.",
+    "logo": "/images/db-logos/imf_elibrary.jpg",
+    "link": "https://www.elibrary.imf.org",
+    "category": "Humaniora & Multidisiplin"
+  },
+  {
+    "no": 42,
+    "name": "The International Journal of Human Resource Management",
+    "desc": "Forum for HRM scholars and professionals focusing on future trends in strategic human resource management in a global environment.",
+    "logo": "/images/db-logos/the_international_journal_of_human_resource_management.png",
+    "link": "https://www.tandfonline.com/toc/rijh20/current",
+    "category": "Humaniora & Multidisiplin"
+  },
+  {
+    "no": 43,
+    "name": "JSTOR",
+    "desc": "Multidisciplinary database with over 2,000 academic journals in humanities, social sciences, and sciences, plus monographs.",
+    "logo": "/images/db-logos/jstor.jpg",
+    "link": "https://www.jstor.org",
+    "category": "Humaniora & Multidisiplin"
+  },
+  {
+    "no": 44,
+    "name": "Multivariate Behavioral Research (MBR)",
+    "desc": "Publishes substantive, methodological, and theoretical articles in all areas of social and behavioral sciences.",
+    "logo": "/images/db-logos/multivariate_behavioral_research_mbr.png",
+    "link": "https://www.tandfonline.com/toc/hmbr20/current",
+    "category": "Humaniora & Multidisiplin"
+  },
+  {
+    "no": 45,
+    "name": "Osiris",
+    "desc": "Information on listed and major unlisted/delisted companies around the world with detailed financial reports.",
+    "logo": "/images/db-logos/osiris.png",
+    "link": "https://www.bvdinfo.com",
+    "category": "Humaniora & Multidisiplin"
+  },
+  {
+    "no": 46,
+    "name": "Taylor & Francis Social Sciences & Humanities Library",
+    "desc": "Access to over 1,450 journals spanning Anthropology, Arts, Business, Criminology, Education, Geography, Law, Media, Politics, Psychology, Sociology, and more.",
+    "logo": "/images/db-logos/taylor_francis_social_sciences_humanities_library.jpg",
+    "link": "https://www.tandfonline.com",
+    "category": "Humaniora & Multidisiplin"
+  },
+  {
+    "no": 47,
+    "name": "World Bank Economic Review",
+    "desc": "Specializes in quantitative development policy analysis with articles examining policy choices in economic development.",
+    "logo": "/images/db-logos/world_bank_economic_review.png",
+    "link": "https://academic.oup.com/wber",
+    "category": "Humaniora & Multidisiplin"
+  },
+  {
+    "no": 48,
+    "name": "American Chemical Society (ACS)",
+    "desc": "Leading publisher of peer-reviewed research journals in chemical and related sciences.",
+    "logo": "/images/db-logos/american_chemical_society_acs.png",
+    "link": "https://pubs.acs.org",
+    "category": "Sains & Teknologi"
+  },
+  {
+    "no": 49,
+    "name": "American Institute of Physics (AIP)",
+    "desc": "Collection of journals in physics and astronomy through Scitation platform.",
+    "logo": "/images/db-logos/american_institute_of_physics_aip.png",
+    "link": "https://pubs.aip.org",
+    "category": "Sains & Teknologi"
+  },
+  {
+    "no": 50,
+    "name": "APS Journals",
+    "desc": "Journals from the American Physical Society embodying the mission to advance and diffuse knowledge of Physics.",
+    "logo": "/images/db-logos/aps_journals.png",
+    "link": "https://journals.aps.org",
+    "category": "Sains & Teknologi"
+  },
+  {
+    "no": 51,
+    "name": "ASME Digital Collection",
+    "desc": "Repository of ASME Transaction Journals (1960-present), Conference Proceedings (2002-present), and ASME Press eBooks.",
+    "logo": "/images/db-logos/asme_digital_collection.jpg",
+    "link": "https://asmedigitalcollection.asme.org",
+    "category": "Sains & Teknologi"
+  },
+  {
+    "no": 52,
+    "name": "IEEEXplore",
+    "desc": "Database in computer science and electrical engineering from IEEE and partners, including IEEE Electronic Library and eBook collections.",
+    "logo": "/images/db-logos/ieeexplore.png",
+    "link": "https://ieeexplore.ieee.org",
+    "category": "Sains & Teknologi"
+  },
+  {
+    "no": 53,
+    "name": "Journal of Pharmaceutical Sciences",
+    "desc": "Publishes research on basic pharmaceutical science including chemical processing, pharmacokinetics, biopharmaceutics, pharmacodynamics, and drug delivery.",
+    "logo": "/images/db-logos/journal_of_pharmaceutical_sciences.png",
+    "link": "https://www.jpharmsci.org",
+    "category": "Sains & Teknologi"
+  },
+  {
+    "no": 54,
+    "name": "AMA (American Management Association)",
+    "desc": "eBooks collection in management published by Amacom.",
+    "logo": "/images/db-logos/ama_american_management_association.png",
+    "link": "https://www.amanet.org",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 55,
+    "name": "Bloomsbury Collections",
+    "desc": "Nearly 11,000 eBooks across humanities and social sciences featuring content from Bloomsbury's research publications.",
+    "logo": "/images/db-logos/bloomsbury_collections.jpg",
+    "link": "https://www.bloomsburycollections.com",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 56,
+    "name": "Cambridge Core (E-books)",
+    "desc": "Cambridge University Press's academic content platform with book and journal content.",
+    "logo": "/images/db-logos/cambridge_core_e_books.png",
+    "link": "https://www.cambridge.org/core",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 57,
+    "name": "Ebsco Dentistry & Oral Sciences Source",
+    "desc": "Full-text collection of dental and oral sciences journals and monographs with cover-to-cover indexing and abstracts.",
+    "logo": "/images/db-logos/ebsco_dentistry_oral_sciences_source.png",
+    "link": "https://www.ebsco.com",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 58,
+    "name": "Ebsco eBooks",
+    "desc": "Multidisciplinary eBook collection from EBSCO with perpetual access.",
+    "logo": "/images/db-logos/ebsco_ebooks.png",
+    "link": "https://www.ebsco.com/products/ebooks",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 59,
+    "name": "Emerald Publishing",
+    "desc": "Over 3,600 eBooks with content covering topics that resonate with real-world challenges across business, management, and social sciences.",
+    "logo": "/images/db-logos/emerald_publishing.png",
+    "link": "https://www.emeraldgrouppublishing.com",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 60,
+    "name": "GLOBAL Professional Publishing",
+    "desc": "Multidisciplinary eBook collection.",
+    "logo": "/images/db-logos/global_professional_publishing.png",
+    "link": "https://www.globalprofessionalpublishing.com",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 61,
+    "name": "KITLV",
+    "desc": "Books and publications from Koninklijk Instituut voor Taal-, Land- en Volkenkunde focusing on Southeast Asia, Pacific, and Caribbean studies.",
+    "logo": "/images/db-logos/kitlv.png",
+    "link": "https://www.kitlv.nl",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 62,
+    "name": "ProQuest Ebook Central",
+    "desc": "1.8+ million eBooks from 1,300+ leading publishers covering all academic disciplines.",
+    "logo": "/images/db-logos/proquest_ebook_central.jpg",
+    "link": "https://ebookcentral.proquest.com",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 63,
+    "name": "Sidila",
+    "desc": "Multidisciplinary eBooks from various publishers including Gadjah Mada University Press, accessible via web or Android app.",
+    "logo": "/images/db-logos/sidila.png",
+    "link": "https://sidila.ugm.ac.id",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 64,
+    "name": "Springer eBook Collection",
+    "desc": "Perpetual access to Springer eBooks in various subjects with full-text download available.",
+    "logo": "/images/db-logos/springer_ebook_collection.png",
+    "link": "https://link.springer.com",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 65,
+    "name": "Taylor & Francis E-books",
+    "desc": "Over 50,000 eBooks across teaching syllabus and research topics, organized into eCollections.",
+    "logo": "/images/db-logos/taylor_francis_e_books.jpg",
+    "link": "https://www.taylorfrancis.com",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 66,
+    "name": "University Press Scholarship Online (UPSO)",
+    "desc": "Public Health and Epidemiology collection from Oxford University Press.",
+    "logo": "/images/db-logos/university_press_scholarship_online_upso.png",
+    "link": "https://oxford.universitypressscholarship.com",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 67,
+    "name": "Wiley Online Library",
+    "desc": "eBooks in Agriculture, Architecture, Economics, Chemistry, Computer Science, Law, and Social Sciences.",
+    "logo": "/images/db-logos/wiley_online_library.png",
+    "link": "https://onlinelibrary.wiley.com",
+    "category": "E-Book Collection"
+  },
+  {
+    "no": 68,
+    "name": "Repositori Ilmiah Nasional (RIN)",
+    "desc": "National research data management platform managed by BRIN for research data and outputs.",
+    "logo": "/images/db-logos/repositori_ilmiah_nasional_rin.png",
+    "link": "https://rin.brin.go.id",
+    "category": "Portal Nasional"
+  },
+  {
+    "no": 69,
+    "name": "Indonesia OneSearch",
+    "desc": "Single search portal for all public collections from libraries, museums, and archives across Indonesia with international e-resources access.",
+    "logo": "/images/db-logos/indonesia_onesearch.jpg",
+    "link": "https://onesearch.id",
+    "category": "Portal Nasional"
+  },
+  {
+    "no": 70,
+    "name": "e-Resources PNRI",
+    "desc": "Digital library resources subscribed by the National Library of Indonesia including journals, eBooks, and online reference works.",
+    "logo": "/images/db-logos/e_resources_pnri.jpg",
+    "link": "https://e-resources.perpusnas.go.id",
+    "category": "Portal Nasional"
+  }
+]

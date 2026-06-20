@@ -1,0 +1,163 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Profil & Tentang Kami",
+    items: [{"label": "Profil Singkat", "href": "/profil"}, {"label": "Visi & Misi", "href": "/visi-misi"}, {"label": "Struktur Organisasi", "href": "/struktur"}, {"label": "Jam Buka Layanan", "href": "/jam-layanan"}]
+};
+---
+
+<LayoutSidebar title="Jam Buka Layanan" sidebarMenu={sidebarMenu}>
+    
+    <p class="font-serif text-[15px] text-[#444444] leading-relaxed mb-10">
+        Kami menyadari pentingnya fleksibilitas waktu bagi para mahasiswa dan dosen dalam menyelesaikan tugas dan penelitian. Oleh karena itu, Perpustakaan IAIN Sorong berusaha memaksimalkan jam operasionalnya untuk melayani Anda.
+    </p>
+
+    <!-- Live Status Widget (Expanded) -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 mb-8 shadow-sm flex flex-col md:flex-row justify-between items-center md:items-center gap-6">
+        <div class="text-center md:text-left">
+            <div class="inline-block px-3 py-1 rounded-[4px] bg-[#F0FDF4] border border-[#dadada] text-[#168940] text-xs font-semibold uppercase tracking-widest mb-4">
+                Live Status
+            </div>
+            <div class="flex items-center justify-center md:justify-start gap-3 mb-1">
+                <div id="page-status-dot" class="w-3.5 h-3.5 rounded-full bg-[#EAB308] shadow-[0_0_15px_rgba(234,179,8,0.5)] animate-pulse"></div>
+                <h2 id="page-status-text" class="text-2xl md:text-3xl font-bold text-[#222222] tracking-tight m-0">Menghitung...</h2>
+            </div>
+            <p class="text-[#666666] font-serif text-[15px] m-0">Perpustakaan IAIN Sorong</p>
+        </div>
+
+        <div class="bg-[#F0FDF4] border border-[#dadada] rounded-[8px] py-4 px-6 text-center min-w-[180px]">
+            <div id="page-live-clock" class="text-4xl font-mono font-bold text-[#168940] mb-1 tracking-tighter">--:--</div>
+            <div id="page-live-day" class="text-[#444444] font-semibold uppercase tracking-wider text-xs">--, WIB</div>
+        </div>
+    </div>
+
+    <!-- Jadwal Interaktif Cards -->
+    <div class="mb-10">
+        <h3 class="text-xl font-semibold text-[#222222] mb-5 flex items-center gap-2">
+            <iconify-icon icon="flat-color-icons:calendar" ></iconify-icon>
+            Jadwal Operasional Rutin
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Senin - Kamis -->
+            <div class="bg-white border border-[#dadada] rounded-[8px] p-5 hover:shadow-md hover:border-[#BBF7D0] transition-all group shadow-sm flex flex-col">
+                <div class="w-10 h-10 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#168940] mb-3 group-hover:border-[#BBF7D0] transition-all">
+                    <iconify-icon icon="flat-color-icons:calendar" ></iconify-icon>
+                </div>
+                <h4 class="font-semibold text-base text-[#222222] mb-1">Senin – Kamis</h4>
+                <div class="text-xl font-mono font-bold text-[#168940] tracking-tighter mb-3">08:00 - 16:00</div>
+                <div class="flex items-center gap-2 text-[13px] text-[#444444] bg-[#F8FAFC] border border-[#dadada] px-3 py-1.5 rounded-[4px] font-serif mt-auto">
+                    <iconify-icon icon="flat-color-icons:coffee-to-go" ></iconify-icon>
+                    Istirahat: 12:00 - 13:00
+                </div>
+            </div>
+
+            <!-- Jumat -->
+            <div class="bg-white border border-[#dadada] rounded-[8px] p-5 hover:shadow-md hover:border-[#BBF7D0] transition-all group shadow-sm flex flex-col">
+                <div class="w-10 h-10 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#168940] mb-3 group-hover:border-[#BBF7D0] transition-all">
+                    <iconify-icon icon="flat-color-icons:calendar" ></iconify-icon>
+                </div>
+                <h4 class="font-semibold text-base text-[#222222] mb-1">Jumat</h4>
+                <div class="text-xl font-mono font-bold text-[#168940] tracking-tighter mb-3">08:00 - 16:30</div>
+                <div class="flex items-center gap-2 text-[13px] text-[#444444] bg-[#F8FAFC] border border-[#dadada] px-3 py-1.5 rounded-[4px] font-serif mt-auto">
+                    <iconify-icon icon="flat-color-icons:coffee-to-go" ></iconify-icon>
+                    Istirahat: 11:30 - 13:30
+                </div>
+            </div>
+
+            <!-- Sabtu Minggu -->
+            <div class="bg-[#F8FAFC] border border-[#dadada] rounded-[8px] p-5 opacity-80 hover:opacity-100 transition-opacity flex flex-col">
+                <div class="w-10 h-10 bg-white border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#666666] mb-3">
+                    <iconify-icon icon="flat-color-icons:night-landscape" ></iconify-icon>
+                </div>
+                <h4 class="font-semibold text-base text-[#222222] mb-1">Sabtu & Minggu</h4>
+                <div class="text-xl font-bold text-[#666666] mb-3">Tutup</div>
+                <div class="flex items-center gap-2 text-[13px] text-[#444444] bg-white px-3 py-1.5 rounded-[4px] border border-[#dadada] font-serif mt-auto">
+                    <iconify-icon icon="flat-color-icons:laptop" ></iconify-icon>
+                    Layanan Online 24/7
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert / Notice -->
+    <div class="bg-[#FEFCE8] border border-[#FDE047] rounded-[8px] p-6 flex gap-5 items-start shadow-sm hover:shadow-md transition-shadow">
+        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#FDE047] shrink-0">
+            <iconify-icon icon="flat-color-icons:appointment-reminders" ></iconify-icon>
+        </div>
+        <div>
+            <h4 class="text-[#854D0E] font-semibold text-base mb-2 m-0">Pemberitahuan Khusus Libur Nasional</h4>
+            <p class="text-[#A16207] font-serif leading-relaxed text-[15px] m-0">
+                Pada hari libur nasional dan tanggal merah, layanan perpustakaan secara fisik akan ditutup. Namun, Anda tetap dapat mengakses koleksi digital kami seperti OPAC, E-Book, dan E-Journal secara non-stop (24/7).
+            </p>
+        </div>
+    </div>
+
+</LayoutSidebar>
+
+<script>
+function updatePageStatus() {
+  const now = new Date();
+  const day = now.getDay();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const time = hours + minutes / 60;
+  
+  const statusDot = document.getElementById('page-status-dot');
+  const statusText = document.getElementById('page-status-text');
+  
+  if (!statusDot || !statusText) return;
+  
+  let isOpen = false;
+  
+  // Mon-Thu: 08:00 - 16:00
+  if (day >= 1 && day <= 4) {
+    if (time >= 8 && time < 16) isOpen = true;
+  }
+  // Fri: 08:00 - 16:30 (Break 11:30 - 13:30)
+  else if (day === 5) {
+    if ((time >= 8 && time < 11.5) || (time >= 13.5 && time < 16.5)) isOpen = true;
+  }
+  
+  if (isOpen) {
+    statusDot.className = "w-4 h-4 rounded-full bg-[#168940] shadow-[0_0_15px_rgba(22,137,64,0.5)] animate-pulse";
+    statusText.textContent = "Buka Sekarang";
+  } else {
+    statusDot.className = "w-4 h-4 rounded-full bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)]";
+    statusText.textContent = "Sedang Tutup";
+  }
+}
+
+function updatePageClock() {
+  const clockEl = document.getElementById('page-live-clock');
+  const dayEl = document.getElementById('page-live-day');
+  if (!clockEl || !dayEl) return;
+  
+  const now = new Date();
+  
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  clockEl.textContent = `${hours}:${minutes}`;
+  
+  const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+  const dayName = days[now.getDay()];
+  
+  const formatter = new Intl.DateTimeFormat('id-ID', { timeZoneName: 'short' });
+  const parts = formatter.formatToParts(now);
+  const tzPart = parts.find(part => part.type === 'timeZoneName');
+  const tzStr = tzPart ? tzPart.value : 'WIB';
+
+  dayEl.textContent = `${dayName}, ${tzStr}`;
+}
+
+setInterval(() => {
+  updatePageClock();
+  updatePageStatus();
+}, 1000);
+
+setTimeout(() => {
+  updatePageClock();
+  updatePageStatus();
+}, 100);
+</script>

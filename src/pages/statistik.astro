@@ -1,0 +1,208 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+import statsRaw from '../data/live_stats.json';
+
+const stats = statsRaw;
+
+const sidebarMenu = {
+    title: "Transparansi Data",
+    items: [
+        {"label": "Statistik Koleksi", "href": "/statistik"},
+        {"label": "Profil Singkat", "href": "/profil"},
+        {"label": "Struktur Organisasi", "href": "/struktur"},
+    ]
+};
+
+const lastUpdated = new Date(stats.last_updated).toLocaleDateString('id-ID', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+});
+
+const cards = [
+    {
+        value: stats.judul_buku.toLocaleString('id-ID'),
+        label: "Judul Koleksi Buku",
+        sublabel: `${stats.eksemplar_buku.toLocaleString('id-ID')} Eksemplar`,
+        icon: "flat-color-icons:library",
+        color: "#168940",
+        bg: "#F0FDF4",
+        source: "SLiMS OPAC (SORPUS)",
+    },
+    {
+        value: stats.jurnal_ilmiah.toLocaleString('id-ID'),
+        label: "Artikel Jurnal Ilmiah",
+        sublabel: "Terindeks OAI-PMH",
+        icon: "flat-color-icons:file",
+        color: "#3182CE",
+        bg: "#EBF8FF",
+        source: "Rumah Jurnal OJS",
+    },
+    {
+        value: stats.dokumen_skripsi.toLocaleString('id-ID'),
+        label: "Dokumen Repositori",
+        sublabel: "Skripsi & Karya Ilmiah",
+        icon: "flat-color-icons:graduation-cap",
+        color: "#805AD5",
+        bg: "#FAF5FF",
+        source: "EPrints Repositori",
+    },
+    {
+        value: stats.total_anggota.toLocaleString('id-ID'),
+        label: "Total Anggota Terdaftar",
+        sublabel: "Mahasiswa, Dosen & Tenaga Kependidikan",
+        icon: "flat-color-icons:businessman",
+        color: "#DD6B20",
+        bg: "#FFFAF0",
+        source: "Basis Data SLiMS",
+    },
+];
+---
+
+<LayoutSidebar title="Statistik Perpustakaan" sidebarMenu={sidebarMenu}>
+
+    <!-- Hero Banner -->
+    <div class="bg-[#F0FDF4] border border-[#dadada] rounded-[8px] p-8 mb-12 flex flex-col md:flex-row items-center gap-8 shadow-sm">
+        <div class="w-16 h-16 bg-white rounded-[8px] border border-[#dadada] flex items-center justify-center shrink-0 shadow-sm">
+            <iconify-icon icon="flat-color-icons:statistics"></iconify-icon>
+        </div>
+        <div class="flex-1">
+            <div class="text-xs font-bold text-[#168940] uppercase tracking-widest mb-2">Data Riil & Terverifikasi</div>
+            <h2 class="text-2xl font-semibold text-[#222222] mb-2 tracking-tight m-0">Statistik Perpustakaan IAIN Sorong</h2>
+            <p class="font-serif text-[15px] text-[#444444] m-0 leading-relaxed">
+                Data di bawah ini dipanen secara otomatis dari sistem EPrints, OJS, dan SLiMS pada setiap proses build website. Informasi ini mencerminkan kondisi koleksi dan keanggotaan perpustakaan secara transparan.
+            </p>
+        </div>
+        <div class="shrink-0 text-center">
+            <div class="text-[11px] text-[#666666] font-semibold uppercase tracking-wider mb-1">Terakhir Diperbarui</div>
+            <div class="text-xs font-mono bg-white border border-[#dadada] rounded-[4px] px-3 py-2 text-[#444444]">{lastUpdated}</div>
+            {stats.status === 'live' && (
+                <div class="mt-2 inline-flex items-center gap-1.5 text-[#168940] text-xs font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-[#168940] animate-pulse"></span>
+                    Data Live
+                </div>
+            )}
+        </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-14">
+        {cards.map((card) => (
+            <div class="bg-white border border-[#dadada] rounded-[8px] p-7 shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group relative overflow-hidden">
+                <!-- Background decoration -->
+                <div class="absolute right-0 top-0 w-24 h-24 rounded-bl-full opacity-30 transition-all group-hover:opacity-50" style={`background-color: ${card.bg};`}></div>
+
+                <div class="relative z-10">
+                    <div class="flex items-start justify-between mb-5">
+                        <div class="w-12 h-12 rounded-[8px] flex items-center justify-center border border-[#dadada] group-hover:border-[#BBF7D0] transition-colors" style={`background-color: ${card.bg};`}>
+                            <iconify-icon icon={card.icon} width="1.8rem"></iconify-icon>
+                        </div>
+                        <span class="text-[10px] font-semibold text-[#888888] uppercase tracking-wider bg-[#F8FAFC] border border-[#dadada] px-2 py-1 rounded-[4px]">
+                            {card.source}
+                        </span>
+                    </div>
+
+                    <div class="mb-1">
+                        <span class="text-4xl font-bold tracking-tight" style={`color: ${card.color};`}>{card.value}</span>
+                    </div>
+                    <div class="font-semibold text-[#222222] text-base mb-1">{card.label}</div>
+                    <div class="font-serif text-sm text-[#888888]">{card.sublabel}</div>
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <!-- Data Perbandingan Koleksi (Bar Chart Visual) -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] p-7 shadow-sm mb-10">
+        <h3 class="text-xl font-semibold text-[#222222] mb-1 m-0 tracking-tight">Komposisi Koleksi</h3>
+        <p class="font-serif text-sm text-[#666666] mb-8 m-0">Perbandingan proporsional antar jenis koleksi perpustakaan.</p>
+
+        <div class="space-y-5">
+            <!-- Buku -->
+            <div>
+                <div class="flex justify-between items-center mb-1.5">
+                    <span class="text-sm font-semibold text-[#222222] flex items-center gap-2">
+                        <iconify-icon icon="flat-color-icons:library" width="1.1rem"></iconify-icon>
+                        Koleksi Buku (SLiMS)
+                    </span>
+                    <span class="text-sm font-bold text-[#168940]">{stats.judul_buku.toLocaleString('id-ID')} judul</span>
+                </div>
+                <div class="h-3 bg-[#F0FDF4] rounded-full overflow-hidden border border-[#dadada]">
+                    <div class="h-full bg-[#168940] rounded-full" style="width: 100%;"></div>
+                </div>
+            </div>
+
+            <!-- Jurnal -->
+            <div>
+                <div class="flex justify-between items-center mb-1.5">
+                    <span class="text-sm font-semibold text-[#222222] flex items-center gap-2">
+                        <iconify-icon icon="flat-color-icons:file" width="1.1rem"></iconify-icon>
+                        Artikel Jurnal (OJS)
+                    </span>
+                    <span class="text-sm font-bold text-[#3182CE]">{stats.jurnal_ilmiah.toLocaleString('id-ID')} artikel</span>
+                </div>
+                <div class="h-3 bg-[#EBF8FF] rounded-full overflow-hidden border border-[#dadada]">
+                    <div class="h-full bg-[#3182CE] rounded-full" style={`width: ${Math.round((stats.jurnal_ilmiah / (stats.jurnal_ilmiah + stats.judul_buku + stats.dokumen_skripsi)) * 100)}%;`}></div>
+                </div>
+            </div>
+
+            <!-- Repositori -->
+            <div>
+                <div class="flex justify-between items-center mb-1.5">
+                    <span class="text-sm font-semibold text-[#222222] flex items-center gap-2">
+                        <iconify-icon icon="flat-color-icons:graduation-cap" width="1.1rem"></iconify-icon>
+                        Repositori (EPrints)
+                    </span>
+                    <span class="text-sm font-bold text-[#805AD5]">{stats.dokumen_skripsi.toLocaleString('id-ID')} dokumen</span>
+                </div>
+                <div class="h-3 bg-[#FAF5FF] rounded-full overflow-hidden border border-[#dadada]">
+                    <div class="h-full bg-[#805AD5] rounded-full" style={`width: ${Math.round((stats.dokumen_skripsi / (stats.jurnal_ilmiah + stats.judul_buku + stats.dokumen_skripsi)) * 100 * 5)}%;`}></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sumber Data & Metodologi -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] p-7 shadow-sm mb-10">
+        <h3 class="text-xl font-semibold text-[#222222] mb-4 m-0 tracking-tight">Metodologi Pemanenan Data</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-[#F0FDF4] border border-[#dadada] rounded-[8px] p-5">
+                <div class="flex items-center gap-2 mb-3">
+                    <iconify-icon icon="flat-color-icons:database" width="1.3rem"></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] m-0">SLiMS (SORPUS)</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] m-0 leading-relaxed">Data koleksi buku dan anggota dipanen melalui scraping pada halaman pencarian publik OPAC menggunakan Cheerio (Node.js).</p>
+            </div>
+            <div class="bg-[#EBF8FF] border border-[#dadada] rounded-[8px] p-5">
+                <div class="flex items-center gap-2 mb-3">
+                    <iconify-icon icon="flat-color-icons:file" width="1.3rem"></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] m-0">OJS (Rumah Jurnal)</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] m-0 leading-relaxed">Jumlah artikel jurnal diperoleh dari feed XML protokol OAI-PMH pada endpoint <code class="text-xs bg-white px-1 rounded border border-[#dadada]">/index.php/index/oai</code>.</p>
+            </div>
+            <div class="bg-[#FAF5FF] border border-[#dadada] rounded-[8px] p-5">
+                <div class="flex items-center gap-2 mb-3">
+                    <iconify-icon icon="flat-color-icons:graduation-cap" width="1.3rem"></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] m-0">EPrints (Repositori)</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] m-0 leading-relaxed">Dokumen repositori dihitung dari feed XML OAI-PMH pada endpoint <code class="text-xs bg-white px-1 rounded border border-[#dadada]">/cgi/oai2</code> yang mengembalikan metadata Dublin Core.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interoperabilitas -->
+    <div class="bg-[#F8FAFC] border border-[#dadada] rounded-[8px] p-7 shadow-sm">
+        <div class="flex items-start gap-4">
+            <iconify-icon icon="flat-color-icons:info" class="shrink-0 mt-0.5"></iconify-icon>
+            <div>
+                <h4 class="font-semibold text-[#222222] m-0 mb-2">Interoperabilitas Data Nasional</h4>
+                <p class="font-serif text-sm text-[#444444] m-0 leading-relaxed">
+                    Koleksi repositori IAIN Sorong terdistribusi ke portal katalog nasional melalui standar OAI-PMH, termasuk
+                    <a href="https://onesearch.id/" target="_blank" rel="noopener noreferrer" class="text-[#168940] font-semibold no-underline hover:underline">Indonesia OneSearch</a>,
+                    <a href="https://rama.kemdikbud.go.id/" target="_blank" rel="noopener noreferrer" class="text-[#168940] font-semibold no-underline hover:underline">RAMA Kemdikbud</a>, dan
+                    <a href="https://garuda.kemdikbud.go.id/" target="_blank" rel="noopener noreferrer" class="text-[#168940] font-semibold no-underline hover:underline">Garuda</a>.
+                    Ini membuktikan bahwa sistem informasi perpustakaan kami telah memenuhi standar interoperabilitas data repositori nasional.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</LayoutSidebar>

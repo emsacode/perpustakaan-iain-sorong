@@ -1,0 +1,255 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const berita = await getCollection('berita');
+  return berita.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} - Perpustakaan IAIN Sorong`}>
+  <Header />
+  
+  <main class="bg-[#F7F7F2] min-h-screen pt-28 lg:pt-20 pb-12">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-1.5 text-xs text-[#718096] mb-5 font-sans">
+        <a href="/" class="hover:text-[#168940] transition-colors flex items-center gap-1">
+          <iconify-icon icon="flat-color-icons:home"></iconify-icon>
+          Beranda
+        </a>
+        <iconify-icon icon="lucide:chevron-right" class="text-[10px]"></iconify-icon>
+        <a href="/#berita" class="hover:text-[#168940] transition-colors">Berita</a>
+        <iconify-icon icon="lucide:chevron-right" class="text-[10px]"></iconify-icon>
+        <span class="text-[#222222] font-medium truncate max-w-[200px] md:max-w-xs">{post.data.title}</span>
+      </nav>
+
+      <!-- Main Grid Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- ARTICLE CONTENT (2/3 Width) -->
+        <article class="lg:col-span-8 bg-white p-5 lg:p-6 rounded-[8px] border border-[#dadada]">
+          
+          <!-- Post Header -->
+          <header class="mb-5 border-b border-[#dadada] pb-4">
+            <span class="inline-block bg-[#F0FDF4] text-[#168940] text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-[4px] mb-3 border border-[#DCFCE7]">
+              {post.data.category}
+            </span>
+            <h1 class="text-2xl md:text-3xl tracking-tight font-semibold text-[#222222] leading-snug mb-4">
+              {post.data.title}
+            </h1>
+            
+            <div class="flex flex-wrap items-center gap-4 text-[13px] text-[#666666]">
+              <div class="flex items-center gap-1.5">
+                <div class="w-6 h-6 rounded-full bg-gray-200 overflow-hidden">
+                  <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(post.data.author)}&background=168940&color=fff`} alt="Author" class="w-full h-full object-cover">
+                </div>
+                <span class="font-medium text-[#222222]">{post.data.author}</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <iconify-icon icon="lucide:calendar"></iconify-icon>
+                {post.data.date}
+              </div>
+              <div class="flex items-center gap-1">
+                <iconify-icon icon="lucide:clock"></iconify-icon>
+                {post.data.readTime}
+              </div>
+            </div>
+          </header>
+
+          <!-- Featured Image -->
+          {post.data.image && (
+            <figure class="mb-6 rounded-[4px] overflow-hidden bg-gray-100">
+              <img src={post.data.image} alt={post.data.title} class="w-full h-auto aspect-[16/7] object-cover">
+            </figure>
+          )}
+
+          <!-- Post Body (Typography) -->
+          <div class="news-content-body text-[#334155] font-serif leading-relaxed text-base">
+            <Content />
+          </div>
+
+          <!-- Post Footer (Share & Tags) -->
+          <footer class="mt-8 pt-5 border-t border-[#dadada] flex flex-col md:flex-row items-center justify-between gap-4 font-sans">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-semibold text-[#666666] uppercase">Kategori:</span>
+              <span class="text-xs font-medium text-[#168940] bg-[#F0FDF4] px-2.5 py-1 rounded-full border border-[#168940]/10">{post.data.category}</span>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-[#666666] uppercase">Bagikan:</span>
+              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`} target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full border border-[#dadada] flex items-center justify-center text-slate-500 hover:border-[#168940] hover:text-[#168940] transition-colors" title="Facebook">
+                <iconify-icon icon="lucide:facebook" width="1.1rem"></iconify-icon>
+              </a>
+              <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent(post.data.title)}`} target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full border border-[#dadada] flex items-center justify-center text-slate-500 hover:border-[#168940] hover:text-[#168940] transition-colors" title="Twitter">
+                <iconify-icon icon="lucide:twitter" width="1.1rem"></iconify-icon>
+              </a>
+              <a href={`https://api.whatsapp.com/send?text=${encodeURIComponent(post.data.title + ' ' + Astro.url.href)}`} target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full border border-[#dadada] flex items-center justify-center text-slate-500 hover:border-[#168940] hover:text-[#168940] transition-colors" title="WhatsApp">
+                <iconify-icon icon="lucide:phone" width="1.1rem"></iconify-icon>
+              </a>
+            </div>
+          </footer>
+
+        </article>
+
+        <!-- SIDEBAR (1/3 Width) -->
+        <aside class="lg:col-span-4 space-y-6">
+          
+          <!-- Quick Access Cards -->
+          <div class="bg-white p-5 rounded-[8px] border border-[#dadada]">
+            <h3 class="text-sm font-bold text-[#0B4226] uppercase tracking-wider mb-4 flex items-center gap-2 m-0">
+              <iconify-icon icon="flat-color-icons:folder" class="text-lg"></iconify-icon>
+              Layanan Utama
+            </h3>
+            <div class="space-y-2.5 font-sans">
+              <a href="http://opac.iainsorong.ac.id" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-[6px] bg-slate-50 hover:bg-[#F0FDF4] hover:text-[#168940] transition-colors border border-slate-100 group">
+                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-slate-500 group-hover:text-[#168940] border border-slate-200 shrink-0">
+                  <iconify-icon icon="lucide:search" width="1.1rem"></iconify-icon>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold leading-tight m-0">Katalog Online (OPAC)</h4>
+                  <p class="text-[10px] text-slate-500 m-0 mt-0.5 font-serif">Cari buku fisik di perpustakaan</p>
+                </div>
+              </a>
+              
+              <a href="https://repositori.iainsorong.ac.id" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-[6px] bg-slate-50 hover:bg-[#F0FDF4] hover:text-[#168940] transition-colors border border-slate-100 group">
+                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-slate-500 group-hover:text-[#168940] border border-slate-200 shrink-0">
+                  <iconify-icon icon="lucide:archive" width="1.1rem"></iconify-icon>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold leading-tight m-0">Repository Digital</h4>
+                  <p class="text-[10px] text-slate-500 m-0 mt-0.5 font-serif">Karya ilmiah &amp; skripsi mahasiswa</p>
+                </div>
+              </a>
+              
+              <a href="https://e-jurnal.iainsorong.ac.id" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-[6px] bg-slate-50 hover:bg-[#F0FDF4] hover:text-[#168940] transition-colors border border-slate-100 group">
+                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-slate-500 group-hover:text-[#168940] border border-slate-200 shrink-0">
+                  <iconify-icon icon="lucide:file-text" width="1.1rem"></iconify-icon>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold leading-tight m-0">Rumah Jurnal (OJS)</h4>
+                  <p class="text-[10px] text-slate-500 m-0 mt-0.5 font-serif">Artikel ilmiah &amp; publikasi dosen</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Operational Hours -->
+          <div class="bg-white p-5 rounded-[8px] border border-[#dadada]">
+            <h3 class="text-sm font-bold text-[#0B4226] uppercase tracking-wider mb-4 flex items-center gap-2 m-0">
+              <iconify-icon icon="flat-color-icons:clock" class="text-lg"></iconify-icon>
+              Jam Buka Layanan
+            </h3>
+            <div class="space-y-3 text-[13px] text-[#444444] font-serif">
+              <div class="flex justify-between items-center py-1.5 border-b border-dashed border-slate-100">
+                <span class="font-sans font-semibold text-[#222222]">Senin – Rabu</span>
+                <span class="font-mono">08.00 – 19.30 WIT</span>
+              </div>
+              <div class="flex justify-between items-center py-1.5 border-b border-dashed border-slate-100">
+                <span class="font-sans font-semibold text-[#222222]">Kamis</span>
+                <span class="font-mono">08.00 – 15.30 WIT</span>
+              </div>
+              <div class="flex justify-between items-center py-1.5 border-b border-dashed border-slate-100">
+                <span class="font-sans font-semibold text-[#222222]">Jumat</span>
+                <span class="font-mono">08.00 – 16.00 WIT</span>
+              </div>
+              <div class="flex justify-between items-center py-1.5 text-red-600 font-sans font-semibold">
+                <span>Sabtu, Minggu &amp; Libur</span>
+                <span>TUTUP</span>
+              </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-[#dadada] text-center">
+              <a href="/jam-layanan" class="text-xs font-semibold text-[#168940] hover:underline">Info Selengkapnya</a>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+      
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .news-content-body :global(p) {
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+    color: #334155;
+    font-size: 1.05rem;
+  }
+  .news-content-body :global(h1),
+  .news-content-body :global(h2),
+  .news-content-body :global(h3),
+  .news-content-body :global(h4) {
+    color: #0D1B12;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-top: 2rem;
+    margin-bottom: 0.85rem;
+  }
+  .news-content-body :global(h1) {
+    font-size: 1.75rem;
+  }
+  .news-content-body :global(h2) {
+    font-size: 1.5rem;
+  }
+  .news-content-body :global(h3) {
+    font-size: 1.25rem;
+    border-left: 4px solid #11853B;
+    padding-left: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .news-content-body :global(h4) {
+    font-size: 1.1rem;
+  }
+  .news-content-body :global(ul) {
+    list-style-type: disc !important;
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .news-content-body :global(ol) {
+    list-style-type: decimal !important;
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .news-content-body :global(li) {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+    color: #334155;
+  }
+  .news-content-body :global(strong) {
+    font-weight: 700;
+    color: #0D1B12;
+  }
+  .news-content-body :global(em) {
+    font-style: italic;
+  }
+  .news-content-body :global(blockquote) {
+    border-left: 4px solid #11853B;
+    padding-left: 1.25rem;
+    font-style: italic;
+    color: #475569;
+    margin: 1.5rem 0;
+  }
+  .news-content-body :global(a) {
+    color: #11853B;
+    text-decoration: underline;
+  }
+  .news-content-body :global(a:hover) {
+    color: #065E26;
+  }
+</style>

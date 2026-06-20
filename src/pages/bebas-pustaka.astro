@@ -1,0 +1,111 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Layanan & Koleksi",
+    items: [
+        {"label": "Sistem Otomasi (SORPUS)", "href": "/sorpus"}, 
+        {"label": "Keanggotaan Online", "href": "/k-online"}, 
+        {"label": "Bebas Pustaka", "href": "/bebas-pustaka"}, 
+        {"label": "IAIN Sorong Press", "href": "/iainsorong-press"}
+    ]
+};
+---
+
+<LayoutSidebar title="Bebas Pustaka" sidebarMenu={sidebarMenu}>
+    
+    <!-- Hero Banner for Bebas Pustaka -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] overflow-hidden mb-12 shadow-sm relative group hover:border-[#BBF7D0] transition-all flex flex-col md:flex-row">
+        <!-- Decoration -->
+        <div class="absolute right-0 top-0 w-32 h-32 bg-[#F0FDF4] rounded-bl-full opacity-50 z-0"></div>
+        
+        <div class="w-full md:w-64 bg-[#F8FAFC] border-b md:border-b-0 md:border-r border-[#dadada] p-8 flex flex-col items-center justify-center shrink-0 relative z-10 group-hover:bg-[#F0FDF4] transition-colors">
+            <div class="w-20 h-20 bg-white rounded-full border border-[#dadada] shadow-sm flex items-center justify-center text-[#168940] text-3xl group-hover:scale-110 transition-transform duration-500">
+                <iconify-icon icon="flat-color-icons:folder"></iconify-icon>
+            </div>
+        </div>
+
+        <!-- Meta text -->
+        <div class="p-8 md:p-10 flex-1 relative z-10">
+            <div class="uppercase tracking-widest text-xs font-bold text-[#168940] mb-3">Layanan Administrasi</div>
+            <h2 class="text-3xl font-semibold text-[#222222] mb-3 tracking-tight m-0">Bebas Pustaka</h2>
+            <p class="font-serif text-[#444444] text-[15px] mb-6 m-0 leading-relaxed max-w-md">Syarat mutlak kelulusan, ujian skripsi, cuti akademik, atau pindah studi bagi mahasiswa IAIN Sorong.</p>
+            <div class="flex flex-wrap items-center gap-4">
+                <a href="https://wa.me/6282194132703?text=Halo%20Perpustakaan%20IAIN%20Sorong,%20saya%20ingin%20mengajukan%20Surat%20Bebas%20Pustaka" target="_blank" rel="noopener noreferrer" class="bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-6 rounded-[4px] shadow-sm transition-colors flex items-center gap-2 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308] text-sm no-underline">
+                    <iconify-icon icon="flat-color-icons:ok"></iconify-icon>
+                    Ajukan Bebas Pustaka via WA
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Requirements Section -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-12">
+        <h3 class="text-xl font-semibold text-[#222222] border-b border-[#dadada] pb-4 mb-6 flex items-center gap-3 m-0 tracking-tight">
+            <iconify-icon icon="flat-color-icons:todo"></iconify-icon>
+            Syarat & Ketentuan Pengajuan
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 font-serif text-[#444444] text-[15px] leading-relaxed">
+            <div class="space-y-4">
+                <div class="flex gap-3 items-start">
+                    <iconify-icon icon="flat-color-icons:approve" class="mt-1 shrink-0"></iconify-icon>
+                    <p class="m-0">Tidak memiliki tanggungan peminjaman koleksi buku di sistem **SORPUS** (SLiMS).</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <iconify-icon icon="flat-color-icons:approve" class="mt-1 shrink-0"></iconify-icon>
+                    <p class="m-0">Telah melunasi semua denda keterlambatan buku perpustakaan (jika ada).</p>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="flex gap-3 items-start">
+                    <iconify-icon icon="flat-color-icons:approve" class="mt-1 shrink-0"></iconify-icon>
+                    <p class="m-0">Menyerahkan 1 (satu) eksemplar **hardcopy skripsi/tesis** yang telah ditandatangani lengkap oleh Dewan Penguji.</p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <iconify-icon icon="flat-color-icons:approve" class="mt-1 shrink-0"></iconify-icon>
+                    <p class="m-0">Mengunggah file lengkap skripsi (dalam format PDF) secara mandiri ke **Repository Ilmiah IAIN Sorong**.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stepper Section (Alur) -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-12">
+        <h3 class="text-xl font-semibold text-[#222222] border-b border-[#dadada] pb-4 mb-6 flex items-center gap-3 m-0 tracking-tight">
+            <iconify-icon icon="flat-color-icons:tree"></iconify-icon>
+            Alur Pengajuan Bebas Pustaka
+        </h3>
+        
+        <div class="relative pl-6 border-l-2 border-[#168940]/30 space-y-8 font-serif">
+            <!-- Step 1 -->
+            <div class="relative">
+                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-[#168940] border-4 border-white shadow-sm"></div>
+                <h4 class="font-sans font-semibold text-[#222222] text-sm md:text-base m-0 mb-1 leading-snug">Langkah 1: Pengembalian Koleksi & Denda</h4>
+                <p class="text-sm text-[#666666] m-0 leading-relaxed">Pastikan keanggotaan Anda bersih dari pinjaman buku aktif dan denda keterlambatan melalui pengecekan di SLiMS OPAC.</p>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="relative">
+                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-[#168940] border-4 border-white shadow-sm"></div>
+                <h4 class="font-sans font-semibold text-[#222222] text-sm md:text-base m-0 mb-1 leading-snug">Langkah 2: Unggah Mandiri Repository</h4>
+                <p class="text-sm text-[#666666] m-0 leading-relaxed">Unggah softcopy skripsi/karya ilmiah Anda ke situs <a href="https://repositori.iainsorong.ac.id/" target="_blank" rel="noopener noreferrer" class="text-[#168940] font-semibold no-underline">Repository IAIN Sorong</a>. Simpan bukti unggah (screenshoot/email konfirmasi).</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative">
+                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-[#168940] border-4 border-white shadow-sm"></div>
+                <h4 class="font-sans font-semibold text-[#222222] text-sm md:text-base m-0 mb-1 leading-snug">Langkah 3: Pengajuan via WhatsApp</h4>
+                <p class="text-sm text-[#666666] m-0 leading-relaxed">Ajukan penerbitan surat bebas pustaka secara asinkron dengan mengirimkan pesan WhatsApp ke Admin Perpustakaan, sertakan KTM dan NIM Anda.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="relative">
+                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-[#168940] border-4 border-white shadow-sm"></div>
+                <h4 class="font-sans font-semibold text-[#222222] text-sm md:text-base m-0 mb-1 leading-snug">Langkah 4: Penyerahan Fisik & Cetak Surat</h4>
+                <p class="text-sm text-[#666666] m-0 leading-relaxed">Setelah verifikasi administrasi disetujui, serahkan jilid skripsi fisik Anda ke gedung perpustakaan untuk mencetak dan melegalisasi Surat Keterangan Bebas Pustaka.</p>
+            </div>
+        </div>
+    </div>
+
+</LayoutSidebar>

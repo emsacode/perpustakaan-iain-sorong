@@ -1,0 +1,291 @@
+---
+---
+
+<div id="search-modal-backdrop" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] hidden opacity-0 transition-opacity duration-200">
+  <div class="fixed inset-0 overflow-y-auto p-4 sm:p-6 md:p-20 flex justify-center items-start">
+    <div id="search-modal-container" class="max-w-2xl w-full bg-white rounded-xl shadow-2xl transform scale-95 opacity-0 transition-all duration-200 overflow-hidden flex flex-col">
+      <!-- Top Section: Search Input -->
+      <div class="relative border-b border-slate-100 flex items-center px-4">
+        <iconify-icon icon="lucide:search" class="text-[#D69E2E]" width="1.5rem" class="pointer-events-none"></iconify-icon>
+        <input 
+          type="text" 
+          id="search-modal-input" 
+          class="w-full h-14 pl-4 pr-4 bg-transparent border-none text-slate-800 text-lg placeholder-slate-400 focus:outline-none focus:ring-0" 
+          placeholder="Cari buku, jurnal, skripsi, fasilitas..."
+          autocomplete="off"
+        >
+        <div class="hidden sm:flex items-center gap-1">
+          <kbd class="font-sans px-2 py-1 bg-slate-100 border border-slate-200 rounded text-xs text-slate-500 font-semibold shadow-[0_2px_0_rgba(226,232,240,1)]">ESC</kbd>
+        </div>
+      </div>
+
+      <!-- Middle Section: Quick Filter Tags -->
+      <div class="p-4 bg-slate-50/50 border-b border-slate-100">
+        <p class="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">What can we help you find?</p>
+        <div class="flex flex-wrap gap-2" id="search-quick-tags">
+          <button class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-medium text-slate-700 hover:bg-[#F0FDF4] hover:border-[#168940] hover:text-[#168940] transition-colors focus:outline-none focus:ring-2 focus:ring-[#168940]/20" data-tag="Buku">Buku</button>
+          <button class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-medium text-slate-700 hover:bg-[#F0FDF4] hover:border-[#168940] hover:text-[#168940] transition-colors focus:outline-none focus:ring-2 focus:ring-[#168940]/20" data-tag="Jurnal">Jurnal</button>
+          <button class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-medium text-slate-700 hover:bg-[#F0FDF4] hover:border-[#168940] hover:text-[#168940] transition-colors focus:outline-none focus:ring-2 focus:ring-[#168940]/20" data-tag="Skripsi">Skripsi</button>
+          <button class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-medium text-slate-700 hover:bg-[#F0FDF4] hover:border-[#168940] hover:text-[#168940] transition-colors focus:outline-none focus:ring-2 focus:ring-[#168940]/20" data-tag="Repository">Repository</button>
+          <button class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-medium text-slate-700 hover:bg-[#F0FDF4] hover:border-[#168940] hover:text-[#168940] transition-colors focus:outline-none focus:ring-2 focus:ring-[#168940]/20" data-tag="Fasilitas">Fasilitas</button>
+        </div>
+      </div>
+
+      <!-- Bottom Section: Results -->
+      <div class="max-h-[60vh] overflow-y-auto p-2" id="search-results-container">
+        <!-- Default State: Recent Searches -->
+        <div id="search-recent-state">
+          <div class="px-3 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Recent Searches</div>
+          <ul class="space-y-1 mt-1">
+            <li>
+              <a href="/tata-tertib" class="search-result-item flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#168940]/10 focus:bg-[#168940]/10 outline-none text-slate-700 group transition-colors">
+                <iconify-icon icon="lucide:clock" width="1.2rem" class="opacity-70"></iconify-icon>
+                <span class="text-sm font-medium">Panduan dan tata tertib peminjaman</span>
+                <iconify-icon icon="lucide:arrow-up-left" width="1rem" class="ml-auto opacity-0 group-hover:opacity-50 group-focus:opacity-50 text-[#168940]"></iconify-icon>
+              </a>
+            </li>
+            <li>
+              <a href="/jam-layanan" class="search-result-item flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#168940]/10 focus:bg-[#168940]/10 outline-none text-slate-700 group transition-colors">
+                <iconify-icon icon="lucide:clock" width="1.2rem" class="opacity-70"></iconify-icon>
+                <span class="text-sm font-medium">Jam buka perpustakaan hari sabtu</span>
+                <iconify-icon icon="lucide:arrow-up-left" width="1rem" class="ml-auto opacity-0 group-hover:opacity-50 group-focus:opacity-50 text-[#168940]"></iconify-icon>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Active State: Live Results (Hidden by default) -->
+        <div id="search-live-state" class="hidden">
+          <div class="px-3 py-2 text-xs font-semibold text-[#168940] uppercase tracking-wider">Live Results</div>
+          <ul class="space-y-1 mt-1" id="search-live-list">
+            <!-- Results will be injected here via JS -->
+          </ul>
+        </div>
+
+        <!-- Empty State -->
+        <div id="search-empty-state" class="hidden py-14 flex flex-col items-center justify-center text-center">
+          <iconify-icon icon="lucide:file-text" width="3rem" class="mb-3 opacity-50"></iconify-icon>
+          <h3 class="text-sm font-semibold text-slate-700">Tidak ada hasil ditemukan</h3>
+          <p class="text-sm text-slate-500 mt-1">Coba gunakan kata kunci lain untuk mencari.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    // DOM Elements
+    const modalBackdrop = document.getElementById('search-modal-backdrop');
+    const modalContainer = document.getElementById('search-modal-container');
+    const searchInput = document.getElementById('search-modal-input');
+    const searchBtns = document.querySelectorAll('.open-search-modal-btn, #open-search-modal-btn');
+    
+    const recentState = document.getElementById('search-recent-state');
+    const liveState = document.getElementById('search-live-state');
+    const emptyState = document.getElementById('search-empty-state');
+    const liveList = document.getElementById('search-live-list');
+    const quickTags = document.querySelectorAll('#search-quick-tags button');
+    
+    let isOpen = false;
+    let debounceTimer;
+    let searchIndex = [];
+
+    // Muat indeks pencarian secara asinkron dari search-index.json
+    function loadSearchIndex() {
+      if (searchIndex.length > 0) return;
+      fetch('/search-index.json')
+        .then(res => {
+          if (!res.ok) throw new Error('Network response was not ok');
+          return res.json();
+        })
+        .then(data => {
+          searchIndex = data;
+        })
+        .catch(err => {
+          console.error('Gagal memuat indeks pencarian internal:', err);
+          // Fallback data jika gagal mengambil dari server
+          searchIndex = [
+            { title: 'Tata Tertib Perpustakaan IAIN Sorong', type: 'informasi', icon: 'flat-color-icons:rules', link: '/tata-tertib' },
+            { title: 'Jam Buka Layanan Perpustakaan', type: 'informasi', icon: 'flat-color-icons:clock', link: '/jam-layanan' },
+            { title: 'Visi dan Misi Perpustakaan', type: 'informasi', icon: 'flat-color-icons:document', link: '/visi-misi' },
+            { title: 'Struktur Organisasi Perpustakaan', type: 'informasi', icon: 'flat-color-icons:document', link: '/struktur' },
+            { title: 'Profil Singkat Perpustakaan', type: 'informasi', icon: 'flat-color-icons:document', link: '/profil' }
+          ];
+        });
+    }
+
+    // Open Modal Function
+    function openSearchModal() {
+      if (isOpen) return;
+      isOpen = true;
+      
+      // Close mobile menu if open
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu) {
+        mobileMenu.classList.add('hidden');
+      }
+      
+      // Muat indeks pencarian segera saat modal dibuka
+      loadSearchIndex();
+
+      // Unhide and animate in
+      modalBackdrop.classList.remove('hidden');
+      // small delay to allow display:block to apply before animating opacity
+      setTimeout(() => {
+        modalBackdrop.classList.remove('opacity-0');
+        modalContainer.classList.remove('opacity-0', 'scale-95');
+        searchInput.focus();
+      }, 10);
+      
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close Modal Function
+    function closeSearchModal() {
+      if (!isOpen) return;
+      isOpen = false;
+      
+      // Animate out
+      modalBackdrop.classList.add('opacity-0');
+      modalContainer.classList.add('opacity-0', 'scale-95');
+      
+      // Wait for transition to finish before hiding
+      setTimeout(() => {
+        modalBackdrop.classList.add('hidden');
+        document.body.style.overflow = '';
+        // Reset state
+        searchInput.value = '';
+        showRecentState();
+      }, 200);
+    }
+
+    // Handle Search Logic with Debounce
+    function handleSearch(query) {
+      if (!query.trim()) {
+        showRecentState();
+        return;
+      }
+
+      // Hide everything while searching
+      recentState.classList.add('hidden');
+      liveState.classList.add('hidden');
+      emptyState.classList.add('hidden');
+
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        const queryLower = query.toLowerCase();
+        const results = searchIndex.filter(item => 
+          item.title.toLowerCase().includes(queryLower) || 
+          item.type.toLowerCase().includes(queryLower)
+        );
+
+        if (results.length > 0) {
+          renderLiveResults(results);
+          liveState.classList.remove('hidden');
+        } else {
+          emptyState.classList.remove('hidden');
+        }
+      }, 300); // 300ms debounce
+    }
+
+    // Render Results
+    function renderLiveResults(results) {
+      liveList.innerHTML = results.map(item => `
+        <li>
+          <a href="${item.link}" ${item.link.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="search-result-item flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#168940]/10 focus:bg-[#168940]/10 outline-none text-slate-700 group transition-colors">
+            <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 border border-slate-200">
+              <iconify-icon icon="${item.icon}" width="1.2rem"></iconify-icon>
+            </div>
+            <span class="text-sm font-medium line-clamp-1">${item.title}</span>
+            <span class="ml-auto text-[10px] uppercase font-bold text-[#168940] bg-[#F0FDF4] border border-[#168940]/20 px-2 py-0.5 rounded shadow-sm shrink-0">${item.type}</span>
+          </a>
+        </li>
+      `).join('');
+    }
+
+    // Show Recent State
+    function showRecentState() {
+      recentState.classList.remove('hidden');
+      liveState.classList.add('hidden');
+      emptyState.classList.add('hidden');
+    }
+
+    // --- SETUP EVENT LISTENERS ---
+
+    // 1. Global Keyboard Shortcut (Ctrl+K or Cmd+K)
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault(); // Prevent default browser search behavior
+        isOpen ? closeSearchModal() : openSearchModal();
+      }
+      
+      // ESC to close
+      if (e.key === 'Escape' && isOpen) {
+        closeSearchModal();
+      }
+    });
+
+    // 2. Click outside to close
+    modalBackdrop.addEventListener('click', (e) => {
+      // Check if clicking exactly on backdrop elements, not inside the container
+      if (e.target === modalBackdrop || e.target.closest('.fixed.inset-0.overflow-y-auto') === e.target) {
+        closeSearchModal();
+      }
+    });
+
+    // 3. Prevent click inside container from closing
+    modalContainer.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // 4. Header Search Button Click
+    searchBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openSearchModal();
+      });
+    });
+
+    // 5. Input Event for Live Search
+    searchInput.addEventListener('input', (e) => {
+      handleSearch(e.target.value);
+    });
+
+    // 6. Quick Tags Click
+    quickTags.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag');
+        searchInput.value = tag;
+        searchInput.focus();
+        handleSearch(tag);
+      });
+    });
+
+    // 7. Keyboard Navigation (ArrowUp/ArrowDown)
+    modalContainer.addEventListener('keydown', (e) => {
+      if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return;
+
+      const items = Array.from(modalContainer.querySelectorAll('.search-result-item:not(.hidden)'));
+      if (!items.length) return;
+
+      const currentIndex = items.findIndex(item => item === document.activeElement);
+      
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
+        items[nextIndex].focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        // If we are at the top or not focused on items, focus search input
+        if (currentIndex <= 0) {
+          searchInput.focus();
+        } else {
+          items[currentIndex - 1].focus();
+        }
+      }
+    });
+  });
+</script>

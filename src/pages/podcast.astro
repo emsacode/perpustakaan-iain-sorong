@@ -1,0 +1,117 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Literasi & Publikasi",
+    items: [{"label": "Kelas Literasi & KILAU", "href": "/literasi"}, {"label": "Podcast Perpustakaan", "href": "/podcast"}, {"label": "Desiderata", "href": "/desiderata"}]
+};
+---
+
+<LayoutSidebar title="Podcast Perpustakaan" sidebarMenu={sidebarMenu}>
+    
+    <!-- Hero / Featured Banner (Clean Light Style) -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] overflow-hidden mb-12 shadow-sm flex flex-col md:flex-row relative group hover:border-[#BBF7D0] transition-all">
+        <!-- Decoration -->
+        <div class="absolute right-0 top-0 w-32 h-32 bg-[#F0FDF4] rounded-bl-full opacity-50 z-0"></div>
+        
+        <!-- Thumbnail Cover -->
+        <div class="w-full md:w-64 bg-[#F8FAFC] border-b md:border-b-0 md:border-r border-[#dadada] p-8 flex flex-col items-center justify-center shrink-0 relative z-10 group-hover:bg-[#F0FDF4] transition-colors">
+            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#dadada] mb-4 text-[#168940]">
+                <iconify-icon icon="flat-color-icons:voice-presentation" ></iconify-icon>
+            </div>
+        </div>
+
+        <!-- Meta text -->
+        <div class="p-8 md:p-10 flex-1 relative z-10">
+            <div class="uppercase tracking-widest text-xs font-bold text-[#EAB308] mb-2">Podcast Siniar</div>
+            <h2 class="text-3xl font-semibold text-[#222222] mb-3 tracking-tight m-0">Suara Pustaka</h2>
+            
+            <div class="flex flex-wrap items-center gap-3 mb-6 font-serif text-[#444444] text-[13px]">
+                <span class="font-semibold text-[#168940]">IAIN Sorong</span>
+                <span class="text-[#dadada]">•</span>
+                <span>12 Episode</span>
+                <span class="text-[#dadada]">•</span>
+                <span>Diperbarui setiap Jumat</span>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button class="bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-6 rounded-[4px] shadow-sm transition-colors flex items-center gap-2 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308] text-sm">
+                    <iconify-icon icon="flat-color-icons:play" ></iconify-icon>
+                    Mulai Dengar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Intro Text -->
+    <div class="mb-12">
+        <p class="font-serif text-[15px] text-[#444444] leading-relaxed border-l-4 border-[#168940] pl-5 italic m-0 bg-[#F8FAFC] p-5 rounded-r-[8px]">
+            Kami menyadari bahwa tidak semua bentuk pengetahuan harus dibaca secara kaku di dalam ruang hening. Melalui podcast, kami mengundang akademisi, pustakawan, penulis lokal, dan aktivis literasi untuk berbincang mendalam sembari menemani aktivitas Anda sehari-hari.
+        </p>
+    </div>
+
+    <!-- Episode Tracklist -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-12">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 border-b border-[#dadada] pb-4 gap-2">
+            <h3 class="text-2xl font-semibold text-[#222222] m-0 tracking-tight">Topik Populer</h3>
+            <span class="font-serif text-[13px] text-[#666666]">Berdasarkan pendengar terbanyak</span>
+        </div>
+
+        <div class="space-y-2">
+            
+            <!-- Track 1 -->
+            <div class="group flex items-center gap-4 p-3 rounded-[4px] hover:bg-[#F8FAFC] border border-transparent hover:border-[#dadada] transition-colors cursor-pointer">
+                <div class="w-12 h-12 bg-white border border-[#dadada] rounded-[4px] flex items-center justify-center shrink-0 group-hover:border-[#168940] transition-colors text-[#666666] group-hover:text-[#168940] group-hover:bg-[#F0FDF4]">
+                    <iconify-icon icon="flat-color-icons:play" ></iconify-icon>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-semibold text-[#222222] group-hover:text-[#168940] transition-colors m-0 text-[15px]">Bedah Buku Spesial</h4>
+                    <p class="font-serif text-[13px] text-[#666666] mt-1 m-0 line-clamp-1">Mengulik ide utama buku best seller dan rujukan akademik.</p>
+                </div>
+                <div class="font-mono text-sm text-[#94a3b8] hidden sm:block tracking-tighter">45:20</div>
+            </div>
+
+            <!-- Track 2 -->
+            <div class="group flex items-center gap-4 p-3 rounded-[4px] hover:bg-[#F8FAFC] border border-transparent hover:border-[#dadada] transition-colors cursor-pointer">
+                <div class="w-12 h-12 bg-white border border-[#dadada] rounded-[4px] flex items-center justify-center shrink-0 group-hover:border-[#168940] transition-colors text-[#666666] group-hover:text-[#168940] group-hover:bg-[#F0FDF4]">
+                    <iconify-icon icon="flat-color-icons:play" ></iconify-icon>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-semibold text-[#222222] group-hover:text-[#168940] transition-colors m-0 text-[15px]">Bincang Skripsi & Riset</h4>
+                    <p class="font-serif text-[13px] text-[#666666] mt-1 m-0 line-clamp-1">Mengatasi writer's block, mencari judul, hingga menghadapi dosen.</p>
+                </div>
+                <div class="font-mono text-sm text-[#94a3b8] hidden sm:block tracking-tighter">38:15</div>
+            </div>
+
+            <!-- Track 3 -->
+            <div class="group flex items-center gap-4 p-3 rounded-[4px] hover:bg-[#F8FAFC] border border-transparent hover:border-[#dadada] transition-colors cursor-pointer">
+                <div class="w-12 h-12 bg-white border border-[#dadada] rounded-[4px] flex items-center justify-center shrink-0 group-hover:border-[#168940] transition-colors text-[#666666] group-hover:text-[#168940] group-hover:bg-[#F0FDF4]">
+                    <iconify-icon icon="flat-color-icons:play" ></iconify-icon>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-semibold text-[#222222] group-hover:text-[#168940] transition-colors m-0 text-[15px]">Tokoh Literasi</h4>
+                    <p class="font-serif text-[13px] text-[#666666] mt-1 m-0 line-clamp-1">Wawancara inspiratif dengan penggerak pendidikan Papua.</p>
+                </div>
+                <div class="font-mono text-sm text-[#94a3b8] hidden sm:block tracking-tighter">52:40</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Platform Links -->
+    <div class="bg-[#F8FAFC] border border-[#dadada] p-8 rounded-[8px] flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+        <div class="text-center md:text-left">
+            <h4 class="text-xl font-semibold text-[#222222] mb-1 m-0 tracking-tight">Dengarkan Kapan Saja</h4>
+            <p class="font-serif text-sm text-[#666666] m-0">Tersedia di platform streaming digital kesayangan Anda.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#" class="bg-white border border-red-200 hover:border-red-500 hover:bg-red-50 text-red-600 px-6 py-3 rounded-[4px] font-semibold flex items-center gap-2 transition-all shadow-sm text-sm focus:outline-none focus:ring-[3px] focus:ring-red-200 no-underline">
+                <iconify-icon icon="logos:youtube-icon" ></iconify-icon> YouTube
+            </a>
+            <a href="#" class="bg-white border border-green-200 hover:border-green-500 hover:bg-[#F0FDF4] text-green-700 px-6 py-3 rounded-[4px] font-semibold flex items-center gap-2 transition-all shadow-sm text-sm focus:outline-none focus:ring-[3px] focus:ring-green-200 no-underline">
+                <iconify-icon icon="logos:spotify-icon" ></iconify-icon> Spotify
+            </a>
+        </div>
+    </div>
+
+</LayoutSidebar>

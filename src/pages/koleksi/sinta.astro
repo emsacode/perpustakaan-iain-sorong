@@ -1,0 +1,864 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Pusat Rujukan Jurnal Nasional (Sinta) - Perpustakaan IAIN Sorong">
+  <Header />
+  
+  <main class="bg-slate-50 min-h-screen pb-16 font-sans">
+    
+    <!-- Hero Banner Section -->
+    <div class="bg-gradient-to-r from-[#0B4226] to-[#168940] text-white py-10 md:py-14 border-b border-[#dadada]">
+      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex gap-2 text-xs text-[#BBF7D0] mb-3 font-medium">
+          <a href="/" class="hover:underline">Beranda</a>
+          <span>/</span>
+          <span class="text-white">Koleksi Jurnal</span>
+          <span>/</span>
+          <span class="text-white">Sinta</span>
+        </nav>
+        <h1 class="text-2xl md:text-4xl font-serif font-bold tracking-tight mb-3">
+          Pusat Rujukan Jurnal Nasional (Sinta)
+        </h1>
+        <p class="text-sm md:text-base text-[#BBF7D0] max-w-3xl leading-relaxed font-serif">
+          Modul analisis dan pencarian jurnal nasional terakreditasi Kemenristek/Sinta edisi 2026. Temukan wadah penerbitan terbaik untuk naskah ilmiah Anda, kalkulasikan poin KUM Jabatan Fungsional, serta rencanakan estimasi garis masa publikasi secara otomatis.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      
+      <!-- CONTROL PANEL (NON-STICKY) -->
+      <div class="bg-white border border-slate-200 rounded-xl shadow-md p-4 md:p-6 mb-6 transition-all">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-end">
+          
+          <!-- Column 1: Date Picker (Timeline Input) -->
+          <div class="lg:col-span-3">
+            <label for="submission-date" class="block text-xs font-bold text-[#0B4226] uppercase tracking-wider mb-2 flex items-center gap-1">
+              <iconify-icon icon="flat-color-icons:calendar" width="1.15rem"></iconify-icon>
+              Tanggal Submit Rencana
+            </label>
+            <input 
+              type="date" 
+              id="submission-date" 
+              class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#168940] focus:border-[#168940] bg-white hover:bg-slate-50 transition-colors"
+            />
+          </div>
+
+          <!-- Column 2: Search Input -->
+          <div class="lg:col-span-3">
+            <label for="search-input" class="block text-xs font-bold text-[#0B4226] uppercase tracking-wider mb-2 flex items-center gap-1">
+              <iconify-icon icon="lucide:search" class="text-primary" width="1.1rem"></iconify-icon>
+              Cari Nama Jurnal / Penerbit
+            </label>
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Masukkan kata kunci..."
+              class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#168940] focus:border-[#168940]"
+            />
+          </div>
+
+          <!-- Column 3: Subject Selection -->
+          <div class="lg:col-span-3">
+            <label for="subject-filter" class="block text-xs font-bold text-[#0B4226] uppercase tracking-wider mb-2 flex items-center gap-1">
+              <iconify-icon icon="lucide:book" class="text-primary" width="1.1rem"></iconify-icon>
+              Bidang Ilmu (Subject Area)
+            </label>
+            <select 
+              id="subject-filter" 
+              class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-[#168940] focus:border-[#168940]"
+            >
+              <option value="">Semua Bidang Ilmu</option>
+            </select>
+          </div>
+
+          <!-- Column 4: Quick Filters (Reset Only) -->
+          <div class="lg:col-span-3">
+            <button 
+              id="btn-reset" 
+              class="w-full px-3 py-2 border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-sm rounded-lg transition-colors cursor-pointer bg-white flex items-center justify-center gap-1.5"
+              title="Reset Filters"
+            >
+              <iconify-icon icon="lucide:rotate-ccw" width="1.1rem"></iconify-icon>
+              Reset Filter
+            </button>
+          </div>
+          
+        </div>
+
+        <!-- Secondary Filters Row (Collapsible / Grid) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-4 pt-4 border-t border-slate-100">
+          
+          <!-- Peringkat Sinta Selector -->
+          <div>
+            <label for="sinta-filter" class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+              Peringkat Sinta
+            </label>
+            <select id="sinta-filter" class="w-full px-2 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-700 bg-white">
+              <option value="">Semua Sinta</option>
+              <option value="S1">Sinta 1 (S1)</option>
+              <option value="S2">Sinta 2 (S2)</option>
+              <option value="S3">Sinta 3 (S3)</option>
+              <option value="S4">Sinta 4 (S4)</option>
+              <option value="S5">Sinta 5 (S5)</option>
+              <option value="S6">Sinta 6 (S6)</option>
+            </select>
+          </div>
+
+          <!-- Scopus Indexed Selector -->
+          <div>
+            <label for="scopus-filter" class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+              Scopus Indexed
+            </label>
+            <select id="scopus-filter" class="w-full px-2 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-700 bg-white">
+              <option value="">Semua Status</option>
+              <option value="Yes">Ya (Yes)</option>
+              <option value="No">Tidak (No)</option>
+            </select>
+          </div>
+
+          <!-- Garuda Indexed Selector -->
+          <div>
+            <label for="garuda-filter" class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+              Garuda Indexed
+            </label>
+            <select id="garuda-filter" class="w-full px-2 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-700 bg-white">
+              <option value="">Semua Status</option>
+              <option value="Yes">Ya (Yes)</option>
+              <option value="No">Tidak (No)</option>
+            </select>
+          </div>
+
+          <!-- Difficulty Selector -->
+          <div>
+            <label for="difficulty-filter" class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+              Tingkat Kemudahan (IKP)
+            </label>
+            <select id="difficulty-filter" class="w-full px-2 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-700 bg-white">
+              <option value="">Semua Tingkat</option>
+              <option value="🟢 Mudah">🟢 Mudah (IKP ≥ 7)</option>
+              <option value="🟡 Sedang">🟡 Sedang (IKP 4.5 - 6.9)</option>
+              <option value="🔴 Sulit">🔴 Sukar (IKP < 4.5)</option>
+            </select>
+          </div>
+
+          <!-- APC Filter (Free vs Paid) -->
+          <div>
+            <label for="apc-filter" class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+              Biaya Publikasi (APC)
+            </label>
+            <select id="apc-filter" class="w-full px-2 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-700 bg-white">
+              <option value="">Semua Biaya</option>
+              <option value="free">Gratis (APC = Rp 0)</option>
+              <option value="paid">Berbayar</option>
+            </select>
+          </div>
+
+          <!-- Sorting Selector -->
+          <div>
+            <label for="sort-by" class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+              Urutkan Berdasarkan
+            </label>
+            <select id="sort-by" class="w-full px-2 py-1.5 border border-slate-300 rounded-lg text-xs text-slate-700 bg-white">
+              <option value="no">Default (No)</option>
+              <option value="citations_desc">Sitasi Terbanyak</option>
+              <option value="h5_desc">H5-Index Tertinggi</option>
+              <option value="impact_desc">Impact Score Tertinggi</option>
+              <option value="apc_asc">APC Terendah</option>
+              <option value="review_asc">Review Tercepat</option>
+              <option value="ikp_desc">IKP Tertinggi (Terpopuler/Termudah)</option>
+              <option value="kum_desc">Nilai KUM Tertinggi</option>
+            </select>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- MAIN TABLE CONTAINER -->
+      <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden mb-6">
+        
+        <!-- Loading State -->
+        <div id="loading-state" class="flex flex-col items-center justify-center py-20">
+          <div class="animate-spin rounded-full h-12 w-12 border-2 border-[#168940] border-t-transparent mb-3"></div>
+          <p class="text-sm text-slate-500">Memuat basis data jurnal Sinta...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden flex-col items-center justify-center py-16 px-4 text-center">
+          <iconify-icon icon="flat-color-icons:search" width="3.5rem" class="mb-3"></iconify-icon>
+          <h3 class="text-lg font-bold text-slate-700 mb-1">Jurnal tidak ditemukan</h3>
+          <p class="text-sm text-slate-500 max-w-md">
+            Tidak ada jurnal terakreditasi Sinta yang cocok dengan kriteria filter atau kata kunci carian Anda. Coba kurangi filter pencarian Anda.
+          </p>
+        </div>
+
+        <!-- Table Body (Horizontal Scroll on Mobile) -->
+        <div class="overflow-x-auto hidden" id="table-wrapper">
+          <table class="w-full border-collapse text-left text-sm text-slate-600 font-sans">
+            <thead class="bg-slate-100/80 border-b border-slate-200 text-slate-700 font-semibold uppercase text-xs">
+              <tr>
+                <th class="py-3.5 px-4 w-12 text-center">No</th>
+                <th class="py-3.5 px-4 min-w-[280px]">Nama Jurnal</th>
+                <th class="py-3.5 px-4 text-center w-24">Peringkat</th>
+                <th class="py-3.5 px-4 text-center">Sitasi (5 th)</th>
+                <th class="py-3.5 px-4 text-center">H5-Index</th>
+                <th class="py-3.5 px-4 text-center">KUM Poin</th>
+                <th class="py-3.5 px-4 text-center">IKP (Kemudahan)</th>
+                <th class="py-3.5 px-4 text-right">APC (Biaya)</th>
+                <th class="py-3.5 px-4 text-center">Review (Waktu)</th>
+                <th class="py-3.5 px-4 min-w-[320px] bg-yellow-50/20 text-[#856404]" id="th-timeline">
+                  Garis Masa Publikasi (Timeline)
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100" id="table-body">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PAGINATION FOOTER -->
+        <div class="flex flex-col sm:flex-row items-center justify-between border-t border-slate-200 px-6 py-4 gap-4 hidden" id="pagination-wrapper">
+          <div class="text-xs text-slate-500 font-medium" id="pagination-info">
+            Menampilkan 0 - 0 dari 0 jurnal
+          </div>
+          <div class="flex items-center gap-1.5" id="pagination-controls">
+            <!-- Buttons rendered dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ACCORDION DOCUMENTATION & GUIDELINES -->
+      <div class="bg-white border border-slate-200 rounded-xl shadow-sm p-6 mb-6">
+        <h3 class="text-base font-bold text-[#0B4226] mb-3 flex items-center gap-2">
+          <iconify-icon icon="flat-color-icons:about" width="1.25rem"></iconify-icon>
+          Panduan Penggunaan & Kredit KUM Jabatan Fungsional
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-600 font-serif leading-relaxed mt-4">
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+            <h4 class="font-bold text-[#0B4226] uppercase mb-2">🏅 Nilai KUM Dosen</h4>
+            <p>Berdasarkan panduan beban kerja dan jabatan fungsional dosen, publikasi pada jurnal terakreditasi Sinta memiliki bobot angka kredit (KUM) sebagai berikut:</p>
+            <ul class="space-y-1.5 mt-2 font-semibold text-slate-700">
+              <li>• Sinta 1 (S1) = 25 Poin</li>
+              <li>• Sinta 2 (S2) = 15 Poin</li>
+              <li>• Sinta 3 s/d 6 (S3–S6) = 10 Poin</li>
+            </ul>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+            <h4 class="font-bold text-[#0B4226] uppercase mb-2">🗓️ Cara Kerja Kalkulator</h4>
+            <p>Masukkan tanggal rencana submit Anda di bagian atas. Sistem akan menghitung estimasi tanggal selesai review serta estimasi waktu penerbitan artikel (turnaround) berdasarkan metadata historis jurnal.</p>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+            <h4 class="font-bold text-[#0B4226] uppercase mb-2">🟢 Indeks Kemudahan (IKP)</h4>
+            <p>Indeks Kemudahan Publikasi (IKP) dirancang untuk mempermudah pemetaan tingkat kesulitan penerbitan:</p>
+            <ul class="space-y-1.5 mt-1.5">
+              <li>🟢 <strong>Mudah (Skor IKP ≥ 7)</strong>: Penerimaan tinggi, review cepat.</li>
+              <li>🟡 <strong>Sedang (Skor 4.5–6.9)</strong>: Seleksi moderat.</li>
+              <li>🔴 <strong>Sukar (Skor &lt; 4.5)</strong>: Persentase penolakan tinggi.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<!-- Client Side Logic for Sinta Center -->
+<script>
+  let journalData = [];
+  let filteredData = [];
+  let currentPage = 1;
+  const itemsPerPage = 25;
+  let targetSubmissionDate = null;
+
+  // DOM Elements
+  const loadingState = document.getElementById('loading-state');
+  const emptyState = document.getElementById('empty-state');
+  const tableWrapper = document.getElementById('table-wrapper');
+  const tableBody = document.getElementById('table-body');
+  const paginationWrapper = document.getElementById('pagination-wrapper');
+  const paginationInfo = document.getElementById('pagination-info');
+  const paginationControls = document.getElementById('pagination-controls');
+  
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const submissionDateInput = document.getElementById('submission-date') as HTMLInputElement;
+  const subjectFilter = document.getElementById('subject-filter') as HTMLSelectElement;
+  const sintaFilter = document.getElementById('sinta-filter') as HTMLSelectElement;
+  const scopusFilter = document.getElementById('scopus-filter') as HTMLSelectElement;
+  const garudaFilter = document.getElementById('garuda-filter') as HTMLSelectElement;
+  const difficultyFilter = document.getElementById('difficulty-filter') as HTMLSelectElement;
+  const apcFilter = document.getElementById('apc-filter') as HTMLSelectElement;
+  const sortBy = document.getElementById('sort-by') as HTMLSelectElement;
+  
+  const btnExport = document.getElementById('btn-export');
+  const btnReset = document.getElementById('btn-reset');
+
+  // Calculate KUM Points based on Sinta Rank
+  function getKumPoints(sintaRank) {
+    if (sintaRank === 'S1') return 25;
+    if (sintaRank === 'S2') return 15;
+    return 10;
+  }
+
+  // Load JSON Data
+  async function fetchDatabases() {
+    try {
+      const response = await fetch('/data/sinta_2026.json');
+      if (!response.ok) throw new Error('Network failed to fetch JSON database');
+      journalData = await response.json();
+      
+      // Populate unique Subject Areas
+      populateSubjects();
+      
+      // Apply filters on load
+      applyFiltersAndRender();
+    } catch (err) {
+      console.error(err);
+      if (loadingState) {
+        loadingState.innerHTML = `
+          <iconify-icon icon="flat-color-icons:cancel" width="3rem" class="mb-2"></iconify-icon>
+          <p class="text-sm text-red-500 font-bold">Gagal memuat database jurnal Sinta.</p>
+          <p class="text-xs text-slate-400 mt-1 mb-3">Pastikan file database tersedia di server.</p>
+          <button id="btn-retry" class="px-4 py-2 bg-[#168940] hover:bg-[#0B4226] text-white text-xs font-bold rounded-lg transition-colors cursor-pointer">
+            Coba Lagi
+          </button>
+        `;
+        const retryBtn = document.getElementById('btn-retry');
+        if (retryBtn) {
+          retryBtn.addEventListener('click', () => {
+            // Restore loading state
+            loadingState.innerHTML = `
+              <div class="animate-spin rounded-full h-12 w-12 border-2 border-[#168940] border-t-transparent mb-3"></div>
+              <p class="text-sm text-slate-500">Memuat basis data jurnal Sinta...</p>
+            `;
+            fetchDatabases();
+          });
+        }
+      }
+    }
+  }
+
+  // Populate dynamic subjects dropdown
+  function populateSubjects() {
+    if (!subjectFilter) return;
+    const subjects = new Set();
+    journalData.forEach(item => {
+      if (item.subject_area) {
+        subjects.add(item.subject_area);
+      }
+    });
+    
+    // Clear and keep first
+    subjectFilter.innerHTML = '<option value="">Semua Bidang Ilmu</option>';
+    const sortedSubjects = Array.from(subjects).sort();
+    sortedSubjects.forEach(subject => {
+      const option = document.createElement('option');
+      option.value = subject as string;
+      option.textContent = subject as string;
+      subjectFilter.appendChild(option);
+    });
+  }
+
+  // Format APC Currency
+  function formatApc(value) {
+    if (typeof value !== 'number' || value === 0) return '<span class="text-[#168940] font-bold">Gratis (Rp0)</span>';
+    return `<span class="text-slate-700 font-semibold">Rp ${value.toLocaleString('id-ID')}</span>`;
+  }
+
+  // Helper to format Date
+  function formatDateIndo(dateObj) {
+    if (!dateObj || isNaN(dateObj.getTime())) return '-';
+    return dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  // Handle timeline calculations
+  function calculateTimeline(submissionDateStr, reviewWeeks, turnaroundWeeks) {
+    if (!submissionDateStr) return null;
+    
+    const subDate = new Date(submissionDateStr);
+    if (isNaN(subDate.getTime())) return null;
+    
+    // Estimasi Review Selesai
+    const reviewDate = new Date(subDate.getTime());
+    reviewDate.setDate(reviewDate.getDate() + ((reviewWeeks || 0) * 7));
+    
+    // Estimasi LoA (+ 2 minggu dari review selesai)
+    const loaDate = new Date(reviewDate.getTime());
+    loaDate.setDate(loaDate.getDate() + 14);
+    
+    // Estimasi Terbit (submission + turnaround_weeks)
+    const pubDate = new Date(subDate.getTime());
+    pubDate.setDate(pubDate.getDate() + ((turnaroundWeeks || 0) * 7));
+    
+    return {
+      review: formatDateIndo(reviewDate),
+      loa: formatDateIndo(loaDate),
+      pub: formatDateIndo(pubDate)
+    };
+  }
+
+  // Apply filters and sort
+  function applyFiltersAndRender() {
+    if (!searchInput) return;
+    const query = searchInput.value.toLowerCase().trim();
+    const selectedSubject = subjectFilter.value;
+    const selectedSinta = sintaFilter.value;
+    const selectedScopus = scopusFilter.value;
+    const selectedGaruda = garudaFilter.value;
+    const selectedDifficulty = difficultyFilter.value;
+    const selectedApc = apcFilter.value;
+    const sortVal = sortBy.value;
+    
+    // Filter rows
+    filteredData = journalData.filter(item => {
+      // 1. Search Query
+      const matchesSearch = !query || 
+                            (item.name && item.name.toLowerCase().includes(query)) || 
+                            (item.publisher && item.publisher.toLowerCase().includes(query));
+      
+      // 2. Subject Area
+      const matchesSubject = !selectedSubject || item.subject_area === selectedSubject;
+      
+      // 3. Sinta Rank
+      const matchesSinta = !selectedSinta || item.sinta_rank === selectedSinta;
+
+      // 4. Scopus Indexed
+      const matchesScopus = !selectedScopus || item.scopus_indexed === selectedScopus;
+
+      // 5. Garuda Indexed
+      const matchesGaruda = !selectedGaruda || item.garuda_indexed === selectedGaruda;
+      
+      // 6. Difficulty
+      const matchesDifficulty = !selectedDifficulty || item.difficulty === selectedDifficulty;
+      
+      // 7. APC
+      let matchesApc = true;
+      if (selectedApc === 'free') {
+        matchesApc = item.apc === 0;
+      } else if (selectedApc === 'paid') {
+        matchesApc = item.apc > 0;
+      }
+      
+      return matchesSearch && matchesSubject && matchesSinta && matchesScopus && matchesGaruda && matchesDifficulty && matchesApc;
+    });
+
+    // Sort rows
+    filteredData.sort((a, b) => {
+      const citationsA = a.citations || 0;
+      const citationsB = b.citations || 0;
+      const h5A = a.h5_index || 0;
+      const h5B = b.h5_index || 0;
+      const impactA = a.impact_score || 0;
+      const impactB = b.impact_score || 0;
+      const apcA = a.apc || 0;
+      const apcB = b.apc || 0;
+      const reviewA = a.review_weeks || 0;
+      const reviewB = b.review_weeks || 0;
+      const ikpA = a.ikp || 0;
+      const ikpB = b.ikp || 0;
+      const kumA = getKumPoints(a.sinta_rank);
+      const kumB = getKumPoints(b.sinta_rank);
+      const noA = a.no || 0;
+      const noB = b.no || 0;
+
+      if (sortVal === 'citations_desc') return citationsB - citationsA;
+      if (sortVal === 'h5_desc') return h5B - h5A;
+      if (sortVal === 'impact_desc') return impactB - impactA;
+      if (sortVal === 'apc_asc') return apcA - apcB;
+      if (sortVal === 'review_asc') return reviewA - reviewB;
+      if (sortVal === 'ikp_desc') return ikpB - ikpA;
+      if (sortVal === 'kum_desc') return kumB - kumA;
+      return noA - noB; // default
+    });
+
+    // Reset to page 1 on filter
+    currentPage = 1;
+    renderTable();
+  }
+
+  // Render Table
+  function renderTable() {
+    if (loadingState) loadingState.classList.add('hidden');
+    
+    // Distinct check if the database itself is empty
+    if (journalData.length === 0) {
+      if (emptyState) {
+        emptyState.classList.remove('hidden');
+        emptyState.innerHTML = `
+          <iconify-icon icon="flat-color-icons:opened-folder" width="3.5rem" class="mb-3"></iconify-icon>
+          <h3 class="text-lg font-bold text-slate-700 mb-1">Database Kosong</h3>
+          <p class="text-sm text-slate-500 max-w-md mx-auto">
+            Maaf, basis data jurnal Sinta saat ini sedang kosong atau belum terisi data.
+          </p>
+        `;
+      }
+      if (tableWrapper) tableWrapper.classList.add('hidden');
+      if (paginationWrapper) paginationWrapper.classList.add('hidden');
+      return;
+    }
+
+    if (filteredData.length === 0) {
+      if (emptyState) {
+        emptyState.classList.remove('hidden');
+        emptyState.innerHTML = `
+          <iconify-icon icon="flat-color-icons:search" width="3.5rem" class="mb-3"></iconify-icon>
+          <h3 class="text-lg font-bold text-slate-700 mb-1">Jurnal tidak ditemukan</h3>
+          <p class="text-sm text-slate-500 max-w-md mx-auto">
+            Tidak ada jurnal terakreditasi Sinta yang cocok dengan kriteria filter atau kata kunci carian Anda. Coba kurangi filter pencarian Anda.
+          </p>
+        `;
+      }
+      if (tableWrapper) tableWrapper.classList.add('hidden');
+      if (paginationWrapper) paginationWrapper.classList.add('hidden');
+      return;
+    }
+
+    if (emptyState) emptyState.classList.add('hidden');
+    if (tableWrapper) tableWrapper.classList.remove('hidden');
+    if (paginationWrapper) paginationWrapper.classList.remove('hidden');
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, filteredData.length);
+    const paginatedItems = filteredData.slice(startIndex, endIndex);
+
+    if (tableBody) tableBody.innerHTML = '';
+    
+    paginatedItems.forEach((item, index) => {
+      const rowNo = startIndex + index + 1;
+      
+      // IKP Difficulty Color
+      let diffBadge = '';
+      if (item.difficulty === '🟢 Mudah') {
+        diffBadge = '<span class="inline-flex items-center gap-1.5 text-xs text-[#168940] bg-[#F0FDF4] border border-[#BBF7D0] px-2 py-0.5 rounded-full font-bold">🟢 Mudah</span>';
+      } else if (item.difficulty === '🟡 Sedang') {
+        diffBadge = '<span class="inline-flex items-center gap-1.5 text-xs text-[#D69E2E] bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full font-bold">🟡 Sedang</span>';
+      } else {
+        diffBadge = '<span class="inline-flex items-center gap-1.5 text-xs text-red-600 bg-red-50 border border-red-200 px-2 py-0.5 rounded-full font-bold">🔴 Sukar</span>';
+      }
+
+      // Sinta Rank Colors
+      let sintaClass = 'bg-slate-100 text-slate-700 border-slate-200';
+      if (item.sinta_rank === 'S1') sintaClass = 'bg-[#EAFDF0] text-[#168940] border-[#C8F7D5] font-bold';
+      else if (item.sinta_rank === 'S2') sintaClass = 'bg-blue-50 text-blue-700 border-blue-200 font-bold';
+      else if (item.sinta_rank === 'S3') sintaClass = 'bg-amber-50 text-amber-700 border-amber-200 font-bold';
+      
+      // Calculate KUM Point
+      const kumVal = getKumPoints(item.sinta_rank);
+
+      // Calculate Timeline if date is selected
+      let timelineContent = '';
+      if (targetSubmissionDate) {
+        const timeline = calculateTimeline(targetSubmissionDate, item.review_weeks, item.turnaround_weeks);
+        if (timeline) {
+          timelineContent = `
+            <div class="flex flex-col gap-1 py-1 text-xs">
+              <div class="flex gap-2"><span class="inline-block w-28 flex-shrink-0 text-slate-500 font-serif">Review Selesai:</span> <span class="font-bold text-slate-700">${timeline.review}</span></div>
+              <div class="flex gap-2"><span class="inline-block w-28 flex-shrink-0 text-slate-500 font-serif">Estimasi LoA:</span> <span class="font-bold text-[#168940]">${timeline.loa}</span></div>
+              <div class="flex gap-2"><span class="inline-block w-28 flex-shrink-0 text-slate-500 font-serif">Estimasi Terbit:</span> <span class="font-bold text-[#DD6B20]">${timeline.pub}</span></div>
+            </div>
+          `;
+        } else {
+          timelineContent = `
+            <div class="text-[11px] text-[#A0AEC0] italic py-1 flex items-center gap-1">
+              <iconify-icon icon="lucide:calendar-clock" class="text-slate-400"></iconify-icon>
+              Tanggal tidak valid
+            </div>
+          `;
+        }
+      } else {
+        timelineContent = `
+          <div class="text-[11px] text-[#A0AEC0] italic py-1 flex items-center gap-1">
+            <iconify-icon icon="lucide:calendar-clock" class="text-slate-400"></iconify-icon>
+            Set target tanggal kirim di atas
+          </div>
+        `;
+      }
+
+      // Check Scopus & Garuda status badges
+      const scopusStatus = item.scopus_indexed === 'Yes' 
+        ? '<span class="px-1 text-[9px] bg-sky-100 text-sky-800 rounded font-bold">Scopus</span>' 
+        : '';
+      const garudaStatus = item.garuda_indexed === 'Yes' 
+        ? '<span class="px-1 text-[9px] bg-red-100 text-red-800 rounded font-bold">Garuda</span>' 
+        : '';
+
+      const citationsVal = typeof item.citations === 'number' ? item.citations.toLocaleString('id-ID') : '0';
+      const h5IndexVal = typeof item.h5_index === 'number' ? item.h5_index : 0;
+      const reviewWeeksVal = typeof item.review_weeks === 'number' ? item.review_weeks : 0;
+      const turnaroundWeeksVal = typeof item.turnaround_weeks === 'number' ? item.turnaround_weeks : 0;
+
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-slate-50/60 transition-colors duration-150 border-b border-slate-100';
+      tr.innerHTML = `
+        <td class="py-3.5 px-4 text-center font-bold text-slate-400 text-xs">${item.no || rowNo}</td>
+        <td class="py-3.5 px-4 break-words min-w-0 max-w-sm">
+          <div class="font-bold text-slate-800 hover:text-primary transition-colors leading-tight">${item.name || 'Jurnal'}</div>
+          <div class="text-[11px] text-slate-500 font-serif mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5">
+            <span>${item.publisher || ''}</span>
+            <span class="text-slate-300">|</span>
+            <span>ISSN-P: ${item.issn_p || ''}</span>
+            <span class="text-slate-300">|</span>
+            <span>ISSN-O: ${item.issn_o || ''}</span>
+            <span class="text-slate-300">|</span>
+            <span class="font-semibold text-slate-600">${item.subject_area || ''}</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 mt-1.5">
+            <a href="${item.link_sinta || '#'}" target="_blank" rel="noopener noreferrer" class="text-[10px] font-bold text-[#3182CE] hover:underline flex items-center gap-0.5 whitespace-nowrap">
+              <iconify-icon icon="lucide:external-link"></iconify-icon> Sinta Profile
+            </a>
+            <a href="${item.link_website || '#'}" target="_blank" rel="noopener noreferrer" class="text-[10px] font-bold text-[#319795] hover:underline flex items-center gap-0.5 whitespace-nowrap">
+              <iconify-icon icon="lucide:external-link"></iconify-icon> Website Jurnal
+            </a>
+            ${scopusStatus}
+            ${garudaStatus}
+          </div>
+        </td>
+        <td class="py-3.5 px-4 text-center">
+          <span class="inline-block text-xs px-2.5 py-0.5 rounded border ${sintaClass}">
+            ${item.sinta_rank || 'N/A'}
+          </span>
+        </td>
+        <td class="py-3.5 px-4 text-center font-bold text-slate-700">${citationsVal}</td>
+        <td class="py-3.5 px-4 text-center font-bold text-slate-700">${h5IndexVal}</td>
+        <td class="py-3.5 px-4 text-center font-bold text-[#0B4226]">
+          <span class="px-2 py-1 bg-[#F0FDF4] border border-[#BBF7D0] rounded-lg text-xs whitespace-nowrap">
+            ${kumVal} Poin
+          </span>
+        </td>
+        <td class="py-3.5 px-4 text-center">${diffBadge}</td>
+        <td class="py-3.5 px-4 text-right">${formatApc(item.apc)}</td>
+        <td class="py-3.5 px-4 text-center">
+          <div class="font-bold text-slate-700 text-xs">${reviewWeeksVal} minggu</div>
+          <div class="text-[9px] text-slate-400 font-medium">Turnaround: ${turnaroundWeeksVal}m</div>
+        </td>
+        <td class="py-3.5 px-4 bg-yellow-50/10 border-l border-yellow-100/50">${timelineContent}</td>
+      `;
+      if (tableBody) tableBody.appendChild(tr);
+    });
+
+    // Pagination info
+    if (paginationInfo) paginationInfo.textContent = `Menampilkan ${startIndex + 1} - ${endIndex} dari ${filteredData.length} jurnal`;
+    
+    // Render pagination buttons
+    renderPaginationControls();
+  }
+
+  // Render Pagination Controls
+  function renderPaginationControls() {
+    if (!paginationControls) return;
+    paginationControls.innerHTML = '';
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+    if (totalPages <= 1) return;
+
+    // Previous Button
+    const prevBtn = document.createElement('button');
+    prevBtn.className = `px-2.5 py-1.5 border rounded-lg text-xs font-semibold transition-colors bg-white ${currentPage === 1 ? 'border-slate-200 text-slate-300 cursor-not-allowed' : 'border-slate-300 text-slate-600 hover:bg-slate-50'}`;
+    prevBtn.innerHTML = '<iconify-icon icon="lucide:chevron-left"></iconify-icon>';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+        if (tableWrapper) tableWrapper.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    paginationControls.appendChild(prevBtn);
+
+    // Dynamic Pages
+    let startPage = Math.max(1, currentPage - 1);
+    let endPage = Math.min(totalPages, startPage + 2);
+    
+    if (endPage - startPage < 2) {
+      startPage = Math.max(1, endPage - 2);
+    }
+
+    if (startPage > 1) {
+      const firstBtn = document.createElement('button');
+      firstBtn.className = 'px-2.5 py-1.5 border border-slate-300 text-slate-600 rounded-lg text-xs hover:bg-slate-50 font-semibold bg-white';
+      firstBtn.textContent = '1';
+      firstBtn.addEventListener('click', () => {
+        currentPage = 1;
+        renderTable();
+        if (tableWrapper) tableWrapper.scrollIntoView({ behavior: 'smooth' });
+      });
+      paginationControls.appendChild(firstBtn);
+      
+      if (startPage > 2) {
+        const dots = document.createElement('span');
+        dots.className = 'px-1.5 text-slate-400 text-xs';
+        dots.textContent = '...';
+        paginationControls.appendChild(dots);
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      const pageBtn = document.createElement('button');
+      pageBtn.className = `px-2.5 py-1.5 border rounded-lg text-xs font-bold transition-colors ${currentPage === i ? 'bg-[#168940] border-[#168940] text-white shadow-sm' : 'border-slate-300 text-slate-600 hover:bg-slate-50 bg-white'}`;
+      pageBtn.textContent = i.toString();
+      pageBtn.addEventListener('click', () => {
+        currentPage = i;
+        renderTable();
+        if (tableWrapper) tableWrapper.scrollIntoView({ behavior: 'smooth' });
+      });
+      paginationControls.appendChild(pageBtn);
+    }
+
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        const dots = document.createElement('span');
+        dots.className = 'px-1.5 text-slate-400 text-xs';
+        dots.textContent = '...';
+        paginationControls.appendChild(dots);
+      }
+      
+      const lastBtn = document.createElement('button');
+      lastBtn.className = 'px-2.5 py-1.5 border border-slate-300 text-slate-600 rounded-lg text-xs hover:bg-slate-50 font-semibold bg-white';
+      lastBtn.textContent = totalPages.toString();
+      lastBtn.addEventListener('click', () => {
+        currentPage = totalPages;
+        renderTable();
+        if (tableWrapper) tableWrapper.scrollIntoView({ behavior: 'smooth' });
+      });
+      paginationControls.appendChild(lastBtn);
+    }
+
+    // Next Button
+    const nextBtn = document.createElement('button');
+    nextBtn.className = `px-2.5 py-1.5 border rounded-lg text-xs font-semibold transition-colors bg-white ${currentPage === totalPages ? 'border-slate-200 text-slate-300 cursor-not-allowed' : 'border-slate-300 text-slate-600 hover:bg-slate-50'}`;
+    nextBtn.innerHTML = '<iconify-icon icon="lucide:chevron-right"></iconify-icon>';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable();
+        if (tableWrapper) tableWrapper.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    paginationControls.appendChild(nextBtn);
+  }
+
+  // Export to CSV Function
+  function exportToCSV() {
+    if (filteredData.length === 0) return;
+    
+    // Define Headers
+    const headers = [
+      'No', 'Nama Jurnal', 'Publisher', 'ISSN Print', 'ISSN Online', 
+      'Link Sinta', 'Link Website', 'Peringkat Sinta', 'KUM Poin', 'Citations', 
+      'H5-Index', 'Impact Score', 'Scopus Indexed', 'Garuda Indexed', 'APC (IDR)', 
+      'Open Access', 'Lama Review (minggu)', 'Turnaround Total (minggu)', 
+      'Acceptance Rate (%)', 'Skor IKP (1-10)', 'Kategori Kemudahan', 'Subject Area'
+    ];
+    
+    // Add timeline headings if target date is set
+    if (targetSubmissionDate) {
+      headers.push('Estimasi Review Selesai', 'Estimasi LoA', 'Estimasi Terbit');
+    }
+    
+    // Convert rows
+    const csvRows = [headers.join(';')];
+    
+    filteredData.forEach(item => {
+      const kumVal = getKumPoints(item.sinta_rank);
+      const row = [
+        item.no,
+        `"${item.name.replace(/"/g, '""')}"`,
+        `"${item.publisher.replace(/"/g, '""')}"`,
+        item.issn_p,
+        item.issn_o,
+        `"${item.link_sinta}"`,
+        `"${item.link_website}"`,
+        item.sinta_rank,
+        kumVal,
+        item.citations,
+        item.h5_index,
+        item.impact_score,
+        item.scopus_indexed,
+        item.garuda_indexed,
+        item.apc,
+        item.open_access,
+        item.review_weeks,
+        item.turnaround_weeks,
+        item.acceptance_rate,
+        item.ikp,
+        item.difficulty,
+        `"${item.subject_area.replace(/"/g, '""')}"`
+      ];
+      
+      if (targetSubmissionDate) {
+        const timeline = calculateTimeline(targetSubmissionDate, item.review_weeks, item.turnaround_weeks);
+        row.push(timeline ? timeline.review : '', timeline ? timeline.loa : '', timeline ? timeline.pub : '');
+      }
+      
+      csvRows.push(row.join(';'));
+    });
+    
+    // Download File
+    const csvContent = "\uFEFF" + csvRows.join('\n'); // Add BOM for Excel support
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `Rujukan_Jurnal_Sinta_${targetSubmissionDate || 'Full'}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // --- EVENT LISTENERS ---
+  
+  function initListeners() {
+    if (searchInput) searchInput.addEventListener('input', applyFiltersAndRender);
+    
+    if (submissionDateInput) {
+      submissionDateInput.addEventListener('change', (e) => {
+        const val = (e.target as HTMLInputElement).value;
+        targetSubmissionDate = val ? val : null;
+        renderTable(); 
+      });
+    }
+
+    if (subjectFilter) subjectFilter.addEventListener('change', applyFiltersAndRender);
+    if (sintaFilter) sintaFilter.addEventListener('change', applyFiltersAndRender);
+    if (scopusFilter) scopusFilter.addEventListener('change', applyFiltersAndRender);
+    if (garudaFilter) garudaFilter.addEventListener('change', applyFiltersAndRender);
+    if (difficultyFilter) difficultyFilter.addEventListener('change', applyFiltersAndRender);
+    if (apcFilter) apcFilter.addEventListener('change', applyFiltersAndRender);
+    if (sortBy) sortBy.addEventListener('change', applyFiltersAndRender);
+
+    if (btnReset) {
+      btnReset.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        if (submissionDateInput) submissionDateInput.value = '';
+        if (subjectFilter) subjectFilter.value = '';
+        if (sintaFilter) sintaFilter.value = '';
+        if (scopusFilter) scopusFilter.value = '';
+        if (garudaFilter) garudaFilter.value = '';
+        if (difficultyFilter) difficultyFilter.value = '';
+        if (apcFilter) apcFilter.value = '';
+        if (sortBy) sortBy.value = 'no';
+        targetSubmissionDate = null;
+        applyFiltersAndRender();
+      });
+    }
+
+    if (btnExport) btnExport.addEventListener('click', exportToCSV);
+  }
+
+  // Initialize on page load and support ViewTransitions navigation
+  fetchDatabases();
+  initListeners();
+  document.addEventListener('astro:page-load', () => {
+    fetchDatabases();
+    initListeners();
+  });
+</script>

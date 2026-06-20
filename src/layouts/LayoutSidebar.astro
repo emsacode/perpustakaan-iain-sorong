@@ -1,0 +1,131 @@
+---
+import Layout from './Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+	title: string;
+	sidebarMenu: { title: string; items: { label: string; href: string }[] };
+}
+
+const { title, sidebarMenu } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+// Fungsi helper untuk mengecek active class (menangani trailing slash juga)
+const isActive = (href: string) => {
+    if (href === '/') return currentPath === '/';
+    return currentPath === href || currentPath === href + '/';
+};
+---
+
+<Layout title={`${title} - Perpustakaan IAIN Sorong`}>
+	<Header />
+	
+	<!-- Full-width Premium Hero Banner -->
+	<div class="relative bg-primary py-10 md:py-14 overflow-hidden">
+		<!-- Decorative Background -->
+		<div class="absolute inset-0 z-0">
+			<!-- Background Image (Library/Campus Vibe) -->
+			<img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop" alt="Background" class="w-full h-full object-cover opacity-20 mix-blend-luminosity" />
+			
+			<!-- Gradient Overlay for Readability -->
+			<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary-dark/90 z-10"></div>
+			
+			<!-- Elegant Abstract Lines Pattern (Right Side) -->
+			<div class="absolute right-0 top-0 h-full w-full md:w-2/3 opacity-40 z-20 pointer-events-none">
+				<svg viewBox="0 0 1000 200" class="w-full h-full object-cover" preserveAspectRatio="none">
+					<!-- Parametric / Guilloche wavy lines -->
+					<path d="M0,200 C300,150 400,50 1000,0 L1000,200 Z" fill="url(#hero-gradient)" opacity="0.1"></path>
+					<path d="M100,200 C400,150 500,50 1000,25" fill="none" stroke="white" stroke-width="1.5" opacity="0.3"></path>
+					<path d="M200,200 C500,150 600,50 1000,50" fill="none" stroke="white" stroke-width="1" opacity="0.4"></path>
+					<path d="M300,200 C600,150 700,50 1000,75" fill="none" stroke="white" stroke-width="0.5" opacity="0.5"></path>
+					<path d="M400,200 C700,150 800,50 1000,100" fill="none" stroke="white" stroke-width="0.5" opacity="0.6"></path>
+					<path d="M500,200 C800,150 900,50 1000,125" fill="none" stroke="white" stroke-width="0.5" opacity="0.7"></path>
+					<path d="M0,100 C400,200 600,0 1000,150" fill="none" stroke="white" stroke-width="0.3" opacity="0.5"></path>
+					<path d="M0,50 C400,150 600,-50 1000,100" fill="none" stroke="white" stroke-width="0.3" opacity="0.4"></path>
+					
+					<defs>
+						<linearGradient id="hero-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+							<stop offset="0%" stop-color="transparent" />
+							<stop offset="100%" stop-color="#ffffff" />
+						</linearGradient>
+					</defs>
+				</svg>
+			</div>
+			
+			<!-- Subtle Grid Pattern -->
+			<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxwYXRoIGQ9Ik0gMjAgMCBMMCAwIDAgMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz4KPC9zdmc+')] opacity-20 z-10 mix-blend-overlay"></div>
+		</div>
+
+		<div class="relative z-30 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center h-full">
+			<!-- Breadcrumb -->
+			<nav class="flex items-center text-[12px] md:text-[13px] text-white/90 mb-6 font-semibold tracking-wide" aria-label="Breadcrumb">
+				<a href="/" class="hover:text-white transition-colors">Home</a>
+				<span class="mx-2 md:mx-3 text-white/50">/</span>
+				<span class="hover:text-white transition-colors cursor-pointer">{sidebarMenu.title}</span>
+				<span class="mx-2 md:mx-3 text-white/50">/</span>
+				<span class="text-white font-bold">{title}</span>
+			</nav>
+
+			<!-- Page Title -->
+			<h1 class="text-4xl md:text-[2.75rem] font-semibold text-white tracking-tight drop-shadow-md m-0">
+				{title}
+			</h1>
+		</div>
+	</div>
+
+	<!-- Wrapper Utama -->
+	<div class="bg-white min-h-screen py-12 border-b border-[#dadada]">
+		<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+			
+			<div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
+				
+				<!-- Sidebar (Daftar Isi / Submenu) - Sticky, Lebih Compact -->
+				<aside class="w-full lg:w-64 flex-shrink-0 lg:sticky lg:top-24 bg-white rounded-[8px] shadow-sm border border-[#dadada] overflow-hidden z-20">
+					<div class="bg-slate-50 border-b border-[#dadada] p-5">
+						<h3 class="text-[#222222] font-semibold text-base tracking-tight flex items-center gap-2 m-0">
+							<iconify-icon icon="flat-color-icons:folder" ></iconify-icon>
+							{sidebarMenu.title}
+						</h3>
+					</div>
+					<nav class="p-3">
+						<ul class="space-y-1 m-0 p-0 list-none">
+							{sidebarMenu.items.map((item) => (
+								<li>
+									<a 
+										href={item.href} 
+										class={`flex items-center gap-3 px-3 py-3 rounded-[4px] text-[14px] transition-all duration-200 no-underline ${
+											isActive(item.href) 
+												? 'bg-[#F0FDF4] text-[#168940] font-semibold border-l-2 border-[#168940]' 
+												: 'text-[#666666] font-serif hover:bg-[#F8FAFC] hover:text-[#222222]'
+										}`}
+									>
+										<iconify-icon icon="flat-color-icons:document" class={`text-lg ${isActive(item.href) ? 'text-[#168940]' : 'text-[#94a3b8]'}`}></iconify-icon>
+										{item.label}
+									</a>
+								</li>
+							))}
+						</ul>
+					</nav>
+				</aside>
+
+				<!-- Area Konten Utama - Bebas dari box bergaris -->
+				<main class="flex-1 w-full bg-white mt-4 lg:mt-0">
+					<article class="pb-12">
+						<!-- Konten Dinamis yang Di-inject oleh Halaman .astro -->
+						<div class="prose prose-slate prose-lg max-w-none 
+									prose-headings:text-[#222222] prose-headings:font-bold prose-headings:tracking-tight
+									prose-p:text-[#444444] prose-p:leading-relaxed
+									prose-a:text-[#168940] prose-a:no-underline hover:prose-a:underline
+									prose-img:rounded-[8px] prose-img:shadow-sm prose-img:border prose-img:border-[#dadada]">
+							<slot />
+						</div>
+					</article>
+				</main>
+
+			</div>
+		</div>
+	</div>
+
+	<Footer />
+</Layout>

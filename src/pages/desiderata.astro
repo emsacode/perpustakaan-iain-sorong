@@ -1,0 +1,90 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Literasi & Publikasi",
+    items: [{"label": "Kelas Literasi & KILAU", "href": "/literasi"}, {"label": "Podcast Perpustakaan", "href": "/podcast"}, {"label": "Desiderata", "href": "/desiderata"}]
+};
+---
+
+<LayoutSidebar title="Desiderata" sidebarMenu={sidebarMenu}>
+    
+    <div class="mb-10 text-left">
+        <h2 class="text-2xl font-semibold text-[#222222] mb-4 tracking-tight">Usulan Pengadaan Koleksi</h2>
+        <p class="font-serif text-[15px] text-[#444444] leading-relaxed">
+            Punya rekomendasi buku bagus yang belum ada di perpustakaan? Jangan ragu untuk mengisi formulir <strong>Desiderata</strong> di bawah ini agar kami dapat merencanakan pengadaannya.
+        </p>
+    </div>
+
+    <!-- Info Notice -->
+    <div class="bg-[#F0FDF4] border border-[#dadada] rounded-[8px] p-5 flex gap-4 items-start mb-8 shadow-sm">
+        <iconify-icon icon="flat-color-icons:idea" class="shrink-0 mt-0.5"></iconify-icon>
+        <div>
+            <h4 class="font-semibold text-[#222222] mb-1 m-0">Kenapa Desiderata Penting?</h4>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Sistem Desiderata membantu kami memastikan anggaran pembelian buku tepat sasaran sesuai dengan kebutuhan aktual perkuliahan, riset dosen, maupun minat baca mahasiswa IAIN Sorong.</p>
+        </div>
+    </div>
+
+    <!-- Form Container -->
+    <div class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-8">
+        
+        <form class="space-y-6" onsubmit="event.preventDefault(); alert('Terima kasih atas usulan buku Anda! Kami akan meninjaunya pada periode pengadaan berikutnya.');">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6">
+                <!-- Identitas Buku -->
+                <div class="space-y-5">
+                    <h4 class="font-semibold text-[#222222] border-b border-[#dadada] pb-2 m-0 tracking-tight">Identitas Buku Usulan</h4>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Judul Buku <span class="text-red-500">*</span></label>
+                        <input type="text" placeholder="Masukkan judul lengkap" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Pengarang / Penulis <span class="text-red-500">*</span></label>
+                        <input type="text" placeholder="Nama penulis" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-[#222222] mb-2">Penerbit</label>
+                            <input type="text" placeholder="Penerbit" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-[#222222] mb-2">Tahun Terbit</label>
+                            <input type="number" placeholder="YYYY" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alasan & Kontak -->
+                <div class="space-y-5">
+                    <h4 class="font-semibold text-[#222222] border-b border-[#dadada] pb-2 m-0 tracking-tight">Informasi Pendukung</h4>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Alasan Pengusulan <span class="text-red-500">*</span></label>
+                        <textarea rows="4" placeholder="Misal: Buku ini menjadi rujukan utama mata kuliah Tafsir semester 3..." class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors resize-none" required></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Email Pengusul</label>
+                        <div class="relative">
+                            <input type="email" placeholder="Agar kami dapat mengabari Anda jika buku tersedia" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 pl-11 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
+                            <iconify-icon icon="flat-color-icons:letter" class="absolute left-4 top-1/2 -translate-y-1/2"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="pt-6 mt-6 border-t border-[#dadada] flex justify-center">
+                <button type="submit" class="w-full md:w-2/3 bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-8 rounded-[4px] transition-colors flex items-center justify-center gap-2 group focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]">
+                    <iconify-icon icon="flat-color-icons:box" class="group-hover:-translate-y-1 transition-transform"></iconify-icon>
+                    Kirim Usulan Desiderata
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</LayoutSidebar>

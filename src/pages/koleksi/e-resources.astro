@@ -1,0 +1,446 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Daftar Database & E-Resource Akademik - Perpustakaan IAIN Sorong">
+  <Header />
+  
+  <main class="bg-slate-50 min-h-screen pb-16 font-sans">
+    
+    <!-- Hero Banner Section -->
+    <div class="bg-gradient-to-r from-[#0B4226] to-[#168940] text-white py-10 md:py-14 border-b border-[#dadada]">
+      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex gap-2 text-xs text-[#BBF7D0] mb-3 font-medium">
+          <a href="/" class="hover:underline">Beranda</a>
+          <span>/</span>
+          <span class="text-white">Koleksi</span>
+          <span>/</span>
+          <span class="text-white">Database &amp; E-Resource</span>
+        </nav>
+        <h1 class="text-2xl md:text-4xl font-serif font-bold tracking-tight mb-3">
+          Direktori Database &amp; E-Resource Global
+        </h1>
+        <p class="text-sm md:text-base text-[#BBF7D0] max-w-3xl leading-relaxed font-serif">
+          Akses portal terintegrasi untuk jurnal elektronik, database referensi, dan koleksi buku digital internasional terkemuka guna mendukung riset, tugas akhir, dan publikasi ilmiah sivitas akademika IAIN Sorong.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      
+      <!-- CONTROL PANEL (NON-STICKY) -->
+      <div class="bg-white border border-slate-200 rounded-xl shadow-md p-4 md:p-6 mb-8 transition-all">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+          
+          <!-- Column 1: Search Bar -->
+          <div class="md:col-span-5">
+            <label for="search-input" class="block text-xs font-bold text-[#0B4226] uppercase tracking-wider mb-2 flex items-center gap-1">
+              <iconify-icon icon="lucide:search" class="text-primary" width="1.1rem"></iconify-icon>
+              Cari E-Resource / Keyword
+            </label>
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Masukkan nama database atau topik riset..."
+              class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#168940] focus:border-[#168940] bg-white hover:bg-slate-50 transition-colors"
+            />
+          </div>
+
+          <!-- Column 2: Category Filter -->
+          <div class="md:col-span-4">
+            <label for="category-filter" class="block text-xs font-bold text-[#0B4226] uppercase tracking-wider mb-2 flex items-center gap-1">
+              <iconify-icon icon="lucide:filter" class="text-primary" width="1.1rem"></iconify-icon>
+              Saring Kategori
+            </label>
+            <select 
+              id="category-filter" 
+              class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-[#168940] focus:border-[#168940]"
+            >
+              <option value="">Semua Kategori</option>
+              <option value="Database & E-Journal">Database &amp; E-Journal</option>
+              <option value="Jurnal Spesifik">Jurnal Spesifik</option>
+              <option value="Pertanian & Pangan">Pertanian &amp; Pangan</option>
+              <option value="Sosial & Ekonomi">Sosial &amp; Ekonomi</option>
+              <option value="Humaniora & Multidisiplin">Humaniora &amp; Multidisiplin</option>
+              <option value="Sains & Teknologi">Sains &amp; Teknologi</option>
+              <option value="E-Book Collection">E-Book Collection</option>
+              <option value="Portal Nasional">Portal Nasional</option>
+            </select>
+          </div>
+
+          <!-- Column 3: Reset Filter -->
+          <div class="md:col-span-3">
+            <button 
+              id="btn-reset" 
+              class="w-full px-3 py-2 border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-sm rounded-lg transition-colors cursor-pointer bg-white flex items-center justify-center gap-1.5"
+              title="Reset Filters"
+            >
+              <iconify-icon icon="lucide:rotate-ccw" width="1.1rem"></iconify-icon>
+              Reset Filter
+            </button>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- MAIN RESULTS CONTAINER -->
+      <div>
+        
+        <!-- Loading State -->
+        <div id="loading-state" class="flex flex-col items-center justify-center py-20 bg-white border border-slate-200 rounded-xl shadow-sm">
+          <div class="animate-spin rounded-full h-12 w-12 border-2 border-[#168940] border-t-transparent mb-3"></div>
+          <p class="text-sm text-slate-500">Memuat direktori e-resources...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden flex-col items-center justify-center py-16 px-4 text-center bg-white border border-slate-200 rounded-xl shadow-sm">
+          <iconify-icon icon="flat-color-icons:search" width="3.5rem" class="mb-3"></iconify-icon>
+          <h3 class="text-lg font-bold text-slate-700 mb-1">E-Resource tidak ditemukan</h3>
+          <p class="text-sm text-slate-500 max-w-md mx-auto">
+            Tidak ada database, e-journal, atau e-book yang cocok dengan filter atau kata kunci carian Anda. Silakan bersihkan pencarian atau ganti kategori.
+          </p>
+        </div>
+
+        <!-- Card Grid (1 Column List Layout) -->
+        <div class="space-y-4 hidden" id="card-grid">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- PAGINATION FOOTER -->
+        <div class="flex flex-col sm:flex-row items-center justify-between border border-slate-200 bg-white rounded-xl shadow-sm px-6 py-4 mt-6 gap-4 hidden" id="pagination-wrapper">
+          <div class="text-xs text-slate-500 font-semibold" id="pagination-info">
+            Menampilkan 0 - 0 dari 0 database
+          </div>
+          <div class="flex items-center gap-1.5" id="pagination-controls">
+            <!-- Buttons rendered dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<!-- Client Side Logic for E-Resources Directory -->
+<script>
+  let resourceData = [];
+  let filteredData = [];
+  let currentPage = 1;
+  const itemsPerPage = 10;
+
+  // DOM Elements
+  const loadingState = document.getElementById('loading-state');
+  const emptyState = document.getElementById('empty-state');
+  const cardGrid = document.getElementById('card-grid');
+  const paginationWrapper = document.getElementById('pagination-wrapper');
+  const paginationInfo = document.getElementById('pagination-info');
+  const paginationControls = document.getElementById('pagination-controls');
+  
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const categoryFilter = document.getElementById('category-filter') as HTMLSelectElement;
+  const btnReset = document.getElementById('btn-reset');
+
+  // Load JSON Data
+  async function fetchResources() {
+    try {
+      const response = await fetch('/data/ugm_db_2026.json');
+      if (!response.ok) throw new Error('Network failed to fetch E-Resources JSON database');
+      resourceData = await response.json();
+      
+      // Apply filters on load
+      applyFiltersAndRender();
+    } catch (err) {
+      console.error(err);
+      if (loadingState) {
+        loadingState.innerHTML = `
+          <iconify-icon icon="flat-color-icons:cancel" width="3rem" class="mb-2"></iconify-icon>
+          <p class="text-sm text-red-500 font-bold">Gagal memuat basis data e-resource.</p>
+          <p class="text-xs text-slate-400 mt-1 mb-3">Pastikan file data tersedia di server.</p>
+          <button id="btn-retry" class="px-4 py-2 bg-[#168940] hover:bg-[#0B4226] text-white text-xs font-bold rounded-lg transition-colors cursor-pointer">
+            Coba Lagi
+          </button>
+        `;
+        const retryBtn = document.getElementById('btn-retry');
+        if (retryBtn) {
+          retryBtn.addEventListener('click', () => {
+            // Restore loading state
+            loadingState.innerHTML = `
+              <div class="animate-spin rounded-full h-12 w-12 border-2 border-[#168940] border-t-transparent mb-3"></div>
+              <p class="text-sm text-slate-500">Memuat direktori e-resources...</p>
+            `;
+            fetchResources();
+          });
+        }
+      }
+    }
+  }
+
+  // Get category badge color class
+  function getCategoryColor(category) {
+    switch (category) {
+      case "Database & E-Journal":
+        return "bg-green-50 text-green-700 border-green-200";
+      case "Jurnal Spesifik":
+        return "bg-blue-50 text-blue-700 border-blue-200";
+      case "Pertanian & Pangan":
+        return "bg-emerald-50 text-emerald-700 border-emerald-200";
+      case "Sosial & Ekonomi":
+        return "bg-amber-50 text-amber-700 border-amber-200";
+      case "Humaniora & Multidisiplin":
+        return "bg-indigo-50 text-indigo-700 border-indigo-200";
+      case "Sains & Teknologi":
+        return "bg-cyan-50 text-cyan-700 border-cyan-200";
+      case "E-Book Collection":
+        return "bg-purple-50 text-purple-700 border-purple-200";
+      case "Portal Nasional":
+        return "bg-red-50 text-red-700 border-red-200";
+      default:
+        return "bg-slate-50 text-slate-700 border-slate-200";
+    }
+  }
+
+  // Apply filters and search
+  function applyFiltersAndRender() {
+    if (!searchInput) return;
+    const query = searchInput.value.toLowerCase().trim();
+    const selectedCategory = categoryFilter.value;
+    
+    filteredData = resourceData.filter(item => {
+      // 1. Search Query with safe checks
+      const matchesSearch = !query || 
+                            (item.name && item.name.toLowerCase().includes(query)) || 
+                            (item.desc && item.desc.toLowerCase().includes(query));
+      
+      // 2. Category
+      const matchesCategory = !selectedCategory || item.category === selectedCategory;
+      
+      return matchesSearch && matchesCategory;
+    });
+
+    currentPage = 1;
+    renderCards();
+  }
+
+  // Render Card Grid
+  function renderCards() {
+    if (loadingState) loadingState.classList.add('hidden');
+    
+    // Distinct check if the database itself is empty
+    if (resourceData.length === 0) {
+      if (emptyState) {
+        emptyState.classList.remove('hidden');
+        emptyState.innerHTML = `
+          <iconify-icon icon="flat-color-icons:opened-folder" width="3.5rem" class="mb-3"></iconify-icon>
+          <h3 class="text-lg font-bold text-slate-700 mb-1">Database Kosong</h3>
+          <p class="text-sm text-slate-500 max-w-md mx-auto">
+            Maaf, basis data e-resource saat ini sedang kosong atau belum terisi data.
+          </p>
+        `;
+      }
+      if (cardGrid) cardGrid.classList.add('hidden');
+      if (paginationWrapper) paginationWrapper.classList.add('hidden');
+      return;
+    }
+
+    if (filteredData.length === 0) {
+      if (emptyState) {
+        emptyState.classList.remove('hidden');
+        emptyState.innerHTML = `
+          <iconify-icon icon="flat-color-icons:search" width="3.5rem" class="mb-3"></iconify-icon>
+          <h3 class="text-lg font-bold text-slate-700 mb-1">E-Resource tidak ditemukan</h3>
+          <p class="text-sm text-slate-500 max-w-md mx-auto">
+            Tidak ada database, e-journal, atau e-book yang cocok dengan filter atau kata kunci carian Anda. Silakan bersihkan pencarian atau ganti kategori.
+          </p>
+        `;
+      }
+      if (cardGrid) cardGrid.classList.add('hidden');
+      if (paginationWrapper) paginationWrapper.classList.add('hidden');
+      return;
+    }
+
+    if (emptyState) emptyState.classList.add('hidden');
+    if (cardGrid) cardGrid.classList.remove('hidden');
+    if (paginationWrapper) paginationWrapper.classList.remove('hidden');
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, filteredData.length);
+    const paginatedItems = filteredData.slice(startIndex, endIndex);
+
+    if (cardGrid) cardGrid.innerHTML = '';
+    
+    paginatedItems.forEach(item => {
+      const colorClass = getCategoryColor(item.category);
+      
+      const card = document.createElement('div');
+      card.className = "bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row items-center p-5 gap-6 hover:border-[#168940]/30";
+      card.innerHTML = `
+        <!-- Left: Logo container -->
+        <div class="w-32 h-20 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center p-3 flex-shrink-0 relative overflow-hidden">
+          <img 
+            src="${item.logo || ''}" 
+            alt="Logo ${item.name || 'E-Resource'}" 
+            class="max-h-full max-w-full object-contain relative z-10" 
+            onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'80\' viewBox=\'0 0 120 80\'><rect width=\'120\' height=\'80\' rx=\'8\' fill=\'%23f8fafc\'/><path d=\'M36 28h48v24H36z\' fill=\'none\' stroke=\'%23cbd5e1\' stroke-width=\'2\'/><text x=\'60\' y=\'45\' font-family=\'sans-serif\' font-size=\'10\' font-weight=\'bold\' fill=\'%2394a3b8\' text-anchor=\'middle\'>DATABASE</text></svg>'"
+          />
+        </div>
+        <!-- Right: Content details -->
+        <div class="flex-grow flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-4">
+          <div class="flex-grow max-w-4xl break-words min-w-0">
+            <div class="flex items-center gap-2 mb-2 flex-wrap">
+              <span class="inline-block text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${colorClass} whitespace-nowrap">
+                ${item.category || 'N/A'}
+              </span>
+              <span class="text-[10px] font-bold text-slate-400">#${item.no || ''}</span>
+            </div>
+            <h3 class="font-bold text-slate-800 text-base mb-1.5 leading-snug">
+              ${item.name || 'E-Resource'}
+            </h3>
+            <p class="text-xs text-slate-600 font-serif leading-relaxed line-clamp-2" title="${item.desc || ''}">
+              ${item.desc || ''}
+            </p>
+          </div>
+          <div class="flex-shrink-0 w-full md:w-auto mt-2 md:mt-0">
+            <a 
+              href="${item.link || '#'}" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="w-full md:w-auto inline-flex items-center justify-center gap-1.5 px-6 py-2.5 bg-gradient-to-r from-[#0B4226] to-[#168940] hover:from-[#168940] hover:to-[#0B4226] text-white font-bold text-xs rounded-lg transition-all shadow-sm whitespace-nowrap"
+            >
+              Akses E-Resource
+              <iconify-icon icon="lucide:external-link" width="0.95rem"></iconify-icon>
+            </a>
+          </div>
+        </div>
+      `;
+      if (cardGrid) cardGrid.appendChild(card);
+    });
+
+    // Pagination info
+    if (paginationInfo) paginationInfo.textContent = `Menampilkan ${startIndex + 1} - ${endIndex} dari ${filteredData.length} database`;
+    
+    // Render pagination buttons
+    renderPaginationControls();
+  }
+
+  // Render Pagination Controls
+  function renderPaginationControls() {
+    if (!paginationControls) return;
+    paginationControls.innerHTML = '';
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+    if (totalPages <= 1) return;
+
+    // Previous Button
+    const prevBtn = document.createElement('button');
+    prevBtn.className = `px-2.5 py-1.5 border rounded-lg text-xs font-semibold transition-colors bg-white ${currentPage === 1 ? 'border-slate-200 text-slate-300 cursor-not-allowed' : 'border-slate-300 text-slate-600 hover:bg-slate-50'}`;
+    prevBtn.innerHTML = '<iconify-icon icon="lucide:chevron-left"></iconify-icon>';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderCards();
+        if (cardGrid) cardGrid.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    paginationControls.appendChild(prevBtn);
+
+    // Dynamic Pages
+    let startPage = Math.max(1, currentPage - 1);
+    let endPage = Math.min(totalPages, startPage + 2);
+    
+    if (endPage - startPage < 2) {
+      startPage = Math.max(1, endPage - 2);
+    }
+
+    if (startPage > 1) {
+      const firstBtn = document.createElement('button');
+      firstBtn.className = 'px-2.5 py-1.5 border border-slate-300 text-slate-600 rounded-lg text-xs hover:bg-slate-50 font-semibold bg-white';
+      firstBtn.textContent = '1';
+      firstBtn.addEventListener('click', () => {
+        currentPage = 1;
+        renderCards();
+        if (cardGrid) cardGrid.scrollIntoView({ behavior: 'smooth' });
+      });
+      paginationControls.appendChild(firstBtn);
+      
+      if (startPage > 2) {
+        const dots = document.createElement('span');
+        dots.className = 'px-1.5 text-slate-400 text-xs';
+        dots.textContent = '...';
+        paginationControls.appendChild(dots);
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      const pageBtn = document.createElement('button');
+      pageBtn.className = `px-2.5 py-1.5 border rounded-lg text-xs font-bold transition-colors ${currentPage === i ? 'bg-[#168940] border-[#168940] text-white shadow-sm' : 'border-slate-300 text-slate-600 hover:bg-slate-50 bg-white'}`;
+      pageBtn.textContent = i.toString();
+      pageBtn.addEventListener('click', () => {
+        currentPage = i;
+        renderCards();
+        if (cardGrid) cardGrid.scrollIntoView({ behavior: 'smooth' });
+      });
+      paginationControls.appendChild(pageBtn);
+    }
+
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        const dots = document.createElement('span');
+        dots.className = 'px-1.5 text-slate-400 text-xs';
+        dots.textContent = '...';
+        paginationControls.appendChild(dots);
+      }
+      
+      const lastBtn = document.createElement('button');
+      lastBtn.className = 'px-2.5 py-1.5 border border-slate-300 text-slate-600 rounded-lg text-xs hover:bg-slate-50 font-semibold bg-white';
+      lastBtn.textContent = totalPages.toString();
+      lastBtn.addEventListener('click', () => {
+        currentPage = totalPages;
+        renderCards();
+        if (cardGrid) cardGrid.scrollIntoView({ behavior: 'smooth' });
+      });
+      paginationControls.appendChild(lastBtn);
+    }
+
+    // Next Button
+    const nextBtn = document.createElement('button');
+    nextBtn.className = `px-2.5 py-1.5 border rounded-lg text-xs font-semibold transition-colors bg-white ${currentPage === totalPages ? 'border-slate-200 text-slate-300 cursor-not-allowed' : 'border-slate-300 text-slate-600 hover:bg-slate-50'}`;
+    nextBtn.innerHTML = '<iconify-icon icon="lucide:chevron-right"></iconify-icon>';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderCards();
+        if (cardGrid) cardGrid.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    paginationControls.appendChild(nextBtn);
+  }
+
+  // --- EVENT LISTENERS ---
+  function initListeners() {
+    if (searchInput) searchInput.addEventListener('input', applyFiltersAndRender);
+    if (categoryFilter) categoryFilter.addEventListener('change', applyFiltersAndRender);
+
+    if (btnReset) {
+      btnReset.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        if (categoryFilter) categoryFilter.value = '';
+        applyFiltersAndRender();
+      });
+    }
+  }
+
+  // Initialize on load and support ViewTransitions
+  fetchResources();
+  initListeners();
+  document.addEventListener('astro:page-load', () => {
+    fetchResources();
+    initListeners();
+  });
+</script>

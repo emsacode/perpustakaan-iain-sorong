@@ -1,0 +1,57 @@
+---
+---
+<div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <!-- Chatbot Popup (Hidden by default) -->
+    <div id="chatbot-popup" class="hidden w-80 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden transition-all duration-300 transform translate-y-4 opacity-0">
+        <div class="bg-primary text-white p-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:headset" class="text-[#805AD5]" width="24"></iconify-icon>
+                <span class="font-bold font-serif">Asisten Pustaka</span>
+            </div>
+            <button id="close-chatbot" class="text-white hover:text-accent-highlight transition-colors focus:outline-none">
+                <iconify-icon icon="lucide:x" class="text-[#319795]" width="24"></iconify-icon>
+            </button>
+        </div>
+        <div class="p-4 h-64 overflow-y-auto bg-surface flex flex-col gap-3">
+            <div class="bg-white p-3 rounded-lg rounded-tl-none text-sm text-dark shadow-sm border border-gray-100 max-w-[85%]">
+                Halo! 👋 Selamat datang di Perpustakaan IAIN Sorong. Ada yang bisa saya bantu hari ini?
+            </div>
+        </div>
+        <div class="p-3 bg-white border-t border-gray-100 flex gap-2">
+            <input type="text" placeholder="Ketik pesan..." class="flex-1 border border-gray-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" disabled>
+            <button class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary-dark transition-colors" disabled>
+                <iconify-icon icon="lucide:send" class="text-[#DD6B20]" width="20"></iconify-icon>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chatbot Trigger Button -->
+    <button id="chatbot-trigger" class="w-14 h-14 bg-accent-highlight hover:bg-accent text-dark rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-accent-highlight/30">
+        <iconify-icon icon="lucide:message-square" class="text-[#3182CE]" width="32"></iconify-icon>
+    </button>
+</div>
+
+<script>
+    const trigger = document.getElementById('chatbot-trigger');
+    const popup = document.getElementById('chatbot-popup');
+    const closeBtn = document.getElementById('close-chatbot');
+
+    function toggleChatbot() {
+        if (popup.classList.contains('hidden')) {
+            popup.classList.remove('hidden');
+            setTimeout(() => {
+                popup.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+        } else {
+            popup.classList.add('translate-y-4', 'opacity-0');
+            setTimeout(() => {
+                popup.classList.add('hidden');
+            }, 300);
+        }
+    }
+
+    if(trigger && popup && closeBtn) {
+        trigger.addEventListener('click', toggleChatbot);
+        closeBtn.addEventListener('click', toggleChatbot);
+    }
+</script>

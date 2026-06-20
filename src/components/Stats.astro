@@ -1,0 +1,72 @@
+---
+import liveStats from '../data/live_stats.json';
+
+const formatNumber = (num) => typeof num === 'number' ? num.toLocaleString('id-ID') : num;
+---
+<section class="bg-white py-12 relative z-20 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border-y border-slate-100">
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-y-8 gap-x-0 text-center md:divide-x md:divide-slate-200">
+      
+      <div class="px-4 py-2 md:py-0">
+        <div class="hover:-translate-y-1 transition-transform duration-300 cursor-default">
+          <div class="flex justify-center mb-2 text-[#168940]/80">
+            <iconify-icon icon="lucide:book-copy" width="1.75rem"></iconify-icon>
+          </div>
+          <h4 class="text-3xl md:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+            {formatNumber(liveStats.eksemplar_buku)}
+          </h4>
+          <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Eksemplar Buku</p>
+        </div>
+      </div>
+      
+      <div class="px-4 py-2 md:py-0">
+        <div class="hover:-translate-y-1 transition-transform duration-300 cursor-default">
+          <div class="flex justify-center mb-2 text-[#168940]/80">
+            <iconify-icon icon="lucide:book-open" width="1.75rem"></iconify-icon>
+          </div>
+          <h4 class="text-3xl md:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+            {formatNumber(liveStats.judul_buku)}
+          </h4>
+          <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Judul Buku</p>
+        </div>
+      </div>
+      
+      <div class="px-4 py-2 md:py-0">
+        <div class="hover:-translate-y-1 transition-transform duration-300 cursor-default">
+          <div class="flex justify-center mb-2 text-[#168940]/80">
+            <iconify-icon icon="lucide:newspaper" width="1.75rem"></iconify-icon>
+          </div>
+          <h4 class="text-3xl md:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+            {formatNumber(liveStats.jurnal_ilmiah)}
+          </h4>
+          <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Jurnal / Ilmiah</p>
+        </div>
+      </div>
+      
+      <div class="px-4 py-2 md:py-0">
+        <div class="hover:-translate-y-1 transition-transform duration-300 cursor-default">
+          <div class="flex justify-center mb-2 text-[#168940]/80">
+            <iconify-icon icon="lucide:graduation-cap" width="1.75rem"></iconify-icon>
+          </div>
+          <h4 class="text-3xl md:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+            {formatNumber(liveStats.dokumen_skripsi)}
+          </h4>
+          <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Dokumen Skripsi</p>
+        </div>
+      </div>
+      
+      <div class="px-4 py-2 md:py-0 col-span-2 md:col-span-1">
+        <div class="hover:-translate-y-1 transition-transform duration-300 cursor-default">
+          <div class="flex justify-center mb-2 text-[#168940]/80">
+            <iconify-icon icon="lucide:users" width="1.75rem"></iconify-icon>
+          </div>
+          <h4 class="text-3xl md:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+            {formatNumber(liveStats.total_anggota)}
+          </h4>
+          <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Anggota</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,97 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Layanan & Aturan",
+    items: [{"label": "Tata Tertib Pemustaka", "href": "/tata-tertib"}, {"label": "Panduan Ruangan Gedung", "href": "/panduan-ruangan"}, {"label": "Kontak & Lokasi", "href": "/kontak"}, {"label": "Survei Kepuasan (IKM)", "href": "/survei"}]
+};
+---
+
+<LayoutSidebar title="Tata Tertib Pemustaka" sidebarMenu={sidebarMenu}>
+    
+    <p class="font-serif text-[15px] text-[#444444] leading-relaxed mb-10">
+        Guna menciptakan iklim akademik yang kondusif, nyaman, dan aman bagi seluruh pengguna, Perpustakaan IAIN Sorong memberlakukan beberapa tata tertib yang wajib dipatuhi oleh setiap pemustaka.
+    </p>
+
+    <!-- Aturan Umum Kunjungan -->
+    <div class="mb-12">
+        <h3 class="text-2xl font-semibold text-[#222222] mb-6 flex items-center gap-3">
+            <iconify-icon icon="flat-color-icons:inspection" ></iconify-icon>
+            Aturan Umum Kunjungan
+        </h3>
+
+        <div class="space-y-4">
+            <div class="bg-white p-5 rounded-[8px] border border-[#dadada] shadow-sm flex gap-4 items-start hover:border-[#BBF7D0] hover:shadow-md transition-all group">
+                <div class="w-10 h-10 rounded-full bg-[#F0FDF4] text-[#168940] flex items-center justify-center font-bold shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">1</div>
+                <div>
+                    <h4 class="font-semibold text-[#222222] mb-1 m-0">Pengisian Daftar Hadir</h4>
+                    <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Pemustaka diwajibkan <strong class="text-[#168940]">mengisi daftar hadir</strong> (buku tamu elektronik) dengan men-scan Kartu Mahasiswa/Kartu Anggota pada komputer presensi yang tersedia di pintu masuk.</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-[8px] border border-[#dadada] shadow-sm flex gap-4 items-start hover:border-[#BBF7D0] hover:shadow-md transition-all group">
+                <div class="w-10 h-10 rounded-full bg-[#F0FDF4] text-[#168940] flex items-center justify-center font-bold shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">2</div>
+                <div>
+                    <h4 class="font-semibold text-[#222222] mb-1 m-0">Penyimpanan Barang</h4>
+                    <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Tas, jaket, dan barang bawaan berukuran besar wajib <strong class="text-[#168940]">disimpan di dalam loker</strong> yang telah disediakan. Barang berharga (dompet, laptop, HP) harap dibawa masuk. Perpustakaan tidak bertanggung jawab atas kehilangan barang di loker.</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-[8px] border border-[#dadada] shadow-sm flex gap-4 items-start hover:border-[#BBF7D0] hover:shadow-md transition-all group">
+                <div class="w-10 h-10 rounded-full bg-[#F0FDF4] text-[#168940] flex items-center justify-center font-bold shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">3</div>
+                <div>
+                    <h4 class="font-semibold text-[#222222] mb-1 m-0">Pakaian & Etika</h4>
+                    <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Harap berpakaian rapi, sopan, dan memakai sepatu (tidak diperkenankan menggunakan kaos oblong tanpa kerah atau sandal jepit).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Etika di Dalam Ruangan -->
+    <div class="mb-12">
+        <h3 class="text-2xl font-semibold text-[#222222] mb-6 flex items-center gap-3">
+            <iconify-icon icon="flat-color-icons:safe" ></iconify-icon>
+            Etika di Dalam Ruangan
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white border border-[#dadada] p-6 rounded-[8px] shadow-sm text-center hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+                <div class="w-12 h-12 bg-[#F0FDF4] text-[#168940] rounded-[8px] flex items-center justify-center mx-auto mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                    <iconify-icon icon="flat-color-icons:mute" ></iconify-icon>
+                </div>
+                <h4 class="font-semibold text-[#222222] mb-2 m-0">Jaga Ketenangan</h4>
+                <p class="font-serif text-sm text-[#444444] m-0">Demi menjaga ketenangan belajar, dilarang menimbulkan suara gaduh atau mengobrol dengan keras.</p>
+            </div>
+
+            <div class="bg-white border border-[#dadada] p-6 rounded-[8px] shadow-sm text-center hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+                <div class="w-12 h-12 bg-red-50 text-red-600 rounded-[8px] flex items-center justify-center mx-auto mb-4 border border-[#dadada] group-hover:border-red-200">
+                    <iconify-icon icon="flat-color-icons:menu" ></iconify-icon>
+                </div>
+                <h4 class="font-semibold text-[#222222] mb-2 m-0">Bebas Makanan</h4>
+                <p class="font-serif text-sm text-[#444444] m-0">Dilarang membawa makanan & minuman berwarna (kecuali air mineral botol tertutup) untuk melindungi koleksi.</p>
+            </div>
+
+            <div class="bg-white border border-[#dadada] p-6 rounded-[8px] shadow-sm text-center hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+                <div class="w-12 h-12 bg-[#F0FDF4] text-[#168940] rounded-[8px] flex items-center justify-center mx-auto mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                    <iconify-icon icon="flat-color-icons:bookmark" ></iconify-icon>
+                </div>
+                <h4 class="font-semibold text-[#222222] mb-2 m-0">Biar Kami yang Rapikan</h4>
+                <p class="font-serif text-sm text-[#444444] m-0">Buku yang selesai dibaca letakkan saja di atas meja. Petugas kami yang akan menyusunnya kembali ke rak.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sanksi Pelanggaran -->
+    <div class="bg-[#FEF2F2] border border-[#FCA5A5] rounded-[8px] p-6 flex gap-4 items-start shadow-sm hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-red-600 shadow-sm shrink-0 border border-[#FCA5A5]">
+            <iconify-icon icon="flat-color-icons:high-priority" ></iconify-icon>
+        </div>
+        <div>
+            <h4 class="font-semibold text-red-800 text-lg mb-2 m-0">Sanksi Pelanggaran</h4>
+            <p class="font-serif text-red-700/90 text-[15px] leading-relaxed m-0">
+                Pelanggaran terhadap tata tertib, merusak koleksi/fasilitas, atau membawa buku keluar tanpa proses administrasi sirkulasi, akan dikenakan sanksi berupa teguran lisan, pencabutan hak keanggotaan sementara, hingga sanksi denda atau lapor ke pihak rektorat sesuai regulasi kampus.
+            </p>
+        </div>
+    </div>
+
+</LayoutSidebar>

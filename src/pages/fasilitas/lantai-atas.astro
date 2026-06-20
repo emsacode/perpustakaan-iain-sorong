@@ -1,0 +1,63 @@
+---
+import LayoutSidebar from '../../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Fasilitas Ruangan",
+    items: [{"label": "Lantai 1", "href": "/fasilitas/lantai-1"}, {"label": "Lantai Atas", "href": "/fasilitas/lantai-atas"}, {"label": "Reservasi Ruangan", "href": "/reservasi"}]
+};
+---
+
+<LayoutSidebar title="Fasilitas Lantai Atas" sidebarMenu={sidebarMenu}>
+    
+    <div class="mb-8">
+        <p class="font-serif text-[15px] text-[#444444] leading-relaxed m-0 max-w-3xl">Lantai atas merupakan "ruang mesin" bagi kerja-kerja intelektual mahasiswa IAIN Sorong yang tenang, hening, dan kondusif.</p>
+    </div>
+
+    <!-- Fasilitas Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Koleksi Sirkulasi -->
+        <div class="md:col-span-2 bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="flex items-center gap-3 mb-4 text-[#168940]">
+                <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center border border-[#dadada] group-hover:border-[#BBF7D0]">
+                    <iconify-icon icon="flat-color-icons:library" ></iconify-icon>
+                </div>
+                <h3 class="text-lg font-semibold text-[#222222] m-0 tracking-tight">Ruang Koleksi Sirkulasi & Referensi</h3>
+            </div>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0 max-w-3xl">
+                Menempati area terbesar di lantai atas. Tersedia puluhan meja dan bilik baca (carrel desk) individual berfasilitas stop kontak untuk mendukung penggunaan laptop dengan tenang.
+            </p>
+        </div>
+
+        <!-- Home Theater -->
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="flex items-center gap-3 mb-4 text-[#168940]">
+                <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center border border-[#dadada] group-hover:border-[#BBF7D0]">
+                    <iconify-icon icon="flat-color-icons:video-projector" ></iconify-icon>
+                </div>
+                <h3 class="text-lg font-semibold text-[#222222] m-0 tracking-tight">Home Theater</h3>
+            </div>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Ruangan kedap suara yang dilengkapi proyektor dan sound system jernih. Lazim difungsikan untuk pemutaran film dokumenter dan kuliah umum.
+            </p>
+        </div>
+
+        <!-- Rooftop -->
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="flex items-center gap-3 mb-4 text-[#168940]">
+                <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center border border-[#dadada] group-hover:border-[#BBF7D0]">
+                    <iconify-icon icon="flat-color-icons:department" ></iconify-icon>
+                </div>
+                <div class="flex flex-col">
+                    <h3 class="text-lg font-semibold text-[#222222] m-0 tracking-tight">Rooftop & Cafeteria</h3>
+                    <span class="text-xs font-semibold text-[#EAB308] uppercase tracking-wider mt-1">Segera Hadir</span>
+                </div>
+            </div>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Area diskusi semi-outdoor untuk memecahkan kebosanan saat menyusun skripsi dengan suguhan pemandangan dari atas gedung.
+            </p>
+        </div>
+
+    </div>
+
+</LayoutSidebar>

@@ -1,0 +1,142 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Profil & Tentang Kami",
+    items: [{"label": "Profil Singkat", "href": "/profil"}, {"label": "Visi & Misi", "href": "/visi-misi"}, {"label": "Struktur Organisasi", "href": "/struktur"}, {"label": "Jam Buka Layanan", "href": "/jam-layanan"}]
+};
+---
+
+<LayoutSidebar title="Struktur Organisasi" sidebarMenu={sidebarMenu}>
+    
+    <div class="mb-12">
+        <p class="font-serif text-[15px] text-[#444444] bg-[#F0FDF4] rounded-[8px] px-6 py-5 leading-relaxed italic mb-10 border border-[#dadada]">
+            Untuk menjalankan visi dan misi pelayanan yang prima, Perpustakaan IAIN Sorong didukung oleh tenaga profesional yang berdedikasi tinggi di bidang ilmu perpustakaan dan informasi.
+        </p>
+
+        <!-- Visual Org Chart -->
+        <div class="bg-white p-6 md:p-10 rounded-[8px] border border-[#dadada] overflow-x-auto shadow-sm">
+            <div class="min-w-[600px] flex flex-col items-center">
+                
+                <!-- Kepala UPT -->
+                <div class="relative flex flex-col items-center">
+                    <div class="w-20 h-20 rounded-full border-4 border-white shadow-sm bg-[#168940] flex items-center justify-center mb-4 z-10">
+                        <iconify-icon icon="flat-color-icons:manager" ></iconify-icon>
+                    </div>
+                    <div class="bg-white border border-[#dadada] rounded-[8px] px-6 py-3 shadow-sm text-center z-10 w-64">
+                        <h4 class="font-semibold text-[#222222] text-lg mt-0 mb-1">Kepala UPT</h4>
+                        <p class="text-xs text-[#666666] uppercase font-semibold tracking-wider m-0">Perpustakaan</p>
+                    </div>
+                    <!-- Vertical Line down from Kepala -->
+                    <div class="w-px h-12 bg-[#dadada] -mt-2"></div>
+                </div>
+
+                <!-- Horizontal Connector -->
+                <div class="w-full max-w-[800px] h-px bg-[#dadada] relative">
+                    <!-- Little dots at ends -->
+                    <div class="absolute -left-1 -top-1 w-2 h-2 rounded-full bg-[#168940]"></div>
+                    <div class="absolute -right-1 -top-1 w-2 h-2 rounded-full bg-[#168940]"></div>
+                </div>
+
+                <!-- Koordinator Cards Container -->
+                <div class="flex justify-between w-full max-w-[800px] mt-0 gap-4 pt-8 relative">
+                    
+                    <!-- Line 1 -->
+                    <div class="absolute top-0 left-[12.5%] w-px h-8 bg-[#dadada]"></div>
+                    <!-- Line 2 -->
+                    <div class="absolute top-0 left-[37.5%] w-px h-8 bg-[#dadada]"></div>
+                    <!-- Line 3 -->
+                    <div class="absolute top-0 left-[62.5%] w-px h-8 bg-[#dadada]"></div>
+                    <!-- Line 4 -->
+                    <div class="absolute top-0 left-[87.5%] w-px h-8 bg-[#dadada]"></div>
+
+                    <!-- Divisi 1 -->
+                    <div class="flex-1 flex flex-col items-center group cursor-default">
+                        <div class="w-14 h-14 rounded-full border-2 border-white shadow-sm bg-[#F0FDF4] flex items-center justify-center mb-3 transition-transform group-hover:border-[#BBF7D0]">
+                            <iconify-icon icon="flat-color-icons:invite" ></iconify-icon>
+                        </div>
+                        <div class="bg-white border border-[#dadada] rounded-[8px] px-3 py-4 shadow-sm text-center w-full group-hover:border-[#BBF7D0] transition-all">
+                            <h4 class="font-semibold text-[#222222] text-sm m-0 leading-tight">Layanan Sirkulasi</h4>
+                        </div>
+                    </div>
+
+                    <!-- Divisi 2 -->
+                    <div class="flex-1 flex flex-col items-center group cursor-default">
+                        <div class="w-14 h-14 rounded-full border-2 border-white shadow-sm bg-[#F0FDF4] flex items-center justify-center mb-3 transition-transform group-hover:border-[#BBF7D0]">
+                            <iconify-icon icon="flat-color-icons:bookmark" ></iconify-icon>
+                        </div>
+                        <div class="bg-white border border-[#dadada] rounded-[8px] px-3 py-4 shadow-sm text-center w-full group-hover:border-[#BBF7D0] transition-all">
+                            <h4 class="font-semibold text-[#222222] text-sm m-0 leading-tight">Pengolahan Pustaka</h4>
+                        </div>
+                    </div>
+
+                    <!-- Divisi 3 -->
+                    <div class="flex-1 flex flex-col items-center group cursor-default">
+                        <div class="w-14 h-14 rounded-full border-2 border-white shadow-sm bg-[#F0FDF4] flex items-center justify-center mb-3 transition-transform group-hover:border-[#BBF7D0]">
+                            <iconify-icon icon="flat-color-icons:server" ></iconify-icon>
+                        </div>
+                        <div class="bg-white border border-[#dadada] rounded-[8px] px-3 py-4 shadow-sm text-center w-full group-hover:border-[#BBF7D0] transition-all">
+                            <h4 class="font-semibold text-[#222222] text-sm m-0 leading-tight">IT & Repository</h4>
+                        </div>
+                    </div>
+
+                    <!-- Divisi 4 -->
+                    <div class="flex-1 flex flex-col items-center group cursor-default">
+                        <div class="w-14 h-14 rounded-full border-2 border-white shadow-sm bg-[#F0FDF4] flex items-center justify-center mb-3 transition-transform group-hover:border-[#BBF7D0]">
+                            <iconify-icon icon="flat-color-icons:diploma-1" ></iconify-icon>
+                        </div>
+                        <div class="bg-white border border-[#dadada] rounded-[8px] px-3 py-4 shadow-sm text-center w-full group-hover:border-[#BBF7D0] transition-all">
+                            <h4 class="font-semibold text-[#222222] text-sm m-0 leading-tight">Referensi & Literasi</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deskripsi Divisi Detail -->
+    <div class="space-y-6">
+        <h3 class="text-2xl font-semibold text-[#222222] border-b border-[#dadada] pb-3 mb-6 tracking-tight">Deskripsi Tugas Jabatan</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-[8px] border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all">
+                <div class="flex items-center gap-3 mb-4">
+                    <iconify-icon icon="flat-color-icons:invite" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0">Layanan Sirkulasi</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Menangani kegiatan harian sirkulasi mulai dari peminjaman, pengembalian, perpanjangan buku, hingga layanan administrasi pendaftaran keanggotaan baru (K-Online) dan penyelesaian denda.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-[8px] border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all">
+                <div class="flex items-center gap-3 mb-4">
+                    <iconify-icon icon="flat-color-icons:bookmark" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0">Pengolahan Pustaka</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Mengurus proses hilir buku baru, mulai dari inventarisasi, klasifikasi DDC (Dewey Decimal Classification), katalogisasi, pembuatan barcode, dan penyelesaian akhir (labeling) sebelum buku didisplai di rak baca.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-[8px] border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all">
+                <div class="flex items-center gap-3 mb-4">
+                    <iconify-icon icon="flat-color-icons:server" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0">Layanan IT & Repository</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Memelihara infrastruktur jaringan lokal perpustakaan, sistem otomasi SLiMS, manajemen katalog digital (OPAC), validasi unggahan karya ilmiah ke repository institusi, serta memastikan fasilitas multimedia berfungsi baik.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-[8px] border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all">
+                <div class="flex items-center gap-3 mb-4">
+                    <iconify-icon icon="flat-color-icons:diploma-1" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0">Referensi & Literasi</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Memberikan panduan penelusuran informasi mendalam, melayani konsultasi riset tugas akhir mahasiswa, mengelola koleksi referensi khusus, dan mengkoordinasikan program pendidikan pemustaka seperti Kelas Literasi.</p>
+            </div>
+        </div>
+        
+        <div class="mt-8 bg-[#F0FDF4] p-5 rounded-[8px] border border-[#dadada] flex gap-4 items-start shadow-sm">
+            <iconify-icon icon="flat-color-icons:info" class="shrink-0 mt-0.5"></iconify-icon>
+            <p class="font-serif text-sm text-[#444444] m-0">Sinergi antara staf administrasi, pustakawan fungsional, dan tenaga teknisi IT menjadikan Perpustakaan IAIN Sorong mampu menyajikan layanan yang adaptif, cepat, dan presisi di era digital.</p>
+        </div>
+    </div>
+
+</LayoutSidebar>

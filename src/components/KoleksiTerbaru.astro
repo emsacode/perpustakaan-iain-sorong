@@ -1,0 +1,118 @@
+---
+import { XMLParser } from 'fast-xml-parser';
+
+let books = [];
+let errorMsg = null;
+
+try {
+  // Fetch SLiMS OAI-PMH endpoint
+  const response = await fetch('https://opac.iainsorong.ac.id/oai.php?verb=ListRecords&metadataPrefix=oai_dc');
+  if (!response.ok) throw new Error('Failed to fetch data');
+  
+  const xmlData = await response.text();
+  
+  // Parse XML to JS Object, removing namespace prefixes for easier access (e.g., dc:title -> title)
+  const parser = new XMLParser({ removeNSPrefix: true, ignoreAttributes: false });
+  const parsedData = parser.parse(xmlData);
+  
+  // Extract records array. It might be single object if only 1 record, so we safely handle it.
+  let records = parsedData?.['OAI-PMH']?.ListRecords?.record || [];
+  if (!Array.isArray(records)) records = [records];
+  
+  // Map and sanitize the data we need, taking only the first 6
+  books = records.slice(0, 8).map(record => {
+    const dc = record?.metadata?.dc || {};
+    
+    // Sometimes elements are arrays if repeated in XML
+    const getVal = (val) => Array.isArray(val) ? val[0] : val;
+    
+    return {
+      title: getVal(dc.title) || 'Tanpa Judul',
+      creator: getVal(dc.creator) || 'Anonim',
+      publisher: getVal(dc.publisher) || 'Tidak diketahui',
+      date: getVal(dc.date) || 'N/A',
+      url: getVal(dc.identifier) || '#'
+    };
+  });
+  
+} catch (e) {
+  console.error("Error fetching SLiMS OPAC:", e);
+  errorMsg = "Gagal memuat koleksi terbaru dari server perpustakaan.";
+}
+---
+
+<section class="py-12 bg-[#F9FAFB] border-t border-[#dadada]">
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-serif font-bold text-dark mb-2">Koleksi Terbaru</h2>
+        <p class="text-sm font-sans text-[#718096]">Tambahan literatur mutakhir di Perpustakaan IAIN Sorong.</p>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <!-- Navigation Arrows (Desktop) -->
+        <div class="hidden lg:flex items-center gap-2">
+          <button onclick="document.getElementById('koleksi-carousel').scrollBy({left: -320, behavior: 'smooth'})" class="w-10 h-10 rounded-full border border-[#dadada] flex items-center justify-center text-dark hover:bg-primary hover:text-white hover:border-primary transition-all" aria-label="Geser Kiri">
+            <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+          </button>
+          <button onclick="document.getElementById('koleksi-carousel').scrollBy({left: 320, behavior: 'smooth'})" class="w-10 h-10 rounded-full border border-[#dadada] flex items-center justify-center text-dark hover:bg-primary hover:text-white hover:border-primary transition-all" aria-label="Geser Kanan">
+            <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+          </button>
+        </div>
+
+        <a href="https://opac.iainsorong.ac.id" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-[13px] font-sans font-bold text-primary hover:text-primary-dark transition-colors border border-primary px-4 py-2 rounded-[6px] hover:bg-secondary-bg whitespace-nowrap">
+          Semua Katalog <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+        </a>
+      </div>
+    </div>
+
+    {errorMsg ? (
+      <div class="bg-red-50 text-red-600 p-4 rounded-[8px] text-sm font-sans text-center border border-red-100">
+        <iconify-icon icon="lucide:alert-circle" class="text-lg mb-1"></iconify-icon>
+        <p>{errorMsg}</p>
+      </div>
+    ) : (
+      <div id="koleksi-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 px-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        {books.map((book) => (
+          <div class="w-[220px] sm:w-[240px] shrink-0 snap-start bg-white rounded-[10px] border border-[#dadada] overflow-hidden hover:border-primary hover:shadow-[0_4px_20px_rgba(17,133,59,0.08)] transition-all duration-300 group flex flex-col">
+            
+            {/* Abstract Cover Concept (Portrait) */}
+            <div class="aspect-[3/4] bg-dark relative overflow-hidden flex flex-col items-center justify-center p-4 text-center border-b-[4px] border-accent">
+              <!-- Subtle decorative pattern -->
+              <div class="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_25%,#ffffff_25%,#ffffff_50%,transparent_50%,transparent_75%,#ffffff_75%,#ffffff_100%)] bg-[length:10px_10px]"></div>
+              
+              <iconify-icon icon="lucide:book-open" class="text-accent text-4xl mb-4 z-10"></iconify-icon>
+              <h3 class="text-white font-serif font-bold text-[13px] leading-snug line-clamp-4 z-10 px-2">{book.title}</h3>
+            </div>
+
+            {/* Book Details */}
+            <div class="p-5 flex-1 flex flex-col font-sans">
+              <div class="flex-1">
+                <div class="text-[11px] font-bold text-primary uppercase tracking-widest mb-1.5 flex items-center gap-1 line-clamp-1">
+                  <iconify-icon icon="lucide:pen-tool"></iconify-icon> {book.creator}
+                </div>
+                <h3 class="text-dark font-bold text-[14px] leading-snug mb-3 group-hover:text-primary transition-colors line-clamp-2" title={book.title}>
+                  <a href="/buku-detail" class="before:absolute before:inset-0">
+                    {book.title}
+                  </a>
+                </h3>
+              </div>
+              
+              <div class="pt-4 mt-auto border-t border-gray-100 flex items-center justify-between text-[11px] text-[#718096]">
+                <span class="flex items-center gap-1" title="Penerbit">
+                  <iconify-icon icon="lucide:building"></iconify-icon> <span class="line-clamp-1 max-w-[120px]">{book.publisher}</span>
+                </span>
+                <span class="flex items-center gap-1 font-semibold text-dark bg-[#F7F7F2] px-2 py-0.5 rounded-[4px]">
+                  {book.date}
+                </span>
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
+    )}
+
+  </div>
+</section>

@@ -1,0 +1,140 @@
+---
+const testimonials = [
+  {
+    youtubeId: "dQw4w9WgXcQ", // GANTI INI DENGAN ID YOUTUBE REKTOR IAIN SORONG
+    title: "Testimoni Rektor IAIN Sorong - Suparto Iribaram"
+  },
+  {
+    youtubeId: "dQw4w9WgXcQ", // GANTI INI DENGAN ID YOUTUBE KEPALA PERPUSTAKAAN
+    title: "Testimoni Kepala Perpustakaan - Muhammad Satir"
+  },
+  {
+    youtubeId: "dQw4w9WgXcQ", // GANTI INI DENGAN ID YOUTUBE PUSTAKAWAN
+    title: "Testimoni Pustakawan - Mutawalli"
+  }
+];
+---
+<section class="py-12 bg-surface-warm relative overflow-hidden">
+  <!-- Decorative Gradient Background -->
+  <div class="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-accent-highlight to-accent rounded-full blur-3xl opacity-20 pointer-events-none"></div>
+  <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-primary to-primary-dark rounded-full blur-3xl opacity-10 pointer-events-none"></div>
+
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-stretch">
+      
+      <!-- F-Pattern Left: Heading -->
+      <div class="lg:w-1/4 flex flex-col justify-center text-center lg:text-left shrink-0">
+        <h2 class="text-3xl font-bold text-dark mb-3 tracking-tight lg:border-l-4 lg:border-primary lg:pl-4">Suara Pemustaka</h2>
+        <p class="text-sm text-gray-600 font-sans lg:pl-4 leading-relaxed">
+          Ketahui apa kata mereka tentang pengalaman memanfaatkan layanan, fasilitas, dan koleksi Perpustakaan IAIN Sorong.
+        </p>
+      </div>
+
+      <!-- F-Pattern Right: Carousel -->
+      <div class="lg:w-3/4 w-full">
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-5 pb-4 hide-scrollbar">
+          {testimonials.map((t) => (
+            <div class="snap-start shrink-0 w-[280px] sm:w-[320px] bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-all duration-300">
+              <!-- Youtube Lazy Load Container (Trigger Modal) -->
+              <div class="youtube-trigger relative w-full aspect-video bg-slate-100 cursor-pointer overflow-hidden" data-id={t.youtubeId}>
+                <img 
+                  src={`https://i.ytimg.com/vi/${t.youtubeId}/maxresdefault.jpg`} 
+                  alt={t.title} 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  onerror="this.src='https://i.ytimg.com/vi/'+this.parentNode.dataset.id+'/hqdefault.jpg'" 
+                />
+                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
+                  <div class="w-12 h-12 bg-red-600/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-red-600 transition-all duration-300">
+                    <iconify-icon icon="lucide:play" class="text-white text-xl ml-1"></iconify-icon>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="p-4">
+                <h3 class="font-bold text-[#1E293B] text-[14px] leading-snug group-hover:text-primary transition-colors">{t.title}</h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Popup Modal -->
+  <div id="youtube-modal" class="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm p-4">
+    <div class="relative w-full max-w-4xl aspect-video bg-black rounded-xl shadow-2xl scale-95 transition-transform duration-300" id="youtube-modal-content">
+      <button id="close-modal" class="absolute -top-10 right-0 text-white hover:text-red-500 transition-colors focus:outline-none flex items-center gap-1">
+        <span class="text-sm font-semibold uppercase tracking-wider">Tutup</span>
+        <iconify-icon icon="lucide:x" class="text-2xl"></iconify-icon>
+      </button>
+      <div id="iframe-container" class="w-full h-full rounded-xl overflow-hidden bg-black"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const triggers = document.querySelectorAll('.youtube-trigger');
+    const modal = document.getElementById('youtube-modal');
+    const modalContent = document.getElementById('youtube-modal-content');
+    const closeBtn = document.getElementById('close-modal');
+    const iframeContainer = document.getElementById('iframe-container');
+    
+    // Fungsi buka modal
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const videoId = this.getAttribute('data-id');
+        
+        // Buat iframe
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&showinfo=0`);
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        iframe.setAttribute('allowfullscreen', '1');
+        iframe.classList.add('w-full', 'h-full');
+        
+        iframeContainer.innerHTML = '';
+        iframeContainer.appendChild(iframe);
+        
+        // Tampilkan modal
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modalContent.classList.remove('scale-95');
+        modalContent.classList.add('scale-100');
+        document.body.style.overflow = 'hidden'; // Cegah scroll halaman
+      });
+    });
+
+    // Fungsi tutup modal
+    const closeModal = () => {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalContent.classList.remove('scale-100');
+      modalContent.classList.add('scale-95');
+      document.body.style.overflow = '';
+      
+      // Hapus iframe agar video berhenti memutar
+      setTimeout(() => {
+        iframeContainer.innerHTML = '';
+      }, 300); // Tunggu animasi selesai
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Tutup jika klik background gelap
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  });
+</script>

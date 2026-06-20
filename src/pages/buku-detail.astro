@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Detail Koleksi - Perpustakaan IAIN Sorong">
+  <Header />
+  
+  <!-- Breadcrumb -->
+  <div class="bg-[#F7F7F2] border-b border-[#dadada]">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex items-center gap-2 text-[11px] font-sans text-[#718096]">
+        <a href="/" class="hover:text-primary transition-colors flex items-center gap-1"><iconify-icon icon="lucide:home"></iconify-icon> Beranda</a>
+        <iconify-icon icon="lucide:chevron-right" class="text-[10px] opacity-50"></iconify-icon>
+        <span>Koleksi</span>
+        <iconify-icon icon="lucide:chevron-right" class="text-[10px] opacity-50"></iconify-icon>
+        <span class="text-dark font-semibold">Kembara Rindu</span>
+      </nav>
+    </div>
+  </div>
+
+  <main class="bg-white py-8 lg:py-12">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+        
+        <!-- Left Area: Main Focus (Cover, Title, Abstract) -->
+        <div class="lg:col-span-8 flex flex-col md:flex-row gap-6 md:gap-8">
+          
+          <!-- Abstract Cover / Image Proxy -->
+          <div class="shrink-0">
+            <div class="w-full md:w-[220px] aspect-[2/3] bg-dark rounded-[8px] shadow-sm flex flex-col items-center justify-center p-6 text-center relative overflow-hidden border-b-[6px] border-accent">
+              <div class="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_25%,#ffffff_25%,#ffffff_50%,transparent_50%,transparent_75%,#ffffff_75%,#ffffff_100%)] bg-[length:10px_10px]"></div>
+              <iconify-icon icon="lucide:book-open" class="text-accent text-5xl mb-4"></iconify-icon>
+              <h3 class="text-white font-serif font-bold text-[15px] leading-snug z-10">Kembara Rindu</h3>
+            </div>
+            
+            <div class="mt-4 flex gap-2">
+              <span class="flex-1 text-center py-1.5 bg-[#F7F7F2] text-[#718096] text-[10px] font-bold uppercase tracking-widest rounded-[4px] border border-[#dadada]">Tersedia</span>
+              <span class="flex-1 text-center py-1.5 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest rounded-[4px]">Buku Fisik</span>
+            </div>
+          </div>
+
+          <!-- Book Typography & Content -->
+          <div class="flex-1 font-sans">
+            <div class="flex items-center gap-2 text-[11px] font-bold text-primary uppercase tracking-widest mb-3">
+              <iconify-icon icon="lucide:pen-tool"></iconify-icon> Habiburrahman El Shirazy
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl font-serif font-bold text-dark leading-tight mb-4">
+              Kembara Rindu
+            </h1>
+
+            <div class="flex flex-wrap gap-4 text-[12px] text-[#718096] mb-8 pb-6 border-b border-[#dadada]">
+              <span class="flex items-center gap-1.5"><iconify-icon icon="lucide:calendar"></iconify-icon> 2019</span>
+              <span class="flex items-center gap-1.5"><iconify-icon icon="lucide:building"></iconify-icon> Republika Penerbit</span>
+              <span class="flex items-center gap-1.5"><iconify-icon icon="lucide:bookmark"></iconify-icon> Fiksi Indonesia</span>
+            </div>
+
+            <!-- Abstract/Description -->
+            <div>
+              <h3 class="text-lg font-serif font-bold text-dark mb-3 flex items-center gap-2">
+                <iconify-icon icon="lucide:align-left" class="text-primary"></iconify-icon> Sinopsis Buku
+              </h3>
+              <div class="prose prose-sm md:prose-base prose-green text-[#4a5568] leading-relaxed max-w-none">
+                <p>Di dunia ini kita seperti orang bepergian, orang yang mengembara. Dunia ini bukan tujuan kita. Tujuan kita adalah Allah. Kita harus memiliki rasa rindu yang mendalam kepada Allah. Dan Allah akan membalas dengan kehangatan rindu dan ridha-Nya yang tiada bandingannya.</p>
+                <p>Novel ini menceritakan perjalanan pencarian makna, cinta yang hakiki, dan kepasrahan kepada Sang Pencipta melalui karakter-karakter yang diuji dengan berbagai rintangan kehidupan modern yang pelik namun penuh hikmah.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Area: Sidebar Metadata & Action (Clean Professional Compact Look) -->
+        <div class="lg:col-span-4">
+          <div class="sticky top-[100px] border border-[#dadada] rounded-[10px] bg-[#F9FAFB] p-6 shadow-sm">
+            
+            <h3 class="text-[13px] font-bold text-dark font-serif uppercase tracking-widest border-b-[2px] border-primary pb-3 mb-4">
+              Informasi Katalog
+            </h3>
+
+            <!-- Metadata List -->
+            <ul class="space-y-4 text-[12px] font-sans">
+              <li class="flex flex-col gap-1">
+                <span class="text-[#718096] font-semibold">ISBN/ISSN</span>
+                <span class="text-dark font-bold text-[13px]">9786237458098</span>
+              </li>
+              <li class="flex flex-col gap-1">
+                <span class="text-[#718096] font-semibold">Nomor Panggil (Call Number)</span>
+                <span class="text-dark font-bold text-[13px] bg-white border border-[#dadada] w-max px-2 py-0.5 rounded-[4px] font-mono">899.221 3 HAB k</span>
+              </li>
+              <li class="flex flex-col gap-1">
+                <span class="text-[#718096] font-semibold">Deskripsi Fisik</span>
+                <span class="text-dark font-semibold">iv, 266 hlm.; 20,5 cm</span>
+              </li>
+              <li class="flex flex-col gap-1">
+                <span class="text-[#718096] font-semibold">Bahasa</span>
+                <span class="text-dark font-semibold">Indonesia</span>
+              </li>
+              <li class="flex flex-col gap-1">
+                <span class="text-[#718096] font-semibold">Cetakan/Edisi</span>
+                <span class="text-dark font-semibold">Cet. 1</span>
+              </li>
+            </ul>
+
+            <!-- Call To Action: OPAC Link -->
+            <div class="mt-8 pt-6 border-t border-[#dadada]">
+              <p class="text-[11px] text-[#718096] font-sans mb-3 text-center leading-snug">
+                Tertarik untuk meminjam buku ini? Cek ketersediaan fisiknya langsung di sistem informasi perpustakaan kami.
+              </p>
+              <a href="https://opac.iainsorong.ac.id/index.php?p=show_detail&id=3684" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-sans font-bold text-[13px] py-3.5 px-4 rounded-[6px] transition-all shadow-[0_4px_12px_rgba(17,133,59,0.2)] hover:shadow-[0_6px_16px_rgba(17,133,59,0.3)] hover:-translate-y-0.5">
+                Cek Ketersediaan di OPAC
+                <iconify-icon icon="lucide:external-link" class="text-[15px]"></iconify-icon>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>

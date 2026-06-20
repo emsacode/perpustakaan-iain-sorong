@@ -1,0 +1,96 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Profil & Tentang Kami",
+    items: [{"label": "Profil Singkat", "href": "/profil"}, {"label": "Visi & Misi", "href": "/visi-misi"}, {"label": "Struktur Organisasi", "href": "/struktur"}, {"label": "Jam Buka Layanan", "href": "/jam-layanan"}]
+};
+---
+
+<LayoutSidebar title="Visi & Misi" sidebarMenu={sidebarMenu}>
+    
+    <!-- Visi Section -->
+    <div class="bg-[#F0FDF4] border border-[#dadada] rounded-[8px] p-8 md:p-12 mb-12 flex flex-col items-center text-center shadow-sm">
+        <div class="inline-flex items-center justify-center p-3 bg-white rounded-full mb-6 border border-[#dadada] shadow-sm">
+            <iconify-icon icon="flat-color-icons:view-details" ></iconify-icon>
+        </div>
+        <h2 class="text-lg md:text-xl font-bold tracking-widest uppercase text-[#168940] mb-4 border-b border-[#dadada] pb-2">Visi Perpustakaan</h2>
+        <p class="text-xl md:text-2xl font-serif leading-relaxed text-[#222222]">
+            "Menjadi pusat referensi dan informasi rujukan utama yang unggul dalam menyediakan literatur studi keislaman, sains, dan teknologi untuk mendukung tercapainya visi IAIN Sorong sebagai perguruan tinggi terkemuka di Papua dan Indonesia Timur."
+        </p>
+    </div>
+
+    <!-- Misi Section -->
+    <div class="mb-12">
+        <div class="flex items-center gap-3 mb-8">
+            <iconify-icon icon="flat-color-icons:bullish" ></iconify-icon>
+            <h2 class="text-2xl font-semibold text-[#222222] tracking-tight m-0">Misi Perpustakaan</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Misi 1 -->
+            <div class="group bg-white border border-[#dadada] rounded-[8px] p-6 hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] flex items-center justify-center text-[#168940] shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                        <iconify-icon icon="flat-color-icons:database" ></iconify-icon>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-[#222222] mb-2 mt-0">Penyediaan Akses Cepat & Tepat</h3>
+                        <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Membangun dan mengembangkan sistem informasi perpustakaan yang terintegrasi untuk memudahkan pemustaka mengakses sumber literasi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Misi 2 -->
+            <div class="group bg-white border border-[#dadada] rounded-[8px] p-6 hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] flex items-center justify-center text-[#168940] shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                        <iconify-icon icon="flat-color-icons:bookmark" ></iconify-icon>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-[#222222] mb-2 mt-0">Pengembangan Koleksi Mutakhir</h3>
+                        <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Menyediakan bahan pustaka cetak dan digital (e-resources) yang relevan dan terkini guna menunjang kegiatan pendidikan dan riset.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Misi 3 -->
+            <div class="group bg-white border border-[#dadada] rounded-[8px] p-6 hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] flex items-center justify-center text-[#168940] shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                        <iconify-icon icon="flat-color-icons:collaboration" ></iconify-icon>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-[#222222] mb-2 mt-0">Peningkatan Budaya Literasi</h3>
+                        <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Menyelenggarakan program edukasi dan literasi informasi guna meningkatkan kemampuan riset mahasiswa dan dosen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Misi 4 -->
+            <div class="group bg-white border border-[#dadada] rounded-[8px] p-6 hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] flex items-center justify-center text-[#168940] shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                        <iconify-icon icon="flat-color-icons:sms" ></iconify-icon>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-[#222222] mb-2 mt-0">Pelayanan Prima</h3>
+                        <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Memberikan layanan prima yang ramah, responsif, dan adaptif berbasis teknologi informasi kepada seluruh pengguna perpustakaan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tujuan Strategis Section -->
+    <div class="bg-white rounded-[8px] p-8 border border-[#dadada] shadow-sm mt-10">
+        <div class="flex items-center gap-3 mb-4">
+            <iconify-icon icon="flat-color-icons:startup" ></iconify-icon>
+            <h3 class="text-xl font-semibold text-[#222222] m-0">Tujuan Strategis</h3>
+        </div>
+        <p class="font-serif text-[#444444] leading-relaxed m-0 text-[15px]">
+            Tujuan utama kami adalah melahirkan inovasi pelayanan secara berkelanjutan sehingga ruang perpustakaan tidak hanya difungsikan sebagai ruang baca yang tenang, namun juga menjadi <strong class="text-[#168940]">titik kumpul produktivitas ide, diskusi akademik, serta lahirnya karya-karya ilmiah berkualitas</strong> dari mahasiswa maupun tenaga pengajar IAIN Sorong.
+        </p>
+    </div>
+
+</LayoutSidebar>

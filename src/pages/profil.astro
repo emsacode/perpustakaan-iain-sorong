@@ -1,0 +1,89 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+import statsRaw from '../data/live_stats.json';
+
+const stats = statsRaw;
+
+const sidebarMenu = {
+    title: "Profil & Tentang Kami",
+    items: [{"label": "Profil Singkat", "href": "/profil"}, {"label": "Visi & Misi", "href": "/visi-misi"}, {"label": "Struktur Organisasi", "href": "/struktur"}, {"label": "Jam Buka Layanan", "href": "/jam-layanan"}]
+};
+---
+
+<LayoutSidebar title="Profil Singkat" sidebarMenu={sidebarMenu}>
+    
+    <!-- Hero Section -->
+    <div class="bg-[#F0FDF4] border border-[#dadada] rounded-[8px] p-8 sm:p-10 mb-10 flex flex-col md:flex-row items-center gap-8">
+        <div class="w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center border border-[#dadada] shrink-0 shadow-sm">
+            <iconify-icon icon="flat-color-icons:library" ></iconify-icon>
+        </div>
+        <div>
+            <h2 class="text-2xl font-semibold tracking-tight text-[#222222] mb-3">Jantung Akademik IAIN Sorong</h2>
+            <p class="font-serif text-[15px] text-[#444444] leading-relaxed max-w-2xl">
+                Perpustakaan Institut Agama Islam Negeri (IAIN) Sorong hadir sebagai pusat literatur yang komprehensif, menggerakkan roda tridharma perguruan tinggi di kawasan timur Indonesia.
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="prose prose-lg max-w-none text-[#444444]">
+        <p class="font-serif leading-relaxed mb-10">
+            Sejak awal berdirinya, perpustakaan kami terus berkembang seiring dengan transformasi institusi menuju keunggulan. Kami tidak hanya berfungsi sebagai tempat penyimpanan buku, melainkan telah bertransformasi menjadi pusat pembelajaran kolaboratif yang adaptif terhadap perkembangan teknologi informasi.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+            <!-- Fungsi Card -->
+            <div class="bg-white p-6 rounded-[8px] border border-[#dadada] hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex items-center gap-3 mb-4 text-[#168940]">
+                    <iconify-icon icon="flat-color-icons:rating" width="2rem" style="stroke-width: 1.5;"></iconify-icon>
+                    <h3 class="text-xl tracking-tight font-semibold m-0 text-[#222222]">Peran & Fungsi</h3>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                    Menjalankan fungsi krusial dalam pendidikan, penelitian, dan pengabdian masyarakat. Kami menyajikan koleksi pustaka bermutu yang relevan dengan seluruh program studi IAIN Sorong.
+                </p>
+            </div>
+
+            <!-- Budaya Literasi Card -->
+            <div class="bg-white p-6 rounded-[8px] border border-[#dadada] hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex items-center gap-3 mb-4 text-[#168940]">
+                    <iconify-icon icon="flat-color-icons:bookmark" width="2rem" style="stroke-width: 1.5;"></iconify-icon>
+                    <h3 class="text-xl tracking-tight font-semibold m-0 text-[#222222]">Pusat Literasi</h3>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                    Menyelenggarakan program-program literasi secara berkala untuk mendorong terciptanya budaya riset, menulis, dan membaca yang unggul di kalangan mahasiswa dan dosen.
+                </p>
+            </div>
+        </div>
+
+        <!-- Quote Section -->
+        <blockquote class="my-12 p-8 bg-white rounded-[8px] border border-[#dadada] shadow-sm text-center">
+            <p class="text-xl font-semibold italic text-[#222222] leading-relaxed mb-4 font-serif">
+                "Membangun generasi cerdas berkarakter melalui penguasaan literatur dan informasi."
+            </p>
+            <footer class="text-sm font-semibold tracking-wide uppercase text-[#168940]">Motto Layanan Perpustakaan</footer>
+        </blockquote>
+    </div>
+
+    <!-- Quick Stats — Data Riil dari Pipeline Otomatis -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-10 border-t border-[#dadada]">
+        <div class="text-center p-4 hover:bg-[#F0FDF4] rounded-[8px] transition-colors">
+            <div class="text-2xl font-bold text-[#168940] mb-1">{stats.judul_buku.toLocaleString('id-ID')}</div>
+            <div class="text-xs font-semibold text-[#666666] uppercase tracking-wider">Judul Koleksi Buku</div>
+        </div>
+        <div class="text-center p-4 hover:bg-[#EBF8FF] rounded-[8px] transition-colors">
+            <div class="text-2xl font-bold text-[#3182CE] mb-1">{stats.jurnal_ilmiah.toLocaleString('id-ID')}</div>
+            <div class="text-xs font-semibold text-[#666666] uppercase tracking-wider">Artikel Jurnal</div>
+        </div>
+        <div class="text-center p-4 hover:bg-[#FAF5FF] rounded-[8px] transition-colors">
+            <div class="text-2xl font-bold text-[#805AD5] mb-1">{stats.dokumen_skripsi}</div>
+            <div class="text-xs font-semibold text-[#666666] uppercase tracking-wider">Dokumen Repositori</div>
+        </div>
+        <div class="text-center p-4 hover:bg-[#FFFAF0] rounded-[8px] transition-colors">
+            <div class="text-2xl font-bold text-[#DD6B20] mb-1">{stats.total_anggota.toLocaleString('id-ID')}</div>
+            <div class="text-xs font-semibold text-[#666666] uppercase tracking-wider">Total Anggota</div>
+        </div>
+    </div>
+    <div class="text-center mt-3">
+        <a href="/statistik" class="text-xs font-semibold text-[#168940] hover:text-[#0B4226] no-underline">Lihat Statistik Lengkap →</a>
+    </div>
+</LayoutSidebar>

@@ -1,0 +1,114 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Layanan & Aturan",
+    items: [{"label": "Tata Tertib Pemustaka", "href": "/tata-tertib"}, {"label": "Panduan Ruangan Gedung", "href": "/panduan-ruangan"}, {"label": "Kontak & Lokasi", "href": "/kontak"}, {"label": "Survei Kepuasan (IKM)", "href": "/survei"}]
+};
+---
+
+<LayoutSidebar title="Panduan Ruangan Gedung" sidebarMenu={sidebarMenu}>
+    
+    <p class="font-serif text-[15px] text-[#444444] leading-relaxed mb-10 border-b border-[#dadada] pb-8">
+        Gedung Perpustakaan IAIN Sorong didesain secara arsitektural modern untuk memenuhi kebutuhan pemustaka. Berikut panduan fungsi dari masing-masing area agar kunjungan Anda lebih efektif.
+    </p>
+
+    <!-- Lantai 1 Section -->
+    <div class="mb-12">
+        <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#168940] shadow-sm">
+                <iconify-icon icon="flat-color-icons:grid" ></iconify-icon>
+            </div>
+            <div>
+                <h3 class="text-2xl font-semibold text-[#222222] m-0 tracking-tight">Lantai 1</h3>
+                <p class="text-[#666666] font-semibold text-sm m-0 uppercase tracking-wider mt-1">Area Publik & Sirkulasi</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+                <div class="flex items-center gap-3 mb-3 text-[#168940]">
+                    <iconify-icon icon="flat-color-icons:collaboration" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0 tracking-tight">Lobi & Resepsionis</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Tempat mengisi presensi dan menitipkan tas pada Loker Penitipan yang telah disediakan.</p>
+            </div>
+
+            <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+                <div class="flex items-center gap-3 mb-3 text-[#168940]">
+                    <iconify-icon icon="flat-color-icons:invite" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0 tracking-tight">Meja Sirkulasi</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Loket utama untuk meminjam, mengembalikan, atau memperpanjang buku dengan menunjukkan kartu anggota.</p>
+            </div>
+
+            <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+                <div class="flex items-center gap-3 mb-3 text-[#168940]">
+                    <iconify-icon icon="flat-color-icons:coffee-to-go" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0 tracking-tight">Pojok Baca & Koran</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Area bersantai untuk membaca koran hari ini atau buku referensi populer yang ringan.</p>
+            </div>
+
+            <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+                <div class="flex items-center gap-3 mb-3 text-[#168940]">
+                    <iconify-icon icon="flat-color-icons:shop" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0 tracking-tight">Fasilitas Pendukung</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Toilet pria/wanita, Ruang Laktasi, dan Musala berada di sayap kanan gedung lantai dasar.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lantai Atas Section -->
+    <div class="mb-8">
+        <div class="flex items-center gap-4 mb-6 pt-8 border-t border-[#dadada]">
+            <div class="w-12 h-12 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#EAB308] shadow-sm">
+                <iconify-icon icon="flat-color-icons:library" ></iconify-icon>
+            </div>
+            <div>
+                <h3 class="text-2xl font-semibold text-[#222222] m-0 tracking-tight">Lantai Atas</h3>
+                <p class="text-[#666666] font-semibold text-sm m-0 uppercase tracking-wider mt-1">Area Koleksi Utama & Riset Hening</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="md:col-span-2 bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+                <div class="flex items-center gap-3 mb-3 text-[#EAB308]">
+                    <iconify-icon icon="flat-color-icons:library" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0 tracking-tight">Rak Koleksi Umum & Keislaman</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                    Jajaran rak buku utama yang disusun rapi berdasarkan sistem klasifikasi DDC (Dewey Decimal Classification). Silakan telusuri lorong ini untuk mencari rujukan utama perkuliahan Anda.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+                <div class="flex items-center gap-3 mb-3 text-[#168940]">
+                    <iconify-icon icon="flat-color-icons:diploma-1" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0 tracking-tight">Ruang Referensi & Karya Ilmiah</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Menyimpan koleksi rujukan khusus (kamus, ensiklopedia) serta kumpulan cetak Skripsi/Tesis. Buku di ruangan ini hanya untuk dibaca di tempat.</p>
+            </div>
+
+            <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+                <div class="flex items-center gap-3 mb-3 text-[#168940]">
+                    <iconify-icon icon="flat-color-icons:webcam" ></iconify-icon>
+                    <h4 class="font-semibold text-[#222222] text-lg m-0 tracking-tight">Ruang Multimedia & Home Theater</h4>
+                </div>
+                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Fasilitas komputer terkoneksi internet untuk pencarian e-journal, database, OPAC, dan pemutaran media interaktif visual.</p>
+            </div>
+            
+            <div class="md:col-span-2 bg-[#F0FDF4] rounded-[8px] p-6 border border-[#dadada] shadow-sm flex items-start gap-4">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shrink-0 border border-[#dadada] text-[#168940]">
+                    <iconify-icon icon="flat-color-icons:conference-call" ></iconify-icon>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-[#222222] text-base mb-1 m-0">Kawasan Diskusi Kelompok</h4>
+                    <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Beberapa titik meja besar dialokasikan untuk kerja kelompok yang membutuhkan ruang untuk berdiskusi. Dimohon tetap menjaga volume suara agar tidak mengganggu pemustaka lain yang sedang riset hening.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</LayoutSidebar>

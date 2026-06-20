@@ -1,0 +1,256 @@
+---
+---
+
+<!-- DESKTOP FLOATING INTERACTION WIDGET (Visible on Screens >= 768px) -->
+<div class="fixed right-0 top-1/2 -translate-y-1/2 flex flex-col gap-2.5 items-end z-[99] hidden md:flex select-none">
+  <!-- Button 1: Beri Penilaian -->
+  <button id="floating-btn-rate" class="group flex items-center bg-[#168940] hover:bg-[#0B4226] text-white rounded-l-full shadow-lg h-12 transition-all duration-300 pl-4 pr-3.5 focus:outline-none focus:ring-2 focus:ring-[#EAB308]/50 border-y border-l border-white/20">
+    <span class="max-w-0 overflow-hidden group-hover:max-w-[150px] transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold uppercase tracking-wider block mr-0 group-hover:mr-2">
+      Beri Penilaian
+    </span>
+    <iconify-icon icon="lucide:star" width="20" class="shrink-0 text-[#EAB308]"></iconify-icon>
+  </button>
+  
+  <!-- Button 2: Aksesibilitas -->
+  <button id="floating-btn-accessibility" class="group flex items-center bg-[#168940] hover:bg-[#0B4226] text-white rounded-l-full shadow-lg h-12 transition-all duration-300 pl-4 pr-3.5 focus:outline-none focus:ring-2 focus:ring-[#EAB308]/50 border-y border-l border-white/20">
+    <span class="max-w-0 overflow-hidden group-hover:max-w-[150px] transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold uppercase tracking-wider block mr-0 group-hover:mr-2">
+      Aksesibilitas
+    </span>
+    <iconify-icon icon="lucide:accessibility" width="20" class="shrink-0 text-white"></iconify-icon>
+  </button>
+  
+  <!-- Button 3: Chat Librarian Agent -->
+  <button id="floating-btn-chat" class="group flex items-center bg-[#168940] hover:bg-[#0B4226] text-white rounded-l-full shadow-lg h-12 transition-all duration-300 pl-4 pr-3.5 focus:outline-none focus:ring-2 focus:ring-[#EAB308]/50 border-y border-l border-white/20">
+    <span class="max-w-0 overflow-hidden group-hover:max-w-[150px] transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold uppercase tracking-wider block mr-0 group-hover:mr-2">
+      Chat Pustakawan
+    </span>
+    <iconify-icon icon="lucide:message-square" width="20" class="shrink-0 text-white"></iconify-icon>
+  </button>
+</div>
+
+<!-- MOBILE DOCK INTERACTION WIDGET (Visible on Screens < 768px) -->
+<div class="fixed bottom-4 left-1/2 -translate-x-1/2 flex flex-row items-center gap-4 bg-white/90 backdrop-blur-md px-5 py-3 rounded-full shadow-2xl border border-slate-200/80 z-[99] md:hidden select-none">
+  <!-- Button 1: Beri Penilaian Mobile -->
+  <button id="mobile-btn-rate" class="w-11 h-11 bg-[#168940] hover:bg-[#0B4226] text-white rounded-full flex items-center justify-center shadow-md active:scale-95 transition-transform focus:outline-none border border-white/20" title="Beri Penilaian">
+    <iconify-icon icon="lucide:star" width="20" class="text-[#EAB308]"></iconify-icon>
+  </button>
+  
+  <!-- Button 2: Aksesibilitas Mobile -->
+  <button id="mobile-btn-accessibility" class="w-11 h-11 bg-[#168940] hover:bg-[#0B4226] text-white rounded-full flex items-center justify-center shadow-md active:scale-95 transition-transform focus:outline-none border border-white/20" title="Aksesibilitas">
+    <iconify-icon icon="lucide:accessibility" width="20"></iconify-icon>
+  </button>
+  
+  <!-- Button 3: Chat Librarian Agent Mobile -->
+  <button id="mobile-btn-chat" class="w-11 h-11 bg-[#168940] hover:bg-[#0B4226] text-white rounded-full flex items-center justify-center shadow-md active:scale-95 transition-transform focus:outline-none border border-white/20" title="Chat Pustakawan">
+    <iconify-icon icon="lucide:message-square" width="20"></iconify-icon>
+  </button>
+</div>
+
+<!-- KUESIONER SURVEY MODAL DIALOG -->
+<div id="survey-modal-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+  <div id="survey-modal-container" class="bg-white rounded-xl shadow-2xl border border-slate-100 max-w-md w-full overflow-hidden transform scale-95 opacity-0 transition-all duration-300 flex flex-col">
+    <!-- Header -->
+    <div class="px-5 py-4 bg-gradient-to-r from-[#168940] to-[#0B4226] text-white flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <iconify-icon icon="lucide:star" class="text-[#EAB308]" width="20"></iconify-icon>
+        <h3 class="font-bold text-sm md:text-base tracking-tight m-0 text-white">Kuesioner Kepuasan Layanan</h3>
+      </div>
+      <button id="close-survey-modal" class="text-white/80 hover:text-white transition-colors focus:outline-none flex items-center justify-center">
+        <iconify-icon icon="lucide:x" width="20"></iconify-icon>
+      </button>
+    </div>
+
+    <!-- Form Section -->
+    <form id="survey-form" class="p-5 space-y-4">
+      <!-- Status Pengguna -->
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">Status Pengguna <span class="text-red-500">*</span></label>
+        <select id="survey-status" class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded px-3 py-2.5 focus:outline-none focus:border-[#168940] focus:ring-2 focus:ring-[#168940]/10 transition-colors" required>
+          <option value="" disabled selected>Pilih status Anda...</option>
+          <option value="mahasiswa">Mahasiswa IAIN Sorong</option>
+          <option value="dosen">Dosen / Tenaga Pengajar</option>
+          <option value="tendik">Tenaga Kependidikan</option>
+          <option value="umum">Masyarakat Umum / Peneliti</option>
+        </select>
+      </div>
+
+      <!-- Fakultas / Unit Kerja -->
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">Fakultas / Unit Kerja</label>
+        <input type="text" id="survey-fakultas" placeholder="Cth: Tarbiyah / Pascasarjana" class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded px-3 py-2.5 focus:outline-none focus:border-[#168940] focus:ring-2 focus:ring-[#168940]/10 transition-colors">
+      </div>
+
+      <!-- Penilaian Kepuasan -->
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Bagaimana Penilaian Layanan Kami? <span class="text-red-500">*</span></label>
+        <div class="grid grid-cols-4 gap-2">
+          <!-- Sangat Baik -->
+          <label class="cursor-pointer group relative">
+            <input type="radio" name="survey-rating" value="sangat-baik" class="peer sr-only" required>
+            <div class="flex flex-col items-center p-2 border border-slate-200 rounded hover:bg-slate-50 peer-checked:bg-[#F0FDF4] peer-checked:border-[#168940] peer-checked:text-[#168940] transition-all text-center">
+              <iconify-icon icon="lucide:smile" width="20" class="mb-1 text-emerald-600 shrink-0"></iconify-icon>
+              <span class="text-[9px] font-bold uppercase leading-none block whitespace-nowrap">Sangat Baik</span>
+            </div>
+          </label>
+          
+          <!-- Baik -->
+          <label class="cursor-pointer group relative">
+            <input type="radio" name="survey-rating" value="baik" class="peer sr-only">
+            <div class="flex flex-col items-center p-2 border border-slate-200 rounded hover:bg-slate-50 peer-checked:bg-[#F0FDF4] peer-checked:border-[#168940] peer-checked:text-[#168940] transition-all text-center">
+              <iconify-icon icon="lucide:smile" width="20" class="mb-1 text-green-500 shrink-0"></iconify-icon>
+              <span class="text-[9px] font-bold uppercase leading-none block whitespace-nowrap">Baik</span>
+            </div>
+          </label>
+
+          <!-- Cukup -->
+          <label class="cursor-pointer group relative">
+            <input type="radio" name="survey-rating" value="cukup" class="peer sr-only">
+            <div class="flex flex-col items-center p-2 border border-slate-200 rounded hover:bg-slate-50 peer-checked:bg-amber-50 peer-checked:border-amber-500 peer-checked:text-amber-600 transition-all text-center">
+              <iconify-icon icon="lucide:meh" width="20" class="mb-1 text-amber-500 shrink-0"></iconify-icon>
+              <span class="text-[9px] font-bold uppercase leading-none block whitespace-nowrap">Cukup</span>
+            </div>
+          </label>
+
+          <!-- Kurang -->
+          <label class="cursor-pointer group relative">
+            <input type="radio" name="survey-rating" value="kurang" class="peer sr-only">
+            <div class="flex flex-col items-center p-2 border border-slate-200 rounded hover:bg-slate-50 peer-checked:bg-red-50 peer-checked:border-red-500 peer-checked:text-red-600 transition-all text-center">
+              <iconify-icon icon="lucide:frown" width="20" class="mb-1 text-red-500 shrink-0"></iconify-icon>
+              <span class="text-[9px] font-bold uppercase leading-none block whitespace-nowrap">Kurang</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Kritik & Saran -->
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">Kritik & Saran</label>
+        <textarea id="survey-saran" rows="3" placeholder="Tuliskan masukan Anda..." class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded px-3 py-2 focus:outline-none focus:border-[#168940] focus:ring-2 focus:ring-[#168940]/10 transition-colors resize-none"></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="w-full h-11 bg-[#168940] hover:bg-[#0B4226] text-white font-bold text-sm rounded flex items-center justify-center gap-2 shadow transition-colors focus:outline-none focus:ring-2 focus:ring-[#EAB308]/50">
+        <iconify-icon icon="lucide:send" width="16"></iconify-icon>
+        Kirim Penilaian
+      </button>
+    </form>
+
+    <!-- Success Screen (Hidden by default) -->
+    <div id="survey-success" class="hidden p-8 flex flex-col items-center justify-center text-center">
+      <div class="w-16 h-16 bg-[#F0FDF4] border border-[#DCFCE7] text-[#168940] rounded-full flex items-center justify-center mb-4 shadow-sm animate-bounce">
+        <iconify-icon icon="lucide:check-circle-2" width="40"></iconify-icon>
+      </div>
+      <h4 class="text-base font-bold text-slate-800">Terima Kasih!</h4>
+      <p class="text-sm text-slate-500 mt-1.5 leading-relaxed">Partisipasi Anda sangat berharga dalam membantu kami meningkatkan kualitas layanan Perpustakaan IAIN Sorong.</p>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* Sembunyikan pemicu default Sienna & Chatbot kuning */
+  .asw-menu-btn,
+  #chatbot-trigger {
+    display: none !important;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // --- ACCESSIBILITY TRIGGER ---
+    const accessibilityBtn = document.getElementById('floating-btn-accessibility');
+    const accessibilityMobileBtn = document.getElementById('mobile-btn-accessibility');
+
+    function triggerAccessibility() {
+      const siennaBtn = document.querySelector('.asw-menu-btn') as HTMLElement;
+      if (siennaBtn) {
+        siennaBtn.click();
+      } else {
+        console.warn('Sienna accessibility widget is still loading...');
+      }
+    }
+
+    accessibilityBtn?.addEventListener('click', triggerAccessibility);
+    accessibilityMobileBtn?.addEventListener('click', triggerAccessibility);
+
+    // --- CHATBOT TRIGGER ---
+    const chatBtn = document.getElementById('floating-btn-chat');
+    const chatMobileBtn = document.getElementById('mobile-btn-chat');
+
+    function triggerChatbot() {
+      // Menggunakan Facebook Messenger (m.me)
+      window.open('https://m.me/IAINSorongPapuaBarat', '_blank');
+    }
+
+    chatBtn?.addEventListener('click', triggerChatbot);
+    chatMobileBtn?.addEventListener('click', triggerChatbot);
+
+    // --- SURVEY MODAL LOGIC ---
+    const rateBtn = document.getElementById('floating-btn-rate');
+    const rateMobileBtn = document.getElementById('mobile-btn-rate');
+    
+    const surveyBackdrop = document.getElementById('survey-modal-backdrop');
+    const surveyContainer = document.getElementById('survey-modal-container');
+    const closeSurveyBtn = document.getElementById('close-survey-modal');
+    
+    const surveyForm = document.getElementById('survey-form') as HTMLFormElement;
+    const surveySuccess = document.getElementById('survey-success');
+
+    let isSurveyOpen = false;
+
+    function openSurvey() {
+      if (isSurveyOpen) return;
+      isSurveyOpen = true;
+
+      // Reset state form
+      surveyForm.reset();
+      surveyForm.classList.remove('hidden');
+      surveySuccess?.classList.add('hidden');
+
+      surveyBackdrop?.classList.remove('hidden');
+      setTimeout(() => {
+        surveyBackdrop?.classList.remove('opacity-0');
+        surveyContainer?.classList.remove('opacity-0', 'scale-95');
+      }, 10);
+
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSurvey() {
+      if (!isSurveyOpen) return;
+      isSurveyOpen = false;
+
+      surveyBackdrop?.classList.add('opacity-0');
+      surveyContainer?.classList.add('opacity-0', 'scale-95');
+
+      setTimeout(() => {
+        surveyBackdrop?.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    rateBtn?.addEventListener('click', openSurvey);
+    rateMobileBtn?.addEventListener('click', openSurvey);
+    closeSurveyBtn?.addEventListener('click', closeSurvey);
+
+    // Close when clicking outside
+    surveyBackdrop?.addEventListener('click', (e) => {
+      if (e.target === surveyBackdrop) {
+        closeSurvey();
+      }
+    });
+
+    // Handle form submit
+    surveyForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Show success screen animation
+      surveyForm.classList.add('hidden');
+      surveySuccess?.classList.remove('hidden');
+
+      // Auto close after 2.5 seconds
+      setTimeout(() => {
+        closeSurvey();
+      }, 2500);
+    });
+  });
+</script>

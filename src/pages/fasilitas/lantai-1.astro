@@ -1,0 +1,65 @@
+---
+import LayoutSidebar from '../../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Fasilitas Ruangan",
+    items: [{"label": "Lantai 1", "href": "/fasilitas/lantai-1"}, {"label": "Lantai Atas", "href": "/fasilitas/lantai-atas"}, {"label": "Reservasi Ruangan", "href": "/reservasi"}]
+};
+---
+
+<LayoutSidebar title="Fasilitas Lantai 1" sidebarMenu={sidebarMenu}>
+    
+    <div class="mb-8">
+        <p class="font-serif text-[15px] text-[#444444] leading-relaxed m-0 max-w-3xl">Lantai dasar yang dirancang dinamis sebagai zona sirkulasi untuk memudahkan akses seluruh pengunjung.</p>
+    </div>
+
+    <!-- Fasilitas Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Pojok Baca -->
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:vip" ></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Pojok Baca & Lobi</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Ruang santai dengan interior minimalis, dilengkapi kursi sofa empuk. Sangat cocok bagi Anda untuk membaca koran nasional terbaru atau majalah.
+            </p>
+        </div>
+
+        <!-- Loker -->
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:lock" ></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Loker Otomatis</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Tersedia lebih dari 100 laci penitipan barang (loker) yang menggunakan sistem kunci presisi untuk menjamin keamanan tas dan jaket Anda.
+            </p>
+        </div>
+
+        <!-- Ruang Laktasi -->
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-blue-600 mb-4 border border-[#dadada] group-hover:border-blue-200">
+                <iconify-icon icon="flat-color-icons:like" ></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Fasilitas Inklusif</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Dilengkapi dengan Ruang Laktasi (Menyusui) yang tertutup rapat dan privat. Terdapat juga jalur landai khusus kursi roda di area depan.
+            </p>
+        </div>
+
+        <!-- Musala -->
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-amber-600 mb-4 border border-[#dadada] group-hover:border-amber-200">
+                <iconify-icon icon="flat-color-icons:water" ></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Musala & Tempat Wudu</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Menyediakan musala mini yang sejuk, lengkap dengan tempat wudu bersih agar ibadah tetap terjaga tanpa harus keluar dari gedung.
+            </p>
+        </div>
+
+    </div>
+
+</LayoutSidebar>

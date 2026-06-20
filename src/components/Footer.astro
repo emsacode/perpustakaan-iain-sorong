@@ -1,0 +1,239 @@
+---
+---
+<footer class="bg-[#062E19] text-[#BBF7D0] pt-12 pb-8 font-sans">
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Clean Unboxed Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 mb-8 overflow-hidden">
+      
+      <!-- 1. Pilihan Lokasi Fisik -->
+      <div class="lg:col-span-3 lg:pr-8 flex flex-col justify-between">
+        <div>
+          <h4 class="text-accent text-[11px] font-bold uppercase tracking-widest mb-4 flex items-center gap-2 font-serif">
+            <iconify-icon icon="lucide:map-pin" class="text-lg"></iconify-icon>
+            Pilihan Lokasi Fisik
+          </h4>
+          
+          <!-- Expandable Select Style -->
+          <div class="relative group">
+            <select class="w-full bg-white/5 text-surface text-[13px] font-semibold rounded-[6px] px-3 py-2.5 appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-accent transition-colors">
+              <option value="pusat" class="bg-[#062E19] text-surface">Perpustakaan Pusat</option>
+            </select>
+            <iconify-icon icon="lucide:chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none"></iconify-icon>
+          </div>
+
+          <div class="mt-4 font-serif text-[13px] text-[#BBF7D0]/70 leading-relaxed">
+            <p class="m-0">
+              Jalan Sorong - Klamono Km. 17 Klablim, Kota Sorong, Papua Barat Daya.
+            </p>
+          </div>
+        </div>
+        
+        <a href="#" class="inline-flex items-center justify-between w-full bg-white/5 hover:bg-white/10 text-[#BBF7D0] hover:text-accent font-sans font-semibold text-[12px] px-4 py-2.5 rounded-[6px] transition-colors mt-6">
+          Lihat Google Maps
+          <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
+        </a>
+      </div>
+
+      <!-- 2. Hubungi Kami & Media Sosial -->
+      <div class="lg:col-span-3 lg:px-8 flex flex-col">
+        
+        <!-- Accordion: Hubungi Kami -->
+        <div class="flex-1 pb-4 mb-4 md:pb-0 md:mb-0">
+          <button class="w-full flex justify-between items-center text-accent text-[11px] font-bold uppercase tracking-widest md:mb-4 focus:outline-none md:cursor-default font-serif" onclick="if(window.innerWidth < 1024) { const ul = this.nextElementSibling; ul.classList.toggle('hidden'); this.querySelector('iconify-icon').classList.toggle('rotate-180'); }">
+            Hubungi Kami
+            <iconify-icon icon="lucide:chevron-down" class="lg:hidden transition-transform duration-300"></iconify-icon>
+          </button>
+          <ul class="hidden lg:block space-y-4 text-[13px] font-sans">
+            <li class="flex items-start gap-3 group">
+              <div class="w-8 h-8 rounded-[4px] bg-white/5 flex items-center justify-center text-[#BBF7D0]/50 group-hover:text-accent transition-colors shrink-0">
+                <iconify-icon icon="lucide:phone" text-lg></iconify-icon>
+              </div>
+              <div class="flex flex-col justify-center">
+                <span class="text-[10px] text-[#BBF7D0]/50 uppercase tracking-wider font-semibold">WA Layanan</span>
+                <span class="text-[#BBF7D0] font-semibold">0821 9413 2703</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3 group">
+              <div class="w-8 h-8 rounded-[4px] bg-white/5 flex items-center justify-center text-[#BBF7D0]/50 group-hover:text-accent transition-colors shrink-0">
+                <iconify-icon icon="lucide:mail" text-lg></iconify-icon>
+              </div>
+              <div class="flex flex-col justify-center">
+                <span class="text-[10px] text-[#BBF7D0]/50 uppercase tracking-wider font-semibold">E-mail Resmi</span>
+                <span class="text-[#BBF7D0] font-semibold">perpustakaan@iainsorong.ac.id</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- 3. Jam Layanan Operasional -->
+      <div class="lg:col-span-6 lg:pl-8 flex flex-col justify-between">
+        <h4 class="text-accent text-[11px] font-bold uppercase tracking-widest mb-4 flex items-center gap-2 font-serif">
+          <iconify-icon icon="lucide:clock" class="text-lg"></iconify-icon>
+          Jam Layanan Operasional
+        </h4>
+        
+        <div class="flex-1 flex flex-col justify-between">
+          <!-- Header Status & Clock -->
+          <div class="flex justify-between items-start mb-5 pb-4">
+            <div>
+              <div class="text-[9px] font-bold text-[#BBF7D0]/40 tracking-widest uppercase mb-1.5">Status Saat Ini</div>
+              <div class="flex items-center gap-2 text-sm md:text-base font-bold text-[#BBF7D0] bg-white/5 px-3 py-1.5 rounded-full w-max">
+                <div id="footer-op-dot" class="shrink-0 w-2 h-2 rounded-full bg-gray-500"></div>
+                <span id="footer-op-text">Memuat...</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <div id="footer-op-clock" class="text-2xl md:text-3xl font-bold text-accent-highlight font-sans leading-none tracking-tight">--:--</div>
+              <div id="footer-op-day" class="text-[11px] text-[#BBF7D0]/50 mt-1.5 font-semibold">--, WIB</div>
+            </div>
+          </div>
+
+          <!-- Wide Schedule Grid (7 days) -->
+          <div class="grid grid-cols-7 gap-1.5">
+            <!-- Sen -->
+            <div id="f-day-1" class="text-center py-2 px-1 rounded-[4px] bg-white/5 text-[#BBF7D0]/70 transition-all duration-300">
+              <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Sen</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08–19.30</div>
+            </div>
+            <!-- Sel -->
+            <div id="f-day-2" class="text-center py-2 px-1 rounded-[4px] bg-white/5 text-[#BBF7D0]/70 transition-all duration-300">
+              <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Sel</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08–19.30</div>
+            </div>
+            <!-- Rab -->
+            <div id="f-day-3" class="text-center py-2 px-1 rounded-[4px] bg-white/5 text-[#BBF7D0]/70 transition-all duration-300">
+              <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Rab</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08–19.30</div>
+            </div>
+            <!-- Kam -->
+            <div id="f-day-4" class="text-center py-2 px-1 rounded-[4px] bg-white/5 text-[#BBF7D0]/70 transition-all duration-300">
+              <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Kam</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08–15.30</div>
+            </div>
+            <!-- Jum -->
+            <div id="f-day-5" class="text-center py-2 px-1 rounded-[4px] bg-white/5 text-[#BBF7D0]/70 transition-all duration-300 flex flex-col items-center justify-center">
+              <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Jum</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter relative w-max">
+                08–16<span class="absolute -right-2 -top-0.5 text-accent-highlight text-[10px]">*</span>
+              </div>
+            </div>
+            <!-- Sab -->
+            <div id="f-day-6" class="text-center py-2 px-1 rounded-[4px] text-[#BBF7D0]/30 transition-all duration-300">
+              <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Sab</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">—</div>
+            </div>
+            <!-- Min -->
+            <div id="f-day-0" class="text-center py-2 px-1 rounded-[4px] text-[#BBF7D0]/30 transition-all duration-300">
+              <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Min</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inline Media Sosial -->
+        <div class="mt-6 flex flex-col md:flex-row items-start md:items-center gap-3 text-[12px] font-sans">
+          <span class="text-accent font-bold uppercase tracking-widest text-[10px] font-serif">Media Sosial</span>
+          <div class="flex flex-wrap items-center gap-3 text-[#BBF7D0]/80">
+            <a href="#" class="flex items-center gap-1.5 hover:text-accent transition-colors group">
+              <iconify-icon icon="mdi:instagram" class="text-sm"></iconify-icon>
+              @pustakaiainsorong
+            </a>
+            <span class="text-[#BBF7D0]/30 text-[10px]">|</span>
+            <a href="#" class="flex items-center gap-1.5 hover:text-accent transition-colors group">
+              <iconify-icon icon="mdi:facebook" class="text-sm"></iconify-icon>
+              Pustaka IAIN Sorong
+            </a>
+            <span class="text-[#BBF7D0]/30 text-[10px]">|</span>
+            <a href="#" class="flex items-center gap-1.5 hover:text-accent transition-colors group">
+              <iconify-icon icon="mdi:youtube" class="text-sm"></iconify-icon>
+              Pustaka IAIN Sorong
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Legalitas & Statistik -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] font-sans text-[#BBF7D0]/50 pt-8 border-t border-white/5 mt-4">
+      <div class="text-center md:text-left space-y-0.5">
+        <p>© 2026 Perpustakaan IAIN Sorong. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p>Pernyataan Hak Cipta &amp; Hak Akses Data.</p>
+      </div>
+      <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-[4px]">
+        <iconify-icon icon="lucide:file-text" class="text-accent"></iconify-icon>
+        <span class="font-sans font-semibold text-[#BBF7D0]">
+          NPP: 142927100051
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function updateFooterStatusHospitality() {
+  const now = new Date();
+  const day = now.getDay();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const time = hours + minutes / 60;
+  
+  const dot = document.getElementById('footer-op-dot');
+  const text = document.getElementById('footer-op-text');
+  
+  if (!dot || !text) return;
+  
+  let isOpen = false;
+  if (day >= 1 && day <= 3) {
+    if (time >= 8 && time < 19.5) isOpen = true;
+  } else if (day === 4) {
+    if (time >= 8 && time < 15.5) isOpen = true;
+  } else if (day === 5) {
+    if ((time >= 8 && time < 11) || (time >= 13 && time < 16)) isOpen = true;
+  }
+  
+  if (isOpen) {
+    dot.className = "shrink-0 w-2 h-2 rounded-full bg-[#168940] shadow-[0_0_0_3px_rgba(22,137,64,0.2)] animate-pulse";
+    text.textContent = "Buka Sekarang";
+    text.className = "text-[#168940]";
+  } else {
+    dot.className = "shrink-0 w-2 h-2 rounded-full bg-red-500 shadow-[0_0_0_3px_rgba(239,68,68,0.2)]";
+    text.textContent = "Sedang Tutup";
+    text.className = "text-red-400";
+  }
+  
+  // Update Live Clock
+  const clockEl = document.getElementById('footer-op-clock');
+  const dayEl = document.getElementById('footer-op-day');
+  if (clockEl && dayEl) {
+    clockEl.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    dayEl.textContent = `${days[day]}, WIB`;
+  }
+  
+  // Highlight active pill
+  for (let i = 0; i <= 6; i++) {
+    const el = document.getElementById('f-day-' + i);
+    if (!el) continue;
+    
+    if (i === day) {
+      el.classList.remove('bg-white/5', 'text-[#BBF7D0]/70', 'text-[#BBF7D0]/30');
+      el.classList.add('bg-[#168940]', 'text-white', 'shadow-sm', 'scale-[1.03]', 'z-10');
+    } else {
+      el.classList.remove('bg-[#168940]', 'text-white', 'shadow-sm', 'scale-[1.03]', 'z-10');
+      if (i === 0 || i === 6) {
+        el.classList.add('text-[#BBF7D0]/30');
+      } else {
+        el.classList.add('bg-white/5', 'text-[#BBF7D0]/70');
+      }
+    }
+  }
+}
+
+setInterval(updateFooterStatusHospitality, 1000);
+setTimeout(updateFooterStatusHospitality, 100);
+document.addEventListener('astro:page-load', updateFooterStatusHospitality);
+</script>
