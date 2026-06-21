@@ -9,112 +9,272 @@ const sidebarMenu = {
 
 <LayoutSidebar title="Reservasi Ruangan" sidebarMenu={sidebarMenu}>
     
-    <div class="mb-10 text-left">
+    <div class="mb-8 text-left">
         <h2 class="text-2xl font-semibold text-[#222222] mb-4 tracking-tight">Peminjaman Fasilitas</h2>
         <p class="font-serif text-[15px] text-[#444444] leading-relaxed">
-            Gunakan formulir di bawah ini untuk mengajukan peminjaman Ruang Home Theater atau Area Diskusi Kelompok untuk keperluan akademik.
+            Gunakan formulir di bawah ini untuk mengajukan peminjaman ruangan untuk keperluan akademik.
         </p>
     </div>
 
-    <!-- Info Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div class="bg-[#EFF6FF] border border-[#BFDBFE] rounded-[8px] p-5 flex gap-4 items-start shadow-sm hover:shadow-md hover:border-[#93C5FD] transition-all">
-            <iconify-icon icon="flat-color-icons:info" class="shrink-0"></iconify-icon>
-            <div>
-                <h4 class="font-semibold text-blue-900 mb-1 m-0">Syarat Peminjaman</h4>
-                <p class="font-serif text-[13px] text-blue-800/80 leading-relaxed m-0">Peminjaman diajukan maksimal H-2 sebelum acara. Prioritas diberikan untuk kegiatan perkuliahan, seminar proposal, atau bedah buku.</p>
-            </div>
+    <!-- Progress Status Placeholder -->
+    <div class="bg-[#F8FAFC] border border-[#dadada] rounded-[8px] p-4 flex items-center justify-between mb-8 overflow-x-auto">
+        <div class="flex items-center gap-2 min-w-max">
+            <div class="w-6 h-6 rounded-full bg-[#168940] text-white flex items-center justify-center text-xs font-bold">1</div>
+            <span class="text-sm font-semibold text-[#168940]">Formulir</span>
         </div>
-        <div class="bg-[#FFFBEB] border border-[#FDE68A] rounded-[8px] p-5 flex gap-4 items-start shadow-sm hover:shadow-md hover:border-[#FCD34D] transition-all">
-            <iconify-icon icon="flat-color-icons:warning-shield" class="shrink-0"></iconify-icon>
-            <div>
-                <h4 class="font-semibold text-amber-900 mb-1 m-0">Ketentuan Kapasitas</h4>
-                <p class="font-serif text-[13px] text-amber-800/80 leading-relaxed m-0">Ruang Home Theater menampung maks 30 orang. Harap sesuaikan jumlah peserta agar tidak melebihi kapasitas ruangan.</p>
-            </div>
+        <div class="h-px bg-[#dadada] flex-1 mx-4 min-w-[50px]"></div>
+        <div class="flex items-center gap-2 min-w-max opacity-50">
+            <div class="w-6 h-6 rounded-full bg-[#dadada] text-[#666666] flex items-center justify-center text-xs font-bold">2</div>
+            <span class="text-sm font-semibold text-[#666666]">Menunggu Konfirmasi</span>
+        </div>
+        <div class="h-px bg-[#dadada] flex-1 mx-4 min-w-[50px]"></div>
+        <div class="flex items-center gap-2 min-w-max opacity-50">
+            <div class="w-6 h-6 rounded-full bg-[#dadada] text-[#666666] flex items-center justify-center text-xs font-bold">3</div>
+            <span class="text-sm font-semibold text-[#666666]">Dikonfirmasi</span>
         </div>
     </div>
 
     <!-- Form Container -->
-    <div class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-8">
-        <form class="space-y-6" onsubmit="event.preventDefault(); alert('Permintaan reservasi telah dikirim. Menunggu konfirmasi admin.');">
+    <div id="reservation-container" class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-8 transition-opacity duration-500">
+        <form id="reservation-form" class="space-y-6" action="https://formspree.io/f/xanojkzp" method="POST">
+            <input type="hidden" name="_subject" value="Reservasi Ruangan Perpustakaan">
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Nama Pemesan -->
                 <div>
-                    <label class="block text-sm font-semibold text-[#222222] mb-2">Nama Lengkap / Instansi <span class="text-red-500">*</span></label>
-                    <input type="text" placeholder="Masukkan nama Anda" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                    <label class="block text-sm font-semibold text-[#222222] mb-2">Nama Lengkap <span class="text-red-500">*</span></label>
+                    <input type="text" name="nama" placeholder="Sesuai KTP/KTM" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
                 </div>
 
-                <!-- Kontak -->
+                <!-- NIM / NIP -->
+                <div>
+                    <label class="block text-sm font-semibold text-[#222222] mb-2">NIM / NIP / NIK <span class="text-red-500">*</span></label>
+                    <input type="text" name="identitas" placeholder="Nomor Induk" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                </div>
+
+                <!-- Prodi -->
+                <div>
+                    <label class="block text-sm font-semibold text-[#222222] mb-2">Program Studi / Instansi <span class="text-red-500">*</span></label>
+                    <input type="text" name="instansi" placeholder="Cth: PAI" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                </div>
+
+                <!-- Kontak WA -->
                 <div>
                     <label class="block text-sm font-semibold text-[#222222] mb-2">Nomor WhatsApp <span class="text-red-500">*</span></label>
-                    <input type="tel" placeholder="08xx xxxx xxxx" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                    <input type="tel" name="whatsapp" placeholder="08xx xxxx xxxx" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                </div>
+
+                <!-- Email -->
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-semibold text-[#222222] mb-2">Email <span class="text-red-500">*</span></label>
+                    <input type="email" name="email" placeholder="email@contoh.com" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
                 </div>
             </div>
 
             <!-- Pilihan Ruang -->
-            <div class="pt-2">
-                <label class="block text-sm font-semibold text-[#222222] mb-3">Ruangan yang Dipinjam <span class="text-red-500">*</span></label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="pt-4 border-t border-[#dadada]">
+                <label class="block text-base font-semibold text-[#222222] mb-4">Ruangan yang Dipinjam <span class="text-red-500">*</span></label>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <label class="cursor-pointer relative">
-                        <input type="radio" name="ruangan" class="peer sr-only" required>
-                        <div class="p-5 rounded-[4px] border border-[#dadada] peer-checked:border-[#168940] peer-checked:bg-[#F0FDF4] hover:bg-[#F8FAFC] transition-all flex items-start gap-4">
-                            <iconify-icon icon="flat-color-icons:video-projector" class="peer-checked:"></iconify-icon>
-                            <div>
-                                <h4 class="font-semibold text-[#222222] mb-1 m-0">Home Theater</h4>
-                                <p class="font-serif text-[13px] text-[#666666] m-0">Lantai atas, fasilitas Proyektor, Sound System. Kapasitas 30 orang.</p>
-                            </div>
+                        <input type="radio" name="ruangan" value="Home Theater" class="peer sr-only" required>
+                        <div class="p-4 rounded-[4px] border border-[#dadada] peer-checked:border-[#168940] peer-checked:bg-[#F0FDF4] hover:bg-[#F8FAFC] transition-all flex flex-col items-center text-center gap-2">
+                            <iconify-icon icon="flat-color-icons:video-projector" width="32" class="mb-1"></iconify-icon>
+                            <h4 class="font-semibold text-[#222222] text-sm m-0">Home Theater</h4>
+                            <p class="font-serif text-xs text-[#666666] m-0">Lantai Atas, Proyektor. Maks 30 org.</p>
                         </div>
                     </label>
                     
                     <label class="cursor-pointer relative">
-                        <input type="radio" name="ruangan" class="peer sr-only">
-                        <div class="p-5 rounded-[4px] border border-[#dadada] peer-checked:border-[#168940] peer-checked:bg-[#F0FDF4] hover:bg-[#F8FAFC] transition-all flex items-start gap-4">
-                            <iconify-icon icon="flat-color-icons:collaboration" class="peer-checked:"></iconify-icon>
-                            <div>
-                                <h4 class="font-semibold text-[#222222] mb-1 m-0">Area Diskusi (Mesa Bundar)</h4>
-                                <p class="font-serif text-[13px] text-[#666666] m-0">Lantai atas, area terbuka. Cocok untuk FGD skala kecil maks 15 orang.</p>
-                            </div>
+                        <input type="radio" name="ruangan" value="Area Diskusi" class="peer sr-only">
+                        <div class="p-4 rounded-[4px] border border-[#dadada] peer-checked:border-[#168940] peer-checked:bg-[#F0FDF4] hover:bg-[#F8FAFC] transition-all flex flex-col items-center text-center gap-2">
+                            <iconify-icon icon="flat-color-icons:collaboration" width="32" class="mb-1"></iconify-icon>
+                            <h4 class="font-semibold text-[#222222] text-sm m-0">Area Diskusi</h4>
+                            <p class="font-serif text-xs text-[#666666] m-0">Lantai Atas, Terbuka. Maks 15 org.</p>
+                        </div>
+                    </label>
+
+                    <label class="cursor-pointer relative">
+                        <input type="radio" name="ruangan" value="Ruang Multimedia" class="peer sr-only">
+                        <div class="p-4 rounded-[4px] border border-[#dadada] peer-checked:border-[#168940] peer-checked:bg-[#F0FDF4] hover:bg-[#F8FAFC] transition-all flex flex-col items-center text-center gap-2">
+                            <iconify-icon icon="flat-color-icons:multiple-devices" width="32" class="mb-1"></iconify-icon>
+                            <h4 class="font-semibold text-[#222222] text-sm m-0">Ruang Multimedia</h4>
+                            <p class="font-serif text-xs text-[#666666] m-0">Lantai 1, Komputer. Maks 20 org.</p>
                         </div>
                     </label>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[#dadada]">
                 <!-- Tanggal -->
                 <div>
                     <label class="block text-sm font-semibold text-[#222222] mb-2">Tanggal Penggunaan <span class="text-red-500">*</span></label>
-                    <input type="date" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors cursor-pointer" required>
+                    <input type="date" name="tanggal" id="tanggal-reservasi" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors cursor-pointer" required>
+                    <p class="text-xs text-[#666666] mt-1 font-serif">Pemesanan minimal H-2.</p>
                 </div>
 
                 <!-- Jam -->
                 <div class="flex gap-4">
                     <div class="flex-1">
-                        <label class="block text-sm font-semibold text-[#222222] mb-2">Jam Mulai</label>
-                        <input type="time" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors cursor-pointer" required>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Jam Mulai <span class="text-red-500">*</span></label>
+                        <input type="time" name="jam_mulai" id="jam_mulai" min="08:00" max="16:00" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors cursor-pointer" required>
                     </div>
                     <div class="flex-1">
-                        <label class="block text-sm font-semibold text-[#222222] mb-2">Jam Selesai</label>
-                        <input type="time" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors cursor-pointer" required>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Jam Selesai <span class="text-red-500">*</span></label>
+                        <input type="time" name="jam_selesai" id="jam_selesai" min="08:00" max="16:00" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors cursor-pointer" required>
                     </div>
                 </div>
             </div>
 
-            <!-- Kegiatan -->
-            <div class="pt-2">
-                <label class="block text-sm font-semibold text-[#222222] mb-2">Nama / Deskripsi Kegiatan <span class="text-red-500">*</span></label>
-                <textarea rows="3" placeholder="Contoh: Pemutaran film dokumenter sejarah islam kelas B..." class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors resize-none" required></textarea>
+            <!-- Peserta & Kegiatan -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                <div class="md:col-span-1">
+                    <label class="block text-sm font-semibold text-[#222222] mb-2">Jumlah Peserta <span class="text-red-500">*</span></label>
+                    <input type="number" name="jumlah_peserta" min="1" placeholder="Cth: 15" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-semibold text-[#222222] mb-2">Deskripsi Kegiatan <span class="text-red-500">*</span></label>
+                    <textarea name="kegiatan" rows="2" placeholder="Contoh: Pemutaran film dokumenter sejarah islam kelas B..." class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors resize-none" required></textarea>
+                </div>
+            </div>
+
+            <!-- Persetujuan -->
+            <div class="space-y-3 pt-4 border-t border-[#dadada]">
+                <label class="flex items-start gap-3 cursor-pointer group">
+                    <div class="relative flex items-center mt-0.5">
+                        <input type="checkbox" name="persetujuan_izin" class="peer sr-only" required>
+                        <div class="w-5 h-5 bg-[#F8FAFC] border-2 border-[#dadada] rounded-[4px] peer-checked:bg-[#168940] peer-checked:border-[#168940] transition-colors flex items-center justify-center">
+                            <iconify-icon icon="lucide:check" class="text-white opacity-0 peer-checked:opacity-100 transition-opacity" width="14"></iconify-icon>
+                        </div>
+                    </div>
+                    <span class="text-sm font-serif text-[#444444] group-hover:text-[#222222] transition-colors">
+                        Saya menyatakan bahwa kegiatan ini telah mendapat persetujuan/izin dari Dosen Pembimbing, Ketua Prodi, atau Pejabat berwenang lainnya. <span class="text-red-500">*</span>
+                    </span>
+                </label>
+                <label class="flex items-start gap-3 cursor-pointer group">
+                    <div class="relative flex items-center mt-0.5">
+                        <input type="checkbox" name="persetujuan_tanggung_jawab" class="peer sr-only" required>
+                        <div class="w-5 h-5 bg-[#F8FAFC] border-2 border-[#dadada] rounded-[4px] peer-checked:bg-[#168940] peer-checked:border-[#168940] transition-colors flex items-center justify-center">
+                            <iconify-icon icon="lucide:check" class="text-white opacity-0 peer-checked:opacity-100 transition-opacity" width="14"></iconify-icon>
+                        </div>
+                    </div>
+                    <span class="text-sm font-serif text-[#444444] group-hover:text-[#222222] transition-colors">
+                        Saya bersedia menjaga kebersihan dan keamanan fasilitas, serta bertanggung jawab penuh jika terjadi kerusakan selama penggunaan. <span class="text-red-500">*</span>
+                    </span>
+                </label>
             </div>
 
             <!-- Submit -->
-            <div class="pt-4 border-t border-[#dadada] flex justify-end">
-                <button type="submit" class="w-full md:w-auto bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-8 rounded-[4px] transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]">
-                    <iconify-icon icon="flat-color-icons:calendar" ></iconify-icon>
-                    Ajukan Reservasi
+            <div class="pt-6 border-t border-[#dadada] flex justify-end">
+                <button type="submit" id="res-submit-btn" class="w-full md:w-auto bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-8 rounded-[4px] transition-colors flex items-center justify-center gap-2 shadow-sm focus:outline-none focus:ring-[3px] focus:ring-[#EAB308] disabled:opacity-70 disabled:cursor-not-allowed">
+                    <span id="res-btn-text">Ajukan Reservasi</span>
+                    <iconify-icon id="res-btn-icon" icon="lucide:calendar" width="18"></iconify-icon>
+                    <iconify-icon id="res-btn-spinner" icon="lucide:loader-2" class="animate-spin hidden" width="18"></iconify-icon>
                 </button>
             </div>
 
         </form>
     </div>
 
+    <!-- Success State (Hidden by default) -->
+    <div id="res-success-state" class="hidden bg-white border border-[#dadada] rounded-[8px] p-10 text-center shadow-sm mb-8 transform transition-all duration-500 scale-95 opacity-0">
+        <div class="w-20 h-20 bg-[#F0FDF4] border border-[#168940]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <iconify-icon icon="flat-color-icons:ok" width="48"></iconify-icon>
+        </div>
+        <h3 class="text-2xl font-semibold text-[#0B4226] mb-4">Pengajuan Berhasil!</h3>
+        <p class="font-serif text-[#444444] mb-8 max-w-md mx-auto leading-relaxed">
+            Permintaan reservasi Anda telah terkirim dan saat ini berstatus <strong class="text-amber-600">Menunggu Konfirmasi</strong>. Kami akan segera menghubungi Anda melalui WhatsApp atau Email untuk konfirmasi lebih lanjut.
+        </p>
+        <button onclick="window.location.reload()" class="inline-flex items-center justify-center bg-[#F8FAFC] border border-[#dadada] text-[#444444] hover:bg-[#F0FDF4] hover:text-[#168940] hover:border-[#168940] font-semibold py-2 px-6 rounded-[4px] transition-colors">
+            Kembali
+        </button>
+    </div>
+
 </LayoutSidebar>
+
+<script>
+    // Set minimum date to H+2
+    const dateInput = document.getElementById('tanggal-reservasi') as HTMLInputElement;
+    if (dateInput) {
+        const today = new Date();
+        const minDate = new Date(today);
+        minDate.setDate(today.getDate() + 2); // H+2
+        dateInput.min = minDate.toISOString().split('T')[0];
+    }
+
+    // Jam validation
+    const jamMulai = document.getElementById('jam_mulai') as HTMLInputElement;
+    const jamSelesai = document.getElementById('jam_selesai') as HTMLInputElement;
+
+    function validateJam() {
+        if (jamMulai && jamSelesai && jamMulai.value && jamSelesai.value) {
+            if (jamSelesai.value <= jamMulai.value) {
+                jamSelesai.setCustomValidity('Jam selesai harus setelah jam mulai');
+            } else {
+                jamSelesai.setCustomValidity('');
+            }
+        }
+    }
+
+    if (jamMulai) jamMulai.addEventListener('change', validateJam);
+    if (jamSelesai) jamSelesai.addEventListener('change', validateJam);
+
+    // Form submission handling
+    const form = document.getElementById('reservation-form') as HTMLFormElement;
+    const container = document.getElementById('reservation-container');
+    const successState = document.getElementById('res-success-state');
+    const submitBtn = document.getElementById('res-submit-btn') as HTMLButtonElement;
+    const btnText = document.getElementById('res-btn-text');
+    const btnIcon = document.getElementById('res-btn-icon');
+    const btnSpinner = document.getElementById('res-btn-spinner');
+
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // UI Loading state
+            if (submitBtn && btnText && btnIcon && btnSpinner) {
+                submitBtn.disabled = true;
+                btnText.textContent = 'Mengirim...';
+                btnIcon.classList.add('hidden');
+                btnSpinner.classList.remove('hidden');
+            }
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Show success state
+                    if (container && successState) {
+                        container.classList.add('opacity-0', 'scale-95');
+                        setTimeout(() => {
+                            container.classList.add('hidden');
+                            successState.classList.remove('hidden');
+                            // Trigger reflow
+                            void successState.offsetWidth;
+                            successState.classList.remove('scale-95', 'opacity-0');
+                            successState.classList.add('scale-100', 'opacity-100');
+                        }, 500);
+                    }
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            } catch (error) {
+                alert('Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi.');
+                // Reset UI
+                if (submitBtn && btnText && btnIcon && btnSpinner) {
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Ajukan Reservasi';
+                    btnIcon.classList.remove('hidden');
+                    btnSpinner.classList.add('hidden');
+                }
+            }
+        });
+    }
+</script>

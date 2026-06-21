@@ -1,0 +1,157 @@
+---
+import dashboardData from '../data/dashboard_gold.json';
+import liveStats from '../data/live_stats.json';
+
+const stats = dashboardData;
+
+const formatNumber = (num) => typeof num === 'number' ? num.toLocaleString('id-ID') : num;
+
+const formattedDate = new Date().toLocaleDateString('en-GB', {
+    weekday: 'long', 
+    day: 'numeric', 
+    month: 'long', 
+    year: 'numeric'
+});
+---
+
+<section class="pt-8 pb-4 bg-white relative z-20">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="flex items-center gap-4 mb-4">
+            <h2 class="flex items-center gap-2 text-xl font-bold text-dark">
+                <iconify-icon icon="lucide:activity" class="text-[#DE1D25] text-2xl"></iconify-icon>
+                Live Dashboard Hari Ini
+            </h2>
+            <div class="h-6 w-[1px] bg-gray-300 hidden md:block"></div>
+            <span class="text-sm font-semibold text-gray-500 hidden md:block">{formattedDate}</span>
+        </div>
+
+        <!-- Red Banner -->
+        <div class="bg-[#DE1D25] rounded-[12px] p-6 text-white flex flex-col lg:flex-row lg:items-center justify-between shadow-lg relative z-10">
+            
+            <div class="mb-6 lg:mb-0">
+                <div class="text-2xl font-bold tracking-tight mb-1">Perpustakaan Pusat</div>
+                <div class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider inline-block">
+                    Aktivitas & Sirkulasi Terkini
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-6 lg:gap-10">
+                
+                <!-- Pengunjung Fisik -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-white/20 rounded-[8px] flex items-center justify-center border border-white/10 shrink-0">
+                        <iconify-icon icon="lucide:users" class="text-2xl text-white"></iconify-icon>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-extrabold leading-none tracking-tight">{stats.kunjungan.hari_ini.toLocaleString('id-ID')}</div>
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-red-100 mt-1">Pengunjung Fisik</div>
+                    </div>
+                </div>
+
+                <!-- Peminjaman Buku -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-white/20 rounded-[8px] flex items-center justify-center border border-white/10 shrink-0">
+                        <iconify-icon icon="lucide:book-open" class="text-2xl text-white"></iconify-icon>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-extrabold leading-none tracking-tight">18</div>
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-red-100 mt-1">Peminjaman Buku</div>
+                    </div>
+                </div>
+
+                <!-- Reservasi Ruangan -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-white/20 rounded-[8px] flex items-center justify-center border border-white/10 shrink-0">
+                        <iconify-icon icon="lucide:door-open" class="text-2xl text-white"></iconify-icon>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-extrabold leading-none tracking-tight">2</div>
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-red-100 mt-1">Reservasi Ruangan</div>
+                    </div>
+                </div>
+
+                <!-- Akses Koleksi Digital -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-white/20 rounded-[8px] flex items-center justify-center border border-white/10 shrink-0">
+                        <iconify-icon icon="lucide:cloud-download" class="text-2xl text-white"></iconify-icon>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-extrabold leading-none tracking-tight">{Math.round(stats.kunjungan.download_eresources_bulan / 3).toLocaleString('id-ID')}</div>
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-red-100 mt-1">Akses Koleksi Digital</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Green Stats Container (Total Koleksi & Anggota) -->
+        <div class="bg-white border border-gray-100 rounded-b-[12px] pt-12 pb-8 px-6 -mt-6 shadow-sm">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-y-8 gap-x-0 text-center md:divide-x md:divide-slate-200">
+                
+                <div class="px-4 py-2 md:py-0">
+                    <div class="hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                        <div class="flex justify-center mb-2 text-[#168940]/80">
+                            <iconify-icon icon="lucide:book-copy" width="1.75rem"></iconify-icon>
+                        </div>
+                        <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+                            {formatNumber(liveStats.eksemplar_buku)}
+                        </h4>
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Eksemplar Buku</p>
+                    </div>
+                </div>
+                
+                <div class="px-4 py-2 md:py-0">
+                    <div class="hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                        <div class="flex justify-center mb-2 text-[#168940]/80">
+                            <iconify-icon icon="lucide:book-open" width="1.75rem"></iconify-icon>
+                        </div>
+                        <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+                            {formatNumber(liveStats.judul_buku)}
+                        </h4>
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Judul Buku</p>
+                    </div>
+                </div>
+                
+                <div class="px-4 py-2 md:py-0">
+                    <div class="hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                        <div class="flex justify-center mb-2 text-[#168940]/80">
+                            <iconify-icon icon="lucide:newspaper" width="1.75rem"></iconify-icon>
+                        </div>
+                        <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+                            {formatNumber(liveStats.jurnal_ilmiah)}
+                        </h4>
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Jurnal / Ilmiah</p>
+                    </div>
+                </div>
+                
+                <div class="px-4 py-2 md:py-0">
+                    <div class="hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                        <div class="flex justify-center mb-2 text-[#168940]/80">
+                            <iconify-icon icon="lucide:graduation-cap" width="1.75rem"></iconify-icon>
+                        </div>
+                        <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+                            {formatNumber(liveStats.dokumen_skripsi)}
+                        </h4>
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Dokumen Skripsi</p>
+                    </div>
+                </div>
+                
+                <div class="px-4 py-2 md:py-0 col-span-2 md:col-span-1">
+                    <div class="hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                        <div class="flex justify-center mb-2 text-[#168940]/80">
+                            <iconify-icon icon="lucide:users" width="1.75rem"></iconify-icon>
+                        </div>
+                        <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+                            {formatNumber(liveStats.total_anggota)}
+                        </h4>
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Anggota</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>

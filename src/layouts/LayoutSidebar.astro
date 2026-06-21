@@ -68,7 +68,7 @@ const isActive = (href: string) => {
 			</nav>
 
 			<!-- Page Title -->
-			<h1 class="text-4xl md:text-[2.75rem] font-semibold text-white tracking-tight drop-shadow-md m-0">
+			<h1 class="text-2xl md:text-[2.75rem] font-extrabold text-white tracking-tight drop-shadow-md m-0">
 				{title}
 			</h1>
 		</div>
@@ -83,7 +83,7 @@ const isActive = (href: string) => {
 				<!-- Sidebar (Daftar Isi / Submenu) - Sticky, Lebih Compact -->
 				<aside class="w-full lg:w-64 flex-shrink-0 lg:sticky lg:top-24 bg-white rounded-[8px] shadow-sm border border-[#dadada] overflow-hidden z-20">
 					<div class="bg-slate-50 border-b border-[#dadada] p-5">
-						<h3 class="text-[#222222] font-semibold text-base tracking-tight flex items-center gap-2 m-0">
+						<h3 class="text-[#222222] font-bold text-base tracking-tight flex items-center gap-2 m-0">
 							<iconify-icon icon="flat-color-icons:folder" ></iconify-icon>
 							{sidebarMenu.title}
 						</h3>
@@ -96,8 +96,8 @@ const isActive = (href: string) => {
 										href={item.href} 
 										class={`flex items-center gap-3 px-3 py-3 rounded-[4px] text-[14px] transition-all duration-200 no-underline ${
 											isActive(item.href) 
-												? 'bg-[#F0FDF4] text-[#168940] font-semibold border-l-2 border-[#168940]' 
-												: 'text-[#666666] font-serif hover:bg-[#F8FAFC] hover:text-[#222222]'
+												? 'bg-[#F0FDF4] text-[#168940] font-bold border-l-2 border-[#168940]' 
+												: 'text-[#666666] font-serif font-medium hover:bg-[#F8FAFC] hover:text-[#222222]'
 										}`}
 									>
 										<iconify-icon icon="flat-color-icons:document" class={`text-lg ${isActive(item.href) ? 'text-[#168940]' : 'text-[#94a3b8]'}`}></iconify-icon>
@@ -114,7 +114,7 @@ const isActive = (href: string) => {
 					<article class="pb-12">
 						<!-- Konten Dinamis yang Di-inject oleh Halaman .astro -->
 						<div class="prose prose-slate prose-lg max-w-none 
-									prose-headings:text-[#222222] prose-headings:font-bold prose-headings:tracking-tight
+									prose-headings:text-[#222222] prose-headings:font-extrabold prose-headings:tracking-tight
 									prose-p:text-[#444444] prose-p:leading-relaxed
 									prose-a:text-[#168940] prose-a:no-underline hover:prose-a:underline
 									prose-img:rounded-[8px] prose-img:shadow-sm prose-img:border prose-img:border-[#dadada]">

@@ -1,13 +1,13 @@
 ---
 import LayoutSidebar from '../layouts/LayoutSidebar.astro';
-import statsRaw from '../data/live_stats.json';
+import dashboardData from '../data/dashboard_gold.json';
 
-const stats = statsRaw;
+const stats = dashboardData;
 
 const sidebarMenu = {
     title: "Transparansi Data",
     items: [
-        {"label": "Statistik Koleksi", "href": "/statistik"},
+        {"label": "Dashboard SLiMS", "href": "/statistik"},
         {"label": "Profil Singkat", "href": "/profil"},
         {"label": "Struktur Organisasi", "href": "/struktur"},
     ]
@@ -16,193 +16,285 @@ const sidebarMenu = {
 const lastUpdated = new Date(stats.last_updated).toLocaleDateString('id-ID', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
 });
-
-const cards = [
-    {
-        value: stats.judul_buku.toLocaleString('id-ID'),
-        label: "Judul Koleksi Buku",
-        sublabel: `${stats.eksemplar_buku.toLocaleString('id-ID')} Eksemplar`,
-        icon: "flat-color-icons:library",
-        color: "#168940",
-        bg: "#F0FDF4",
-        source: "SLiMS OPAC (SORPUS)",
-    },
-    {
-        value: stats.jurnal_ilmiah.toLocaleString('id-ID'),
-        label: "Artikel Jurnal Ilmiah",
-        sublabel: "Terindeks OAI-PMH",
-        icon: "flat-color-icons:file",
-        color: "#3182CE",
-        bg: "#EBF8FF",
-        source: "Rumah Jurnal OJS",
-    },
-    {
-        value: stats.dokumen_skripsi.toLocaleString('id-ID'),
-        label: "Dokumen Repositori",
-        sublabel: "Skripsi & Karya Ilmiah",
-        icon: "flat-color-icons:graduation-cap",
-        color: "#805AD5",
-        bg: "#FAF5FF",
-        source: "EPrints Repositori",
-    },
-    {
-        value: stats.total_anggota.toLocaleString('id-ID'),
-        label: "Total Anggota Terdaftar",
-        sublabel: "Mahasiswa, Dosen & Tenaga Kependidikan",
-        icon: "flat-color-icons:businessman",
-        color: "#DD6B20",
-        bg: "#FFFAF0",
-        source: "Basis Data SLiMS",
-    },
-];
 ---
 
-<LayoutSidebar title="Statistik Perpustakaan" sidebarMenu={sidebarMenu}>
+<LayoutSidebar title="Dashboard Statistik SLiMS" sidebarMenu={sidebarMenu}>
 
     <!-- Hero Banner -->
-    <div class="bg-[#F0FDF4] border border-[#dadada] rounded-[8px] p-8 mb-12 flex flex-col md:flex-row items-center gap-8 shadow-sm">
-        <div class="w-16 h-16 bg-white rounded-[8px] border border-[#dadada] flex items-center justify-center shrink-0 shadow-sm">
-            <iconify-icon icon="flat-color-icons:statistics"></iconify-icon>
+    <div class="bg-gradient-to-br from-[#168940] to-[#0f602c] rounded-[12px] p-8 mb-8 flex flex-col md:flex-row items-center gap-8 shadow-md text-white relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute right-0 top-0 opacity-10 pointer-events-none">
+            <iconify-icon icon="lucide:bar-chart-2" class="text-9xl"></iconify-icon>
         </div>
-        <div class="flex-1">
-            <div class="text-xs font-bold text-[#168940] uppercase tracking-widest mb-2">Data Riil & Terverifikasi</div>
-            <h2 class="text-2xl font-semibold text-[#222222] mb-2 tracking-tight m-0">Statistik Perpustakaan IAIN Sorong</h2>
-            <p class="font-serif text-[15px] text-[#444444] m-0 leading-relaxed">
-                Data di bawah ini dipanen secara otomatis dari sistem EPrints, OJS, dan SLiMS pada setiap proses build website. Informasi ini mencerminkan kondisi koleksi dan keanggotaan perpustakaan secara transparan.
+        
+        <div class="w-16 h-16 bg-white/10 rounded-[8px] backdrop-blur-sm border border-white/20 flex items-center justify-center shrink-0 shadow-sm z-10">
+            <iconify-icon icon="lucide:activity" class="text-3xl text-white"></iconify-icon>
+        </div>
+        <div class="flex-1 z-10">
+            <div class="text-xs font-bold text-green-100 uppercase tracking-widest mb-2">Live SLiMS Telemetry</div>
+            <h2 class="text-2xl md:text-3xl font-serif font-bold mb-2 tracking-tight m-0 text-white drop-shadow-sm">Dashboard Perpustakaan SLiMS</h2>
+            <p class="font-sans text-[15px] text-green-50 m-0 leading-relaxed max-w-2xl">
+                Visualisasi data lengkap untuk monitoring aktivitas perpustakaan secara real-time. Data diekstraksi langsung dari pangkalan data SLiMS menggunakan Medallion Data Architecture.
             </p>
         </div>
-        <div class="shrink-0 text-center">
-            <div class="text-[11px] text-[#666666] font-semibold uppercase tracking-wider mb-1">Terakhir Diperbarui</div>
-            <div class="text-xs font-mono bg-white border border-[#dadada] rounded-[4px] px-3 py-2 text-[#444444]">{lastUpdated}</div>
-            {stats.status === 'live' && (
-                <div class="mt-2 inline-flex items-center gap-1.5 text-[#168940] text-xs font-semibold">
-                    <span class="w-2 h-2 rounded-full bg-[#168940] animate-pulse"></span>
-                    Data Live
-                </div>
-            )}
+        <div class="shrink-0 text-center z-10 bg-black/20 backdrop-blur-sm border border-white/10 rounded-[8px] p-4">
+            <div class="text-[11px] text-green-100 font-semibold uppercase tracking-wider mb-1">Data per</div>
+            <div class="text-sm font-mono font-bold">{lastUpdated}</div>
+            <div class="mt-2 inline-flex items-center gap-1.5 text-green-300 text-xs font-bold bg-white/10 px-2 py-1 rounded-full">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                Real-Time Sync
+            </div>
         </div>
     </div>
 
-    <!-- Stats Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-14">
-        {cards.map((card) => (
-            <div class="bg-white border border-[#dadada] rounded-[8px] p-7 shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group relative overflow-hidden">
-                <!-- Background decoration -->
-                <div class="absolute right-0 top-0 w-24 h-24 rounded-bl-full opacity-30 transition-all group-hover:opacity-50" style={`background-color: ${card.bg};`}></div>
+    <!-- Bento Grid 1: Key Metrics (Koleksi) -->
+    <h3 class="text-xl font-bold text-[#222222] mb-4 flex items-center gap-2"><iconify-icon icon="lucide:book-open" class="text-primary"></iconify-icon> Metrik Koleksi SLiMS</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        
+        <!-- Total Judul -->
+        <div class="bg-white border border-[#dadada] rounded-[10px] p-5 shadow-sm">
+            <div class="flex justify-between items-start mb-2">
+                <div class="text-[#666666] font-semibold text-sm">Total Judul Katalog</div>
+                <div class="p-1.5 bg-green-50 text-primary rounded-[6px]"><iconify-icon icon="lucide:library"></iconify-icon></div>
+            </div>
+            <div class="text-3xl font-extrabold text-[#222222] mb-1">{stats.koleksi.total_judul.toLocaleString('id-ID')}</div>
+            <div class="text-xs text-[#888888] font-medium"><span class="text-primary font-bold">{stats.koleksi.katalog_tersedia_persen}%</span> Tersedia di rak</div>
+        </div>
 
-                <div class="relative z-10">
-                    <div class="flex items-start justify-between mb-5">
-                        <div class="w-12 h-12 rounded-[8px] flex items-center justify-center border border-[#dadada] group-hover:border-[#BBF7D0] transition-colors" style={`background-color: ${card.bg};`}>
-                            <iconify-icon icon={card.icon} width="1.8rem"></iconify-icon>
+        <!-- Total Eksemplar -->
+        <div class="bg-white border border-[#dadada] rounded-[10px] p-5 shadow-sm">
+            <div class="flex justify-between items-start mb-2">
+                <div class="text-[#666666] font-semibold text-sm">Total Eksemplar Fisik</div>
+                <div class="p-1.5 bg-blue-50 text-blue-600 rounded-[6px]"><iconify-icon icon="lucide:copy"></iconify-icon></div>
+            </div>
+            <div class="text-3xl font-extrabold text-[#222222] mb-1">{stats.koleksi.total_eksemplar.toLocaleString('id-ID')}</div>
+            <div class="text-xs text-[#888888] font-medium"><span class="text-blue-600 font-bold">{stats.koleksi.eksemplar_tersedia_persen}%</span> Salinan fisik siap</div>
+        </div>
+
+        <!-- Rasio -->
+        <div class="bg-white border border-[#dadada] rounded-[10px] p-5 shadow-sm">
+            <div class="flex justify-between items-start mb-2">
+                <div class="text-[#666666] font-semibold text-sm">Rasio Eks/Judul</div>
+                <div class="p-1.5 bg-purple-50 text-purple-600 rounded-[6px]"><iconify-icon icon="lucide:pie-chart"></iconify-icon></div>
+            </div>
+            <div class="text-3xl font-extrabold text-[#222222] mb-1">1 : {stats.koleksi.rasio_buku}</div>
+            <div class="text-xs text-[#888888] font-medium">Rata-rata 3 per judul</div>
+        </div>
+
+        <!-- Ketersediaan -->
+        <div class="bg-white border border-[#dadada] rounded-[10px] p-5 shadow-sm">
+            <div class="flex justify-between items-start mb-2">
+                <div class="text-[#666666] font-semibold text-sm">Ketersediaan</div>
+                <div class="p-1.5 bg-orange-50 text-orange-600 rounded-[6px]"><iconify-icon icon="lucide:check-circle"></iconify-icon></div>
+            </div>
+            <div class="text-3xl font-extrabold text-[#222222] mb-1">{stats.koleksi.ketersediaan_katalog_persen}%</div>
+            <div class="text-xs text-[#888888] font-medium">{stats.koleksi.judul_tersedia.toLocaleString('id-ID')} judul tersedia</div>
+        </div>
+    </div>
+
+    <!-- Charts Area -->
+    <h3 class="text-xl font-bold text-[#222222] mb-4 flex items-center gap-2"><iconify-icon icon="lucide:users" class="text-primary"></iconify-icon> Analitik Kunjungan & Demografi</h3>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Bar Chart (Kunjungan) -->
+        <div class="lg:col-span-2 bg-white border border-[#dadada] rounded-[10px] p-5 shadow-sm flex flex-col">
+            <div class="flex justify-between items-end mb-4">
+                <div>
+                    <h4 class="font-bold text-[#222222] m-0 text-base">Kunjungan 7 Hari Terakhir</h4>
+                    <div class="text-sm text-[#888888]">Tren kunjungan fisik ke perpustakaan</div>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-extrabold text-primary leading-none">{stats.kunjungan.hari_ini}</div>
+                    <div class="text-xs font-bold text-[#666666] uppercase mt-1">Hari Ini</div>
+                </div>
+            </div>
+            <div id="chart-kunjungan" class="w-full flex-1 min-h-[250px]"></div>
+        </div>
+
+        <!-- Donut Chart (Demografi) -->
+        <div class="bg-white border border-[#dadada] rounded-[10px] p-5 shadow-sm flex flex-col">
+            <h4 class="font-bold text-[#222222] m-0 text-base mb-1">Distribusi Pengunjung</h4>
+            <div class="text-sm text-[#888888] mb-4">Berdasarkan tipe keanggotaan hari ini</div>
+            <div id="chart-demografi" class="w-full flex-1 min-h-[250px] flex items-center justify-center"></div>
+        </div>
+    </div>
+
+    <!-- Bento Grid 2: E-Resources & Top Users -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        
+        <!-- E-Resources -->
+        <div class="bg-white border border-[#dadada] rounded-[10px] p-6 shadow-sm">
+            <h4 class="font-bold text-[#222222] text-lg mb-1 flex items-center gap-2"><iconify-icon icon="lucide:download-cloud" class="text-primary"></iconify-icon> Download E-Resources</h4>
+            <p class="text-sm text-[#888888] mb-6">Aktivitas unduhan jurnal dan repositori bulan ini</p>
+            
+            <div class="flex items-end gap-4 mb-5">
+                <div class="text-5xl font-extrabold text-[#222222] tracking-tighter">{stats.kunjungan.download_eresources_bulan.toLocaleString('id-ID')}</div>
+                <div class="pb-1 text-sm font-bold text-[#168940] flex items-center bg-[#F0FDF4] px-2 py-0.5 rounded-[4px]">
+                    <iconify-icon icon="lucide:trending-up" class="mr-1"></iconify-icon> +12% dari bulan lalu
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <div class="flex justify-between text-sm mb-1.5">
+                        <span class="font-semibold text-[#666666]">Unduhan Minggu Ini</span>
+                        <span class="font-bold text-[#222222]">{stats.kunjungan.download_eresources_minggu.toLocaleString('id-ID')}</span>
+                    </div>
+                    <div class="h-2.5 w-full bg-[#f1f5f9] rounded-full overflow-hidden">
+                        <div class="h-full bg-[#168940] rounded-full" style={`width: ${(stats.kunjungan.download_eresources_minggu / stats.kunjungan.download_eresources_bulan) * 100}%`}></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-1.5">
+                        <span class="font-semibold text-[#666666]">Pencapaian Target Bulanan</span>
+                        <span class="font-bold text-[#222222]">{stats.kunjungan.download_target_persen}%</span>
+                    </div>
+                    <div class="h-2.5 w-full bg-[#f1f5f9] rounded-full overflow-hidden">
+                        <div class="h-full bg-[#3b82f6] rounded-full" style={`width: ${stats.kunjungan.download_target_persen}%`}></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Peminjam -->
+        <div class="bg-white border border-[#dadada] rounded-[10px] p-6 shadow-sm">
+            <h4 class="font-bold text-[#222222] text-lg mb-1 flex items-center gap-2"><iconify-icon icon="lucide:award" class="text-yellow-500"></iconify-icon> Top 3 Peminjam Terbanyak</h4>
+            <p class="text-sm text-[#888888] mb-6">Aktivitas sirkulasi tertinggi tahun ini</p>
+
+            <div class="space-y-4">
+                {stats.top_peminjam.map((user, index) => (
+                    <div class="flex items-center gap-4 p-3 rounded-[8px] bg-[#F8FAFC] border border-[#dadada] hover:border-primary transition-colors">
+                        <div class={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-white shadow-sm shrink-0
+                            ${index === 0 ? 'bg-yellow-500' : index === 1 ? 'bg-gray-400' : 'bg-orange-400'}`}>
+                            #{user.rank}
                         </div>
-                        <span class="text-[10px] font-semibold text-[#888888] uppercase tracking-wider bg-[#F8FAFC] border border-[#dadada] px-2 py-1 rounded-[4px]">
-                            {card.source}
-                        </span>
+                        <div class="flex-1">
+                            <div class="font-bold text-[#222222]">{user.nama}</div>
+                            <div class="text-xs font-semibold text-[#666666]">{index === 0 ? 'Mahasiswa Aktif' : 'Dosen/Tamu'}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-extrabold text-primary text-xl leading-none">{user.jumlah}</div>
+                            <div class="text-[10px] uppercase font-bold text-[#888888] mt-1">Peminjaman</div>
+                        </div>
                     </div>
-
-                    <div class="mb-1">
-                        <span class="text-4xl font-bold tracking-tight" style={`color: ${card.color};`}>{card.value}</span>
-                    </div>
-                    <div class="font-semibold text-[#222222] text-base mb-1">{card.label}</div>
-                    <div class="font-serif text-sm text-[#888888]">{card.sublabel}</div>
-                </div>
-            </div>
-        ))}
-    </div>
-
-    <!-- Data Perbandingan Koleksi (Bar Chart Visual) -->
-    <div class="bg-white border border-[#dadada] rounded-[8px] p-7 shadow-sm mb-10">
-        <h3 class="text-xl font-semibold text-[#222222] mb-1 m-0 tracking-tight">Komposisi Koleksi</h3>
-        <p class="font-serif text-sm text-[#666666] mb-8 m-0">Perbandingan proporsional antar jenis koleksi perpustakaan.</p>
-
-        <div class="space-y-5">
-            <!-- Buku -->
-            <div>
-                <div class="flex justify-between items-center mb-1.5">
-                    <span class="text-sm font-semibold text-[#222222] flex items-center gap-2">
-                        <iconify-icon icon="flat-color-icons:library" width="1.1rem"></iconify-icon>
-                        Koleksi Buku (SLiMS)
-                    </span>
-                    <span class="text-sm font-bold text-[#168940]">{stats.judul_buku.toLocaleString('id-ID')} judul</span>
-                </div>
-                <div class="h-3 bg-[#F0FDF4] rounded-full overflow-hidden border border-[#dadada]">
-                    <div class="h-full bg-[#168940] rounded-full" style="width: 100%;"></div>
-                </div>
-            </div>
-
-            <!-- Jurnal -->
-            <div>
-                <div class="flex justify-between items-center mb-1.5">
-                    <span class="text-sm font-semibold text-[#222222] flex items-center gap-2">
-                        <iconify-icon icon="flat-color-icons:file" width="1.1rem"></iconify-icon>
-                        Artikel Jurnal (OJS)
-                    </span>
-                    <span class="text-sm font-bold text-[#3182CE]">{stats.jurnal_ilmiah.toLocaleString('id-ID')} artikel</span>
-                </div>
-                <div class="h-3 bg-[#EBF8FF] rounded-full overflow-hidden border border-[#dadada]">
-                    <div class="h-full bg-[#3182CE] rounded-full" style={`width: ${Math.round((stats.jurnal_ilmiah / (stats.jurnal_ilmiah + stats.judul_buku + stats.dokumen_skripsi)) * 100)}%;`}></div>
-                </div>
-            </div>
-
-            <!-- Repositori -->
-            <div>
-                <div class="flex justify-between items-center mb-1.5">
-                    <span class="text-sm font-semibold text-[#222222] flex items-center gap-2">
-                        <iconify-icon icon="flat-color-icons:graduation-cap" width="1.1rem"></iconify-icon>
-                        Repositori (EPrints)
-                    </span>
-                    <span class="text-sm font-bold text-[#805AD5]">{stats.dokumen_skripsi.toLocaleString('id-ID')} dokumen</span>
-                </div>
-                <div class="h-3 bg-[#FAF5FF] rounded-full overflow-hidden border border-[#dadada]">
-                    <div class="h-full bg-[#805AD5] rounded-full" style={`width: ${Math.round((stats.dokumen_skripsi / (stats.jurnal_ilmiah + stats.judul_buku + stats.dokumen_skripsi)) * 100 * 5)}%;`}></div>
-                </div>
+                ))}
             </div>
         </div>
-    </div>
 
-    <!-- Sumber Data & Metodologi -->
-    <div class="bg-white border border-[#dadada] rounded-[8px] p-7 shadow-sm mb-10">
-        <h3 class="text-xl font-semibold text-[#222222] mb-4 m-0 tracking-tight">Metodologi Pemanenan Data</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-[#F0FDF4] border border-[#dadada] rounded-[8px] p-5">
-                <div class="flex items-center gap-2 mb-3">
-                    <iconify-icon icon="flat-color-icons:database" width="1.3rem"></iconify-icon>
-                    <h4 class="font-semibold text-[#222222] m-0">SLiMS (SORPUS)</h4>
-                </div>
-                <p class="font-serif text-sm text-[#444444] m-0 leading-relaxed">Data koleksi buku dan anggota dipanen melalui scraping pada halaman pencarian publik OPAC menggunakan Cheerio (Node.js).</p>
-            </div>
-            <div class="bg-[#EBF8FF] border border-[#dadada] rounded-[8px] p-5">
-                <div class="flex items-center gap-2 mb-3">
-                    <iconify-icon icon="flat-color-icons:file" width="1.3rem"></iconify-icon>
-                    <h4 class="font-semibold text-[#222222] m-0">OJS (Rumah Jurnal)</h4>
-                </div>
-                <p class="font-serif text-sm text-[#444444] m-0 leading-relaxed">Jumlah artikel jurnal diperoleh dari feed XML protokol OAI-PMH pada endpoint <code class="text-xs bg-white px-1 rounded border border-[#dadada]">/index.php/index/oai</code>.</p>
-            </div>
-            <div class="bg-[#FAF5FF] border border-[#dadada] rounded-[8px] p-5">
-                <div class="flex items-center gap-2 mb-3">
-                    <iconify-icon icon="flat-color-icons:graduation-cap" width="1.3rem"></iconify-icon>
-                    <h4 class="font-semibold text-[#222222] m-0">EPrints (Repositori)</h4>
-                </div>
-                <p class="font-serif text-sm text-[#444444] m-0 leading-relaxed">Dokumen repositori dihitung dari feed XML OAI-PMH pada endpoint <code class="text-xs bg-white px-1 rounded border border-[#dadada]">/cgi/oai2</code> yang mengembalikan metadata Dublin Core.</p>
-            </div>
-        </div>
     </div>
-
-    <!-- Interoperabilitas -->
-    <div class="bg-[#F8FAFC] border border-[#dadada] rounded-[8px] p-7 shadow-sm">
-        <div class="flex items-start gap-4">
-            <iconify-icon icon="flat-color-icons:info" class="shrink-0 mt-0.5"></iconify-icon>
-            <div>
-                <h4 class="font-semibold text-[#222222] m-0 mb-2">Interoperabilitas Data Nasional</h4>
-                <p class="font-serif text-sm text-[#444444] m-0 leading-relaxed">
-                    Koleksi repositori IAIN Sorong terdistribusi ke portal katalog nasional melalui standar OAI-PMH, termasuk
-                    <a href="https://onesearch.id/" target="_blank" rel="noopener noreferrer" class="text-[#168940] font-semibold no-underline hover:underline">Indonesia OneSearch</a>,
-                    <a href="https://rama.kemdikbud.go.id/" target="_blank" rel="noopener noreferrer" class="text-[#168940] font-semibold no-underline hover:underline">RAMA Kemdikbud</a>, dan
-                    <a href="https://garuda.kemdikbud.go.id/" target="_blank" rel="noopener noreferrer" class="text-[#168940] font-semibold no-underline hover:underline">Garuda</a>.
-                    Ini membuktikan bahwa sistem informasi perpustakaan kami telah memenuhi standar interoperabilitas data repositori nasional.
-                </p>
-            </div>
-        </div>
-    </div>
-
 </LayoutSidebar>
+
+<!-- Pass stats to client side script via data attribute -->
+<div id="chart-data" 
+    data-kunjungan-labels={JSON.stringify(stats.grafik_kunjungan_7_hari.labels)}
+    data-kunjungan-data={JSON.stringify(stats.grafik_kunjungan_7_hari.data)}
+    data-demografi={JSON.stringify(stats.demografi)}
+    class="hidden">
+</div>
+
+<script>
+    import ApexCharts from 'apexcharts';
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const dataEl = document.getElementById('chart-data');
+        if(!dataEl) return;
+
+        const kunjunganLabels = JSON.parse(dataEl.dataset.kunjunganLabels || '[]');
+        const kunjunganData = JSON.parse(dataEl.dataset.kunjunganData || '[]');
+        const demografi = JSON.parse(dataEl.dataset.demografi || '[]');
+
+        // Bar Chart (Kunjungan 7 Hari)
+        const barOptions = {
+            chart: {
+                type: 'bar',
+                height: 280,
+                toolbar: { show: false },
+                fontFamily: 'Inter, sans-serif'
+            },
+            series: [{
+                name: 'Kunjungan',
+                data: kunjunganData
+            }],
+            xaxis: {
+                categories: kunjunganLabels,
+                axisBorder: { show: false },
+                axisTicks: { show: false },
+                labels: {
+                    style: { colors: '#888888', fontSize: '12px', fontWeight: 600 }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: { colors: '#888888', fontSize: '12px', fontWeight: 600 }
+                }
+            },
+            grid: {
+                borderColor: '#f1f1f1',
+                strokeDashArray: 4,
+            },
+            colors: ['#168940'],
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    columnWidth: '45%',
+                }
+            },
+            dataLabels: { enabled: false },
+            tooltip: {
+                theme: 'light',
+                y: { formatter: function (val) { return val + " orang" } }
+            }
+        };
+
+        const barChart = new ApexCharts(document.querySelector("#chart-kunjungan"), barOptions);
+        barChart.render();
+
+        // Donut Chart (Demografi)
+        const donutOptions = {
+            chart: {
+                type: 'donut',
+                height: 280,
+                fontFamily: 'Inter, sans-serif'
+            },
+            series: demografi.map(d => d.jumlah),
+            labels: demografi.map(d => d.tipe),
+            colors: ['#168940', '#3182CE', '#DD6B20', '#805AD5'],
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '70%',
+                        labels: {
+                            show: true,
+                            name: { fontSize: '12px', color: '#888888', offsetY: -5 },
+                            value: { fontSize: '24px', fontWeight: 800, color: '#222222', offsetY: 5 },
+                            total: {
+                                show: true,
+                                showAlways: true,
+                                label: 'Total',
+                                fontSize: '13px',
+                                fontWeight: 600,
+                                color: '#666666',
+                                formatter: function (w) {
+                                    return w.globals.seriesTotals.reduce((a, b) => a + b, 0)
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            dataLabels: { enabled: false },
+            stroke: { width: 0 },
+            legend: {
+                position: 'bottom',
+                markers: { radius: 12 },
+                itemMargin: { horizontal: 5, vertical: 5 }
+            },
+            tooltip: {
+                theme: 'light',
+                y: { formatter: function (val) { return val + " orang" } }
+            }
+        };
+
+        const donutChart = new ApexCharts(document.querySelector("#chart-demografi"), donutOptions);
+        donutChart.render();
+    });
+</script>

@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Halaman Tidak Ditemukan - Perpustakaan IAIN Sorong">
+	<Header />
+	
+	<div class="min-h-[70vh] flex items-center justify-center bg-slate-50 px-4">
+		<div class="text-center max-w-lg">
+			<div class="text-9xl font-extrabold text-primary opacity-20 mb-4 tracking-tighter">404</div>
+			<h1 class="text-3xl md:text-4xl font-serif font-bold text-dark mb-4">Oops! Halaman Tidak Ditemukan</h1>
+			<p class="text-[#666666] mb-8 font-sans leading-relaxed">
+				Maaf, halaman yang Anda cari mungkin telah dihapus, diubah namanya, atau tidak tersedia untuk sementara waktu.
+			</p>
+			<a href="/" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-[6px] font-bold transition-all shadow-md hover:shadow-lg">
+				<iconify-icon icon="lucide:home" class="text-xl"></iconify-icon>
+				Kembali ke Beranda
+			</a>
+		</div>
+	</div>
+
+	<Footer />
+</Layout>

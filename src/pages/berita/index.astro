@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import LayoutSidebar from '../../layouts/LayoutSidebar.astro';
+
+const allBerita = await getCollection('berita');
+// Sort by date descending
+allBerita.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+const sidebarMenu = {
+    title: "Kategori Berita",
+    items: [
+        {"label": "Semua Berita", "href": "/berita"},
+        {"label": "Pengumuman", "href": "#"},
+        {"label": "Kegiatan", "href": "#"},
+        {"label": "Tips Literasi", "href": "#"}
+    ]
+};
+---
+
+<LayoutSidebar title="Berita & Pengumuman" sidebarMenu={sidebarMenu}>
+    <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#dadada] pb-6">
+        <div>
+            <h2 class="text-2xl md:text-3xl font-bold text-[#0B4226] mb-2 tracking-tight">Kabar Pustaka</h2>
+            <p class="font-serif text-[#666666] m-0">Informasi terbaru, kegiatan, dan tips dari Perpustakaan IAIN Sorong.</p>
+        </div>
+    </div>
+
+    <!-- Grid Berita -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {allBerita.map((post) => (
+            <article class="bg-white border border-[#dadada] rounded-[8px] overflow-hidden hover:shadow-lg hover:border-[#168940] transition-all duration-300 group flex flex-col h-full">
+                <div class="aspect-[16/10] overflow-hidden relative">
+                    <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                    <div class="absolute top-3 left-3">
+                        <span class="bg-[#168940] text-white text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-[4px] shadow-sm">
+                            {post.data.category}
+                        </span>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="flex items-center gap-3 text-[#666666] text-[13px] font-serif mb-3">
+                        <span class="flex items-center gap-1.5">
+                            <iconify-icon icon="lucide:calendar" width="14"></iconify-icon>
+                            {post.data.date}
+                        </span>
+                        <span class="w-1 h-1 rounded-full bg-[#dadada]"></span>
+                        <span class="flex items-center gap-1.5">
+                            <iconify-icon icon="lucide:clock" width="14"></iconify-icon>
+                            {post.data.readTime}
+                        </span>
+                    </div>
+                    <h3 class="text-lg font-bold text-[#222222] mb-2 leading-snug group-hover:text-[#168940] transition-colors line-clamp-2">
+                        <a href={`/berita/${post.slug}`} class="focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[#EAB308] rounded-[2px] block">
+                            {post.data.title}
+                        </a>
+                    </h3>
+                    <p class="text-[14px] text-[#444444] font-serif line-clamp-3 mb-4 flex-grow">
+                        {post.data.description}
+                    </p>
+                    <div class="mt-auto border-t border-[#dadada] pt-4 flex items-center justify-between">
+                        <span class="text-[12px] font-semibold text-[#0B4226] flex items-center gap-1.5">
+                            <iconify-icon icon="lucide:user-circle" width="16"></iconify-icon>
+                            {post.data.author}
+                        </span>
+                        <a href={`/berita/${post.slug}`} class="text-[13px] font-semibold text-[#168940] hover:text-[#0B4226] flex items-center gap-1 group/btn">
+                            Baca <iconify-icon icon="lucide:arrow-right" class="group-hover/btn:translate-x-1 transition-transform"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        ))}
+    </div>
+</LayoutSidebar>

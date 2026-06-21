@@ -1,0 +1,120 @@
+---
+import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Layanan Digital",
+    items: [
+        {"label": "SORPUS", "href": "https://web-sorongpustaka.moco.co.id/book/0e0acb94-4855-498e-a8d3-6f753829ec77/f2b0efdb-7c91-4db1-99db-e0022869667d"},
+        {"label": "OPAC Katalog", "href": "http://opac.iainsorong.ac.id"},
+        {"label": "Alur Peminjaman", "href": "/peminjaman"}
+    ]
+};
+---
+
+<LayoutSidebar title="Alur Peminjaman & Pengembalian" sidebarMenu={sidebarMenu}>
+    
+    <div class="mb-10 text-left">
+        <h2 class="text-2xl font-semibold text-[#222222] mb-4 tracking-tight">Prosedur Sirkulasi Mandiri</h2>
+        <p class="font-serif text-[15px] text-[#444444] leading-relaxed">
+            Perpustakaan IAIN Sorong menerapkan sistem pelayanan terbuka. Pemustaka dapat mencari dan mengambil buku secara mandiri dari rak sebelum memproses peminjaman di meja sirkulasi.
+        </p>
+    </div>
+
+    <!-- Peminjaman Section -->
+    <div class="mb-12">
+        <h3 class="text-xl font-bold text-[#0B4226] mb-6 flex items-center gap-2">
+            <iconify-icon icon="lucide:book-up" class="text-[#168940]"></iconify-icon>
+            Alur Peminjaman Koleksi
+        </h3>
+        
+        <div class="relative border-l-2 border-[#168940]/20 ml-4 space-y-8 pb-4">
+            
+            <div class="relative pl-8">
+                <div class="absolute -left-[17px] top-0.5 w-8 h-8 bg-white border-2 border-[#168940] rounded-full flex items-center justify-center font-bold text-[#168940] text-sm shadow-sm">1</div>
+                <div class="bg-white border border-[#dadada] rounded-[8px] p-5 shadow-sm hover:border-[#168940] transition-colors">
+                    <h4 class="font-semibold text-[#222222] mb-2">Terdaftar Sebagai Anggota Aktif</h4>
+                    <p class="text-sm font-serif text-[#666666] leading-relaxed mb-3">Pastikan Anda sudah terdaftar. Mahasiswa baru dapat mendaftar melalui K-Online. Gunakan Kartu Tanda Mahasiswa (KTM) yang sudah divalidasi sebagai kartu anggota.</p>
+                    <a href="https://opac.iainsorong.ac.id/index.php?p=member" target="_blank" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#168940] hover:text-[#0B4226]">Daftar K-Online <iconify-icon icon="lucide:arrow-right"></iconify-icon></a>
+                </div>
+            </div>
+
+            <div class="relative pl-8">
+                <div class="absolute -left-[17px] top-0.5 w-8 h-8 bg-white border-2 border-[#168940] rounded-full flex items-center justify-center font-bold text-[#168940] text-sm shadow-sm">2</div>
+                <div class="bg-white border border-[#dadada] rounded-[8px] p-5 shadow-sm hover:border-[#168940] transition-colors">
+                    <h4 class="font-semibold text-[#222222] mb-2">Cari Buku di OPAC</h4>
+                    <p class="text-sm font-serif text-[#666666] leading-relaxed mb-3">Gunakan komputer katalog (OPAC) yang tersedia atau akses melalui gadget Anda. Cari berdasarkan Judul, Pengarang, atau Subjek.</p>
+                    <a href="http://opac.iainsorong.ac.id" target="_blank" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#168940] hover:text-[#0B4226]">Akses OPAC <iconify-icon icon="lucide:search"></iconify-icon></a>
+                </div>
+            </div>
+
+            <div class="relative pl-8">
+                <div class="absolute -left-[17px] top-0.5 w-8 h-8 bg-white border-2 border-[#168940] rounded-full flex items-center justify-center font-bold text-[#168940] text-sm shadow-sm">3</div>
+                <div class="bg-white border border-[#dadada] rounded-[8px] p-5 shadow-sm hover:border-[#168940] transition-colors">
+                    <h4 class="font-semibold text-[#222222] mb-2">Catat Nomor Panggil (Call Number)</h4>
+                    <p class="text-sm font-serif text-[#666666] leading-relaxed">Catat Nomor Panggil yang tertera pada detail buku di OPAC (misal: <code>297.122 GHA a</code>). Ini adalah 'alamat' buku tersebut di rak.</p>
+                </div>
+            </div>
+
+            <div class="relative pl-8">
+                <div class="absolute -left-[17px] top-0.5 w-8 h-8 bg-white border-2 border-[#168940] rounded-full flex items-center justify-center font-bold text-[#168940] text-sm shadow-sm">4</div>
+                <div class="bg-white border border-[#dadada] rounded-[8px] p-5 shadow-sm hover:border-[#168940] transition-colors">
+                    <h4 class="font-semibold text-[#222222] mb-2">Cari Buku di Rak</h4>
+                    <p class="text-sm font-serif text-[#666666] leading-relaxed">Pergi ke rak buku sesuai dengan klasifikasi Dewey Decimal Classification (DDC) dari Nomor Panggil. Jika butuh bantuan, tanyakan pada petugas jaga rak.</p>
+                </div>
+            </div>
+
+            <div class="relative pl-8">
+                <div class="absolute -left-[17px] top-0.5 w-8 h-8 bg-white border-2 border-[#168940] rounded-full flex items-center justify-center font-bold text-[#168940] text-sm shadow-sm">5</div>
+                <div class="bg-white border border-[#dadada] rounded-[8px] p-5 shadow-sm hover:border-[#168940] transition-colors">
+                    <h4 class="font-semibold text-[#222222] mb-2">Proses di Meja Sirkulasi</h4>
+                    <p class="text-sm font-serif text-[#666666] leading-relaxed">Bawa buku dan KTM Anda ke meja sirkulasi. Petugas akan memproses peminjaman menggunakan sistem SLiMS. Anda dapat meminjam maksimal <strong>3 eksemplar buku</strong> selama <strong>7 hari</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pengembalian & Denda -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Pengembalian -->
+        <div class="bg-slate-50 border border-slate-200 rounded-[8px] p-6">
+            <h3 class="text-lg font-semibold text-[#222222] mb-4 flex items-center gap-2 border-b border-slate-200 pb-2">
+                <iconify-icon icon="lucide:book-down" class="text-blue-600"></iconify-icon>
+                Alur Pengembalian
+            </h3>
+            <ul class="space-y-3">
+                <li class="flex items-start gap-2">
+                    <iconify-icon icon="lucide:check-circle-2" class="text-blue-500 mt-0.5 shrink-0"></iconify-icon>
+                    <span class="text-sm font-serif text-[#444444]">Bawa buku yang dipinjam ke Meja Sirkulasi sebelum tanggal jatuh tempo.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <iconify-icon icon="lucide:check-circle-2" class="text-blue-500 mt-0.5 shrink-0"></iconify-icon>
+                    <span class="text-sm font-serif text-[#444444]">Petugas akan memindai barcode buku dan mengecek kondisi fisik buku.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <iconify-icon icon="lucide:check-circle-2" class="text-blue-500 mt-0.5 shrink-0"></iconify-icon>
+                    <span class="text-sm font-serif text-[#444444]">Struk/bukti pengembalian akan dicetak jika tidak ada denda.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Denda -->
+        <div class="bg-[#FFFBEB] border border-[#FDE68A] rounded-[8px] p-6 shadow-sm relative overflow-hidden">
+            <div class="absolute -right-4 -bottom-4 opacity-10">
+                <iconify-icon icon="lucide:alert-triangle" width="100"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-amber-900 mb-4 flex items-center gap-2 border-b border-amber-200 pb-2 relative z-10">
+                <iconify-icon icon="lucide:alert-circle" class="text-amber-600"></iconify-icon>
+                Ketentuan Keterlambatan
+            </h3>
+            <div class="relative z-10 space-y-3">
+                <p class="text-sm font-serif text-amber-800">Pemustaka yang terlambat mengembalikan buku akan dikenakan denda keterlambatan sebesar:</p>
+                <div class="bg-white/60 border border-amber-200 p-3 rounded-[4px] text-center">
+                    <span class="block text-2xl font-bold text-amber-600">Rp 500</span>
+                    <span class="text-xs font-semibold text-amber-800 uppercase tracking-wider">Per Hari / Per Buku</span>
+                </div>
+                <p class="text-[13px] font-serif text-amber-800/80 leading-relaxed mt-2">Denda dibayarkan pada bagian administrasi/kasir. Bukti pembayaran diserahkan ke meja sirkulasi untuk membuka blokir peminjaman.</p>
+            </div>
+        </div>
+    </div>
+
+</LayoutSidebar>

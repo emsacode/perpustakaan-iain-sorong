@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+    error: unknown
+}
+
+const { error } = Astro.props;
+---
+
+<Layout title="Terjadi Kesalahan - Perpustakaan IAIN Sorong">
+	<Header />
+	
+	<div class="min-h-[70vh] flex items-center justify-center bg-slate-50 px-4">
+		<div class="text-center max-w-lg">
+			<div class="text-9xl font-extrabold text-red-500 opacity-20 mb-4 tracking-tighter">500</div>
+			<h1 class="text-3xl md:text-4xl font-serif font-bold text-dark mb-4">Terjadi Kesalahan Internal</h1>
+			<p class="text-[#666666] mb-8 font-sans leading-relaxed">
+				Maaf, terjadi kesalahan pada server kami saat memproses permintaan Anda. Tim teknis kami sedang berusaha memperbaikinya.
+			</p>
+			<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="window.location.reload()" class="inline-flex items-center gap-2 bg-white text-dark border border-[#dadada] hover:border-primary hover:text-primary px-6 py-3 rounded-[6px] font-bold transition-all shadow-sm">
+                    <iconify-icon icon="lucide:refresh-cw" class="text-xl"></iconify-icon>
+                    Coba Lagi
+                </button>
+                <a href="/" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-[6px] font-bold transition-all shadow-md hover:shadow-lg">
+                    <iconify-icon icon="lucide:home" class="text-xl"></iconify-icon>
+                    Kembali ke Beranda
+                </a>
+            </div>
+            {error instanceof Error ? (
+               <div class="mt-8 text-left bg-red-50 p-4 rounded border border-red-100 hidden">
+                   <p class="text-red-800 text-sm font-mono">{error.message}</p>
+               </div>
+            ) : null}
+		</div>
+	</div>
+
+	<Footer />
+</Layout>

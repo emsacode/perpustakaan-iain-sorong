@@ -18,7 +18,7 @@ const sidebarMenu = {
 
     <!-- Info Notice -->
     <div class="bg-[#F0FDF4] border border-[#dadada] rounded-[8px] p-5 flex gap-4 items-start mb-8 shadow-sm">
-        <iconify-icon icon="flat-color-icons:idea" class="shrink-0 mt-0.5"></iconify-icon>
+        <iconify-icon icon="flat-color-icons:idea" width="24" class="shrink-0 mt-0.5"></iconify-icon>
         <div>
             <h4 class="font-semibold text-[#222222] mb-1 m-0">Kenapa Desiderata Penting?</h4>
             <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Sistem Desiderata membantu kami memastikan anggaran pembelian buku tepat sasaran sesuai dengan kebutuhan aktual perkuliahan, riset dosen, maupun minat baca mahasiswa IAIN Sorong.</p>
@@ -26,51 +26,88 @@ const sidebarMenu = {
     </div>
 
     <!-- Form Container -->
-    <div class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-8">
+    <div id="desiderata-container" class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-8 transition-opacity duration-500">
         
-        <form class="space-y-6" onsubmit="event.preventDefault(); alert('Terima kasih atas usulan buku Anda! Kami akan meninjaunya pada periode pengadaan berikutnya.');">
+        <form id="desiderata-form" class="space-y-8" action="https://formspree.io/f/xanojkzp" method="POST">
+            <input type="hidden" name="_subject" value="Usulan Buku (Desiderata)">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8">
                 <!-- Identitas Buku -->
                 <div class="space-y-5">
-                    <h4 class="font-semibold text-[#222222] border-b border-[#dadada] pb-2 m-0 tracking-tight">Identitas Buku Usulan</h4>
+                    <h4 class="font-semibold text-[#0B4226] border-b border-[#dadada] pb-2 m-0 tracking-tight flex items-center gap-2">
+                        <iconify-icon icon="lucide:book-open"></iconify-icon>
+                        Identitas Buku Usulan
+                    </h4>
                     
                     <div>
                         <label class="block text-sm font-semibold text-[#222222] mb-2">Judul Buku <span class="text-red-500">*</span></label>
-                        <input type="text" placeholder="Masukkan judul lengkap" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                        <input type="text" name="judul" placeholder="Masukkan judul lengkap" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-[#222222] mb-2">Pengarang / Penulis <span class="text-red-500">*</span></label>
-                        <input type="text" placeholder="Nama penulis" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                        <input type="text" name="pengarang" placeholder="Nama penulis" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-semibold text-[#222222] mb-2">Penerbit</label>
-                            <input type="text" placeholder="Penerbit" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
+                            <input type="text" name="penerbit" placeholder="Penerbit" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-[#222222] mb-2">Tahun Terbit</label>
-                            <input type="number" placeholder="YYYY" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
+                            <input type="number" name="tahun" placeholder="YYYY" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
                         </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">ISBN-13 <span class="text-gray-400 font-normal">(Opsional)</span></label>
+                        <input type="text" name="isbn" placeholder="Cth: 978-602-1234-56-7" pattern="^(?:ISBN(?:-13)?:?\ )?(?=[0-9]{13}$|(?=(?:[0-9]+[-\ ]){4})[-\ 0-9]{17}$)97[89][-\ ]?[0-9]{1,5}[-\ ]?[0-9]+[-\ ]?[0-9]$" title="Harap masukkan format ISBN-13 yang valid" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">URL Referensi <span class="text-gray-400 font-normal">(Opsional)</span></label>
+                        <input type="url" name="url_referensi" placeholder="Link Google Books / Goodreads" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
                     </div>
                 </div>
 
                 <!-- Alasan & Kontak -->
                 <div class="space-y-5">
-                    <h4 class="font-semibold text-[#222222] border-b border-[#dadada] pb-2 m-0 tracking-tight">Informasi Pendukung</h4>
+                    <h4 class="font-semibold text-[#0B4226] border-b border-[#dadada] pb-2 m-0 tracking-tight flex items-center gap-2">
+                        <iconify-icon icon="lucide:user-check"></iconify-icon>
+                        Informasi Pendukung
+                    </h4>
                     
                     <div>
-                        <label class="block text-sm font-semibold text-[#222222] mb-2">Alasan Pengusulan <span class="text-red-500">*</span></label>
-                        <textarea rows="4" placeholder="Misal: Buku ini menjadi rujukan utama mata kuliah Tafsir semester 3..." class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors resize-none" required></textarea>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Status Pengusul <span class="text-red-500">*</span></label>
+                        <select name="status_pengusul" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors appearance-none cursor-pointer" required>
+                            <option value="" disabled selected>Pilih status...</option>
+                            <option value="Dosen">Dosen / Tenaga Pengajar</option>
+                            <option value="Mahasiswa">Mahasiswa</option>
+                            <option value="Tendik">Tenaga Kependidikan</option>
+                        </select>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-[#222222] mb-2">Email Pengusul</label>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Mata Kuliah Terkait <span class="text-red-500">*</span></label>
+                        <input type="text" name="mata_kuliah" placeholder="Cth: Filsafat Ilmu" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Estimasi Mahasiswa Membutuhkan</label>
+                        <input type="number" name="estimasi_kebutuhan" placeholder="Cth: 40" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Alasan Pengusulan <span class="text-red-500">*</span></label>
+                        <textarea name="alasan" rows="3" placeholder="Misal: Buku ini menjadi rujukan utama mata kuliah Tafsir..." class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors resize-none" required></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Email Anda <span class="text-red-500">*</span></label>
                         <div class="relative">
-                            <input type="email" placeholder="Agar kami dapat mengabari Anda jika buku tersedia" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 pl-11 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
-                            <iconify-icon icon="flat-color-icons:letter" class="absolute left-4 top-1/2 -translate-y-1/2"></iconify-icon>
+                            <input type="email" name="email" placeholder="Agar kami dapat mengabari Anda" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 pl-11 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                            <iconify-icon icon="lucide:mail" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></iconify-icon>
                         </div>
                     </div>
                 </div>
@@ -78,13 +115,89 @@ const sidebarMenu = {
 
             <!-- Submit -->
             <div class="pt-6 mt-6 border-t border-[#dadada] flex justify-center">
-                <button type="submit" class="w-full md:w-2/3 bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-8 rounded-[4px] transition-colors flex items-center justify-center gap-2 group focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]">
-                    <iconify-icon icon="flat-color-icons:box" class="group-hover:-translate-y-1 transition-transform"></iconify-icon>
-                    Kirim Usulan Desiderata
+                <button type="submit" id="des-submit-btn" class="w-full md:w-2/3 bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-8 rounded-[4px] transition-colors flex items-center justify-center gap-2 group focus:outline-none focus:ring-[3px] focus:ring-[#EAB308] disabled:opacity-70 disabled:cursor-not-allowed">
+                    <span id="des-btn-text">Kirim Usulan Desiderata</span>
+                    <iconify-icon id="des-btn-icon" icon="lucide:book-plus" class="group-hover:-translate-y-1 transition-transform" width="18"></iconify-icon>
+                    <iconify-icon id="des-btn-spinner" icon="lucide:loader-2" class="animate-spin hidden" width="18"></iconify-icon>
                 </button>
             </div>
 
         </form>
     </div>
 
+    <!-- Success State -->
+    <div id="des-success-state" class="hidden bg-white border border-[#dadada] rounded-[8px] p-10 text-center shadow-sm mb-8 transform transition-all duration-500 translate-y-4 opacity-0">
+        <div class="w-20 h-20 bg-[#F0FDF4] border border-[#168940]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <iconify-icon icon="flat-color-icons:approval" width="48"></iconify-icon>
+        </div>
+        <h3 class="text-2xl font-semibold text-[#0B4226] mb-4">Usulan Tersimpan!</h3>
+        <p class="font-serif text-[#444444] mb-8 max-w-md mx-auto leading-relaxed">
+            Terima kasih atas rekomendasi buku Anda. Tim pengadaan kami akan meninjau usulan ini pada periode pembelian berikutnya. Kami akan menghubungi email Anda jika buku sudah tersedia di rak.
+        </p>
+        <div class="flex gap-4 justify-center">
+            <button onclick="window.location.reload()" class="inline-flex items-center justify-center bg-[#F8FAFC] border border-[#dadada] text-[#444444] hover:bg-[#F0FDF4] hover:text-[#168940] hover:border-[#168940] font-semibold py-2.5 px-6 rounded-[4px] transition-colors">
+                Usul Buku Lain
+            </button>
+            <a href="/" class="inline-flex items-center justify-center bg-[#168940] border border-[#168940] text-white hover:bg-[#0B4226] hover:border-[#0B4226] font-semibold py-2.5 px-6 rounded-[4px] transition-colors">
+                Kembali ke Beranda
+            </a>
+        </div>
+    </div>
+
 </LayoutSidebar>
+
+<script>
+    const form = document.getElementById('desiderata-form') as HTMLFormElement;
+    const container = document.getElementById('desiderata-container');
+    const successState = document.getElementById('des-success-state');
+    const submitBtn = document.getElementById('des-submit-btn') as HTMLButtonElement;
+    const btnText = document.getElementById('des-btn-text');
+    const btnIcon = document.getElementById('des-btn-icon');
+    const btnSpinner = document.getElementById('des-btn-spinner');
+
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (submitBtn && btnText && btnIcon && btnSpinner) {
+                submitBtn.disabled = true;
+                btnText.textContent = 'Mengirim...';
+                btnIcon.classList.add('hidden');
+                btnSpinner.classList.remove('hidden');
+            }
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    if (container && successState) {
+                        container.classList.add('opacity-0');
+                        setTimeout(() => {
+                            container.classList.add('hidden');
+                            successState.classList.remove('hidden');
+                            // Trigger reflow
+                            void successState.offsetWidth;
+                            successState.classList.remove('translate-y-4', 'opacity-0');
+                            successState.classList.add('translate-y-0', 'opacity-100');
+                        }, 500);
+                    }
+                } else {
+                    throw new Error('Network error');
+                }
+            } catch (error) {
+                alert('Terjadi kesalahan saat mengirim form. Silakan coba lagi.');
+                if (submitBtn && btnText && btnIcon && btnSpinner) {
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Kirim Usulan Desiderata';
+                    btnIcon.classList.remove('hidden');
+                    btnSpinner.classList.add('hidden');
+                }
+            }
+        });
+    }
+</script>

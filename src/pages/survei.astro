@@ -5,103 +5,207 @@ const sidebarMenu = {
     title: "Layanan & Aturan",
     items: [{"label": "Tata Tertib Pemustaka", "href": "/tata-tertib"}, {"label": "Panduan Ruangan Gedung", "href": "/panduan-ruangan"}, {"label": "Kontak & Lokasi", "href": "/kontak"}, {"label": "Survei Kepuasan (IKM)", "href": "/survei"}]
 };
+
+const ikmElements = [
+    { id: "u1", name: "persyaratan", label: "U1. Persyaratan Pelayanan", desc: "Bagaimana pendapat Anda tentang kesesuaian persyaratan pelayanan dengan jenis pelayanan yang ada?" },
+    { id: "u2", name: "prosedur", label: "U2. Prosedur Pelayanan", desc: "Bagaimana pemahaman Anda tentang kemudahan prosedur pelayanan di perpustakaan?" },
+    { id: "u3", name: "waktu", label: "U3. Waktu Pelayanan", desc: "Bagaimana pendapat Anda tentang kecepatan waktu dalam memberikan pelayanan?" },
+    { id: "u4", name: "biaya", label: "U4. Biaya / Tarif", desc: "Bagaimana pendapat Anda tentang kewajaran biaya/tarif dalam pelayanan (jika ada)?" },
+    { id: "u5", name: "produk", label: "U5. Produk Spesifikasi Jenis Pelayanan", desc: "Bagaimana pendapat Anda tentang kesesuaian produk pelayanan (hasil) yang diterima?" },
+    { id: "u6", name: "kompetensi", label: "U6. Kompetensi Pelaksana", desc: "Bagaimana pendapat Anda tentang kemampuan/pengetahuan petugas perpustakaan?" },
+    { id: "u7", name: "perilaku", label: "U7. Perilaku Pelaksana", desc: "Bagaimana pendapat Anda tentang kesopanan dan keramahan petugas perpustakaan?" },
+    { id: "u8", name: "pengaduan", label: "U8. Penanganan Pengaduan", desc: "Bagaimana pendapat Anda tentang kualitas penanganan pengaduan layanan?" },
+    { id: "u9", name: "sarpras", label: "U9. Sarana dan Prasarana", desc: "Bagaimana pendapat Anda tentang kualitas fasilitas (ruangan, AC, rak buku, dsb)?" }
+];
+
+const likertScale = [
+    { value: 1, label: "Tidak Baik" },
+    { value: 2, label: "Kurang Baik" },
+    { value: 3, label: "Baik" },
+    { value: 4, label: "Sangat Baik" }
+];
 ---
 
 <LayoutSidebar title="Survei Kepuasan (IKM)" sidebarMenu={sidebarMenu}>
     
     <div class="mb-10 text-left">
         <p class="font-serif text-[15px] text-[#444444] leading-relaxed">
-            Perpustakaan IAIN Sorong berkomitmen untuk terus meningkatkan kualitas layanan. Partisipasi Anda dalam mengisi <strong class="text-[#168940]">Indeks Kepuasan Masyarakat (IKM)</strong> sangat berharga bagi evaluasi kami.
+            Perpustakaan IAIN Sorong berkomitmen untuk terus meningkatkan kualitas layanan. Partisipasi Anda dalam mengisi <strong class="text-[#168940]">Indeks Kepuasan Masyarakat (IKM)</strong> (berdasarkan PermenPAN-RB No.14/2017) sangat berharga bagi evaluasi kami.
         </p>
     </div>
 
     <!-- Form Container -->
-    <div class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-8">
+    <div id="survey-container" class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-8 transition-opacity duration-500">
         
         <div class="flex items-center gap-4 mb-8 pb-6 border-b border-[#dadada]">
             <div class="w-12 h-12 bg-[#F0FDF4] border border-[#dadada] text-[#168940] rounded-[8px] flex items-center justify-center shadow-sm">
-                <iconify-icon icon="flat-color-icons:inspection" ></iconify-icon>
+                <iconify-icon icon="flat-color-icons:inspection" width="24"></iconify-icon>
             </div>
             <div>
-                <h3 class="text-xl font-semibold text-[#222222] m-0 tracking-tight">Formulir Survei</h3>
-                <p class="font-serif text-sm text-[#666666] m-0">Waktu pengisian sekitar 2-3 menit</p>
+                <h3 class="text-xl font-semibold text-[#222222] m-0 tracking-tight">Formulir IKM</h3>
+                <p class="font-serif text-sm text-[#666666] m-0">Waktu pengisian sekitar 3-5 menit</p>
             </div>
         </div>
 
-        <form class="space-y-6" onsubmit="event.preventDefault(); alert('Terima kasih atas partisipasi Anda!');">
+        <form id="survey-form" class="space-y-8" action="https://formspree.io/f/xanojkzp" method="POST">
+            <input type="hidden" name="_subject" value="Survei IKM Perpustakaan">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Status -->
-                <div>
-                    <label class="block text-sm font-semibold text-[#222222] mb-2">Status Pengguna <span class="text-red-500">*</span></label>
-                    <select class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors appearance-none cursor-pointer" required>
-                        <option value="" disabled selected>Pilih status Anda...</option>
-                        <option value="mahasiswa">Mahasiswa IAIN Sorong</option>
-                        <option value="dosen">Dosen / Tenaga Pengajar</option>
-                        <option value="tendik">Tenaga Kependidikan</option>
-                        <option value="umum">Masyarakat Umum / Peneliti Luar</option>
-                    </select>
-                </div>
+            <div class="space-y-6 bg-[#F8FAFC] p-6 rounded-[8px] border border-[#dadada]">
+                <h4 class="text-lg font-semibold text-[#0B4226] mb-4">A. Data Responden</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Status -->
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Status Pengguna <span class="text-red-500">*</span></label>
+                        <select name="status" class="w-full bg-white border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors appearance-none cursor-pointer" required>
+                            <option value="" disabled selected>Pilih status Anda...</option>
+                            <option value="Mahasiswa">Mahasiswa IAIN Sorong</option>
+                            <option value="Dosen">Dosen / Tenaga Pengajar</option>
+                            <option value="Tendik">Tenaga Kependidikan</option>
+                            <option value="Umum">Masyarakat Umum / Peneliti Luar</option>
+                        </select>
+                    </div>
 
-                <!-- Fakultas -->
-                <div>
-                    <label class="block text-sm font-semibold text-[#222222] mb-2">Fakultas / Instansi</label>
-                    <input type="text" placeholder="Cth: Fakultas Tarbiyah" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
+                    <!-- NIM/NIP -->
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">NIM / NIP / NIK <span class="text-red-500">*</span></label>
+                        <input type="text" name="id_pengguna" placeholder="Masukkan nomor identitas" class="w-full bg-white border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                    </div>
+
+                    <!-- Fakultas -->
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Fakultas / Instansi</label>
+                        <input type="text" name="fakultas" placeholder="Cth: Fakultas Tarbiyah" class="w-full bg-white border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
+                    </div>
+
+                    <!-- Tanggal -->
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Tanggal Kunjungan <span class="text-red-500">*</span></label>
+                        <input type="date" name="tanggal" id="tanggal" class="w-full bg-white border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors cursor-pointer" required>
+                    </div>
                 </div>
             </div>
 
-            <div class="w-full h-px bg-[#dadada] my-6"></div>
-
-            <!-- Penilaian -->
-            <div class="space-y-4">
-                <label class="block text-sm font-semibold text-[#222222] mb-2">Bagaimana penilaian Anda terhadap kelengkapan koleksi buku kami? <span class="text-red-500">*</span></label>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <label class="cursor-pointer group">
-                        <input type="radio" name="koleksi" class="peer sr-only" required>
-                        <div class="text-center p-4 rounded-[4px] border border-[#dadada] peer-checked:bg-[#168940] peer-checked:text-white peer-checked:border-[#168940] group-hover:bg-[#F8FAFC] transition-colors text-[#666666]">
-                            <iconify-icon icon="flat-color-icons:landscape" class="mb-2"></iconify-icon>
-                            <div class="text-sm font-semibold">Sangat Baik</div>
+            <div class="space-y-8">
+                <h4 class="text-lg font-semibold text-[#0B4226] border-b border-[#dadada] pb-2">B. Penilaian Unsur Pelayanan</h4>
+                
+                {ikmElements.map((item) => (
+                    <div class="space-y-4 bg-white p-4 rounded-[8px] border border-[#dadada] hover:border-[#168940] transition-colors">
+                        <div>
+                            <label class="block text-base font-semibold text-[#222222]">{item.label} <span class="text-red-500">*</span></label>
+                            <p class="text-sm font-serif text-[#666666] mt-1">{item.desc}</p>
                         </div>
-                    </label>
-                    <label class="cursor-pointer group">
-                        <input type="radio" name="koleksi" class="peer sr-only">
-                        <div class="text-center p-4 rounded-[4px] border border-[#dadada] peer-checked:bg-[#168940] peer-checked:text-white peer-checked:border-[#168940] group-hover:bg-[#F8FAFC] transition-colors text-[#666666]">
-                            <iconify-icon icon="flat-color-icons:happy" class="mb-2"></iconify-icon>
-                            <div class="text-sm font-semibold">Baik</div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            {likertScale.map((scale) => (
+                                <label class="cursor-pointer group">
+                                    <input type="radio" name={item.name} value={scale.value} class="peer sr-only" required>
+                                    <div class="text-center py-2 px-3 rounded-[4px] border border-[#dadada] peer-checked:bg-[#168940] peer-checked:text-white peer-checked:border-[#168940] hover:bg-[#F0FDF4] transition-colors text-[#666666] peer-checked:font-semibold">
+                                        <div class="text-[13px]">{scale.value} - {scale.label}</div>
+                                    </div>
+                                </label>
+                            ))}
                         </div>
-                    </label>
-                    <label class="cursor-pointer group">
-                        <input type="radio" name="koleksi" class="peer sr-only">
-                        <div class="text-center p-4 rounded-[4px] border border-[#dadada] peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 group-hover:bg-[#F8FAFC] transition-colors text-[#666666]">
-                            <iconify-icon icon="flat-color-icons:sad" class="mb-2"></iconify-icon>
-                            <div class="text-sm font-semibold">Cukup</div>
-                        </div>
-                    </label>
-                    <label class="cursor-pointer group">
-                        <input type="radio" name="koleksi" class="peer sr-only">
-                        <div class="text-center p-4 rounded-[4px] border border-[#dadada] peer-checked:bg-red-500 peer-checked:text-white peer-checked:border-red-500 group-hover:bg-[#F8FAFC] transition-colors text-[#666666]">
-                            <iconify-icon icon="flat-color-icons:sad" class="mb-2"></iconify-icon>
-                            <div class="text-sm font-semibold">Kurang</div>
-                        </div>
-                    </label>
-                </div>
+                    </div>
+                ))}
             </div>
 
             <!-- Saran -->
-            <div class="pt-4">
-                <label class="block text-sm font-semibold text-[#222222] mb-2">Kritik & Saran Membangun</label>
-                <textarea rows="4" placeholder="Tuliskan masukan Anda di sini..." class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors resize-none"></textarea>
+            <div class="space-y-4 pt-4">
+                <label class="block text-lg font-semibold text-[#0B4226] border-b border-[#dadada] pb-2">C. Kritik & Saran Membangun</label>
+                <textarea name="saran" rows="4" placeholder="Tuliskan masukan Anda di sini..." class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors resize-none"></textarea>
             </div>
 
             <!-- Submit -->
-            <div class="pt-4">
-                <button type="submit" class="w-full md:w-auto bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-8 rounded-[4px] transition-colors flex items-center justify-center gap-2 shadow-sm focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]">
-                    <iconify-icon icon="flat-color-icons:paper-plane" ></iconify-icon>
-                    Kirim Penilaian
+            <div class="pt-6">
+                <button type="submit" id="submit-btn" class="w-full bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3.5 px-8 rounded-[4px] transition-colors flex items-center justify-center gap-2 shadow-sm focus:outline-none focus:ring-[3px] focus:ring-[#EAB308] disabled:opacity-70 disabled:cursor-not-allowed">
+                    <span id="btn-text">Kirim Penilaian IKM</span>
+                    <iconify-icon id="btn-icon" icon="lucide:send" width="18"></iconify-icon>
+                    <iconify-icon id="btn-spinner" icon="lucide:loader-2" class="animate-spin hidden" width="18"></iconify-icon>
                 </button>
             </div>
 
         </form>
     </div>
 
+    <!-- Success State (Hidden by default) -->
+    <div id="success-state" class="hidden bg-white border border-[#dadada] rounded-[8px] p-10 text-center shadow-sm mb-8 transform transition-all duration-500 scale-95 opacity-0">
+        <div class="w-20 h-20 bg-[#F0FDF4] rounded-full flex items-center justify-center mx-auto mb-6">
+            <iconify-icon icon="flat-color-icons:ok" width="48"></iconify-icon>
+        </div>
+        <h3 class="text-2xl font-semibold text-[#0B4226] mb-4">Terima Kasih!</h3>
+        <p class="font-serif text-[#444444] mb-8 max-w-md mx-auto leading-relaxed">
+            Partisipasi Anda sangat berarti bagi peningkatan kualitas layanan Perpustakaan IAIN Sorong. Penilaian Anda telah kami rekam.
+        </p>
+        <button onclick="window.location.reload()" class="inline-flex items-center justify-center bg-[#F8FAFC] border border-[#dadada] text-[#444444] hover:bg-[#F0FDF4] hover:text-[#168940] hover:border-[#168940] font-semibold py-2 px-6 rounded-[4px] transition-colors">
+            Kembali
+        </button>
+    </div>
+
 </LayoutSidebar>
+
+<script>
+    // Set default date to today
+    const dateInput = document.getElementById('tanggal') as HTMLInputElement;
+    if (dateInput) {
+        dateInput.valueAsDate = new Date();
+    }
+
+    // Form submission handling
+    const form = document.getElementById('survey-form') as HTMLFormElement;
+    const container = document.getElementById('survey-container');
+    const successState = document.getElementById('success-state');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const btnText = document.getElementById('btn-text');
+    const btnIcon = document.getElementById('btn-icon');
+    const btnSpinner = document.getElementById('btn-spinner');
+
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // UI Loading state
+            if (submitBtn && btnText && btnIcon && btnSpinner) {
+                submitBtn.disabled = true;
+                btnText.textContent = 'Mengirim...';
+                btnIcon.classList.add('hidden');
+                btnSpinner.classList.remove('hidden');
+            }
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Show success state
+                    if (container && successState) {
+                        container.classList.add('opacity-0', 'scale-95');
+                        setTimeout(() => {
+                            container.classList.add('hidden');
+                            successState.classList.remove('hidden');
+                            // Trigger reflow
+                            void successState.offsetWidth;
+                            successState.classList.remove('scale-95', 'opacity-0');
+                            successState.classList.add('scale-100', 'opacity-100');
+                        }, 500);
+                    }
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            } catch (error) {
+                alert('Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi.');
+                // Reset UI
+                if (submitBtn && btnText && btnIcon && btnSpinner) {
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Kirim Penilaian IKM';
+                    btnIcon.classList.remove('hidden');
+                    btnSpinner.classList.add('hidden');
+                }
+            }
+        });
+    }
+</script>
