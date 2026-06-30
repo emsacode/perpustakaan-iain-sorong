@@ -1,0 +1,346 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+---
+
+<Layout title="Koleksi E-Paper Surat Kabar & Majalah - Perpustakaan IAIN Sorong">
+  <Header />
+  
+  <main class="bg-[#FAF9F6] min-h-screen pb-16 font-sans text-slate-700">
+    <!-- Hero Banner Section -->
+    <div class="bg-gradient-to-r from-[#0B4226] to-[#168940] text-white py-10 md:py-14 border-b border-emerald-800">
+      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex gap-2 text-xs text-[#BBF7D0] mb-3 font-medium">
+          <a href="/" class="hover:underline">Beranda</a>
+          <span>/</span>
+          <span class="text-white">Koleksi</span>
+          <span>/</span>
+          <span class="text-white">E-Paper Surat Kabar</span>
+        </nav>
+        <h1 class="text-2xl md:text-4xl font-serif font-bold tracking-tight mb-3">
+          Koleksi Surat Kabar &amp; Majalah Digital
+        </h1>
+        <p class="text-sm md:text-base text-[#BBF7D0] max-w-3xl leading-relaxed font-serif">
+          Akses arsip surat kabar harian cetak versi elektronik secara real-time. Baca koran nasional dan daerah terbaru untuk mendukung kelengkapan referensi sivitas akademika IAIN Sorong.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      
+      <!-- CONTROL PANEL -->
+      <div class="bg-white border border-slate-200/80 rounded-2xl shadow-sm p-4 mb-8">
+        <div class="flex flex-col md:flex-row items-center gap-4 w-full">
+          <!-- Search Bar -->
+          <div class="relative w-full md:w-[25%] shrink-0">
+            <div class="relative">
+              <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Cari koran..."
+                class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none focus:border-[#168940]/50 bg-slate-50 focus:bg-white hover:bg-slate-100/50 transition-colors shadow-sm"
+              />
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <iconify-icon icon="lucide:search" width="1.1rem"></iconify-icon>
+              </div>
+            </div>
+          </div>
+
+          <!-- Publisher Filter -->
+          <div class="w-full md:w-[75%] min-w-0">
+            <div class="flex flex-row gap-2 overflow-x-auto py-1.5 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent" id="publisher-filters">
+              <!-- Dynamically rendered -->
+              <button class="filter-btn active shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all bg-[#168940] text-white border border-[#168940] shadow-sm hover:shadow" data-publisher="all">
+                Semua Koran
+              </button>
+              <div class="flex gap-2" id="dynamic-publishers">
+                <!-- Skeleton categories -->
+                <div class="h-8 w-24 bg-slate-100 animate-pulse rounded-full"></div>
+                <div class="h-8 w-28 bg-slate-100 animate-pulse rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKELETON LOADER GRID -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6" id="skeleton-grid">
+        {Array.from({ length: 10 }).map(() => (
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200/60 overflow-hidden p-3 space-y-3">
+            <div class="bg-slate-100 aspect-[3/4] rounded-xl animate-pulse w-full"></div>
+            <div class="h-4 bg-slate-100 animate-pulse rounded w-3/4"></div>
+            <div class="h-3 bg-slate-100 animate-pulse rounded w-1/2"></div>
+          </div>
+        ))}
+      </div>
+
+      <!-- GRID KOLEKSI (DYNAMICALLY RENDERED) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 hidden" id="epaper-grid">
+      </div>
+      
+      <!-- Empty State -->
+      <div id="empty-state" class="hidden py-16 text-center bg-white rounded-2xl border border-slate-200/80 border-dashed shadow-sm">
+        <iconify-icon icon="lucide:search-x" class="text-slate-300 mx-auto mb-3" width="3.5rem"></iconify-icon>
+        <h3 class="text-lg font-bold text-slate-800 mb-1">Edisi Tidak Ditemukan</h3>
+        <p class="text-sm text-slate-400 font-medium">Coba gunakan kata kunci atau filter penerbit yang berbeda.</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="error-state" class="hidden py-16 text-center bg-white rounded-2xl border border-slate-200/80 border-dashed shadow-sm">
+        <iconify-icon icon="lucide:cloud-lightning" class="text-amber-500 mx-auto mb-3" width="3.5rem"></iconify-icon>
+        <h3 class="text-lg font-bold text-slate-800 mb-1">Koneksi API Gagal</h3>
+        <p class="text-sm text-slate-400 font-medium mb-4">Gagal terhubung dengan server Koran Digital DDAG.</p>
+        <button id="retry-btn" class="px-5 py-2.5 bg-[#168940] hover:bg-[#0B4226] text-white text-xs font-bold rounded-lg shadow-sm transition-colors cursor-pointer">
+          Coba Lagi
+        </button>
+      </div>
+      
+    </div>
+  </main>
+  
+  <Footer />
+
+  <!-- DFlip Dependencies -->
+  <link href="https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/css/dflip.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/css/themify-icons.min.css" rel="stylesheet" type="text/css">
+  <script is:inline src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script is:inline>
+    window.dFlipLocation = "https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/";
+  </script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/js/dflip.min.js"></script>
+  
+  <script is:inline>
+    if (window.DFLIP && window.DFLIP.defaults) {
+      Object.assign(window.DFLIP.defaults, {
+        webgl: true,
+        zoomRatio: 1.5,
+        autoEnableOutline: false,
+        autoEnableThumbnail: true,
+        backgroundColor: "#FAF9F6",
+        threejsSrc: "https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/js/libs/three.min.js",
+        soundFile: "https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/sound/turn2.mp3"
+      });
+    }
+  </script>
+</Layout>
+
+<script>
+  interface EpaperItem {
+    book_id: string;
+    title: string;
+    category_name: string;
+    pages: number;
+    cover_url: string;
+    file_url: string;
+    published_at: string;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const dynamicPublishers = document.getElementById('dynamic-publishers');
+    const epaperGrid = document.getElementById('epaper-grid');
+    const skeletonGrid = document.getElementById('skeleton-grid');
+    const emptyState = document.getElementById('empty-state');
+    const errorState = document.getElementById('error-state');
+    const retryBtn = document.getElementById('retry-btn');
+    
+    let originalData: EpaperItem[] = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    async function loadNewspapers() {
+      if (skeletonGrid) skeletonGrid.classList.remove('hidden');
+      if (epaperGrid) epaperGrid.classList.add('hidden');
+      if (emptyState) emptyState.classList.add('hidden');
+      if (errorState) errorState.classList.add('hidden');
+
+      try {
+        // Fetch from local Laravel proxy endpoint to bypass CORS and hide API secrets
+        const dataResponse = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/newspapers');
+
+        if (!dataResponse.ok) throw new Error('Data fetch failed');
+        const result = await dataResponse.json();
+
+        if (result.success && Array.isArray(result.data)) {
+          originalData = result.data;
+          renderFilters();
+          renderGrid();
+        } else {
+          throw new Error('Invalid format');
+        }
+      } catch (err) {
+        console.error('Koran Digital API integration error:', err);
+        if (skeletonGrid) skeletonGrid.classList.add('hidden');
+        if (errorState) errorState.classList.remove('hidden');
+      }
+    }
+
+    function renderFilters() {
+      if (!dynamicPublishers) return;
+      dynamicPublishers.innerHTML = '';
+
+      // Get unique category names
+      const categories = [...new Set(originalData.map(item => item.category_name))].sort();
+
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:border-[#168940] hover:text-[#168940] hover:bg-[#FAF9F6] shadow-sm cursor-pointer';
+        btn.textContent = cat;
+        btn.setAttribute('data-publisher', cat);
+        
+        btn.addEventListener('click', (e) => {
+          // Reset all filter buttons
+          const allBtns = document.querySelectorAll('.filter-btn');
+          allBtns.forEach(b => {
+            b.classList.remove('bg-[#168940]', 'text-white', 'border-[#168940]');
+            b.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+          });
+
+          const target = e.currentTarget as HTMLElement;
+          target.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+          target.classList.add('bg-[#168940]', 'text-white', 'border-[#168940]');
+
+          currentFilter = target.getAttribute('data-publisher') || 'all';
+          renderGrid();
+        });
+
+        dynamicPublishers.appendChild(btn);
+      });
+
+      // Bind the "Semua Koran" button
+      const allBtn = document.querySelector('[data-publisher="all"]');
+      if (allBtn) {
+        allBtn.addEventListener('click', (e) => {
+          const allBtns = document.querySelectorAll('.filter-btn');
+          allBtns.forEach(b => {
+            b.classList.remove('bg-[#168940]', 'text-white', 'border-[#168940]');
+            b.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+          });
+
+          const target = e.currentTarget as HTMLElement;
+          target.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+          target.classList.add('bg-[#168940]', 'text-white', 'border-[#168940]');
+
+          currentFilter = 'all';
+          renderGrid();
+        });
+      }
+    }
+
+    function renderGrid() {
+      if (!epaperGrid || !skeletonGrid) return;
+
+      skeletonGrid.classList.add('hidden');
+      epaperGrid.innerHTML = '';
+
+      // Filter local list
+      const filtered = originalData.filter(item => {
+        const matchPub = currentFilter === 'all' || item.category_name === currentFilter;
+        const matchSearch = searchQuery === '' || item.title.toLowerCase().includes(searchQuery);
+        return matchPub && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        epaperGrid.classList.add('hidden');
+        if (emptyState) emptyState.classList.remove('hidden');
+        return;
+      }
+
+      if (emptyState) emptyState.classList.add('hidden');
+      epaperGrid.classList.remove('hidden');
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'epaper-card group block bg-white rounded-2xl shadow-sm border border-slate-200/60 overflow-hidden hover:shadow-md hover:border-[#168940]/40 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer p-3';
+        card.setAttribute('source', item.file_url);
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Baca koran ${item.title}`);
+
+        // Custom formatted date
+        const pubDate = item.published_at ? new Date(item.published_at).toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        }) : '';
+
+        card.innerHTML = `
+          <!-- Cover Depan Koran -->
+          <div class="bg-slate-55 aspect-[3/4] border border-slate-100 rounded-xl relative overflow-hidden">
+            <img 
+              src="${item.cover_url}" 
+              alt="Cover ${item.title}"
+              class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              onerror="this.src='/images/katalog-default.png'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-6">
+              <span class="bg-[#168940] text-white text-[11px] font-bold px-3 py-1.5 rounded-lg shadow flex items-center gap-1 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                <iconify-icon icon="lucide:book-open" width="0.9rem"></iconify-icon>
+                Baca Koran
+              </span>
+            </div>
+          </div>
+          
+          <div class="pt-3">
+            <h3 class="font-bold text-sm text-[#0B4226] line-clamp-2 leading-snug group-hover:text-[#168940] transition-colors">
+              ${item.title}
+            </h3>
+            <div class="mt-2 flex items-center justify-between text-[10px] font-medium">
+              <span class="text-slate-400">${pubDate}</span>
+              <span class="bg-emerald-50 border border-emerald-100/50 text-emerald-700 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider text-[9px]">
+                ${item.category_name}
+              </span>
+            </div>
+          </div>
+        `;
+
+        // Click to open in Lightbox flipbook reader
+        card.addEventListener('click', () => {
+          const pdfUrl = card.getAttribute('source');
+          if (pdfUrl) {
+            // @ts-ignore
+            if (window.DFLIP) {
+              // @ts-ignore
+              window.DFLIP.showLightbox(pdfUrl, {
+                title: item.title,
+                webgl: true
+              });
+            } else {
+              window.open(pdfUrl, '_blank');
+            }
+          }
+        });
+
+        epaperGrid.appendChild(card);
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = (e.target as HTMLInputElement).value.toLowerCase();
+        renderGrid();
+      });
+    }
+
+    if (retryBtn) {
+      retryBtn.addEventListener('click', loadNewspapers);
+    }
+
+    // Keyboard accessibility for card selection (Space or Enter key)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const activeEl = document.activeElement;
+        if (activeEl && activeEl.classList.contains('epaper-card')) {
+          e.preventDefault();
+          (activeEl as HTMLElement).click();
+        }
+      }
+    });
+
+    // Load initially
+    loadNewspapers();
+  });
+</script>

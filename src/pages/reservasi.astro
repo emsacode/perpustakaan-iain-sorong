@@ -241,13 +241,27 @@ const sidebarMenu = {
 
             try {
                 const formData = new FormData(form);
-                const response = await fetch(form.action, {
+                
+                // Map Astro fields to Laravel database columns
+                const payload = {
+                    name: formData.get('nama'),
+                    nim_nip: formData.get('identitas'),
+                    email: formData.get('email'),
+                    room_name: formData.get('ruangan'),
+                    booking_date: formData.get('tanggal'),
+                    session_time: `${formData.get('jam_mulai')} - ${formData.get('jam_selesai')}`
+                };
+
+                const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/reservations', {
                     method: 'POST',
-                    body: formData,
                     headers: {
+                        'Content-Type': 'application/json',
                         'Accept': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify(payload)
                 });
+
+                const result = await response.json();
 
                 if (response.ok) {
                     // Show success state
@@ -262,11 +276,25 @@ const sidebarMenu = {
                             successState.classList.add('scale-100', 'opacity-100');
                         }, 500);
                     }
+                } else if (response.status === 422) {
+                    // Display specific validation/duplicate room booking error
+                    const errorMsg = result.errors && result.errors.room_name 
+                        ? result.errors.room_name[0] 
+                        : result.message || 'Ruangan sudah dipesan untuk sesi tersebut.';
+                    alert(`Gagal Reservasi: ${errorMsg}`);
+                    
+                    // Reset UI
+                    if (submitBtn && btnText && btnIcon && btnSpinner) {
+                        submitBtn.disabled = false;
+                        btnText.textContent = 'Ajukan Reservasi';
+                        btnIcon.classList.remove('hidden');
+                        btnSpinner.classList.add('hidden');
+                    }
                 } else {
-                    throw new Error('Network response was not ok.');
+                    throw new Error(result.message || 'Network response was not ok.');
                 }
             } catch (error) {
-                alert('Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi.');
+                alert('Maaf, terjadi kesalahan saat menghubungi server. Silakan coba lagi.');
                 // Reset UI
                 if (submitBtn && btnText && btnIcon && btnSpinner) {
                     submitBtn.disabled = false;

@@ -2,48 +2,66 @@
 ---
 
 <!-- DESKTOP FLOATING INTERACTION WIDGET (Visible on Screens >= 768px) -->
-<div class="fixed right-0 top-1/2 -translate-y-1/2 flex flex-col gap-2.5 items-end z-[99] hidden md:flex select-none">
-  <!-- Button 1: Beri Penilaian -->
-  <button id="floating-btn-rate" class="group flex items-center bg-[#168940] hover:bg-[#0B4226] text-white rounded-l-full shadow-lg h-12 transition-all duration-300 pl-4 pr-3.5 focus:outline-none focus:ring-2 focus:ring-[#EAB308]/50 border-y border-l border-white/20">
-    <span class="max-w-0 overflow-hidden group-hover:max-w-[150px] transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold uppercase tracking-wider block mr-0 group-hover:mr-2">
-      Beri Penilaian
-    </span>
-    <iconify-icon icon="lucide:star" width="20" class="shrink-0 text-[#EAB308]"></iconify-icon>
-  </button>
-  
-  <!-- Button 2: Aksesibilitas -->
-  <button id="floating-btn-accessibility" class="group flex items-center bg-[#168940] hover:bg-[#0B4226] text-white rounded-l-full shadow-lg h-12 transition-all duration-300 pl-4 pr-3.5 focus:outline-none focus:ring-2 focus:ring-[#EAB308]/50 border-y border-l border-white/20">
-    <span class="max-w-0 overflow-hidden group-hover:max-w-[150px] transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold uppercase tracking-wider block mr-0 group-hover:mr-2">
-      Aksesibilitas
-    </span>
-    <iconify-icon icon="lucide:accessibility" width="20" class="shrink-0 text-white"></iconify-icon>
-  </button>
-  
-  <!-- Button 3: Chat Librarian Agent -->
-  <button id="floating-btn-chat" class="group flex items-center bg-[#168940] hover:bg-[#0B4226] text-white rounded-l-full shadow-lg h-12 transition-all duration-300 pl-4 pr-3.5 focus:outline-none focus:ring-2 focus:ring-[#EAB308]/50 border-y border-l border-white/20">
-    <span class="max-w-0 overflow-hidden group-hover:max-w-[150px] transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold uppercase tracking-wider block mr-0 group-hover:mr-2">
-      Chat Pustakawan
-    </span>
-    <iconify-icon icon="lucide:message-square" width="20" class="shrink-0 text-white"></iconify-icon>
-  </button>
+<div class="fixed right-5 top-1/2 -translate-y-1/2 z-[99] hidden md:block select-none">
+  <ul class="flex flex-col gap-2.5 items-end">
+    <!-- Button 1: Beri Penilaian -->
+    <li class="group flex justify-end">
+      <button id="floating-btn-rate" title="Beri Penilaian" class="w-[52px] h-[52px] bg-[#168940] rounded-xl flex items-center justify-center pointer-events-auto transition-all duration-300 group-hover:flex-row group-hover:px-4 group-hover:w-auto group-hover:gap-x-3 group-hover:bg-[#0B4226] shadow-lg">
+        <iconify-icon icon="lucide:star" width="24" class="text-white group-hover:text-[#EAB308] shrink-0 transition-colors"></iconify-icon>
+        <p class="font-sans font-bold text-[13px] leading-none text-white group-hover:block hidden whitespace-nowrap uppercase tracking-wider">
+          Beri Penilaian
+        </p>
+      </button>
+    </li>
+    
+    <!-- Button 2: Aksesibilitas -->
+    <li class="group flex justify-end">
+      <!-- Trigger Sienna secara programmatic -->
+      <button title="Aksesibilitas" class="w-[52px] h-[52px] bg-[#168940] rounded-xl flex items-center justify-center pointer-events-auto transition-all duration-300 group-hover:flex-row group-hover:px-4 group-hover:w-auto group-hover:gap-x-3 group-hover:bg-[#0B4226] shadow-lg" onclick="document.querySelector('.asw-menu-btn')?.click()">
+        <iconify-icon icon="lucide:accessibility" width="24" class="text-white shrink-0 transition-colors"></iconify-icon>
+        <p class="font-sans font-bold text-[13px] leading-none text-white group-hover:block hidden whitespace-nowrap uppercase tracking-wider">
+          Aksesibilitas
+        </p>
+      </button>
+    </li>
+    
+    <!-- Button 3: Chat Pustakawan -->
+    <li class="group flex justify-end">
+      <button id="floating-btn-chat" title="Chat Pustakawan" class="w-[52px] h-[52px] bg-[#168940] rounded-xl flex items-center justify-center pointer-events-auto transition-all duration-300 group-hover:flex-row group-hover:px-4 group-hover:w-auto group-hover:gap-x-3 group-hover:bg-[#0B4226] shadow-lg">
+        <iconify-icon icon="lucide:message-square" width="24" class="text-white shrink-0 transition-colors"></iconify-icon>
+        <p class="font-sans font-bold text-[13px] leading-none text-white group-hover:block hidden whitespace-nowrap uppercase tracking-wider">
+          Chat Pustakawan
+        </p>
+      </button>
+    </li>
+  </ul>
 </div>
 
 <!-- MOBILE DOCK INTERACTION WIDGET (Visible on Screens < 768px) -->
-<div class="fixed bottom-4 left-1/2 -translate-x-1/2 flex flex-row items-center gap-4 bg-white/90 backdrop-blur-md px-5 py-3 rounded-full shadow-2xl border border-slate-200/80 z-[99] md:hidden select-none">
-  <!-- Button 1: Beri Penilaian Mobile -->
-  <button id="mobile-btn-rate" class="w-11 h-11 bg-[#168940] hover:bg-[#0B4226] text-white rounded-full flex items-center justify-center shadow-md active:scale-95 transition-transform focus:outline-none border border-white/20" title="Beri Penilaian">
-    <iconify-icon icon="lucide:star" width="20" class="text-[#EAB308]"></iconify-icon>
-  </button>
-  
-  <!-- Button 2: Aksesibilitas Mobile -->
-  <button id="mobile-btn-accessibility" class="w-11 h-11 bg-[#168940] hover:bg-[#0B4226] text-white rounded-full flex items-center justify-center shadow-md active:scale-95 transition-transform focus:outline-none border border-white/20" title="Aksesibilitas">
-    <iconify-icon icon="lucide:accessibility" width="20"></iconify-icon>
-  </button>
-  
-  <!-- Button 3: Chat Librarian Agent Mobile -->
-  <button id="mobile-btn-chat" class="w-11 h-11 bg-[#168940] hover:bg-[#0B4226] text-white rounded-full flex items-center justify-center shadow-md active:scale-95 transition-transform focus:outline-none border border-white/20" title="Chat Pustakawan">
-    <iconify-icon icon="lucide:message-square" width="20"></iconify-icon>
-  </button>
+<div class="fixed bottom-5 left-5 z-[99] md:hidden select-none">
+  <ul class="flex flex-col gap-2.5 items-start">
+    <!-- Button 1: Beri Penilaian Mobile -->
+    <li class="group flex justify-start">
+      <button id="mobile-btn-rate" title="Beri Penilaian" class="w-[48px] h-[48px] bg-[#168940] rounded-xl flex items-center justify-center pointer-events-auto transition-all duration-300 active:scale-95 shadow-lg border border-white/20">
+        <iconify-icon icon="lucide:star" width="22" class="text-[#EAB308] shrink-0"></iconify-icon>
+      </button>
+    </li>
+    
+    <!-- Button 2: Aksesibilitas Mobile -->
+    <li class="group flex justify-start">
+      <!-- Trigger Sienna secara programmatic -->
+      <button id="mobile-btn-accessibility" title="Aksesibilitas" class="w-[48px] h-[48px] bg-[#168940] rounded-xl flex items-center justify-center pointer-events-auto transition-all duration-300 active:scale-95 shadow-lg border border-white/20" onclick="document.querySelector('.asw-menu-btn')?.click()">
+        <iconify-icon icon="lucide:accessibility" width="22" class="text-white shrink-0"></iconify-icon>
+      </button>
+    </li>
+    
+    <!-- Button 3: Chat Librarian Agent Mobile -->
+    <li class="group flex justify-start">
+      <button id="mobile-btn-chat" title="Chat Pustakawan" class="w-[48px] h-[48px] bg-[#168940] rounded-xl flex items-center justify-center pointer-events-auto transition-all duration-300 active:scale-95 shadow-lg border border-white/20">
+        <iconify-icon icon="lucide:message-square" width="22" class="text-white shrink-0"></iconify-icon>
+      </button>
+    </li>
+  </ul>
 </div>
 
 <!-- KUESIONER SURVEY MODAL DIALOG -->

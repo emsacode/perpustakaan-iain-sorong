@@ -126,16 +126,36 @@
 </section>
 
 <script>
+function getWITDateTime() {
+  const formatter = new Intl.DateTimeFormat('id-ID', {
+    timeZone: 'Asia/Jayapura',
+    hour: 'numeric',
+    minute: 'numeric',
+    weekday: 'long',
+    hour12: false
+  });
+  const parts = formatter.formatToParts(new Date());
+  const dayName = parts.find(p => p.type === 'weekday').value;
+  const hourVal = parseInt(parts.find(p => p.type === 'hour').value, 10);
+  const minuteVal = parseInt(parts.find(p => p.type === 'minute').value, 10);
+  
+  const daysMap = { 'Minggu': 0, 'Senin': 1, 'Selasa': 2, 'Rabu': 3, 'Kamis': 4, 'Jumat': 5, 'Sabtu': 6 };
+  const day = daysMap[dayName] !== undefined ? daysMap[dayName] : 0;
+  
+  return {
+    day,
+    dayName,
+    hours: hourVal,
+    minutes: minuteVal,
+    time: hourVal + minuteVal / 60
+  };
+}
+
 // Jam Operasional Logic
 function updateOperationalStatus() {
-  const now = new Date();
-  
-  // Create Date object for current time in WIB (UTC+7) or WIT (UTC+9)?
-  // IAIN Sorong is in Papua (WIT = UTC+9). Let's assume the user accesses locally or we use client time.
-  const day = now.getDay();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const time = hours + minutes / 60;
+  const wit = getWITDateTime();
+  const day = wit.day;
+  const time = wit.time;
   
   const statusDotContainer = document.getElementById('op-status-dot-container');
   const statusText = document.getElementById('op-status-text');
@@ -190,23 +210,13 @@ function updateLiveClock() {
   const dayEl = document.getElementById('op-live-day');
   if (!clockEl || !dayEl) return;
   
-  const now = new Date();
+  const wit = getWITDateTime();
   
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const hours = String(wit.hours).padStart(2, '0');
+  const minutes = String(wit.minutes).padStart(2, '0');
   clockEl.textContent = `${hours}:${minutes}`;
   
-  const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-  const dayName = days[now.getDay()];
-  
-  const formatter = new Intl.DateTimeFormat('id-ID', {
-      timeZoneName: 'short'
-  });
-  const parts = formatter.formatToParts(now);
-  const tzPart = parts.find(part => part.type === 'timeZoneName');
-  const tzStr = tzPart ? tzPart.value : 'WIB';
-
-  dayEl.textContent = `${dayName}, ${tzStr}`;
+  dayEl.textContent = `${wit.dayName}, WIT`;
 }
 
 // Initial calls

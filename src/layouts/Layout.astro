@@ -24,7 +24,7 @@ const { title } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
     
-    <style>
+    <style is:global>
       body {
       font-family: 'Albert Sans', sans-serif;
       color: #0D1B12;
@@ -39,12 +39,17 @@ const { title } = Astro.props;
       font-family: 'Plus Jakarta Sans', sans-serif;
       }
       /* Custom scrollbar for a polished look */
-      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar { width: 5px; height: 5px; }
       ::-webkit-scrollbar-track { background: #E8F5E9; }
       ::-webkit-scrollbar-thumb { background: #18BF5A; border-radius: 4px; }
       ::-webkit-scrollbar-thumb:hover { background: #118538; }
       /* Smooth scrolling */
       html { scroll-behavior: smooth; }
+
+      /* Hide Default Sienna Widget Trigger */
+      .asw-widget {
+        display: none !important;
+      }
     </style>
   </head>
   <body class="bg-surface text-dark font-sans antialiased">

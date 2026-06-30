@@ -104,6 +104,11 @@
                 const query = input.value.trim();
                 if (!query) return;
 
+                if (currentSearchType === 'opac') {
+                  window.location.href = `/koleksi/katalog?q=${encodeURIComponent(query)}`;
+                  return;
+                }
+
                 let url = '';
                 switch (currentSearchType) {
                   case 'archive':
@@ -117,11 +122,6 @@
                   case 'scholar':
                     // Mengarah ke Google Scholar
                     url = `https://scholar.google.com/scholar?q=${encodeURIComponent(query)}`;
-                    break;
-                  case 'opac':
-                  default:
-                    // Default mengarah ke OPAC SLiMS
-                    url = `https://opac.iainsorong.ac.id/index.php?search=Advance&keywords=${encodeURIComponent(query)}`;
                     break;
                 }
                 

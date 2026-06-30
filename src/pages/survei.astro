@@ -172,13 +172,31 @@ const likertScale = [
 
             try {
                 const formData = new FormData(form);
-                const response = await fetch(form.action, {
+                
+                // Map Astro fields to Laravel database columns (q1 - q9)
+                const payload = {
+                    q1: parseInt(formData.get('persyaratan') as string),
+                    q2: parseInt(formData.get('prosedur') as string),
+                    q3: parseInt(formData.get('waktu') as string),
+                    q4: parseInt(formData.get('biaya') as string),
+                    q5: parseInt(formData.get('produk') as string),
+                    q6: parseInt(formData.get('kompetensi') as string),
+                    q7: parseInt(formData.get('perilaku') as string),
+                    q8: parseInt(formData.get('pengaduan') as string),
+                    q9: parseInt(formData.get('sarpras') as string),
+                    feedback: `Status: ${formData.get('status')}, ID: ${formData.get('id_pengguna')}, Fak: ${formData.get('fakultas') || '-'}, Saran: ${formData.get('saran') || '-'}`
+                };
+
+                const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/surveys', {
                     method: 'POST',
-                    body: formData,
                     headers: {
+                        'Content-Type': 'application/json',
                         'Accept': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify(payload)
                 });
+
+                const result = await response.json();
 
                 if (response.ok) {
                     // Show success state
@@ -194,7 +212,7 @@ const likertScale = [
                         }, 500);
                     }
                 } else {
-                    throw new Error('Network response was not ok.');
+                    throw new Error(result.message || 'Network response was not ok.');
                 }
             } catch (error) {
                 alert('Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi.');

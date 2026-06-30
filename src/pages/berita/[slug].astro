@@ -1,99 +1,378 @@
 ---
 import { getCollection } from 'astro:content';
-import LayoutSidebar from '../../layouts/LayoutSidebar.astro';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 
 export async function getStaticPaths() {
   const berita = await getCollection('berita');
   return berita.map(entry => ({
     params: { slug: entry.slug },
-    props: { entry },
+    props: { entry, allBerita: berita },
   }));
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { entry, allBerita } = Astro.props;
+const { Content, headings } = await entry.render();
 
-const sidebarMenu = {
-    title: "Kategori Berita",
-    items: [
-        {"label": "Semua Berita", "href": "/berita"},
-        {"label": "Pengumuman", "href": "#"},
-        {"label": "Kegiatan", "href": "#"},
-        {"label": "Tips Literasi", "href": "#"}
-    ]
-};
+// Ambil 8 berita terkait yang bukan berita saat ini (4 kolom x 2 baris)
+const relatedPosts = allBerita
+    .filter((post: any) => post.slug !== entry.slug)
+    .sort((a: any, b: any) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
+    .slice(0, 8);
 ---
 
-<LayoutSidebar title={entry.data.title} sidebarMenu={sidebarMenu}>
-    
-    <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 text-sm font-serif text-[#666666] mb-6 flex-wrap">
-        <a href="/" class="hover:text-[#168940] transition-colors whitespace-nowrap">Beranda</a>
-        <iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>
-        <a href="/berita" class="hover:text-[#168940] transition-colors whitespace-nowrap">Berita</a>
-        <iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>
-        <span class="text-[#222222] font-semibold truncate max-w-[200px] md:max-w-md">{entry.data.title}</span>
-    </nav>
+<Layout title={`${entry.data.title} - Berita | Perpustakaan IAIN Sorong`}>
+    <!-- Wrapper Header z-index tinggi agar tidak tertutup Hero -->
+    <div class="relative z-[60]">
+        <Header />
+    </div>
 
-    <article class="bg-white border border-[#dadada] rounded-[8px] overflow-hidden shadow-sm">
-        <!-- Hero Image -->
-        <div class="aspect-video w-full overflow-hidden bg-slate-100">
-            <img src={entry.data.image} alt={entry.data.title} class="w-full h-full object-cover">
+    <!-- Reading Progress Bar -->
+    <div id="progress-container" class="fixed top-0 left-0 w-full h-1.5 z-[100] bg-transparent">
+        <div id="progress-bar" class="h-full bg-[#EAB308] w-0 transition-all duration-100 ease-out shadow-[0_0_10px_rgba(234,179,8,0.5)]"></div>
+    </div>
+    
+    <!-- Hero Banner khusus detail berita (Lebih compact) -->
+    <div class="relative bg-primary pt-8 pb-8 md:pt-12 md:pb-10 overflow-hidden">
+        <!-- Decorative Background -->
+        <div class="absolute inset-0 z-0">
+            <img src={entry.data.image} alt="Background" class="w-full h-full object-cover opacity-20 mix-blend-luminosity blur-sm" />
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0B4226] via-[#0B4226]/95 to-[#168940]/80 z-10"></div>
+            
+            <!-- Abstract Lines Overlay -->
+            <div class="absolute right-0 top-0 h-full w-full md:w-2/3 opacity-30 z-20 pointer-events-none">
+				<svg viewBox="0 0 1000 200" class="w-full h-full object-cover" preserveAspectRatio="none">
+					<path d="M0,200 C300,150 400,50 1000,0 L1000,200 Z" fill="url(#hero-gradient)" opacity="0.1"></path>
+					<path d="M100,200 C400,150 500,50 1000,25" fill="none" stroke="white" stroke-width="1.5" opacity="0.3"></path>
+					<path d="M200,200 C500,150 600,50 1000,50" fill="none" stroke="white" stroke-width="1" opacity="0.4"></path>
+					<defs>
+						<linearGradient id="hero-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+							<stop offset="0%" stop-color="transparent" />
+							<stop offset="100%" stop-color="#ffffff" />
+						</linearGradient>
+					</defs>
+				</svg>
+			</div>
         </div>
 
-        <div class="p-6 md:p-10">
-            <!-- Meta Header -->
-            <div class="flex flex-wrap items-center gap-4 mb-6 pb-6 border-b border-[#dadada]">
-                <span class="bg-[#F0FDF4] text-[#168940] border border-[#168940]/20 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-[4px]">
-                    {entry.data.category}
-                </span>
-                <div class="flex flex-wrap items-center gap-4 text-[#666666] text-sm font-serif">
-                    <span class="flex items-center gap-1.5">
-                        <iconify-icon icon="lucide:calendar" width="16"></iconify-icon>
-                        {entry.data.date}
+        <div class="relative z-30 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Breadcrumb -->
+            <nav class="flex items-center text-[12px] text-white/80 mb-5 font-medium tracking-wide font-sans flex-wrap gap-2" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-white transition-colors">Beranda</a>
+                <span class="text-white/40">/</span>
+                <a href="/berita" class="hover:text-white transition-colors">Berita</a>
+                <span class="text-white/40">/</span>
+                <span class="text-white font-bold">{entry.data.title}</span>
+            </nav>
+
+            <div class="max-w-4xl">
+                <!-- Category Tag -->
+                <div class="mb-3">
+                    <span class="bg-[#EAB308] text-[#0B4226] text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-[4px] shadow-sm">
+                        {entry.data.category}
                     </span>
+                </div>
+
+                <!-- Page Title -->
+                <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight drop-shadow-md m-0 mb-5 leading-tight">
+                    {entry.data.title}
+                </h1>
+
+                <!-- Meta Header -->
+                <div class="flex flex-wrap items-center gap-3 text-white/90 text-[13px] font-sans font-medium">
                     <span class="flex items-center gap-1.5">
                         <iconify-icon icon="lucide:user-circle" width="16"></iconify-icon>
                         {entry.data.author}
                     </span>
+                    <span class="text-white/40 hidden md:block">•</span>
+                    <span class="flex items-center gap-1.5">
+                        <iconify-icon icon="lucide:calendar" width="16"></iconify-icon>
+                        {entry.data.date}
+                    </span>
+                    <span class="text-white/40 hidden md:block">•</span>
                     <span class="flex items-center gap-1.5">
                         <iconify-icon icon="lucide:clock" width="16"></iconify-icon>
                         {entry.data.readTime}
                     </span>
                 </div>
             </div>
-
-            <!-- Title -->
-            <h1 class="text-2xl md:text-4xl font-bold text-[#0B4226] mb-8 leading-tight tracking-tight">
-                {entry.data.title}
-            </h1>
-
-            <!-- Content -->
-            <div class="prose prose-slate prose-lg max-w-none 
-                prose-headings:text-[#0B4226] prose-headings:font-bold 
-                prose-a:text-[#168940] prose-a:no-underline hover:prose-a:underline
-                prose-img:rounded-[8px] prose-img:shadow-sm
-                prose-blockquote:border-l-4 prose-blockquote:border-[#168940] prose-blockquote:bg-[#F0FDF4] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-[4px] prose-blockquote:text-[#222222] prose-blockquote:font-serif
-                text-[#444444] font-serif leading-relaxed">
-                <Content />
-            </div>
-
-            <!-- Share & Tag -->
-            <div class="mt-12 pt-6 border-t border-[#dadada] flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <span class="text-sm font-semibold text-[#222222]">Bagikan:</span>
-                    <a href={`https://wa.me/?text=${encodeURIComponent(entry.data.title + ' - ' + Astro.url)}`} target="_blank" class="w-8 h-8 rounded-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] flex items-center justify-center hover:bg-[#25D366] hover:text-white hover:border-[#25D366] transition-colors">
-                        <iconify-icon icon="lucide:message-circle" width="16"></iconify-icon>
-                    </a>
-                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url)}`} target="_blank" class="w-8 h-8 rounded-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] flex items-center justify-center hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] transition-colors">
-                        <iconify-icon icon="lucide:facebook" width="16"></iconify-icon>
-                    </a>
-                    <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url)}&text=${encodeURIComponent(entry.data.title)}`} target="_blank" class="w-8 h-8 rounded-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] flex items-center justify-center hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2] transition-colors">
-                        <iconify-icon icon="lucide:twitter" width="16"></iconify-icon>
-                    </a>
-                </div>
-            </div>
         </div>
-    </article>
+    </div>
 
-</LayoutSidebar>
+    <!-- Wrapper Utama dengan 2 Kolom (Konten + Sidebar Daftar Isi) -->
+    <div class="bg-[#F7F7F2] min-h-screen py-8 md:py-12">
+        <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 relative">
+                
+                <!-- Kolom Kiri: Area Baca -->
+                <div class="w-full lg:w-[70%]">
+                    <article class="bg-white rounded-[12px] shadow-sm border border-[#dadada]/50 overflow-hidden mb-12">
+                        <!-- Hero Image -->
+                        <div class="aspect-[16/9] w-full overflow-hidden bg-slate-100 group relative">
+                            <img src={entry.data.image} alt={entry.data.title} class="w-full h-full object-cover transition-transform duration-700 hover:scale-105 cursor-pointer" id="hero-img">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none flex items-center justify-center">
+                                <iconify-icon icon="lucide:zoom-in" class="text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md" width="32"></iconify-icon>
+                            </div>
+                        </div>
+
+                        <div class="p-5 md:p-8">
+                            <!-- Content -->
+                            <!-- Diterapkan typography spesifik berdasarkan request dengan global style -->
+                            <div class="prose max-w-none prose-a:text-[#168940] prose-a:no-underline hover:prose-a:underline prose-img:rounded-[8px] prose-img:shadow-sm prose-img:cursor-pointer hover:prose-img:opacity-95 transition-opacity prose-blockquote:border-l-4 prose-blockquote:border-[#168940] prose-blockquote:bg-[#F0FDF4] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-[4px] prose-blockquote:text-[#2F2F2F] prose-blockquote:font-normal" id="article-content">
+                                <Content />
+                            </div>
+
+                            <!-- Share & Tag -->
+                            <div class="mt-10 pt-6 border-t border-[#dadada] flex flex-col sm:flex-row items-center justify-between gap-4 font-sans">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-[13px] font-semibold text-[#222222] uppercase tracking-wider">Bagikan:</span>
+                                    <div class="flex gap-2">
+                                        <a href={`https://wa.me/?text=${encodeURIComponent(entry.data.title + ' - ' + Astro.url)}`} target="_blank" class="w-8 h-8 rounded-full bg-[#F0FDF4] text-[#168940] flex items-center justify-center hover:bg-[#25D366] hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                                            <iconify-icon icon="lucide:message-circle" width="16"></iconify-icon>
+                                        </a>
+                                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url)}`} target="_blank" class="w-8 h-8 rounded-full bg-[#EFF6FF] text-[#1877F2] flex items-center justify-center hover:bg-[#1877F2] hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                                            <iconify-icon icon="lucide:facebook" width="16"></iconify-icon>
+                                        </a>
+                                        <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url)}&text=${encodeURIComponent(entry.data.title)}`} target="_blank" class="w-8 h-8 rounded-full bg-[#F0F9FF] text-[#1DA1F2] flex items-center justify-center hover:bg-[#1DA1F2] hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                                            <iconify-icon icon="lucide:twitter" width="16"></iconify-icon>
+                                        </a>
+                                        <button id="copy-btn" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-[#EAB308] hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm group relative" title="Copy Link">
+                                            <iconify-icon icon="lucide:link" width="16" class="group-hover:hidden"></iconify-icon>
+                                            <iconify-icon icon="lucide:check" width="16" class="hidden group-hover:block"></iconify-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Kolom Kanan: Sidebar Daftar Isi -->
+                <div class="w-full lg:w-[30%] hidden lg:block">
+                    <div class="sticky top-28 bg-white rounded-[12px] shadow-sm border border-[#dadada]/50 p-5">
+                        <h3 class="text-[#0B4226] font-bold text-[15px] uppercase tracking-wider mb-4 border-b border-[#dadada] pb-3 flex items-center gap-2">
+                            <iconify-icon icon="lucide:list" width="18"></iconify-icon>
+                            Daftar Isi
+                        </h3>
+                        {headings && headings.length > 0 ? (
+                            <ul class="space-y-2.5 text-[13px] font-sans">
+                                {headings.map((heading: any) => (
+                                    <li class={`${heading.depth === 2 ? 'font-semibold text-[#222222]' : 'ml-4 text-[#666666]'} hover:text-[#168940] transition-colors leading-snug`}>
+                                        <a href={`#${heading.slug}`} class="block py-0.5">{heading.text}</a>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p class="text-[13px] text-[#666666] italic">Tidak ada daftar isi.</p>
+                        )}
+                    </div>
+                </div>
+
+            </div> <!-- End Flex Row -->
+            
+            <!-- Berita Terkait (Related Posts) - 4 Kolom 2 Baris yang Padat -->
+            {relatedPosts.length > 0 && (
+                <div class="mt-8 border-t border-[#dadada]/50 pt-8">
+                    <h3 class="text-xl font-bold text-[#0B4226] mb-4 flex items-center gap-2">
+                        <iconify-icon icon="lucide:book-open-check" class="text-[#168940]"></iconify-icon>
+                        Baca Juga
+                    </h3>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        {relatedPosts.map((post: any) => (
+                            <article class="bg-white border border-[#dadada]/60 rounded-[6px] overflow-hidden hover:shadow-md hover:border-[#168940]/50 transition-all duration-300 group flex flex-col h-full">
+                                <div class="aspect-[16/10] overflow-hidden relative">
+                                    <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                                </div>
+                                <div class="p-3 flex flex-col flex-grow">
+                                    <h4 class="text-[13px] font-bold text-[#222222] mb-1 leading-[1.3] group-hover:text-[#168940] transition-colors line-clamp-3">
+                                        <a href={`/berita/${post.slug}`} class="focus:outline-none focus-visible:ring-[2px] focus-visible:ring-[#EAB308] rounded-[2px] block before:absolute before:inset-0">
+                                            {post.data.title}
+                                        </a>
+                                    </h4>
+                                    <div class="flex items-center gap-2 text-[#666666] text-[10px] font-sans mt-auto pt-2">
+                                        <span class="flex items-center gap-1">
+                                            <iconify-icon icon="lucide:calendar" width="10"></iconify-icon>
+                                            {post.data.date}
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            )}
+            
+        </div> <!-- End Max-W-1280 Container -->
+    </div> <!-- End Main Content Background -->
+
+    <Footer />
+
+    <!-- Lightbox Modal (Hidden by default) -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-[#EAB308] transition-colors p-2 bg-black/50 rounded-full">
+            <iconify-icon icon="lucide:x" width="24"></iconify-icon>
+        </button>
+        <img id="lightbox-img" src="" alt="Zoomed image" class="max-w-full max-h-[90vh] object-contain rounded-md shadow-2xl scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Client-side Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Reading Progress Bar
+            const progressBar = document.getElementById('progress-bar');
+            const updateProgress = () => {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if (scrollHeight > 0) {
+                    const scrollPercentage = (scrollTop / scrollHeight) * 100;
+                    if (progressBar) {
+                        progressBar.style.width = `${scrollPercentage}%`;
+                    }
+                }
+            };
+            window.addEventListener('scroll', updateProgress);
+            updateProgress(); // Initial call
+
+            // 2. Copy Link Button
+            const copyBtn = document.getElementById('copy-btn');
+            if (copyBtn) {
+                copyBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(window.location.href).then(() => {
+                        // Success feedback handled by CSS hover for simplicity
+                    });
+                });
+            }
+
+            // 3. Image Lightbox Logic
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.getElementById('lightbox-close');
+            
+            // Get hero image and all images inside the prose article
+            const articleImages = document.querySelectorAll('#article-content img, #hero-img');
+            
+            const openLightbox = (src) => {
+                if (lightbox && lightboxImg) {
+                    lightboxImg.setAttribute('src', src);
+                    lightbox.classList.remove('hidden');
+                    lightbox.classList.add('flex');
+                    // Small delay to allow CSS transition to work
+                    setTimeout(() => {
+                        lightbox.classList.remove('opacity-0');
+                        lightboxImg.classList.remove('scale-95');
+                        lightboxImg.classList.add('scale-100');
+                    }, 10);
+                }
+            };
+
+            const closeLightbox = () => {
+                if (lightbox && lightboxImg) {
+                    lightbox.classList.add('opacity-0');
+                    lightboxImg.classList.remove('scale-100');
+                    lightboxImg.classList.add('scale-95');
+                    setTimeout(() => {
+                        lightbox.classList.remove('flex');
+                        lightbox.classList.add('hidden');
+                    }, 300);
+                }
+            };
+
+            articleImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    openLightbox(img.getAttribute('src') || '');
+                });
+            });
+
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', closeLightbox);
+            }
+
+            if (lightbox) {
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeLightbox();
+            });
+            
+            // 4. Highlight Active ToC Items on Scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -80% 0px',
+                threshold: 0
+            };
+            const headings = document.querySelectorAll('#article-content h1, #article-content h2, #article-content h3');
+            const tocLinks = document.querySelectorAll('.sticky.top-28 a');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        tocLinks.forEach(link => {
+                            link.classList.remove('text-[#168940]', 'font-bold');
+                            if (link.getAttribute('href') === `#${entry.target.id}`) {
+                                link.classList.add('text-[#168940]', 'font-bold');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            
+            headings.forEach(heading => observer.observe(heading));
+        });
+    </script>
+</Layout>
+
+<style is:global>
+    #article-content {
+        color: #2F2F2F;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+        font-family: 'Segoe UI', SegoeUI, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    
+    #article-content p, 
+    #article-content ul, 
+    #article-content ol {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 24px 0 0 !important;
+    }
+    
+    #article-content li {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    
+    #article-content h1, 
+    #article-content h2, 
+    #article-content h3, 
+    #article-content h4, 
+    #article-content h5, 
+    #article-content h6 {
+        font-family: 'Segoe UI', SegoeUI, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 20px !important;
+        line-height: 24px !important;
+        font-weight: 700 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 35px 0 5px !important;
+        scroll-margin-top: 100px; /* Offset untuk fixed header navigasi */
+    }
+    
+    #article-content blockquote {
+        margin-top: 24px !important;
+        margin-bottom: 0 !important;
+    }
+    
+    #article-content img {
+        margin-top: 24px !important;
+        margin-bottom: 0 !important;
+    }
+</style>

@@ -11,6 +11,20 @@ const sidebarMenu = {
     ]
 };
 
+// Fetch dynamic FAQs from Laravel API
+let apiFaqs = null;
+try {
+    const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/faqs');
+    if (response.ok) {
+        const data = await response.json();
+        if (data && data.length > 0) {
+            apiFaqs = data;
+        }
+    }
+} catch (e) {
+    // Fail silently, fallback to static grouped FAQ
+}
+
 const faqData = [
     {
         kategori: "Keanggotaan & Registrasi",
@@ -141,46 +155,78 @@ const faqData = [
         </div>
     </div>
 
-    <!-- FAQ Accordion per Kategori -->
-    <div class="space-y-10">
-        {faqData.map((kategori, ki) => (
-            <div>
-                <!-- Kategori Header -->
-                <div class="flex items-center gap-3 mb-5 pb-4 border-b border-[#dadada]">
-                    <div class="w-10 h-10 rounded-[8px] flex items-center justify-center border border-[#dadada]" style={`background-color: ${kategori.bg};`}>
-                        <iconify-icon icon={kategori.icon} width="1.3rem"></iconify-icon>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#222222] m-0 tracking-tight">{kategori.kategori}</h3>
+    <!-- FAQ Display -->
+    {apiFaqs ? (
+        <!-- Render Flat FAQs from API -->
+        <div class="space-y-4">
+            <div class="flex items-center gap-3 mb-5 pb-4 border-b border-[#dadada]">
+                <div class="w-10 h-10 rounded-[8px] flex items-center justify-center border border-[#dadada] bg-[#F0FDF4]">
+                    <iconify-icon icon="flat-color-icons:faq" width="1.3rem"></iconify-icon>
                 </div>
-
-                <!-- FAQ Items -->
-                <div class="space-y-3">
-                    {kategori.items.map((item, idx) => (
-                        <details class="group bg-white border border-[#dadada] rounded-[8px] overflow-hidden hover:border-[#BBF7D0] transition-colors shadow-sm">
-                            <summary class="flex items-center justify-between gap-4 p-5 cursor-pointer list-none select-none">
-                                <div class="flex items-start gap-3">
-                                    <span class="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0 mt-0.5" style={`background-color: ${kategori.color};`}>{idx + 1}</span>
-                                    <span class="font-semibold text-[#222222] text-sm md:text-base leading-snug">{item.q}</span>
-                                </div>
-                                <iconify-icon icon="lucide:chevron-down" class="text-[#168940] shrink-0 transition-transform duration-200 group-open:rotate-180"></iconify-icon>
-                            </summary>
-                            <div class="px-5 pb-5 pt-0 border-t border-[#dadada]">
-                                <div class="pl-9">
-                                    <p class="font-serif text-[#444444] text-[15px] leading-relaxed m-0 mt-4">{item.a}</p>
-                                    {item.link && (
-                                        <a href={item.link} class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-[#168940] hover:text-[#0B4226] no-underline" target={item.link.startsWith('http') ? '_blank' : '_self'} rel={item.link.startsWith('http') ? 'noopener noreferrer' : ''}>
-                                            <iconify-icon icon="lucide:arrow-right" class="text-[#EAB308]"></iconify-icon>
-                                            {item.linkLabel}
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-                        </details>
-                    ))}
-                </div>
+                <h3 class="text-xl font-semibold text-[#222222] m-0 tracking-tight">Daftar Pertanyaan Resmi</h3>
             </div>
-        ))}
-    </div>
+            
+            <div class="space-y-3">
+                {apiFaqs.map((item, idx) => (
+                    <details class="group bg-white border border-[#dadada] rounded-[8px] overflow-hidden hover:border-[#BBF7D0] transition-colors shadow-sm">
+                        <summary class="flex items-center justify-between gap-4 p-5 cursor-pointer list-none select-none">
+                            <div class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0 mt-0.5 bg-[#168940]">{idx + 1}</span>
+                                <span class="font-semibold text-[#222222] text-sm md:text-base leading-snug">{item.question}</span>
+                            </div>
+                            <iconify-icon icon="lucide:chevron-down" class="text-[#168940] shrink-0 transition-transform duration-200 group-open:rotate-180"></iconify-icon>
+                        </summary>
+                        <div class="px-5 pb-5 pt-0 border-t border-[#dadada]">
+                            <div class="pl-9">
+                                <p class="font-serif text-[#444444] text-[15px] leading-relaxed m-0 mt-4">{item.answer}</p>
+                            </div>
+                        </div>
+                    </details>
+                ))}
+            </div>
+        </div>
+    ) : (
+        <!-- FAQ Accordion per Kategori (Fallback) -->
+        <div class="space-y-10">
+            {faqData.map((kategori, ki) => (
+                <div>
+                    <!-- Kategori Header -->
+                    <div class="flex items-center gap-3 mb-5 pb-4 border-b border-[#dadada]">
+                        <div class="w-10 h-10 rounded-[8px] flex items-center justify-center border border-[#dadada]" style={`background-color: ${kategori.bg};`}>
+                            <iconify-icon icon={kategori.icon} width="1.3rem"></iconify-icon>
+                        </div>
+                        <h3 class="text-xl font-semibold text-[#222222] m-0 tracking-tight">{kategori.kategori}</h3>
+                    </div>
+
+                    <!-- FAQ Items -->
+                    <div class="space-y-3">
+                        {kategori.items.map((item, idx) => (
+                            <details class="group bg-white border border-[#dadada] rounded-[8px] overflow-hidden hover:border-[#BBF7D0] transition-colors shadow-sm">
+                                <summary class="flex items-center justify-between gap-4 p-5 cursor-pointer list-none select-none">
+                                    <div class="flex items-start gap-3">
+                                        <span class="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0 mt-0.5" style={`background-color: ${kategori.color};`}>{idx + 1}</span>
+                                        <span class="font-semibold text-[#222222] text-sm md:text-base leading-snug">{item.q}</span>
+                                    </div>
+                                    <iconify-icon icon="lucide:chevron-down" class="text-[#168940] shrink-0 transition-transform duration-200 group-open:rotate-180"></iconify-icon>
+                                </summary>
+                                <div class="px-5 pb-5 pt-0 border-t border-[#dadada]">
+                                    <div class="pl-9">
+                                        <p class="font-serif text-[#444444] text-[15px] leading-relaxed m-0 mt-4">{item.a}</p>
+                                        {item.link && (
+                                            <a href={item.link} class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-[#168940] hover:text-[#0B4226] no-underline" target={item.link.startsWith('http') ? '_blank' : '_self'} rel={item.link.startsWith('http') ? 'noopener noreferrer' : ''}>
+                                                <iconify-icon icon="lucide:arrow-right" class="text-[#EAB308]"></iconify-icon>
+                                                {item.linkLabel}
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+                            </details>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    )}
 
     <!-- Panduan Video -->
     <div class="mt-14 bg-white border border-[#dadada] rounded-[8px] p-7 shadow-sm">

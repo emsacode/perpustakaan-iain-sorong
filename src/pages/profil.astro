@@ -8,6 +8,17 @@ const sidebarMenu = {
     title: "Profil & Tentang Kami",
     items: [{"label": "Profil Singkat", "href": "/profil"}, {"label": "Visi & Misi", "href": "/visi-misi"}, {"label": "Struktur Organisasi", "href": "/struktur"}, {"label": "Jam Buka Layanan", "href": "/jam-layanan"}]
 };
+
+// Fetch dynamic page from Laravel API
+let pageData = null;
+try {
+    const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/pages/profil');
+    if (response.ok) {
+        pageData = await response.json();
+    }
+} catch (e) {
+    // Fail silently, fallback to static HTML
+}
 ---
 
 <LayoutSidebar title="Profil Singkat" sidebarMenu={sidebarMenu}>
@@ -27,41 +38,45 @@ const sidebarMenu = {
 
     <!-- Main Content -->
     <div class="prose prose-lg max-w-none text-[#444444]">
-        <p class="font-serif leading-relaxed mb-10">
-            Sejak awal berdirinya, perpustakaan kami terus berkembang seiring dengan transformasi institusi menuju keunggulan. Kami tidak hanya berfungsi sebagai tempat penyimpanan buku, melainkan telah bertransformasi menjadi pusat pembelajaran kolaboratif yang adaptif terhadap perkembangan teknologi informasi.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
-            <!-- Fungsi Card -->
-            <div class="bg-white p-6 rounded-[8px] border border-[#dadada] hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
-                <div class="flex items-center gap-3 mb-4 text-[#168940]">
-                    <iconify-icon icon="flat-color-icons:rating" width="2rem" style="stroke-width: 1.5;"></iconify-icon>
-                    <h3 class="text-xl tracking-tight font-semibold m-0 text-[#222222]">Peran & Fungsi</h3>
-                </div>
-                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
-                    Menjalankan fungsi krusial dalam pendidikan, penelitian, dan pengabdian masyarakat. Kami menyajikan koleksi pustaka bermutu yang relevan dengan seluruh program studi IAIN Sorong.
-                </p>
-            </div>
-
-            <!-- Budaya Literasi Card -->
-            <div class="bg-white p-6 rounded-[8px] border border-[#dadada] hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
-                <div class="flex items-center gap-3 mb-4 text-[#168940]">
-                    <iconify-icon icon="flat-color-icons:bookmark" width="2rem" style="stroke-width: 1.5;"></iconify-icon>
-                    <h3 class="text-xl tracking-tight font-semibold m-0 text-[#222222]">Pusat Literasi</h3>
-                </div>
-                <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
-                    Menyelenggarakan program-program literasi secara berkala untuk mendorong terciptanya budaya riset, menulis, dan membaca yang unggul di kalangan mahasiswa dan dosen.
-                </p>
-            </div>
-        </div>
-
-        <!-- Quote Section -->
-        <blockquote class="my-12 p-8 bg-white rounded-[8px] border border-[#dadada] shadow-sm text-center">
-            <p class="text-xl font-semibold italic text-[#222222] leading-relaxed mb-4 font-serif">
-                "Membangun generasi cerdas berkarakter melalui penguasaan literatur dan informasi."
+        {pageData ? (
+            <div set:html={pageData.content} />
+        ) : (
+            <p class="font-serif leading-relaxed mb-10">
+                Sejak awal berdirinya, perpustakaan kami terus berkembang seiring dengan transformasi institusi menuju keunggulan. Kami tidak hanya berfungsi sebagai tempat penyimpanan buku, melainkan telah bertransformasi menjadi pusat pembelajaran kolaboratif yang adaptif terhadap perkembangan teknologi informasi.
             </p>
-            <footer class="text-sm font-semibold tracking-wide uppercase text-[#168940]">Motto Layanan Perpustakaan</footer>
-        </blockquote>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+                <!-- Fungsi Card -->
+                <div class="bg-white p-6 rounded-[8px] border border-[#dadada] hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4 text-[#168940]">
+                        <iconify-icon icon="flat-color-icons:rating" width="2rem" style="stroke-width: 1.5;"></iconify-icon>
+                        <h3 class="text-xl tracking-tight font-semibold m-0 text-[#222222]">Peran & Fungsi</h3>
+                    </div>
+                    <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                        Menjalankan fungsi krusial dalam pendidikan, penelitian, dan pengabdian masyarakat. Kami menyajikan koleksi pustaka bermutu yang relevan dengan seluruh program studi IAIN Sorong.
+                    </p>
+                </div>
+
+                <!-- Budaya Literasi Card -->
+                <div class="bg-white p-6 rounded-[8px] border border-[#dadada] hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
+                    <div class="flex items-center gap-3 mb-4 text-[#168940]">
+                        <iconify-icon icon="flat-color-icons:bookmark" width="2rem" style="stroke-width: 1.5;"></iconify-icon>
+                        <h3 class="text-xl tracking-tight font-semibold m-0 text-[#222222]">Pusat Literasi</h3>
+                    </div>
+                    <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                        Menyelenggarakan program-program literasi secara berkala untuk mendorong terciptanya budaya riset, menulis, dan membaca yang unggul di kalangan mahasiswa dan dosen.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quote Section -->
+            <blockquote class="my-12 p-8 bg-white rounded-[8px] border border-[#dadada] shadow-sm text-center">
+                <p class="text-xl font-semibold italic text-[#222222] leading-relaxed mb-4 font-serif">
+                    "Membangun generasi cerdas berkarakter melalui penguasaan literatur dan informasi."
+                </p>
+                <footer class="text-sm font-semibold tracking-wide uppercase text-[#168940]">Motto Layanan Perpustakaan</footer>
+            </blockquote>
+        )}
     </div>
 
     <!-- Quick Stats — Data Riil dari Pipeline Otomatis -->

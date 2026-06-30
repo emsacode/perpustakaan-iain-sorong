@@ -28,8 +28,7 @@ const sidebarMenu = {
     <!-- Form Container -->
     <div id="desiderata-container" class="bg-white border border-[#dadada] rounded-[8px] p-6 md:p-8 shadow-sm mb-8 transition-opacity duration-500">
         
-        <form id="desiderata-form" class="space-y-8" action="https://formspree.io/f/xanojkzp" method="POST">
-            <input type="hidden" name="_subject" value="Usulan Buku (Desiderata)">
+        <form id="desiderata-form" class="space-y-8">
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8">
                 <!-- Identitas Buku -->
@@ -77,6 +76,11 @@ const sidebarMenu = {
                         <iconify-icon icon="lucide:user-check"></iconify-icon>
                         Informasi Pendukung
                     </h4>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-[#222222] mb-2">Nama Lengkap Anda <span class="text-red-500">*</span></label>
+                        <input type="text" name="nama_pengusul" placeholder="Nama lengkap Anda" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                    </div>
                     
                     <div>
                         <label class="block text-sm font-semibold text-[#222222] mb-2">Status Pengusul <span class="text-red-500">*</span></label>
@@ -168,11 +172,28 @@ const sidebarMenu = {
 
             try {
                 const formData = new FormData(form);
-                const response = await fetch(form.action, {
+                
+                // Map Astro fields to Laravel database columns
+                const payload = {
+                    title: formData.get('judul'),
+                    author: formData.get('pengarang'),
+                    publisher: formData.get('penerbit'),
+                    isbn: formData.get('isbn') || null,
+                    proposer_name: formData.get('nama_pengusul'),
+                    proposer_email: formData.get('email'),
+                    notes: `Status: ${formData.get('status_pengusul')}, Matkul: ${formData.get('mata_kuliah')}, Estimasi: ${formData.get('estimasi_kebutuhan') || 0}, Alasan: ${formData.get('alasan')}`
+                };
+
+                const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/desiderata', {
                     method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
                 });
+
+                const result = await response.json();
 
                 if (response.ok) {
                     if (container && successState) {
@@ -187,7 +208,7 @@ const sidebarMenu = {
                         }, 500);
                     }
                 } else {
-                    throw new Error('Network error');
+                    throw new Error(result.message || 'Network error');
                 }
             } catch (error) {
                 alert('Terjadi kesalahan saat mengirim form. Silakan coba lagi.');

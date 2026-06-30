@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Layanan PPID - Perpustakaan IAIN Sorong">
+  <Header />
+  
+  <!-- Clean Compact Header -->
+  <div class="bg-[#F7F7F2] border-b border-[#dadada]">
+    <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 flex flex-col sm:flex-row items-center sm:items-start gap-6">
+      <img src="https://ppid.iainsorong.ac.id/wp-content/uploads/2025/10/Untitled-1.png" alt="Logo PPID IAIN Sorong" class="h-16 sm:h-20 object-contain shrink-0">
+      <div>
+        <h1 class="text-3xl font-bold text-[#0B4226] mb-3 text-center sm:text-left">
+          Formulir Pelayanan Informasi Publik
+        </h1>
+        <p class="text-[15px] text-[#444444] font-serif max-w-2xl leading-relaxed text-center sm:text-left">
+          Kami berkomitmen untuk menyediakan akses yang transparan dan terbuka bagi masyarakat dalam memperoleh informasi yang berkaitan dengan kebijakan dan kegiatan kami melalui layanan PPID IAIN Sorong.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      
+      <!-- Main Content Area -->
+      <div class="lg:col-span-8 space-y-10">
+        
+        <!-- Formulir Layanan Utama -->
+        <section>
+          <h2 class="text-xl font-bold text-[#0B4226] mb-5 border-b border-[#dadada] pb-2 flex items-center gap-2">
+            <iconify-icon icon="lucide:file-edit" class="text-[#168940]"></iconify-icon>
+            Formulir & Layanan Utama
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a href="https://ppid.iainsorong.ac.id/permohonan-informasi-publik-mandiri/" target="_blank" rel="noopener noreferrer" class="group bg-white border border-[#dadada] rounded-[8px] p-5 hover:border-[#168940] hover:shadow-sm transition-all flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center mb-4 text-[#168940] group-hover:bg-[#168940] group-hover:text-white transition-colors">
+                  <iconify-icon icon="lucide:user" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="font-bold text-[#222222] mb-2 group-hover:text-[#168940] transition-colors">Permohonan Individu</h3>
+                <p class="text-[13px] text-[#666666] font-serif">Formulir permohonan informasi publik untuk perorangan.</p>
+              </div>
+            </a>
+
+            <a href="https://ppid.iainsorong.ac.id/permohonan-informasi-publik-lembaga/" target="_blank" rel="noopener noreferrer" class="group bg-white border border-[#dadada] rounded-[8px] p-5 hover:border-[#3182CE] hover:shadow-sm transition-all flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mb-4 text-[#3182CE] group-hover:bg-[#3182CE] group-hover:text-white transition-colors">
+                  <iconify-icon icon="lucide:building" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="font-bold text-[#222222] mb-2 group-hover:text-[#3182CE] transition-colors">Permohonan Lembaga</h3>
+                <p class="text-[13px] text-[#666666] font-serif">Formulir permohonan informasi publik untuk instansi/kelompok.</p>
+              </div>
+            </a>
+
+            <a href="https://ppid.iainsorong.ac.id/formulir-pengajuan-keberatan-informasi-publik-mandiri/" target="_blank" rel="noopener noreferrer" class="group bg-white border border-[#dadada] rounded-[8px] p-5 hover:border-[#D69E2E] hover:shadow-sm transition-all flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-full bg-yellow-50 flex items-center justify-center mb-4 text-[#D69E2E] group-hover:bg-[#D69E2E] group-hover:text-white transition-colors">
+                  <iconify-icon icon="lucide:alert-triangle" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="font-bold text-[#222222] mb-2 group-hover:text-[#D69E2E] transition-colors">Keberatan (Individu)</h3>
+                <p class="text-[13px] text-[#666666] font-serif">Pengajuan keberatan informasi publik untuk perorangan.</p>
+              </div>
+            </a>
+
+            <a href="https://ppid.iainsorong.ac.id/formulir-pengajuan-keberatan-informasi-publik-mandiri-copy/" target="_blank" rel="noopener noreferrer" class="group bg-white border border-[#dadada] rounded-[8px] p-5 hover:border-[#D69E2E] hover:shadow-sm transition-all flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-full bg-yellow-50 flex items-center justify-center mb-4 text-[#D69E2E] group-hover:bg-[#D69E2E] group-hover:text-white transition-colors">
+                  <iconify-icon icon="lucide:alert-octagon" class="text-xl"></iconify-icon>
+                </div>
+                <h3 class="font-bold text-[#222222] mb-2 group-hover:text-[#D69E2E] transition-colors">Keberatan (Lembaga)</h3>
+                <p class="text-[13px] text-[#666666] font-serif">Pengajuan keberatan informasi publik untuk instansi/kelompok.</p>
+              </div>
+            </a>
+          </div>
+
+          <a href="https://lapor.go.id/" target="_blank" rel="noopener noreferrer" class="mt-4 group bg-[#FFF5F5] border border-[#FC8181] rounded-[8px] p-4 hover:bg-[#FED7D7] transition-colors flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-[#E53E3E] flex items-center justify-center shrink-0 text-white">
+              <iconify-icon icon="lucide:megaphone" class="text-xl"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="font-bold text-[#C53030] mb-1">Pengaduan Penyalahgunaan dan Pelanggaran</h3>
+              <p class="text-[13px] text-[#C53030] font-serif">Sampaikan laporan Anda melalui sistem LAPOR! (SP4N).</p>
+            </div>
+          </a>
+        </section>
+
+        <!-- Kategori Informasi Publik -->
+        <section>
+          <h2 class="text-xl font-bold text-[#0B4226] mb-5 border-b border-[#dadada] pb-2 flex items-center gap-2">
+            <iconify-icon icon="lucide:folder-search" class="text-[#3182CE]"></iconify-icon>
+            Kategori Informasi Publik
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <a href="https://ppid.iainsorong.ac.id/informasi-wajib-berkala3/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 border border-[#dadada] rounded-[6px] hover:border-[#168940] hover:shadow-sm bg-white group">
+              <iconify-icon icon="lucide:calendar-clock" class="text-2xl text-[#168940] group-hover:scale-110 transition-transform"></iconify-icon>
+              <span class="font-semibold text-[14px] text-[#444444] group-hover:text-[#168940]">Informasi Wajib Berkala</span>
+            </a>
+            <a href="https://ppid.iainsorong.ac.id/informasi-wajib-tersedia-setiap-saat/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 border border-[#dadada] rounded-[6px] hover:border-[#168940] hover:shadow-sm bg-white group">
+              <iconify-icon icon="lucide:check-square" class="text-2xl text-[#3182CE] group-hover:scale-110 transition-transform"></iconify-icon>
+              <span class="font-semibold text-[14px] text-[#444444] group-hover:text-[#168940]">Informasi Setiap Saat</span>
+            </a>
+            <a href="https://ppid.iainsorong.ac.id/informasi-wajib-diumumkan-serta-merta/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 border border-[#dadada] rounded-[6px] hover:border-[#168940] hover:shadow-sm bg-white group">
+              <iconify-icon icon="lucide:zap" class="text-2xl text-[#D69E2E] group-hover:scale-110 transition-transform"></iconify-icon>
+              <span class="font-semibold text-[14px] text-[#444444] group-hover:text-[#168940]">Informasi Serta Merta</span>
+            </a>
+            <a href="https://ppid.iainsorong.ac.id/daftar-informasi-dikecualikan/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 border border-[#dadada] rounded-[6px] hover:border-[#168940] hover:shadow-sm bg-white group">
+              <iconify-icon icon="lucide:shield-alert" class="text-2xl text-[#E53E3E] group-hover:scale-110 transition-transform"></iconify-icon>
+              <span class="font-semibold text-[14px] text-[#444444] group-hover:text-[#168940]">Informasi Dikecualikan</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- Prosedur Pelayanan (SOP) -->
+        <section>
+          <h2 class="text-xl font-bold text-[#0B4226] mb-5 border-b border-[#dadada] pb-2 flex items-center gap-2">
+            <iconify-icon icon="lucide:book-open" class="text-[#805AD5]"></iconify-icon>
+            Pedoman dan SOP Pelayanan
+          </h2>
+          <div class="space-y-3">
+            <a href="https://ppid.iainsorong.ac.id/wp-content/uploads/ppid_data/Tentang%20Kami/Pedoman%20dan%20SOP/01.%20SOP%20PENGELOLAAN%20PERMOHONAN%20INFORMASI.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-white border border-[#dadada] rounded-[6px] hover:border-[#168940] group">
+              <div class="flex items-center gap-3">
+                <iconify-icon icon="lucide:file-pdf" class="text-[#E53E3E] text-2xl"></iconify-icon>
+                <span class="font-semibold text-[14px] text-[#222222] group-hover:text-[#168940]">SOP Permohonan Informasi Publik</span>
+              </div>
+              <iconify-icon icon="lucide:download" class="text-[#888888] group-hover:text-[#168940]"></iconify-icon>
+            </a>
+
+            <a href="https://ppid.iainsorong.ac.id/wp-content/uploads/ppid_data/Tentang%20Kami/Pedoman%20dan%20SOP/02.%20SOP%20PENANGANAN%20SENGKETA%20INFORMASI%20PUBLIK.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-white border border-[#dadada] rounded-[6px] hover:border-[#168940] group">
+              <div class="flex items-center gap-3">
+                <iconify-icon icon="lucide:file-pdf" class="text-[#E53E3E] text-2xl"></iconify-icon>
+                <span class="font-semibold text-[14px] text-[#222222] group-hover:text-[#168940]">SOP Penanganan Sengketa Informasi</span>
+              </div>
+              <iconify-icon icon="lucide:download" class="text-[#888888] group-hover:text-[#168940]"></iconify-icon>
+            </a>
+
+            <a href="https://ppid.iainsorong.ac.id/wp-content/uploads/ppid_data/Tentang%20Kami/Pedoman%20dan%20SOP/6.%20SOP%20Pengaduan%20Penyalahgunaan%20Wewenang%20atau%20Pelanggaran%20oleh%20Pejabat%20IAIN%20SORONG%20.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-white border border-[#dadada] rounded-[6px] hover:border-[#168940] group">
+              <div class="flex items-center gap-3">
+                <iconify-icon icon="lucide:file-pdf" class="text-[#E53E3E] text-2xl"></iconify-icon>
+                <span class="font-semibold text-[14px] text-[#222222] group-hover:text-[#168940]">SOP Pengaduan Penyalahgunaan Wewenang</span>
+              </div>
+              <iconify-icon icon="lucide:download" class="text-[#888888] group-hover:text-[#168940]"></iconify-icon>
+            </a>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="lg:col-span-4">
+        <div class="sticky top-28">
+          <div class="bg-[#168940] rounded-[8px] p-6 shadow-md text-white">
+            <h3 class="text-[18px] font-bold mb-4 pb-3 border-b border-white/20 flex items-center gap-2">
+              <iconify-icon icon="lucide:headset"></iconify-icon>
+              Kontak PPID
+            </h3>
+            
+            <div class="space-y-5">
+              <div class="flex gap-3">
+                <iconify-icon icon="lucide:phone" class="text-xl shrink-0 mt-0.5 text-green-200"></iconify-icon>
+                <div>
+                  <span class="block text-[11px] font-bold text-green-200 uppercase tracking-wider mb-1">Telepon / WhatsApp</span>
+                  <p class="text-[15px] font-semibold">
+                    +62 812-4713-6889
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex gap-3">
+                <iconify-icon icon="lucide:mail" class="text-xl shrink-0 mt-0.5 text-green-200"></iconify-icon>
+                <div>
+                  <span class="block text-[11px] font-bold text-green-200 uppercase tracking-wider mb-1">Email Resmi</span>
+                  <p class="text-[15px] font-semibold">
+                    <a href="mailto:ppid@iainsorong.ac.id" class="hover:underline">ppid@iainsorong.ac.id</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <iconify-icon icon="lucide:map-pin" class="text-xl shrink-0 mt-0.5 text-green-200"></iconify-icon>
+                <div>
+                  <span class="block text-[11px] font-bold text-green-200 uppercase tracking-wider mb-1">Alamat Lengkap</span>
+                  <p class="text-[14px] leading-relaxed opacity-90">
+                    Kampus IAIN Sorong<br>
+                    Jalan Sorong-Klamono Km 17, Kel. Klablim, Distrik Klaurung, Kota Sorong, PAPUA BARAT DAYA 98417
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-white/20">
+              <a href="https://ppid.iainsorong.ac.id/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full bg-white text-[#0B4226] font-bold py-3 px-4 rounded-[4px] hover:bg-green-50 transition-colors">
+                Kunjungi Website PPID
+                <iconify-icon icon="lucide:external-link"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <Footer />
+</Layout>

@@ -5,6 +5,20 @@ const sidebarMenu = {
     title: "Profil & Tentang Kami",
     items: [{"label": "Profil Singkat", "href": "/profil"}, {"label": "Visi & Misi", "href": "/visi-misi"}, {"label": "Struktur Organisasi", "href": "/struktur"}, {"label": "Jam Buka Layanan", "href": "/jam-layanan"}]
 };
+
+// Fetch service hours from Laravel API
+let apiHours = null;
+try {
+    const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/service-hours');
+    if (response.ok) {
+        const data = await response.json();
+        if (data && data.length > 0) {
+            apiHours = data;
+        }
+    }
+} catch (e) {
+    // Fail silently, fallback to static routine
+}
 ---
 
 <LayoutSidebar title="Jam Buka Layanan" sidebarMenu={sidebarMenu}>
@@ -39,46 +53,70 @@ const sidebarMenu = {
             Jadwal Operasional Rutin
         </h3>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <!-- Senin - Kamis -->
-            <div class="bg-white border border-[#dadada] rounded-[8px] p-5 hover:shadow-md hover:border-[#BBF7D0] transition-all group shadow-sm flex flex-col">
-                <div class="w-10 h-10 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#168940] mb-3 group-hover:border-[#BBF7D0] transition-all">
-                    <iconify-icon icon="flat-color-icons:calendar" ></iconify-icon>
-                </div>
-                <h4 class="font-semibold text-base text-[#222222] mb-1">Senin – Kamis</h4>
-                <div class="text-xl font-mono font-bold text-[#168940] tracking-tighter mb-3">08:00 - 16:00</div>
-                <div class="flex items-center gap-2 text-[13px] text-[#444444] bg-[#F8FAFC] border border-[#dadada] px-3 py-1.5 rounded-[4px] font-serif mt-auto">
-                    <iconify-icon icon="flat-color-icons:coffee-to-go" ></iconify-icon>
-                    Istirahat: 12:00 - 13:00
-                </div>
+        {apiHours ? (
+            <!-- Render dynamic hours from Laravel API -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {apiHours.map((item) => (
+                    <div class="bg-white border border-[#dadada] rounded-[8px] p-5 hover:shadow-md hover:border-[#BBF7D0] transition-all group shadow-sm flex flex-col">
+                        <div class="w-10 h-10 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#168940] mb-3 group-hover:border-[#BBF7D0] transition-all">
+                            <iconify-icon icon={item.is_closed ? "flat-color-icons:night-landscape" : "flat-color-icons:calendar"} ></iconify-icon>
+                        </div>
+                        <h4 class="font-semibold text-base text-[#222222] mb-1">{item.day_name}</h4>
+                        {item.is_closed ? (
+                            <div class="text-xl font-bold text-[#666666] mb-3">Tutup</div>
+                        ) : (
+                            <div class="text-xl font-mono font-bold text-[#168940] tracking-tighter mb-3">{item.open_time} - {item.close_time}</div>
+                        )}
+                        <div class="flex items-center gap-2 text-[13px] text-[#444444] bg-[#F8FAFC] border border-[#dadada] px-3 py-1.5 rounded-[4px] font-serif mt-auto">
+                            <iconify-icon icon="flat-color-icons:laptop" ></iconify-icon>
+                            {item.is_closed ? 'Layanan Online 24/7' : 'Pelayanan Fisik Kampus'}
+                        </div>
+                    </div>
+                ))}
             </div>
+        ) : (
+            <!-- Fallback Static Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Senin - Kamis -->
+                <div class="bg-white border border-[#dadada] rounded-[8px] p-5 hover:shadow-md hover:border-[#BBF7D0] transition-all group shadow-sm flex flex-col">
+                    <div class="w-10 h-10 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#168940] mb-3 group-hover:border-[#BBF7D0] transition-all">
+                        <iconify-icon icon="flat-color-icons:calendar" ></iconify-icon>
+                    </div>
+                    <h4 class="font-semibold text-base text-[#222222] mb-1">Senin – Kamis</h4>
+                    <div class="text-xl font-mono font-bold text-[#168940] tracking-tighter mb-3">08:00 - 16:00</div>
+                    <div class="flex items-center gap-2 text-[13px] text-[#444444] bg-[#F8FAFC] border border-[#dadada] px-3 py-1.5 rounded-[4px] font-serif mt-auto">
+                        <iconify-icon icon="flat-color-icons:coffee-to-go" ></iconify-icon>
+                        Istirahat: 12:00 - 13:00
+                    </div>
+                </div>
 
-            <!-- Jumat -->
-            <div class="bg-white border border-[#dadada] rounded-[8px] p-5 hover:shadow-md hover:border-[#BBF7D0] transition-all group shadow-sm flex flex-col">
-                <div class="w-10 h-10 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#168940] mb-3 group-hover:border-[#BBF7D0] transition-all">
-                    <iconify-icon icon="flat-color-icons:calendar" ></iconify-icon>
+                <!-- Jumat -->
+                <div class="bg-white border border-[#dadada] rounded-[8px] p-5 hover:shadow-md hover:border-[#BBF7D0] transition-all group shadow-sm flex flex-col">
+                    <div class="w-10 h-10 bg-[#F0FDF4] border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#168940] mb-3 group-hover:border-[#BBF7D0] transition-all">
+                        <iconify-icon icon="flat-color-icons:calendar" ></iconify-icon>
+                    </div>
+                    <h4 class="font-semibold text-base text-[#222222] mb-1">Jumat</h4>
+                    <div class="text-xl font-mono font-bold text-[#168940] tracking-tighter mb-3">08:00 - 16:30</div>
+                    <div class="flex items-center gap-2 text-[13px] text-[#444444] bg-[#F8FAFC] border border-[#dadada] px-3 py-1.5 rounded-[4px] font-serif mt-auto">
+                        <iconify-icon icon="flat-color-icons:coffee-to-go" ></iconify-icon>
+                        Istirahat: 11:30 - 13:30
+                    </div>
                 </div>
-                <h4 class="font-semibold text-base text-[#222222] mb-1">Jumat</h4>
-                <div class="text-xl font-mono font-bold text-[#168940] tracking-tighter mb-3">08:00 - 16:30</div>
-                <div class="flex items-center gap-2 text-[13px] text-[#444444] bg-[#F8FAFC] border border-[#dadada] px-3 py-1.5 rounded-[4px] font-serif mt-auto">
-                    <iconify-icon icon="flat-color-icons:coffee-to-go" ></iconify-icon>
-                    Istirahat: 11:30 - 13:30
-                </div>
-            </div>
 
-            <!-- Sabtu Minggu -->
-            <div class="bg-[#F8FAFC] border border-[#dadada] rounded-[8px] p-5 opacity-80 hover:opacity-100 transition-opacity flex flex-col">
-                <div class="w-10 h-10 bg-white border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#666666] mb-3">
-                    <iconify-icon icon="flat-color-icons:night-landscape" ></iconify-icon>
-                </div>
-                <h4 class="font-semibold text-base text-[#222222] mb-1">Sabtu & Minggu</h4>
-                <div class="text-xl font-bold text-[#666666] mb-3">Tutup</div>
-                <div class="flex items-center gap-2 text-[13px] text-[#444444] bg-white px-3 py-1.5 rounded-[4px] border border-[#dadada] font-serif mt-auto">
-                    <iconify-icon icon="flat-color-icons:laptop" ></iconify-icon>
-                    Layanan Online 24/7
+                <!-- Sabtu Minggu -->
+                <div class="bg-[#F8FAFC] border border-[#dadada] rounded-[8px] p-5 opacity-80 hover:opacity-100 transition-opacity flex flex-col">
+                    <div class="w-10 h-10 bg-white border border-[#dadada] rounded-[8px] flex items-center justify-center text-[#666666] mb-3">
+                        <iconify-icon icon="flat-color-icons:night-landscape" ></iconify-icon>
+                    </div>
+                    <h4 class="font-semibold text-base text-[#222222] mb-1">Sabtu & Minggu</h4>
+                    <div class="text-xl font-bold text-[#666666] mb-3">Tutup</div>
+                    <div class="flex items-center gap-2 text-[13px] text-[#444444] bg-white px-3 py-1.5 rounded-[4px] border border-[#dadada] font-serif mt-auto">
+                        <iconify-icon icon="flat-color-icons:laptop" ></iconify-icon>
+                        Layanan Online 24/7
+                    </div>
                 </div>
             </div>
-        </div>
+        )}
     </div>
 
     <!-- Alert / Notice -->
@@ -97,12 +135,35 @@ const sidebarMenu = {
 </LayoutSidebar>
 
 <script>
+function getWITDateTime() {
+  const formatter = new Intl.DateTimeFormat('id-ID', {
+    timeZone: 'Asia/Jayapura',
+    hour: 'numeric',
+    minute: 'numeric',
+    weekday: 'long',
+    hour12: false
+  });
+  const parts = formatter.formatToParts(new Date());
+  const dayName = parts.find(p => p.type === 'weekday').value;
+  const hourVal = parseInt(parts.find(p => p.type === 'hour').value, 10);
+  const minuteVal = parseInt(parts.find(p => p.type === 'minute').value, 10);
+  
+  const daysMap = { 'Minggu': 0, 'Senin': 1, 'Selasa': 2, 'Rabu': 3, 'Kamis': 4, 'Jumat': 5, 'Sabtu': 6 };
+  const day = daysMap[dayName] !== undefined ? daysMap[dayName] : 0;
+  
+  return {
+    day,
+    dayName,
+    hours: hourVal,
+    minutes: minuteVal,
+    time: hourVal + minuteVal / 60
+  };
+}
+
 function updatePageStatus() {
-  const now = new Date();
-  const day = now.getDay();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const time = hours + minutes / 60;
+  const wit = getWITDateTime();
+  const day = wit.day;
+  const time = wit.time;
   
   const statusDot = document.getElementById('page-status-dot');
   const statusText = document.getElementById('page-status-text');
@@ -134,21 +195,13 @@ function updatePageClock() {
   const dayEl = document.getElementById('page-live-day');
   if (!clockEl || !dayEl) return;
   
-  const now = new Date();
+  const wit = getWITDateTime();
   
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const hours = String(wit.hours).padStart(2, '0');
+  const minutes = String(wit.minutes).padStart(2, '0');
   clockEl.textContent = `${hours}:${minutes}`;
   
-  const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-  const dayName = days[now.getDay()];
-  
-  const formatter = new Intl.DateTimeFormat('id-ID', { timeZoneName: 'short' });
-  const parts = formatter.formatToParts(now);
-  const tzPart = parts.find(part => part.type === 'timeZoneName');
-  const tzStr = tzPart ? tzPart.value : 'WIB';
-
-  dayEl.textContent = `${dayName}, ${tzStr}`;
+  dayEl.textContent = `${wit.dayName}, WIT`;
 }
 
 setInterval(() => {

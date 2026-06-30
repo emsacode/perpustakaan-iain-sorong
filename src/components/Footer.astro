@@ -174,12 +174,37 @@
 </footer>
 
 <script>
+function getWITDateTime() {
+  const formatter = new Intl.DateTimeFormat('id-ID', {
+    timeZone: 'Asia/Jayapura',
+    hour: 'numeric',
+    minute: 'numeric',
+    weekday: 'long',
+    hour12: false
+  });
+  const parts = formatter.formatToParts(new Date());
+  const dayName = parts.find(p => p.type === 'weekday').value;
+  const hourVal = parseInt(parts.find(p => p.type === 'hour').value, 10);
+  const minuteVal = parseInt(parts.find(p => p.type === 'minute').value, 10);
+  
+  const daysMap = { 'Minggu': 0, 'Senin': 1, 'Selasa': 2, 'Rabu': 3, 'Kamis': 4, 'Jumat': 5, 'Sabtu': 6 };
+  const day = daysMap[dayName] !== undefined ? daysMap[dayName] : 0;
+  
+  return {
+    day,
+    dayName,
+    hours: hourVal,
+    minutes: minuteVal,
+    time: hourVal + minuteVal / 60
+  };
+}
+
 function updateFooterStatusHospitality() {
-  const now = new Date();
-  const day = now.getDay();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const time = hours + minutes / 60;
+  const wit = getWITDateTime();
+  const day = wit.day;
+  const time = wit.time;
+  const hours = wit.hours;
+  const minutes = wit.minutes;
   
   const dot = document.getElementById('footer-op-dot');
   const text = document.getElementById('footer-op-text');
@@ -210,8 +235,7 @@ function updateFooterStatusHospitality() {
   const dayEl = document.getElementById('footer-op-day');
   if (clockEl && dayEl) {
     clockEl.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-    dayEl.textContent = `${days[day]}, WIB`;
+    dayEl.textContent = `${wit.dayName}, WIT`;
   }
   
   // Highlight active pill
