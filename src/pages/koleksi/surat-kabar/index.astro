@@ -146,6 +146,209 @@ import Footer from '../../../components/Footer.astro';
     const errorState = document.getElementById('error-state');
     const retryBtn = document.getElementById('retry-btn');
     
+    const localNewspapers: EpaperItem[] = [
+      // 18 Juni 2026
+      {
+        book_id: "local-1",
+        title: "Kompas - 18 Juni 2026",
+        category_name: "Kompas",
+        pages: 16,
+        cover_url: "/epaper/covers/kompas-18-juni-2026.jpg",
+        file_url: "/epaper/Kompas - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      {
+        book_id: "local-2",
+        title: "Jawa Pos - 18 Juni 2026",
+        category_name: "Jawa Pos",
+        pages: 16,
+        cover_url: "/epaper/covers/jawa-pos-18-juni-2026.jpg",
+        file_url: "/epaper/Jawa Pos - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      {
+        book_id: "local-3",
+        title: "Harian Kontan - 18 Juni 2026",
+        category_name: "Harian Kontan",
+        pages: 16,
+        cover_url: "/epaper/covers/harian-kontan-18-juni-2026.jpg",
+        file_url: "/epaper/Harian Kontan - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      {
+        book_id: "local-4",
+        title: "Harian Disway - 18 Juni 2026",
+        category_name: "Harian Disway",
+        pages: 16,
+        cover_url: "/epaper/covers/harian-disway-18-juni-2026.jpg",
+        file_url: "/epaper/Harian Disway - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      {
+        book_id: "local-5",
+        title: "Warta Kota - 18 Juni 2026",
+        category_name: "Warta Kota",
+        pages: 16,
+        cover_url: "/epaper/covers/wartakota-18-juni-2026.jpg",
+        file_url: "/epaper/WartaKota - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      {
+        book_id: "local-6",
+        title: "Surya - 18 Juni 2026",
+        category_name: "Surya",
+        pages: 16,
+        cover_url: "/epaper/covers/surya-18-juni-2026.jpg",
+        file_url: "/epaper/Surya - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      {
+        book_id: "local-7",
+        title: "Disway Kaltim - 18 Juni 2026",
+        category_name: "Disway Kaltim",
+        pages: 16,
+        cover_url: "/epaper/covers/disway-kaltim-18-juni-2026.jpg",
+        file_url: "/epaper/Disway Kaltim - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      {
+        book_id: "local-8",
+        title: "Radar Malang - 18 Juni 2026",
+        category_name: "Radar Malang",
+        pages: 16,
+        cover_url: "/epaper/covers/radar-malang-18-juni-2026.jpg",
+        file_url: "/epaper/Radar Malang - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      {
+        book_id: "local-9",
+        title: "Radar Lampung - 18 Juni 2026",
+        category_name: "Radar Lampung",
+        pages: 16,
+        cover_url: "/epaper/covers/radar-lampung-18-juni-2026.jpg",
+        file_url: "/epaper/Radar Lampung - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      {
+        book_id: "local-10",
+        title: "Lentera Today - 18 Juni 2026",
+        category_name: "Lentera Today",
+        pages: 16,
+        cover_url: "/epaper/covers/lentera-today-18-juni-2026.jpg",
+        file_url: "/epaper/Lentera Today - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      {
+        book_id: "local-11",
+        title: "Satelit News - 18 Juni 2026",
+        category_name: "Satelit News",
+        pages: 16,
+        cover_url: "/epaper/covers/satelit-news-18-juni-2026.jpg",
+        file_url: "/epaper/Satelit News - 18 Juni 2026.pdf",
+        published_at: "2026-06-18"
+      },
+      // 17 Juni 2026
+      {
+        book_id: "local-12",
+        title: "Kompas - 17 Juni 2026",
+        category_name: "Kompas",
+        pages: 16,
+        cover_url: "/epaper/covers/kompas-17-juni-2026.jpg",
+        file_url: "/epaper/Kompas - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      },
+      {
+        book_id: "local-13",
+        title: "Jawa Pos - 17 Juni 2026",
+        category_name: "Jawa Pos",
+        pages: 16,
+        cover_url: "/epaper/covers/jawa-pos-17-juni-2026.jpg",
+        file_url: "/epaper/Jawa Pos - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      },
+      {
+        book_id: "local-14",
+        title: "Harian Kontan - 17 Juni 2026",
+        category_name: "Harian Kontan",
+        pages: 16,
+        cover_url: "/epaper/covers/harian-kontan-17-juni-2026.jpg",
+        file_url: "/epaper/Harian Kontan - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      },
+      {
+        book_id: "local-15",
+        title: "Harian Disway - 17 Juni 2026",
+        category_name: "Harian Disway",
+        pages: 16,
+        cover_url: "/epaper/covers/harian-disway-17-juni-2026.jpg",
+        file_url: "/epaper/Harian Disway - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      },
+      {
+        book_id: "local-16",
+        title: "Warta Kota - 17 Juni 2026",
+        category_name: "Warta Kota",
+        pages: 16,
+        cover_url: "/epaper/covers/wartakota-17-juni-2026.jpg",
+        file_url: "/epaper/WartaKota - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      },
+      {
+        book_id: "local-17",
+        title: "Surya - 17 Juni 2026",
+        category_name: "Surya",
+        pages: 16,
+        cover_url: "/epaper/covers/surya-17-juni-2026.jpg",
+        file_url: "/epaper/Surya - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      },
+      {
+        book_id: "local-18",
+        title: "Disway Kaltim - 17 Juni 2026",
+        category_name: "Disway Kaltim",
+        pages: 16,
+        cover_url: "/epaper/covers/disway-kaltim-17-juni-2026.jpg",
+        file_url: "/epaper/Disway Kaltim - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      },
+      {
+        book_id: "local-19",
+        title: "Radar Malang - 17 Juni 2026",
+        category_name: "Radar Malang",
+        pages: 16,
+        cover_url: "/epaper/covers/radar-malang-17-juni-2026.jpg",
+        file_url: "/epaper/Radar Malang - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      },
+      {
+        book_id: "local-20",
+        title: "Radar Lampung - 17 Juni 2026",
+        category_name: "Radar Lampung",
+        pages: 16,
+        cover_url: "/epaper/covers/radar-lampung-17-juni-2026.jpg",
+        file_url: "/epaper/Radar Lampung - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      },
+      {
+        book_id: "local-21",
+        title: "Lentera Today - 17 Juni 2026",
+        category_name: "Lentera Today",
+        pages: 16,
+        cover_url: "/epaper/covers/lentera-today-17-juni-2026.jpg",
+        file_url: "/epaper/Lentera Today - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      },
+      {
+        book_id: "local-22",
+        title: "Satelit News - 17 Juni 2026",
+        category_name: "Satelit News",
+        pages: 16,
+        cover_url: "/epaper/covers/satelit-news-17-juni-2026.jpg",
+        file_url: "/epaper/Satelit News - 17 Juni 2026.pdf",
+        published_at: "2026-06-17"
+      }
+    ];
+
     let originalData: EpaperItem[] = [];
     let currentFilter = 'all';
     let searchQuery = '';
@@ -163,17 +366,19 @@ import Footer from '../../../components/Footer.astro';
         if (!dataResponse.ok) throw new Error('Data fetch failed');
         const result = await dataResponse.json();
 
-        if (result.success && Array.isArray(result.data)) {
+        if (result.success && Array.isArray(result.data) && result.data.length > 0) {
           originalData = result.data;
-          renderFilters();
-          renderGrid();
         } else {
-          throw new Error('Invalid format');
+          console.warn('API returned empty or invalid data, using local fallback.');
+          originalData = localNewspapers;
         }
+        renderFilters();
+        renderGrid();
       } catch (err) {
-        console.error('Koran Digital API integration error:', err);
-        if (skeletonGrid) skeletonGrid.classList.add('hidden');
-        if (errorState) errorState.classList.remove('hidden');
+        console.warn('Koran Digital API error, falling back to local fallback:', err);
+        originalData = localNewspapers;
+        renderFilters();
+        renderGrid();
       }
     }
 
