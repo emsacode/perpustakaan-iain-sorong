@@ -178,10 +178,15 @@ const sidebarMenu = {
                     title: formData.get('judul'),
                     author: formData.get('pengarang'),
                     publisher: formData.get('penerbit'),
+                    year: formData.get('tahun') ? parseInt(formData.get('tahun') as string) : null,
                     isbn: formData.get('isbn') || null,
+                    reference_url: formData.get('url_referensi') || null,
                     proposer_name: formData.get('nama_pengusul'),
+                    proposer_status: formData.get('status_pengusul'),
                     proposer_email: formData.get('email'),
-                    notes: `Status: ${formData.get('status_pengusul')}, Matkul: ${formData.get('mata_kuliah')}, Estimasi: ${formData.get('estimasi_kebutuhan') || 0}, Alasan: ${formData.get('alasan')}`
+                    course: formData.get('mata_kuliah'),
+                    estimated_students: formData.get('estimasi_kebutuhan') ? parseInt(formData.get('estimasi_kebutuhan') as string) : null,
+                    reason: formData.get('alasan')
                 };
 
                 const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/desiderata', {

@@ -3,6 +3,7 @@ import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import catalogData from '../../../data/catalog.json';
+import coversData from '../../../data/covers.json';
 
 export async function getStaticPaths() {
   return catalogData.map(item => ({
@@ -12,6 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { item } = Astro.props;
+const coverUrl = (coversData as Record<string, string>)[item.id] || null;
 ---
 
 <Layout title={`${item.title} - Katalog Terpadu Perpustakaan IAIN Sorong`}>
@@ -41,22 +43,26 @@ const { item } = Astro.props;
         <div class="lg:col-span-8">
           <div class="flex flex-col md:flex-row gap-6 md:gap-8">
             
-            <!-- Book Cover Proxy / Type Badge -->
+            <!-- Book Cover Image or Fallback -->
             <div class="shrink-0 mx-auto md:mx-0">
-              <div class="w-[200px] aspect-[3/4] bg-[#0b4226] rounded-[8px] shadow-md flex flex-col items-center justify-center p-6 text-center relative overflow-hidden border-b-[6px] border-[#D69E2E]">
-                <div class="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_25%,#ffffff_25%,#ffffff_50%,transparent_50%,transparent_75%,#ffffff_75%,#ffffff_100%)] bg-[length:10px_10px]"></div>
-                
-                {item.type.includes("Skripsi") || item.type.includes("Karya Ilmiah") ? (
-                  <iconify-icon icon="lucide:graduation-cap" class="text-[#EAB308] text-5xl mb-4 z-10"></iconify-icon>
-                ) : item.type.includes("Jurnal") ? (
-                  <iconify-icon icon="lucide:file-text" class="text-blue-400 text-5xl mb-4 z-10"></iconify-icon>
+              <div class="w-[200px] aspect-[3/4] bg-[#0b4226] rounded-[8px] shadow-md flex flex-col items-center justify-center text-center relative overflow-hidden border-b-[6px] border-[#D69E2E]">
+                {coverUrl ? (
+                  <img src={coverUrl} alt={item.title} class="w-full h-full object-cover" />
                 ) : (
-                  <iconify-icon icon="lucide:book-open" class="text-emerald-400 text-5xl mb-4 z-10"></iconify-icon>
+                  <>
+                    <div class="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_25%,#ffffff_25%,#ffffff_50%,transparent_50%,transparent_75%,#ffffff_75%,#ffffff_100%)] bg-[length:10px_10px]"></div>
+                    {item.type.includes("Skripsi") || item.type.includes("Karya Ilmiah") ? (
+                      <iconify-icon icon="lucide:graduation-cap" class="text-[#EAB308] text-5xl mb-4 z-10"></iconify-icon>
+                    ) : item.type.includes("Jurnal") ? (
+                      <iconify-icon icon="lucide:file-text" class="text-blue-400 text-5xl mb-4 z-10"></iconify-icon>
+                    ) : (
+                      <iconify-icon icon="lucide:book-open" class="text-emerald-400 text-5xl mb-4 z-10"></iconify-icon>
+                    )}
+                    <h3 class="text-white font-serif font-bold text-[13px] leading-snug z-10 line-clamp-3 px-4">
+                      {item.title}
+                    </h3>
+                  </>
                 )}
-                
-                <h3 class="text-white font-serif font-bold text-[13px] leading-snug z-10 line-clamp-3">
-                  {item.title}
-                </h3>
               </div>
               
               <div class="mt-4 flex gap-2">
@@ -224,7 +230,7 @@ const { item } = Astro.props;
                   href={item.download_url} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  class="w-full flex items-center justify-center gap-2 bg-[#168940] hover:bg-[#0B4226] text-white font-sans font-bold text-[13px] py-3.5 px-4 rounded-[6px] transition-all shadow-[0_4px_12px_rgba(17,133,59,0.2)] hover:-translate-y-0.5"
+                  class="download-pdf-btn w-full flex items-center justify-center gap-2 bg-[#168940] hover:bg-[#0B4226] text-white font-sans font-bold text-[13px] py-3.5 px-4 rounded-[6px] transition-all shadow-[0_4px_12px_rgba(17,133,59,0.2)] hover:-translate-y-0.5"
                 >
                   Buka Halaman Repositori
                   <iconify-icon icon="lucide:external-link" class="text-[15px]"></iconify-icon>
@@ -234,7 +240,7 @@ const { item } = Astro.props;
                   href={item.download_url} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  class="w-full flex items-center justify-center gap-2 bg-[#168940] hover:bg-[#0B4226] text-white font-sans font-bold text-[13px] py-3.5 px-4 rounded-[6px] transition-all shadow-[0_4px_12px_rgba(17,133,59,0.2)] hover:-translate-y-0.5"
+                  class="download-pdf-btn w-full flex items-center justify-center gap-2 bg-[#168940] hover:bg-[#0B4226] text-white font-sans font-bold text-[13px] py-3.5 px-4 rounded-[6px] transition-all shadow-[0_4px_12px_rgba(17,133,59,0.2)] hover:-translate-y-0.5"
                 >
                   Buka Halaman Jurnal
                   <iconify-icon icon="lucide:external-link" class="text-[15px]"></iconify-icon>
@@ -242,7 +248,7 @@ const { item } = Astro.props;
               ) : (
                 <a 
                   href={item.download_url} 
-                  class="w-full flex items-center justify-center gap-2 bg-[#168940] hover:bg-[#0B4226] text-white font-sans font-bold text-[13px] py-3.5 px-4 rounded-[6px] transition-all shadow-[0_4px_12px_rgba(17,133,59,0.2)] hover:-translate-y-0.5"
+                  class="download-pdf-btn w-full flex items-center justify-center gap-2 bg-[#168940] hover:bg-[#0B4226] text-white font-sans font-bold text-[13px] py-3.5 px-4 rounded-[6px] transition-all shadow-[0_4px_12px_rgba(17,133,59,0.2)] hover:-translate-y-0.5"
                   onclick="alert('Mengunduh dokumen digital...'); return false;"
                 >
                   Unduh Dokumen PDF
@@ -261,3 +267,28 @@ const { item } = Astro.props;
 
   <Footer />
 </Layout>
+
+<script>
+  // Capture click events on download/read buttons to track usage stats
+  document.addEventListener('DOMContentLoaded', () => {
+    const downloadButtons = document.querySelectorAll('.download-pdf-btn');
+    const API_URL = import.meta.env.PUBLIC_API_URL || "https://api.emsacode.com";
+    
+    downloadButtons.forEach(btn => {
+      btn.addEventListener('click', async () => {
+        try {
+          // Trigger download event directly to the API gateway (proxy or direct)
+          await fetch(`${API_URL}/api/v1/library/stats/download-event`, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+          console.log('Download event logged successfully.');
+        } catch (err) {
+          console.error('Failed to log digital collection download:', err);
+        }
+      });
+    });
+  });
+</script>

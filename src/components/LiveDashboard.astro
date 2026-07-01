@@ -45,7 +45,7 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
                         <iconify-icon icon="lucide:users" class="text-2xl text-white"></iconify-icon>
                     </div>
                     <div>
-                        <div class="text-3xl font-extrabold leading-none tracking-tight">{stats.kunjungan.hari_ini.toLocaleString('id-ID')}</div>
+                        <div class="text-3xl font-extrabold leading-none tracking-tight">{liveStats.pengunjung_fisik.toLocaleString('id-ID')}</div>
                         <div class="text-[10px] font-bold uppercase tracking-wider text-red-100 mt-1">Pengunjung Fisik</div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
                         <iconify-icon icon="lucide:book-open" class="text-2xl text-white"></iconify-icon>
                     </div>
                     <div>
-                        <div class="text-3xl font-extrabold leading-none tracking-tight">18</div>
+                        <div class="text-3xl font-extrabold leading-none tracking-tight">{liveStats.peminjaman_buku.toLocaleString('id-ID')}</div>
                         <div class="text-[10px] font-bold uppercase tracking-wider text-red-100 mt-1">Peminjaman Buku</div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
                         <iconify-icon icon="lucide:cloud-download" class="text-2xl text-white"></iconify-icon>
                     </div>
                     <div>
-                        <div class="text-3xl font-extrabold leading-none tracking-tight">{Math.round(stats.kunjungan.download_eresources_bulan / 3).toLocaleString('id-ID')}</div>
+                        <div class="text-3xl font-extrabold leading-none tracking-tight">{liveStats.akses_koleksi_digital.toLocaleString('id-ID')}</div>
                         <div class="text-[10px] font-bold uppercase tracking-wider text-red-100 mt-1">Akses Koleksi Digital</div>
                     </div>
                 </div>

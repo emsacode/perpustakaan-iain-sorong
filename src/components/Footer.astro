@@ -1,4 +1,5 @@
 ---
+const currentYear = new Date().getFullYear();
 ---
 <footer class="bg-[#062E19] text-[#BBF7D0] pt-12 pb-8 font-sans">
   <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -160,7 +161,7 @@
     <!-- Legalitas & Statistik -->
     <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] font-sans text-[#BBF7D0]/50 pt-8 border-t border-white/5 mt-4">
       <div class="text-center md:text-left space-y-0.5">
-        <p>© 2026 Perpustakaan IAIN Sorong. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p>© {currentYear} Perpustakaan IAIN Sorong. Hak Cipta Dilindungi Undang-Undang.</p>
         <p>Pernyataan Hak Cipta &amp; Hak Akses Data.</p>
       </div>
       <div class="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-[4px]">

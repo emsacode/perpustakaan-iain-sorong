@@ -104,28 +104,11 @@
                 const query = input.value.trim();
                 if (!query) return;
 
-                if (currentSearchType === 'opac') {
+                if (currentSearchType === 'scholar') {
+                  window.open(`https://scholar.google.com/scholar?q=${encodeURIComponent(query)}`, '_blank');
+                } else {
                   window.location.href = `/koleksi/katalog?q=${encodeURIComponent(query)}`;
-                  return;
                 }
-
-                let url = '';
-                switch (currentSearchType) {
-                  case 'archive':
-                    // Mengarah ke EPrints Repository
-                    url = `https://repositori.iainsorong.ac.id/cgi/search/archive/simple?q=${encodeURIComponent(query)}`;
-                    break;
-                  case 'journal':
-                    // Mengarah ke Rumah Jurnal OJS
-                    url = `https://e-jurnal.iainsorong.ac.id/index.php/index/search/search?query=${encodeURIComponent(query)}`;
-                    break;
-                  case 'scholar':
-                    // Mengarah ke Google Scholar
-                    url = `https://scholar.google.com/scholar?q=${encodeURIComponent(query)}`;
-                    break;
-                }
-                
-                window.open(url, '_blank');
               }
 
               searchBtn.addEventListener('click', executeSearch);

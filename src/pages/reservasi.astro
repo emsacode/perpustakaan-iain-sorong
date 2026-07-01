@@ -65,9 +65,15 @@ const sidebarMenu = {
                 </div>
 
                 <!-- Email -->
-                <div class="md:col-span-2">
+                <div>
                     <label class="block text-sm font-semibold text-[#222222] mb-2">Email <span class="text-red-500">*</span></label>
                     <input type="email" name="email" placeholder="email@contoh.com" class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors" required>
+                </div>
+
+                <!-- Link Surat -->
+                <div>
+                    <label class="block text-sm font-semibold text-[#222222] mb-2">Tautan Surat Izin/Permohonan <span class="text-xs font-normal text-gray-500">(Opsional)</span></label>
+                    <input type="url" name="link_surat" placeholder="https://drive.google.com/..." class="w-full bg-[#F8FAFC] border border-[#dadada] text-[#444444] font-serif rounded-[4px] px-4 py-3 focus:outline-none focus:ring-[3px] focus:ring-[#EAB308]/30 focus:border-[#168940] transition-colors">
                 </div>
             </div>
 
@@ -249,7 +255,8 @@ const sidebarMenu = {
                     email: formData.get('email'),
                     room_name: formData.get('ruangan'),
                     booking_date: formData.get('tanggal'),
-                    session_time: `${formData.get('jam_mulai')} - ${formData.get('jam_selesai')}`
+                    session_time: `${formData.get('jam_mulai')} - ${formData.get('jam_selesai')}`,
+                    link_surat: formData.get('link_surat')
                 };
 
                 const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/reservations', {
