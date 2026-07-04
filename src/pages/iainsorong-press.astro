@@ -1,69 +1,172 @@
 ---
-import LayoutSidebar from '../layouts/LayoutSidebar.astro';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
-const sidebarMenu = {
-    title: "Layanan & Koleksi",
-    items: [{"label": "Sistem Otomasi (SORPUS)", "href": "/sorpus"}, {"label": "Keanggotaan Online", "href": "/k-online"}, {"label": "IAIN Sorong Press", "href": "/iainsorong-press"}]
-};
+const allBooks = [
+  { title: "Moderasi Beragama di Tanah Papua: Perspektif Sosiologis", author: "Dr. Abidin, M.Pd.I", year: "2023", cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop" },
+  { title: "Sejarah Pendidikan Islam Konteks Keindonesiaan", author: "Prof. Dr. H. Surahman Amin, Lc., M.A.", year: "2022", cover: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800&auto=format&fit=crop" },
+  { title: "Metodologi Studi Islam Kontemporer", author: "Dr. Muhammad Syahrul, M.Ag", year: "2021", cover: "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=800&auto=format&fit=crop" },
+  { title: "Ekonomi Syariah: Teori, Praktik, dan Kebijakan", author: "Dr. Bambang Sunatar, S.E., M.M.", year: "2024", cover: "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?q=80&w=800&auto=format&fit=crop" },
+  { title: "Manajemen Pendidikan Vokasi Islam", author: "Dr. Hasbullah, M.Pd", year: "2023", cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=800&auto=format&fit=crop" },
+  { title: "Tafsir Ekologi: Menjaga Lingkungan Berbasis Al-Quran", author: "Dr. Siti Aminah, M.Th.I", year: "2023", cover: "https://images.unsplash.com/photo-1495640388908-05fa85288e61?q=80&w=800&auto=format&fit=crop" },
+  { title: "Hukum Keluarga Islam di Era Digital", author: "Dr. Rahmat Hidayat, M.H.I", year: "2022", cover: "https://images.unsplash.com/photo-1589998059171-989d887dda6e?q=80&w=800&auto=format&fit=crop" },
+  { title: "Psikologi Komunikasi Dakwah", author: "Dr. Fathurrahman, M.Si", year: "2021", cover: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=800&auto=format&fit=crop" },
+  { title: "Filsafat Pendidikan Islam", author: "Dr. Rahmatul Hidayati", year: "2022", cover: "https://images.unsplash.com/photo-1511566898701-443b23548906?q=80&w=800&auto=format&fit=crop" },
+  { title: "Pemberdayaan Masyarakat Berbasis Pesantren", author: "Dr. Mustofa, M.A", year: "2024", cover: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop" },
+  { title: "Kompilasi Hukum Islam", author: "H. Zulkarnain, S.Ag., M.H.", year: "2023", cover: "https://images.unsplash.com/photo-1537286377312-3b03f02e648a?q=80&w=800&auto=format&fit=crop" },
+  { title: "Studi Al-Quran Tematik", author: "Dr. Aminullah, M.A", year: "2021", cover: "https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=800&auto=format&fit=crop" }
+];
+
+// Simulasi Pagination Statis
+const itemsPerPage = 10; // 5 kolom x 2 baris
+const totalPages = Math.ceil(allBooks.length / itemsPerPage);
+const currentPage = 1;
+const books = allBooks.slice(0, itemsPerPage);
 ---
 
-<LayoutSidebar title="IAIN Sorong Press" sidebarMenu={sidebarMenu}>
-    
-    <!-- Hero Banner for Press -->
-    <div class="bg-white border border-[#dadada] rounded-[8px] overflow-hidden mb-12 shadow-sm relative group hover:border-[#BBF7D0] transition-all flex flex-col items-center text-center p-10 md:p-14">
-        <!-- Decoration -->
-        <div class="absolute right-0 top-0 w-40 h-40 bg-[#FFFBEB] rounded-bl-full opacity-70 z-0"></div>
-        <div class="absolute left-0 bottom-0 w-32 h-32 bg-[#F0FDF4] rounded-tr-full opacity-70 z-0"></div>
-        
-        <div class="relative z-10 w-20 h-20 bg-[#FFFBEB] border border-[#FDE68A] rounded-[8px] flex items-center justify-center text-amber-600 mb-6 group-hover:border-amber-400 transition-colors">
-            <iconify-icon icon="flat-color-icons:bookmark" ></iconify-icon>
-        </div>
-        
-        <div class="relative z-10 uppercase tracking-widest text-xs font-semibold text-amber-600 mb-2">Penerbitan & Publikasi</div>
-        <h2 class="relative z-10 text-2xl md:text-4xl font-semibold text-[#222222] mb-4 tracking-tight m-0">IAIN Sorong Press</h2>
-        <p class="relative z-10 font-serif text-[15px] text-[#444444] mb-8 leading-relaxed max-w-2xl mx-auto m-0">Unit penerbitan kampus yang menaungi publikasi karya ilmiah, buku ajar, monograf, dan prosiding dari civitas academica IAIN Sorong.</p>
-        
-        <a href="#" class="relative z-10 inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8 rounded-[4px] shadow-sm transition-colors focus:outline-none focus:ring-[3px] focus:ring-amber-300 text-sm no-underline">
-            Kunjungi Portal OMP
-            <iconify-icon icon="flat-color-icons:up-right" ></iconify-icon>
-        </a>
-    </div>
+<Layout title="IAIN Sorong Press">
+	<Header />
+	
+	<main class="min-h-screen bg-white font-sans">
+		
+		<!-- Hero Section -->
+		<section class="relative bg-[#FDFCF8] pt-24 pb-20 overflow-hidden border-b border-slate-100">
+			<!-- Soft background shapes -->
+			<div class="absolute inset-0 pointer-events-none">
+				<div class="absolute -top-20 -right-20 w-[600px] h-[600px] bg-yellow-50/50 rounded-full blur-3xl opacity-60"></div>
+				<div class="absolute bottom-0 -left-20 w-[500px] h-[500px] bg-green-50/50 rounded-full blur-3xl opacity-60"></div>
+			</div>
+			
+			<div class="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+				<div class="w-16 h-16 bg-yellow-50 rounded-[12px] flex items-center justify-center border border-yellow-200 mx-auto mb-6 shadow-sm">
+					<iconify-icon icon="lucide:bookmark" class="text-2xl text-red-600 fill-red-600"></iconify-icon>
+				</div>
+				<h3 class="text-[#D97706] text-[11px] font-bold uppercase tracking-[0.2em] mb-4">Penerbitan & Publikasi</h3>
+				<h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-[#222222]">IAIN Sorong Press</h1>
+				<p class="text-slate-600 text-[15px] md:text-[17px] max-w-3xl mx-auto leading-relaxed mb-10 font-serif">
+					Unit penerbitan kampus yang menaungi publikasi karya ilmiah, buku ajar, monograf, dan prosiding dari civitas academica IAIN Sorong.
+				</p>
+                <a href="https://lib.emsacode.com/iainsorong-press/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-[8px] bg-[#D97706] hover:bg-[#B45309] text-white font-semibold text-sm transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#D97706] focus:ring-offset-2">
+                    Kunjungi Portal OMP <iconify-icon icon="lucide:arrow-up-right" class="text-sm"></iconify-icon>
+                </a>
+			</div>
+		</section>
 
-    <!-- Intro Text -->
-    <div class="mb-10 text-left">
-        <h3 class="text-2xl font-semibold text-[#222222] mb-4 m-0 tracking-tight">Mewadahi Literasi & Intelektualitas Kampus</h3>
-        <p class="font-serif text-[15px] text-[#444444] leading-relaxed max-w-3xl m-0">
-            Perpustakaan tidak hanya sebagai tempat mengumpulkan buku, namun juga sebagai motor penggerak literasi dan publikasi. IAIN Sorong Press hadir untuk memfasilitasi penerbitan buku ber-ISBN secara profesional.
-        </p>
-    </div>
+		<!-- Features Section -->
+		<section class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-white">
+			<div class="max-w-[1000px] mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold text-[#222222] tracking-tight mb-4 text-left">Mewadahi Literasi & Intelektualitas Kampus</h2>
+                <p class="text-slate-600 text-[16px] leading-relaxed mb-12 text-left max-w-4xl font-serif">
+                    Perpustakaan tidak hanya sebagai tempat mengumpulkan buku, namun juga sebagai motor penggerak literasi dan publikasi. IAIN Sorong Press hadir untuk memfasilitasi penerbitan buku ber-ISBN secara profesional.
+                </p>
 
-    <!-- Layanan Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-        
-        <div class="bg-white border border-[#dadada] p-6 rounded-[8px] shadow-sm text-center group hover:border-[#BBF7D0] hover:shadow-md transition-all">
-            <div class="w-12 h-12 bg-[#EFF6FF] text-blue-600 border border-[#BFDBFE] rounded-[8px] flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <iconify-icon icon="flat-color-icons:edit-image" ></iconify-icon>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Feature 1 -->
+                    <div class="border border-slate-200 rounded-[12px] p-8 bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center">
+                        <div class="w-14 h-14 bg-blue-50 border border-blue-100 rounded-[10px] flex items-center justify-center mb-6">
+                            <iconify-icon icon="lucide:message-square-dashed" class="text-xl text-blue-500"></iconify-icon>
+                        </div>
+                        <h3 class="text-[17px] font-bold text-[#222222] mb-3">Penyuntingan & Layout</h3>
+                        <p class="text-slate-500 text-[13px] leading-relaxed">
+                            Layanan proofreading dan tata letak profesional sesuai standar penerbitan akademik nasional.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="border border-slate-200 rounded-[12px] p-8 bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center">
+                        <div class="w-14 h-14 bg-yellow-50/50 border border-yellow-100 rounded-[10px] flex items-center justify-center mb-6">
+                            <!-- Empty generic doc icon based on reference -->
+                            <iconify-icon icon="lucide:square" class="text-xl text-yellow-500 fill-yellow-100/50"></iconify-icon>
+                        </div>
+                        <h3 class="text-[17px] font-bold text-[#222222] mb-3">Pengurusan ISBN</h3>
+                        <p class="text-slate-500 text-[13px] leading-relaxed">
+                            Fasilitasi pendaftaran International Standard Book Number (ISBN) ke Perpustakaan Nasional RI.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="border border-slate-200 rounded-[12px] p-8 bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center">
+                        <div class="w-14 h-14 bg-green-50 border border-green-100 rounded-[10px] flex items-center justify-center mb-6">
+                            <iconify-icon icon="lucide:store" class="text-xl text-green-600"></iconify-icon>
+                        </div>
+                        <h3 class="text-[17px] font-bold text-[#222222] mb-3">Pemasaran Digital</h3>
+                        <p class="text-slate-500 text-[13px] leading-relaxed">
+                            Buku yang diterbitkan akan dipasarkan dan diindeks melalui portal Open Monograph Press (OMP).
+                        </p>
+                    </div>
+                </div>
             </div>
-            <h4 class="font-semibold text-[#222222] mb-2 m-0">Penyuntingan & Layout</h4>
-            <p class="font-serif text-[13px] text-[#666666] m-0 leading-relaxed">Layanan proofreading dan tata letak profesional sesuai standar penerbitan akademik nasional.</p>
-        </div>
+		</section>
 
-        <div class="bg-white border border-[#dadada] p-6 rounded-[8px] shadow-sm text-center group hover:border-[#BBF7D0] hover:shadow-md transition-all">
-            <div class="w-12 h-12 bg-[#FFFBEB] text-amber-600 border border-[#FDE68A] rounded-[8px] flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
-                <iconify-icon icon="flat-color-icons:barcode-reader" ></iconify-icon>
-            </div>
-            <h4 class="font-semibold text-[#222222] mb-2 m-0">Pengurusan ISBN</h4>
-            <p class="font-serif text-[13px] text-[#666666] m-0 leading-relaxed">Fasilitasi pendaftaran International Standard Book Number (ISBN) ke Perpustakaan Nasional RI.</p>
-        </div>
+		<!-- Catalog Section -->
+		<section class="bg-[#F8FAFC] py-20 border-t border-slate-100">
+            <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex items-center justify-between mb-10 pb-5 border-b border-slate-200">
+					<div>
+						<h2 class="text-2xl font-bold tracking-tight text-[#222222]">Katalog Buku Penerbit</h2>
+						<p class="text-slate-500 mt-1.5 text-sm font-serif">Jelajahi koleksi publikasi terbaru dan unggulan dari penulis kami.</p>
+					</div>
+					<div class="hidden md:block">
+						<span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-[#168940] text-xs font-bold border border-slate-200 shadow-sm">
+							<iconify-icon icon="lucide:library" class="text-sm"></iconify-icon>
+							{allBooks.length} Buku Tersedia
+						</span>
+					</div>
+				</div>
 
-        <div class="bg-white border border-[#dadada] p-6 rounded-[8px] shadow-sm text-center group hover:border-[#BBF7D0] hover:shadow-md transition-all">
-            <div class="w-12 h-12 bg-[#F0FDF4] text-[#168940] border border-[#dadada] rounded-[8px] flex items-center justify-center mx-auto mb-4 group-hover:bg-[#168940] group-hover:text-white transition-colors">
-                <iconify-icon icon="flat-color-icons:shop" ></iconify-icon>
-            </div>
-            <h4 class="font-semibold text-[#222222] mb-2 m-0">Pemasaran Digital</h4>
-            <p class="font-serif text-[13px] text-[#666666] m-0 leading-relaxed">Buku yang diterbitkan akan dipasarkan dan diindeks melalui portal Open Monograph Press (OMP).</p>
-        </div>
+				<!-- Book Grid (5 columns, very compact cards) -->
+				<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-5">
+					{books.map((book) => (
+						<div class="group relative flex flex-col bg-white rounded-lg overflow-hidden border border-slate-200 hover:border-[#168940]/40 hover:shadow-lg hover:shadow-[#168940]/5 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+							<div class="aspect-[2/3] relative overflow-hidden bg-slate-100">
+								<img src={book.cover} alt={book.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+								<div class="absolute top-2 right-2 bg-white/95 backdrop-blur-sm px-1.5 py-0.5 rounded text-[9px] font-bold text-slate-800 shadow-sm">
+									{book.year}
+								</div>
+								
+								<!-- Overlay on Hover -->
+								<div class="absolute inset-0 bg-[#0B4226]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[1px]">
+									<span class="text-white font-semibold text-[10px] inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#168940] rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+										Detail <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+									</span>
+								</div>
+							</div>
+							<div class="p-3 flex flex-col flex-1 border-t border-slate-100">
+								<h3 class="font-bold text-slate-800 text-[12px] leading-tight mb-1.5 group-hover:text-[#168940] transition-colors line-clamp-2">{book.title}</h3>
+								<p class="text-slate-500 text-[10px] mt-auto pt-2 border-t border-slate-50 flex items-center gap-1.5 truncate font-serif">
+									<iconify-icon icon="lucide:pen-tool" class="text-slate-400 shrink-0"></iconify-icon>
+									<span class="truncate">{book.author}</span>
+								</p>
+							</div>
+						</div>
+					))}
+				</div>
+                
+                <!-- Pagination (2 rows limit = 10 items per page) -->
+                <div class="mt-12 flex flex-col items-center justify-center gap-4">
+                    <p class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Halaman 1 dari {totalPages}</p>
+                    <nav class="flex items-center gap-1.5" aria-label="Pagination">
+                        <button class="w-8 h-8 flex items-center justify-center rounded-md border border-slate-200 text-slate-400 hover:text-slate-600 hover:bg-white transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+                        </button>
+                        
+                        <button class="w-8 h-8 flex items-center justify-center rounded-md border border-[#168940] bg-[#168940] text-white font-bold text-xs transition-colors shadow-sm">
+                            1
+                        </button>
+                        
+                        <button class="w-8 h-8 flex items-center justify-center rounded-md border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-[#168940] font-semibold text-xs transition-colors shadow-sm">
+                            2
+                        </button>
 
-    </div>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-md border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">
+                            <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+                        </button>
+                    </nav>
+                </div>
+			</div>
+		</section>
+	</main>
 
-</LayoutSidebar>
+	<Footer />
+</Layout>

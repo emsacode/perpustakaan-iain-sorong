@@ -8,76 +8,111 @@ export async function getStaticPaths({ paginate }) {
     // Sort by date descending
     allBerita.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
     
-    // Generate pages with 12 items per page
-    return paginate(allBerita, { pageSize: 12 });
+    // Generate pages with 13 items per page (1 featured + 12 grid on page 1)
+    return paginate(allBerita, { pageSize: 13 });
 }
 
 // All paginated data is passed on the "page" prop
 const { page } = Astro.props;
-
-const sidebarMenu = {
-    title: "Kategori Berita",
-    items: [
-        {"label": "Semua Berita", "href": "/berita"},
-        {"label": "Pengumuman", "href": "#"},
-        {"label": "Kegiatan", "href": "#"},
-        {"label": "Tips Literasi", "href": "#"}
-    ]
-};
 ---
 
-<LayoutSidebar title="Berita & Pengumuman" sidebarMenu={sidebarMenu}>
-    <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#dadada] pb-6">
-        <div>
-            <h2 class="text-2xl md:text-3xl font-bold text-[#0B4226] mb-2 tracking-tight">Kabar Pustaka</h2>
-            <p class="font-serif text-[#666666] m-0">Informasi terbaru, kegiatan, dan tips dari Perpustakaan IAIN Sorong.</p>
-        </div>
-    </div>
+<LayoutSidebar 
+    title="Kabar Pustaka" 
+    subtitle="Informasi terbaru, kegiatan, dan tips dari Perpustakaan IAIN Sorong."
+    hideSidebar={true}
+>
 
-    <!-- Grid Berita -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {page.data.map((post) => (
-            <article class="bg-white border border-[#dadada] rounded-[8px] overflow-hidden hover:shadow-lg hover:border-[#168940] transition-all duration-300 group flex flex-col h-full">
-                <div class="aspect-[16/10] overflow-hidden relative">
-                    <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-                    <div class="absolute top-3 left-3">
-                        <span class="bg-[#168940] text-white text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-[4px] shadow-sm">
-                            {post.data.category}
+    <!-- Berita Content -->
+    <div class="space-y-10">
+        {page.currentPage === 1 && page.data.length > 0 && (
+            <!-- Featured Article (First Post) -->
+            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col md:flex-row relative border border-[#dadada]">
+                <div class="md:w-1/2 aspect-video md:aspect-auto overflow-hidden relative">
+                    <img src={page.data[0].data.image} alt={page.data[0].data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="eager">
+                    <div class="absolute top-0 left-0">
+                        <span class="bg-[#168940] text-white text-[12px] font-bold uppercase tracking-wider px-4 py-2 rounded-tl-2xl rounded-br-2xl shadow-sm inline-block">
+                            {page.data[0].data.category}
                         </span>
                     </div>
                 </div>
-                <div class="p-5 flex flex-col flex-grow">
-                    <div class="flex items-center gap-3 text-[#666666] text-[13px] font-serif mb-3">
+                <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center bg-white z-10">
+                    <div class="flex items-center gap-3 text-[#666666] text-[14px] font-sans mb-5">
                         <span class="flex items-center gap-1.5">
-                            <iconify-icon icon="lucide:calendar" width="14"></iconify-icon>
-                            {post.data.date}
+                            <iconify-icon icon="lucide:calendar" width="16"></iconify-icon>
+                            {page.data[0].data.date}
                         </span>
-                        <span class="w-1 h-1 rounded-full bg-[#dadada]"></span>
+                        <span class="text-[#dadada] font-bold">•</span>
                         <span class="flex items-center gap-1.5">
-                            <iconify-icon icon="lucide:clock" width="14"></iconify-icon>
-                            {post.data.readTime}
+                            <iconify-icon icon="lucide:clock" width="16"></iconify-icon>
+                            {page.data[0].data.readTime}
                         </span>
                     </div>
-                    <h3 class="text-lg font-bold text-[#222222] mb-2 leading-snug group-hover:text-[#168940] transition-colors line-clamp-2">
-                        <a href={`/berita/${post.slug}`} class="focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[#EAB308] rounded-[2px] block before:absolute before:inset-0 relative z-10">
-                            {post.data.title}
+                    <h3 class="text-2xl md:text-3xl font-bold text-[#168940] mb-4 leading-tight group-hover:text-[#0B4226] transition-colors line-clamp-3">
+                        <a href={`/berita/${page.data[0].slug}`} class="focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[#EAB308] rounded-[2px] block before:absolute before:inset-0 relative z-10">
+                            {page.data[0].data.title}
                         </a>
                     </h3>
-                    <p class="text-[14px] text-[#444444] font-serif line-clamp-3 mb-4 flex-grow relative z-10">
-                        {post.data.description}
+                    <p class="text-[15px] text-[#666666] font-sans line-clamp-3 mb-8 leading-relaxed relative z-10">
+                        {page.data[0].data.description}
                     </p>
-                    <div class="mt-auto border-t border-[#dadada] pt-4 flex items-center justify-between relative z-10">
-                        <span class="text-[12px] font-semibold text-[#0B4226] flex items-center gap-1.5">
-                            <iconify-icon icon="lucide:user-circle" width="16"></iconify-icon>
-                            {post.data.author}
+                    <div class="mt-auto border-t border-[#dadada] pt-5 flex items-center justify-between relative z-10">
+                        <span class="text-[14px] font-semibold text-[#168940] flex items-center gap-2">
+                            <iconify-icon icon="lucide:user-circle" width="18"></iconify-icon>
+                            {page.data[0].data.author}
                         </span>
-                        <a href={`/berita/${post.slug}`} class="text-[13px] font-semibold text-[#168940] hover:text-[#0B4226] flex items-center gap-1 group/btn">
-                            Baca <iconify-icon icon="lucide:arrow-right" class="group-hover/btn:translate-x-1 transition-transform"></iconify-icon>
+                        <a href={`/berita/${page.data[0].slug}`} class="text-[14px] font-bold text-[#168940] hover:text-[#0B4226] flex items-center gap-1 group/btn">
+                            Baca Selengkapnya <iconify-icon icon="lucide:arrow-right" class="group-hover/btn:translate-x-1 transition-transform"></iconify-icon>
                         </a>
                     </div>
                 </div>
             </article>
-        ))}
+        )}
+
+        <!-- Grid Berita (Remaining Posts) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {page.data.slice(page.currentPage === 1 ? 1 : 0).map((post) => (
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col h-full border border-[#dadada]">
+                    <div class="aspect-[16/10] overflow-hidden relative">
+                        <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <div class="absolute top-0 left-0">
+                            <span class="bg-[#168940] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-tl-xl rounded-br-xl shadow-sm inline-block">
+                                {post.data.category}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4 md:p-5 flex flex-col flex-grow bg-white z-10">
+                        <div class="flex items-center gap-2.5 text-[#666666] text-[12px] font-sans mb-3">
+                            <span class="flex items-center gap-1.5">
+                                <iconify-icon icon="lucide:calendar" width="13"></iconify-icon>
+                                {post.data.date}
+                            </span>
+                            <span class="text-[#dadada] font-bold">•</span>
+                            <span class="flex items-center gap-1.5">
+                                <iconify-icon icon="lucide:clock" width="13"></iconify-icon>
+                                {post.data.readTime}
+                            </span>
+                        </div>
+                        <h3 class="text-[17px] font-bold text-[#168940] mb-2 leading-snug group-hover:text-[#0B4226] transition-colors line-clamp-2">
+                            <a href={`/berita/${post.slug}`} class="focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[#EAB308] rounded-[2px] block before:absolute before:inset-0 relative z-10">
+                                {post.data.title}
+                            </a>
+                        </h3>
+                        <p class="text-[13px] text-[#666666] font-sans line-clamp-2 mb-4 flex-grow leading-relaxed relative z-10">
+                            {post.data.description}
+                        </p>
+                        <div class="mt-auto border-t border-[#dadada] pt-3 flex items-center justify-between relative z-10">
+                            <span class="text-[12px] font-semibold text-[#168940] flex items-center gap-1.5">
+                                <iconify-icon icon="lucide:user-circle" width="15"></iconify-icon>
+                                {post.data.author}
+                            </span>
+                            <a href={`/berita/${post.slug}`} class="text-[12px] font-bold text-[#168940] hover:text-[#0B4226] flex items-center gap-1 group/btn">
+                                Baca <iconify-icon icon="lucide:arrow-right" class="group-hover/btn:translate-x-1 transition-transform"></iconify-icon>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            ))}
+        </div>
     </div>
 
     <!-- Pagination Controls -->

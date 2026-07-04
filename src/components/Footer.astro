@@ -30,7 +30,7 @@ const currentYear = new Date().getFullYear();
           </div>
         </div>
         
-        <a href="#" class="inline-flex items-center justify-between w-full bg-white/5 hover:bg-white/10 text-[#BBF7D0] hover:text-accent font-sans font-semibold text-[12px] px-4 py-2.5 rounded-[6px] transition-colors mt-6">
+        <a href="https://www.google.com/maps/place/Perpustakaan+IAIN+Sorong/@-0.9366295,131.3311776,19z/data=!4m14!1m7!3m6!1s0x2d5bfe590c115d3b:0x97aec693c740c55d!2sInstitut+Agama+Islam+Negeri+Sorong!8m2!3d-0.9368829!4d131.3331705!16s%2Fg%2F112yfbtc4!3m5!1s0x2d5bffcc9aeea127:0x860158aac84a224d!8m2!3d-0.9366549!4d131.3313676!16s%2Fg%2F11s8fj_q5l?entry=ttu&g_ep=EgoyMDI2MDYyOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between w-full bg-white/5 hover:bg-white/10 text-[#BBF7D0] hover:text-accent font-sans font-semibold text-[12px] px-4 py-2.5 rounded-[6px] transition-colors mt-6">
           Lihat Google Maps
           <iconify-icon icon="lucide:arrow-up-right"></iconify-icon>
         </a>
@@ -62,6 +62,41 @@ const currentYear = new Date().getFullYear();
               <div class="flex flex-col justify-center">
                 <span class="text-[10px] text-[#BBF7D0]/50 uppercase tracking-wider font-semibold">E-mail Resmi</span>
                 <span class="text-[#BBF7D0] font-semibold">perpustakaan@iainsorong.ac.id</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3 group">
+              <div class="w-8 h-8 rounded-[4px] bg-white/5 flex items-center justify-center text-[#BBF7D0]/50 group-hover:text-accent transition-colors shrink-0">
+                <iconify-icon icon="lucide:bar-chart-2" text-lg></iconify-icon>
+              </div>
+              <div class="flex flex-col justify-center w-full">
+                <span class="text-[10px] text-[#BBF7D0]/50 uppercase tracking-wider font-semibold mb-1.5">Statistik Pengunjung</span>
+                <div class="flex items-start gap-3">
+                  <div class="flex flex-col">
+                    <span class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none">256,748</span>
+                    <span class="text-[8px] md:text-[9px] text-[#BBF7D0]/60 uppercase tracking-wide mt-0.5 whitespace-nowrap">Tahun Ini</span>
+                  </div>
+                  <div class="w-px h-auto self-stretch bg-white/10 my-0.5"></div>
+                  <div class="flex flex-col">
+                    <span class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none">7,299</span>
+                    <span class="text-[8px] md:text-[9px] text-[#BBF7D0]/60 uppercase tracking-wide mt-0.5 whitespace-nowrap">Bulan Ini</span>
+                  </div>
+                  <div class="w-px h-auto self-stretch bg-white/10 my-0.5"></div>
+                  <div class="flex flex-col">
+                    <span class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none">1,222</span>
+                    <span class="text-[8px] md:text-[9px] text-[#BBF7D0]/60 uppercase tracking-wide mt-0.5 whitespace-nowrap">Hari Ini</span>
+                  </div>
+                  <div class="w-px h-auto self-stretch bg-white/10 my-0.5"></div>
+                  <div class="flex flex-col">
+                    <span class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none flex items-center gap-1">
+                      <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                      </span>
+                      111
+                    </span>
+                    <span class="text-[8px] md:text-[9px] text-[#BBF7D0]/60 uppercase tracking-wide mt-0.5 whitespace-nowrap">Online</span>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
@@ -97,28 +132,28 @@ const currentYear = new Date().getFullYear();
             <!-- Sen -->
             <div id="f-day-1" class="text-center py-2 px-1 rounded-[4px] bg-white/5 text-[#BBF7D0]/70 transition-all duration-300">
               <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Sen</div>
-              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08–19.30</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08.00–15.30</div>
             </div>
             <!-- Sel -->
             <div id="f-day-2" class="text-center py-2 px-1 rounded-[4px] bg-white/5 text-[#BBF7D0]/70 transition-all duration-300">
               <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Sel</div>
-              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08–19.30</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08.00–15.30</div>
             </div>
             <!-- Rab -->
             <div id="f-day-3" class="text-center py-2 px-1 rounded-[4px] bg-white/5 text-[#BBF7D0]/70 transition-all duration-300">
               <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Rab</div>
-              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08–19.30</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08.00–15.30</div>
             </div>
             <!-- Kam -->
             <div id="f-day-4" class="text-center py-2 px-1 rounded-[4px] bg-white/5 text-[#BBF7D0]/70 transition-all duration-300">
               <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Kam</div>
-              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08–15.30</div>
+              <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter">08.00–15.30</div>
             </div>
             <!-- Jum -->
             <div id="f-day-5" class="text-center py-2 px-1 rounded-[4px] bg-white/5 text-[#BBF7D0]/70 transition-all duration-300 flex flex-col items-center justify-center">
               <div class="text-[9px] font-bold uppercase tracking-wider mb-1 opacity-60">Jum</div>
               <div class="text-[10px] md:text-[11px] font-sans font-semibold tracking-tighter relative w-max">
-                08–16<span class="absolute -right-2 -top-0.5 text-accent-highlight text-[10px]">*</span>
+                08.00–15.30
               </div>
             </div>
             <!-- Sab -->
@@ -213,12 +248,8 @@ function updateFooterStatusHospitality() {
   if (!dot || !text) return;
   
   let isOpen = false;
-  if (day >= 1 && day <= 3) {
-    if (time >= 8 && time < 19.5) isOpen = true;
-  } else if (day === 4) {
+  if (day >= 1 && day <= 5) {
     if (time >= 8 && time < 15.5) isOpen = true;
-  } else if (day === 5) {
-    if ((time >= 8 && time < 11) || (time >= 13 && time < 16)) isOpen = true;
   }
   
   if (isOpen) {

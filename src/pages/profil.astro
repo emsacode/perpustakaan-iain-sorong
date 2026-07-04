@@ -11,6 +11,7 @@ const sidebarMenu = {
 
 // Fetch dynamic page from Laravel API
 let pageData = null;
+/* 
 try {
     const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/pages/profil');
     if (response.ok) {
@@ -19,6 +20,7 @@ try {
 } catch (e) {
     // Fail silently, fallback to static HTML
 }
+*/
 ---
 
 <LayoutSidebar title="Profil Singkat" sidebarMenu={sidebarMenu}>
@@ -41,41 +43,55 @@ try {
         {pageData ? (
             <div set:html={pageData.content} />
         ) : (
-            <p class="font-serif leading-relaxed mb-10">
-                Sejak awal berdirinya, perpustakaan kami terus berkembang seiring dengan transformasi institusi menuju keunggulan. Kami tidak hanya berfungsi sebagai tempat penyimpanan buku, melainkan telah bertransformasi menjadi pusat pembelajaran kolaboratif yang adaptif terhadap perkembangan teknologi informasi.
-            </p>
+            <div class="space-y-6">
+                <h3 class="text-2xl font-bold tracking-tight text-[#222222] mb-4">Jejak Langkah & Sejarah Perkembangan</h3>
+                
+                <p class="font-serif leading-relaxed text-justify">
+                    Perpustakaan IAIN Sorong memiliki akar sejarah yang panjang, bermula sebagai warisan dari Perpustakaan STAIS Al-Hikmah. Pada tanggal 20 Juli 2006, perpustakaan ini resmi beralih status menjadi Perpustakaan STAIN Sorong, dengan penempatan awal di gedung MAN Model Sorong. Seiring dinamika institusi, pada tahun 2009 lokasi perpustakaan dipindahkan ke Sekolah SD An-Nur Kampung Baru hingga tahun 2010.
+                </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
-                <!-- Fungsi Card -->
-                <div class="bg-white p-6 rounded-[8px] border border-[#dadada] hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
-                    <div class="flex items-center gap-3 mb-4 text-[#168940]">
-                        <iconify-icon icon="flat-color-icons:rating" width="2rem" style="stroke-width: 1.5;"></iconify-icon>
-                        <h3 class="text-xl tracking-tight font-semibold m-0 text-[#222222]">Peran & Fungsi</h3>
-                    </div>
-                    <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
-                        Menjalankan fungsi krusial dalam pendidikan, penelitian, dan pengabdian masyarakat. Kami menyajikan koleksi pustaka bermutu yang relevan dengan seluruh program studi IAIN Sorong.
-                    </p>
-                </div>
+                <p class="font-serif leading-relaxed text-justify">
+                    Titik terang perkembangan sarana dan prasarana terlihat pada tanggal 5 Mei 2010, bertepatan dengan peresmian gedung baru STAIN Sorong. Seluruh aktivitas sivitas akademika, termasuk layanan perpustakaan serta administrasi keuangan dan kepegawaian, secara resmi dipindahkan ke kampus terpadu di Jalan Sorong-Klamono Kilometer 17, Kota Sorong. Saat itu, perpustakaan menempati gedung serbaguna yang kini difungsikan sebagai Gedung Akademik.
+                </p>
 
-                <!-- Budaya Literasi Card -->
-                <div class="bg-white p-6 rounded-[8px] border border-[#dadada] hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
-                    <div class="flex items-center gap-3 mb-4 text-[#168940]">
-                        <iconify-icon icon="flat-color-icons:bookmark" width="2rem" style="stroke-width: 1.5;"></iconify-icon>
-                        <h3 class="text-xl tracking-tight font-semibold m-0 text-[#222222]">Pusat Literasi</h3>
-                    </div>
-                    <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
-                        Menyelenggarakan program-program literasi secara berkala untuk mendorong terciptanya budaya riset, menulis, dan membaca yang unggul di kalangan mahasiswa dan dosen.
-                    </p>
+                <p class="font-serif leading-relaxed text-justify">
+                    Seiring berjalannya waktu, pertumbuhan koleksi yang pesat serta meningkatnya kebutuhan ruang baca bagi pemustaka membuat fasilitas yang ada terasa kian menyempit. Demi memastikan kenyamanan pelayanan, pada tahun 2014 perpustakaan kembali direlokasi, kali ini menempati lantai dua eks-Gedung Rektorat lama hingga saat ini.
+                </p>
+
+                <p class="font-serif leading-relaxed text-justify">
+                    Kepindahan ini menjadi momentum pembenahan total. Perpustakaan mulai menata ulang sistem administrasi, tata letak rak koleksi, hingga pembagian zona fungsi yang meliputi ruang baca, ruang koleksi referensi, ruang pengolahan, serta ruang Kepala Perpustakaan. Sejak tahun 2016, langkah digitalisasi mulai diimplementasikan secara masif melalui penertiban koleksi dan automasi perpustakaan menggunakan aplikasi SLiMS (Senayan Library Management System). Langkah ini terbukti berhasil mempermudah pengelolaan koleksi, sistem administrasi, dan mempercepat pelayanan kepada pemustaka.
+                </p>
+
+                <p class="font-serif leading-relaxed text-justify">
+                    Berkat transformasi berkelanjutan tersebut, Perpustakaan IAIN Sorong kini menjadi salah satu fasilitas terfavorit sivitas akademika. Ruangan yang nyaman didukung fasilitas penelusuran informasi yang memadai sukses menunjang atmosfer belajar mengajar dan riset yang dinamis di lingkungan IAIN Sorong.
+                </p>
+
+                <h3 class="text-2xl font-bold tracking-tight text-[#222222] mt-10 mb-4">Akreditasi dan Kepemimpinan</h3>
+
+                <p class="font-serif leading-relaxed text-justify">
+                    Sebagai buah dari upaya inovatif dan kreatif, serta komitmen dalam menumbuhkan minat literasi insan akademik, Perpustakaan IAIN Sorong berhasil meraih prestasi gemilang: mendapatkan <strong>Akreditasi dengan nilai A</strong> dari Perpustakaan Nasional RI pada tahun 2021.
+                </p>
+
+                <p class="font-serif leading-relaxed text-justify mb-4">
+                    Capaian bersejarah ini tentu tak lepas dari kerja keras dan dedikasi panjang jajaran pimpinan yang pernah menakhodai Perpustakaan IAIN Sorong dari masa ke masa, yaitu:
+                </p>
+
+                <div class="bg-white p-6 rounded-[8px] border border-[#dadada] shadow-sm font-sans mb-10">
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6 text-[15px] text-[#444444]">
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Mahsunah, S.Pd</strong> <span class="text-slate-500">(2008-2010)</span></li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Irfakaharudin, M.E</strong> <span class="text-slate-500">(2010-2011)</span></li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Mutawali, M.IP</strong> <span class="text-slate-500">(2011-2012)</span></li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Rusyaid, M.Pd</strong> <span class="text-slate-500">(2012-2013)</span></li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Dr. Muh. Rusdi Rasyid, M.Pd.I</strong> <span class="text-slate-500">(2013-2015)</span></li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Akramunnisa, S.E</strong> <span class="text-slate-500">(2015-2017)</span></li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Ahmadi, M.MP.d</strong> <span class="text-slate-500">(2018-2020)</span></li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Wati Irmawati, S.Pd.I</strong> <span class="text-slate-500">(2021-2022)</span></li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Rabiudin, M.Pd</strong> <span class="text-slate-500">(2022-2024)</span></li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Muhammad Ramli, M.Pd.</strong> <span class="text-slate-500">(2024-2025)</span></li>
+                        <li class="flex items-center gap-2"><iconify-icon icon="lucide:check-circle" class="text-[#168940]"></iconify-icon> <strong>Drs. Muhammad Satir, M.Pd.I</strong> <span class="text-slate-500 text-[13px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-green-100 text-green-700 ml-1">Sekarang</span></li>
+                    </ul>
                 </div>
             </div>
-
-            <!-- Quote Section -->
-            <blockquote class="my-12 p-8 bg-white rounded-[8px] border border-[#dadada] shadow-sm text-center">
-                <p class="text-xl font-semibold italic text-[#222222] leading-relaxed mb-4 font-serif">
-                    "Membangun generasi cerdas berkarakter melalui penguasaan literatur dan informasi."
-                </p>
-                <footer class="text-sm font-semibold tracking-wide uppercase text-[#168940]">Motto Layanan Perpustakaan</footer>
-            </blockquote>
         )}
     </div>
 

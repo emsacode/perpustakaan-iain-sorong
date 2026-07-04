@@ -2,24 +2,93 @@
 ---
 <section id="profil" class="py-16 bg-white border-b border-[#dadada]">
         <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
             <div class="lg:col-span-7">
               <h2 class="text-2xl tracking-tight font-semibold text-[#222222] mb-6">
                 Profil &amp; Transformasi Perpustakaan
               </h2>
               <div class="font-serif text-base text-[#444444] space-y-4 leading-relaxed">
                 <p class="">
-                  Perpustakaan IAIN Sorong kini menempati gedung baru yang
-                  modern dan representatif guna mendukung seluruh kegiatan
-                  Tridharma Perguruan Tinggi di tanah Papua Barat Daya.
+                  Perpustakaan IAIN Sorong memiliki akar sejarah panjang, bermula sebagai warisan STAIS Al-Hikmah. Pada tahun 2006, perpustakaan ini resmi beralih status menjadi Perpustakaan STAIN Sorong.
                 </p>
                 <p class="">
-                  Mengusung misi transformasi intelektual global yang berakar
-                  kuat pada nilai-nilai kearifan lokal (local wisdom) serta
-                  penguatan moderasi beragama, kami berupaya menjadi jantung
-                  kehidupan akademis kampus.
+                  Kini menempati lantai dua eks-Gedung Rektorat, perpustakaan terus bertransformasi. Fasilitas penelusuran informasi yang memadai disediakan secara khusus guna menunjang atmosfer riset seluruh sivitas akademika.
                 </p>
-                <div class="mt-6 p-5 bg-gradient-to-r from-[#F0FDF4] to-white rounded-[8px] shadow-sm border border-[#DCFCE7]">
+
+                <!-- YouTube Thumbnail Placeholder -->
+                <button type="button" aria-label="Putar Video Profil" class="mt-6 relative w-full rounded-[8px] overflow-hidden border border-[#dadada] group cursor-pointer focus-visible:ring-[3px] focus-visible:ring-[#EAB308] outline-none block" onclick="openYoutubeModal()">
+                   <div class="aspect-video bg-slate-100 flex items-center justify-center relative">
+                     <div class="absolute inset-0 bg-slate-800/20 group-hover:bg-slate-800/10 transition-colors z-10"></div>
+                     <img src="https://img.youtube.com/vi/aqz-KE-bpKQ/maxresdefault.jpg" alt="Video Profil Perpustakaan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                     <div class="absolute z-20 w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-110 group-hover:bg-red-700 transition-all duration-300">
+                       <iconify-icon icon="lucide:play" width="2rem" style="stroke-width: 2;" class="ml-1"></iconify-icon>
+                     </div>
+                   </div>
+                </button>
+
+                <!-- Button Selengkapnya -->
+                <div class="mt-8">
+                  <a href="/profil" class="inline-flex items-center gap-2 px-6 py-2.5 bg-[#168940] text-white text-sm font-semibold rounded-[4px] hover:bg-[#0B4226] transition-colors focus-visible:ring-[3px] focus-visible:ring-[#EAB308] outline-none w-max">
+                    Selengkapnya <iconify-icon icon="lucide:arrow-right" width="1.2rem" style="stroke-width: 2;"></iconify-icon>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 bg-white border border-[#dadada] rounded-[8px] overflow-hidden shadow-sm">
+              <div class="bg-[#0B4226] px-6 py-4 border-b border-[#dadada]">
+                <h3 class="text-lg tracking-tight font-semibold text-white">
+                  Visi &amp; Misi
+                </h3>
+              </div>
+              <div class="p-6 space-y-6">
+                <div>
+                  <h4 class="text-sm font-semibold text-[#168940] uppercase tracking-wide mb-2">
+                    Visi
+                  </h4>
+                  <p class="font-serif text-sm text-[#444444] leading-relaxed italic">
+                    "Menjadi perpustakaan perguruan tinggi yang unggul, berbasis digital, dan berstandar nasional dalam mendukung tri dharma perguruan tinggi tahun 2030"
+                  </p>
+                </div>
+                <div class="h-px bg-[#dadada] w-full"></div>
+                <div>
+                  <h4 class="text-sm font-semibold text-[#168940] uppercase tracking-wide mb-3">
+                    Misi Utama
+                  </h4>
+                  <ul class="space-y-3 font-serif text-sm text-[#444444] leading-relaxed">
+                    <li class="flex items-start gap-2">
+                      <iconify-icon icon="lucide:check-circle" class="text-[#3182CE] mt-0.5 shrink-0" width="1.2rem" style="stroke-width: 1.5;"></iconify-icon>
+                      <span>
+                        Mengembangkan koleksi perpustakaan yang unggul, muktahir, dan integrative (keislaman, sains, dan kearifan local).
+                      </span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <iconify-icon icon="lucide:check-circle" class="text-[#38A169] mt-0.5 shrink-0" width="1.2rem" style="stroke-width: 1.5;"></iconify-icon>
+                      <span>
+                        Menyelenggarakan layanan perpustakaan berbasis digital yang inklusif, cepat, dan mudah diakses.
+                      </span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <iconify-icon icon="lucide:check-circle" class="text-[#E53E3E] mt-0.5 shrink-0" width="1.2rem" style="stroke-width: 1.5;"></iconify-icon>
+                      <span>
+                        Mendukung Tri Dharma Perguruan Tinggi melalui penyediaan sumber informasi berkualitas dan inovatif.
+                      </span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <iconify-icon icon="lucide:check-circle" class="text-[#DD6B20] mt-0.5 shrink-0" width="1.2rem" style="stroke-width: 1.5;"></iconify-icon>
+                      <span>
+                        Meningkatkan literasi informasi civitas akademika yang moderat, kritis, dan kreatif dalam perspektif global.
+                      </span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <iconify-icon icon="lucide:check-circle" class="text-[#805AD5] mt-0.5 shrink-0" width="1.2rem" style="stroke-width: 1.5;"></iconify-icon>
+                      <span>
+                        Menguatkan tata Kelola professional serta jejaring Kerjasama nasional dan internasional yang adaptif dan berdaya saing.
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="p-5 bg-gradient-to-r from-[#F0FDF4] to-white rounded-[8px] shadow-sm border border-[#DCFCE7]">
                   <h3 class="text-sm font-semibold text-[#0B4226] font-sans mb-2 flex items-center gap-2">
                     <iconify-icon icon="lucide:star" class="text-[#DD6B20]" width="1.2rem" style="stroke-width: 1.5;"></iconify-icon>
                     Ciri Khas Koleksi
@@ -38,57 +107,43 @@
                 </div>
               </div>
             </div>
-
-            <div class="lg:col-span-5 bg-white border border-[#dadada] rounded-[8px] overflow-hidden shadow-sm">
-              <div class="bg-[#0B4226] px-6 py-4 border-b border-[#dadada]">
-                <h3 class="text-lg tracking-tight font-semibold text-white">
-                  Visi &amp; Misi
-                </h3>
-              </div>
-              <div class="p-6 space-y-6">
-                <div>
-                  <h4 class="text-sm font-semibold text-[#168940] uppercase tracking-wide mb-2">
-                    Visi
-                  </h4>
-                  <p class="font-serif text-sm text-[#444444] leading-relaxed italic">
-                    "Pusat Keunggulan Sumber Informasi (Center of Excellence for
-                    Information Resources) yang Unggul, Moderat, dan Berbasis
-                    Local Wisdom."
-                  </p>
-                </div>
-                <div class="h-px bg-[#dadada] w-full"></div>
-                <div>
-                  <h4 class="text-sm font-semibold text-[#168940] uppercase tracking-wide mb-3">
-                    Misi Utama
-                  </h4>
-                  <ul class="space-y-3 font-serif text-sm text-[#444444] leading-relaxed">
-                    <li class="flex items-start gap-2">
-                      <iconify-icon icon="lucide:check-circle" class="text-[#3182CE] mt-0.5 shrink-0" width="1.2rem" style="stroke-width: 1.5;"></iconify-icon>
-                      <span>
-                        <strong>Pemberdayaan Informasi:</strong>
-                        Mengembangkan dan menyebarluaskan sumber informasi
-                        terintegrasi.
-                      </span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                      <iconify-icon icon="lucide:check-circle" class="text-[#38A169] mt-0.5 shrink-0" width="1.2rem" style="stroke-width: 1.5;"></iconify-icon>
-                      <span>
-                        <strong>Pengembangan SDM:</strong>
-                        Menyiapkan pustakawan kompeten untuk masyarakat akademis
-                        religius.
-                      </span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                      <iconify-icon icon="lucide:check-circle" class="text-[#E53E3E] mt-0.5 shrink-0" width="1.2rem" style="stroke-width: 1.5;"></iconify-icon>
-                      <span>
-                        <strong>Sinergi &amp; Jejaring:</strong>
-                        Menggalang kemitraan antar-perpustakaan skala global.
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
+
+<!-- YouTube Modal -->
+<div id="youtubeModal" class="fixed inset-0 z-[100] hidden opacity-0 transition-opacity duration-300 flex items-center justify-center">
+  <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeYoutubeModal()"></div>
+  <div class="relative w-full max-w-4xl mx-4 z-10">
+    <button type="button" onclick="closeYoutubeModal()" class="absolute -top-12 right-0 text-white/70 hover:text-white transition-colors focus:outline-none">
+      <iconify-icon icon="lucide:x" width="2.5rem"></iconify-icon>
+    </button>
+    <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+      <iframe id="youtubeIframe" class="w-full h-full" src="https://www.youtube.com/embed/aqz-KE-bpKQ?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function openYoutubeModal() {
+    const modal = document.getElementById('youtubeModal');
+    modal.classList.remove('hidden');
+    // slight delay for transition
+    setTimeout(() => {
+      modal.classList.remove('opacity-0');
+      modal.classList.add('opacity-100');
+    }, 10);
+  }
+
+  function closeYoutubeModal() {
+    const modal = document.getElementById('youtubeModal');
+    const iframe = document.getElementById('youtubeIframe');
+    modal.classList.remove('opacity-100');
+    modal.classList.add('opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      // Stop video by re-assigning src
+      iframe.src = iframe.src; 
+    }, 300);
+  }
+</script>

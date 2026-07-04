@@ -47,18 +47,64 @@ if (newsData.length === 0) {
     { title: "Belum ada berita yang tersedia saat ini.", link: "#", date: "-", views: 0 }
   ];
 }
+
+const internationalResources = [
+  { name: "Nature", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1705552312_9c837fa28a8cb03a57bd.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "EBSCO", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1616580448_1c3a5442efdbd13ce2f2.jpg", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "ProQuest", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1617700487_23c8716da9a7cf1a80d6.jpg", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Gale Cengage", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1618234553_3a134eb97c7b7097b64d.jpg", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Cambridge University Press", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1705554248_feaede58178b11e4b09c.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Wiley", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1645582974_3f1e47ab4df59fdf593c.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "JSTOR", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1650245959_15ab4529751efc0d77fa.jpg", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Oxford University Press", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1705556171_6cf242b4fdc867cd6f4b.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "ScienceDirect", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img13.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "IEEE Xplore", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1598205787_67e5a5c91d6eb85a9dda.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "MyiLibrary", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1598205917_3ae7c0f9757114081e71.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "SAGE Publications", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1681283717_61299c0b8bd3a2b2501b.gif", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Taylor & Francis", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img35.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "CABI", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/cabi.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Westlaw", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img2.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "LexisNexis", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img1.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Springer Link", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img34.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "ClinicalKey", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img19.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Scopus", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img5.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Embase", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img20.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Mendeley", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img36.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Britannica Library", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/britannica.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Emerald Insight", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/emerald.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "ProQuest Dissertations", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img17.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "HeinOnline", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img9.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Ulrichsweb", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img6.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "iG Library", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/1598267711_3210c6d0319bbd5081ee.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Ebsco Discovery Service", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img8.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "PressReader", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img7.png", url: "https://e-resources.perpusnas.go.id/" },
+  { name: "Turnitin", logo: "https://e-resources.perpusnas.go.id/assets/terbitan/logo/img4.png", url: "https://e-resources.perpusnas.go.id/" }
+];
+
+const localResources = [
+  { name: "SINTA", logo: "/images/network/sinta-new.png", url: "https://sinta.kemdiktisaintek.go.id/" },
+  { name: "GARUDA", logo: "/images/network/garuda-new.png", url: "https://garuda.kemdiktisaintek.go.id/" },
+  { name: "Indonesia One Search", logo: "/images/network/onesearch.jpg", url: "https://onesearch.id/Repositories/Repository?library_id=255" },
+  { name: "KOMPAS DATA", logo: "/images/network/local_pub_0.png", url: "https://data.kompas.id/" },
+  { name: "TEMPO DATA SCIENCE", logo: "/images/network/local_pub_1.png", url: "https://data.tempo.co/" },
+  { name: "KOMPAS.id", logo: "/images/network/local_pub_2.png", url: "https://www.kompas.id/" },
+  { name: "Neliti", logo: "/images/network/local_pub_3.png", url: "https://www.neliti.com/" },
+  { name: "Balai Pustaka", logo: "/images/network/local_pub_4.png", url: "https://balaipustaka.co.id/" },
+  { name: "RAMA Repository", logo: "/images/network/rama.png", url: "https://rama.kemdikbud.go.id/" },
+  { name: "Turnitin", logo: "/images/network/turnitin.png", url: "https://www.turnitin.com/" }
+];
 ---
 
 <section class="py-12 bg-white border-b border-[#dadada]">
   <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
       
-      <!-- LEFT COLUMN: News & Info -->
+      <!-- LEFT COLUMN: Pengumuman -->
       <div class="lg:col-span-3">
         <!-- Title -->
         <h2 class="flex items-center gap-2 text-xl font-serif font-bold text-dark border-b-[2px] border-primary pb-3 mb-2">
           <iconify-icon icon="lucide:newspaper" class="text-primary text-2xl"></iconify-icon>
-          News & Info
+          Pengumuman
         </h2>
 
         <!-- News List (Dynamic) -->
@@ -106,24 +152,11 @@ if (newsData.length === 0) {
           <div class="animate-marquee flex whitespace-nowrap items-center gap-3 group-hover:[animation-play-state:paused]">
             {Array(2).fill(null).map(() => (
               <div class="grid grid-rows-2 grid-flow-col gap-3 px-1.5">
-                <a href="https://ieeexplore.ieee.org" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="IEEE"><img src="/images/network/ieee.png" alt="IEEE" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://link.springer.com" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Springer"><img src="/images/network/springer.png" alt="Springer" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://www.sciencedirect.com" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Science Direct"><img src="/images/network/sciencedirect.png" alt="Science Direct" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://www.worldscientific.com" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="World Scientific"><img src="/images/network/worldscientific.jpg" alt="World Scientific" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://dl.acm.org" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="ACM"><img src="/images/network/acm_.png" alt="ACM" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://www.nature.com/scientificamerican/index.html" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Scientific American"><img src="/images/network/scientific_american.png" alt="Scientific American" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://www.emerald.com/insight/" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Emerald Insight"><img src="/images/network/emerald.gif" alt="Emerald Insight" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://journals.sagepub.com" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="SAGE"><img src="/images/network/sage.png" alt="SAGE" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://www.inderscienceonline.com" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Inderscience"><img src="/images/network/indersience.jpg" alt="Inderscience" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://www.tandfonline.com" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Taylor and Francis"><img src="/images/network/taylorfrancis.png" alt="Taylor and Francis" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://portal.igpublish.com/iglibrary/" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="BEP"><img src="/images/network/bep.png" alt="BEP" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://www.statista.com" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Statista"><img src="/images/network/statista.png" alt="Statista" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://www.bloomsburycollections.com" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Bloomsbury"><img src="/images/network/bloomsbury-logo.jpg" alt="Bloomsbury" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://digital-library.theiet.org/" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="IET Digital Library"><img src="/images/network/IET_logo.png" alt="IET Digital Library" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://accessmedicine.mhmedical.com/" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="AccessMedicine"><img src="/images/network/macgrowhill_accessmedicine.webp" alt="AccessMedicine" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://ithenticate.com/" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Ithenticate"><img src="/images/network/ithenticate_new.png" alt="Ithenticate" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://turnitin.com/" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Turnitin"><img src="/images/network/turnitin.png" alt="Turnitin" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-                <a href="https://scopus.com/" target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="SCOPUS"><img src="/images/network/scopus.png" alt="SCOPUS" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
+                {internationalResources.map(res => (
+                  <a href={res.url} target="_blank" rel="noopener noreferrer" class="h-12 w-28 shrink-0 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title={res.name}>
+                    <img src={res.logo} alt={res.name} class="max-h-full max-w-full object-contain" loading="lazy" />
+                  </a>
+                ))}
               </div>
             ))}
           </div>
@@ -131,24 +164,11 @@ if (newsData.length === 0) {
 
         <!-- E-Resources: Desktop Grid -->
         <div class="hidden md:flex flex-wrap items-center justify-center gap-4 bg-slate-50 border border-slate-100 rounded-xl py-6 px-6">
-          <a href="https://ieeexplore.ieee.org" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="IEEE"><img src="/images/network/ieee.png" alt="IEEE" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://link.springer.com" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Springer"><img src="/images/network/springer.png" alt="Springer" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://www.sciencedirect.com" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Science Direct"><img src="/images/network/sciencedirect.png" alt="Science Direct" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://www.worldscientific.com" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="World Scientific"><img src="/images/network/worldscientific.jpg" alt="World Scientific" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://dl.acm.org" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="ACM"><img src="/images/network/acm_.png" alt="ACM" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://www.nature.com/scientificamerican/index.html" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Scientific American"><img src="/images/network/scientific_american.png" alt="Scientific American" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://www.emerald.com/insight/" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Emerald Insight"><img src="/images/network/emerald.gif" alt="Emerald Insight" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://journals.sagepub.com" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="SAGE"><img src="/images/network/sage.png" alt="SAGE" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://www.inderscienceonline.com" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Inderscience"><img src="/images/network/indersience.jpg" alt="Inderscience" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://www.tandfonline.com" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Taylor and Francis"><img src="/images/network/taylorfrancis.png" alt="Taylor and Francis" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://portal.igpublish.com/iglibrary/" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="BEP"><img src="/images/network/bep.png" alt="BEP" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://www.statista.com" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Statista"><img src="/images/network/statista.png" alt="Statista" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://www.bloomsburycollections.com" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Bloomsbury"><img src="/images/network/bloomsbury-logo.jpg" alt="Bloomsbury" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://digital-library.theiet.org/" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="IET Digital Library"><img src="/images/network/IET_logo.png" alt="IET Digital Library" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://accessmedicine.mhmedical.com/" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="AccessMedicine"><img src="/images/network/macgrowhill_accessmedicine.webp" alt="AccessMedicine" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://ithenticate.com/" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Ithenticate"><img src="/images/network/ithenticate_new.png" alt="Ithenticate" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://turnitin.com/" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="Turnitin"><img src="/images/network/turnitin.png" alt="Turnitin" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
-          <a href="https://scopus.com/" target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title="SCOPUS"><img src="/images/network/scopus.png" alt="SCOPUS" class="max-h-full max-w-full object-contain" loading="lazy" /></a>
+          {internationalResources.map(res => (
+            <a href={res.url} target="_blank" rel="noopener noreferrer" class="h-14 w-32 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] transition-all bg-white p-2" title={res.name}>
+              <img src={res.logo} alt={res.name} class="max-h-full max-w-full object-contain" loading="lazy" />
+            </a>
+          ))}
         </div>
 
         <!-- Networks / Integrations: Mobile Marquee -->
@@ -159,53 +179,37 @@ if (newsData.length === 0) {
           <div class="animate-marquee flex whitespace-nowrap items-center gap-4 group-hover:[animation-play-state:paused]">
             {Array(2).fill(null).map(() => (
               <div class="flex items-center gap-4 px-2">
-                <a href="http://e-resources.perpusnas.go.id/" target="_blank" rel="noopener noreferrer" class="h-16 w-48 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] hover:shadow-sm transition-all bg-white p-2" title="E-Resources Perpusnas">
-                  <img src="/images/network/pnri.jpg" alt="E-Resources Perpusnas" class="max-h-full max-w-full object-contain" />
-                </a>
-                <a href="https://infralib.ptsmi.co.id/" target="_blank" rel="noopener noreferrer" class="h-16 w-48 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] hover:shadow-sm transition-all bg-white p-2" title="infralib">
-                  <img src="/images/network/smi.png" alt="infralib" class="max-h-full max-w-full object-contain" />
-                </a>
-                <a href="https://onesearch.id/Repositories/Repository?library_id=255" target="_blank" rel="noopener noreferrer" class="h-16 w-48 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] hover:shadow-sm transition-all bg-white p-2" title="Indonesia One Search">
-                  <img src="/images/network/onesearch.jpg" alt="Indonesia One Search" class="max-h-full max-w-full object-contain" />
-                </a>
-                <a href="https://rama.kemdiktisaintek.go.id/repositories/repodoc/333" target="_blank" rel="noopener noreferrer" class="h-16 w-48 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] hover:shadow-sm transition-all bg-white p-2" title="RAMA Repository">
-                  <img src="/images/network/rama.png" alt="RAMA Repository" class="max-h-full max-w-full object-contain" />
-                </a>
-                <a href="https://e-jurnal.iainsorong.ac.id/" target="_blank" rel="noopener noreferrer" class="h-16 w-48 border border-gray-200 rounded-[6px] flex items-center justify-center gap-2 hover:border-[#0284C7] hover:shadow-sm transition-all bg-white p-2" title="Journals IAIN Sorong">
-                  <iconify-icon icon="lucide:book-open" class="text-2xl text-[#0284C7]"></iconify-icon>
-                  <span class="font-sans font-bold text-[12px] text-center text-[#0284C7] leading-tight">Journals<br/>IAIN Sorong</span>
-                </a>
-                <a href="https://repositori.iainsorong.ac.id/" target="_blank" rel="noopener noreferrer" class="h-16 w-48 border border-gray-200 rounded-[6px] flex items-center justify-center gap-2 hover:border-[#0284C7] hover:shadow-sm transition-all bg-white p-2" title="E-Proceeding IAIN Sorong">
-                  <iconify-icon icon="lucide:library" class="text-2xl text-[#0284C7]"></iconify-icon>
-                  <span class="font-sans font-bold text-[12px] text-center text-[#0284C7] leading-tight">E-Proceeding<br/>IAIN Sorong</span>
-                </a>
+                {localResources.map(res => (
+                  res.type === "icon" ? (
+                    <a href={res.url} target="_blank" rel="noopener noreferrer" class="h-16 w-48 border border-gray-200 rounded-[6px] flex items-center justify-center gap-2 hover:border-[#0284C7] hover:shadow-sm transition-all bg-white p-2" title={res.name}>
+                      <iconify-icon icon={res.icon} class="text-2xl text-[#0284C7]"></iconify-icon>
+                      <span class="font-sans font-bold text-[12px] text-center text-[#0284C7] leading-tight" set:html={res.htmlName}></span>
+                    </a>
+                  ) : (
+                    <a href={res.url} target="_blank" rel="noopener noreferrer" class="h-16 w-48 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] hover:shadow-sm transition-all bg-white p-2" title={res.name}>
+                      <img src={res.logo} alt={res.name} class="max-h-full max-w-full object-contain" loading="lazy" />
+                    </a>
+                  )
+                ))}
               </div>
             ))}
           </div>
         </div>
 
         <!-- Networks / Integrations: Desktop Grid -->
-        <div class="hidden md:grid mt-10 grid-cols-3 gap-x-6 gap-y-4">
-          <a href="http://e-resources.perpusnas.go.id/" target="_blank" rel="noopener noreferrer" class="h-16 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] hover:shadow-sm transition-all bg-white group overflow-hidden p-2" title="E-Resources Perpusnas">
-            <img src="/images/network/pnri.jpg" alt="E-Resources Perpusnas" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
-          </a>
-          <a href="https://infralib.ptsmi.co.id/" target="_blank" rel="noopener noreferrer" class="h-16 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] hover:shadow-sm transition-all bg-white group overflow-hidden p-2" title="infralib">
-            <img src="/images/network/smi.png" alt="infralib" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
-          </a>
-          <a href="https://onesearch.id/Repositories/Repository?library_id=255" target="_blank" rel="noopener noreferrer" class="h-16 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] hover:shadow-sm transition-all bg-white group overflow-hidden p-2" title="Indonesia One Search">
-            <img src="/images/network/onesearch.jpg" alt="Indonesia One Search" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
-          </a>
-          <a href="https://rama.kemdiktisaintek.go.id/repositories/repodoc/333" target="_blank" rel="noopener noreferrer" class="h-16 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] hover:shadow-sm transition-all bg-white group overflow-hidden p-2" title="RAMA Repository">
-            <img src="/images/network/rama.png" alt="RAMA Repository" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
-          </a>
-          <a href="https://e-jurnal.iainsorong.ac.id/" target="_blank" rel="noopener noreferrer" class="h-16 border border-gray-200 rounded-[6px] flex items-center justify-center gap-2 hover:border-[#0284C7] hover:shadow-sm transition-all bg-white group overflow-hidden p-2" title="Journals IAIN Sorong">
-            <iconify-icon icon="lucide:book-open" class="text-2xl text-[#0284C7] group-hover:scale-110 transition-transform"></iconify-icon>
-            <span class="font-sans font-bold text-[13px] text-center text-[#0284C7] leading-tight">Journals<br/>IAIN Sorong</span>
-          </a>
-          <a href="https://repositori.iainsorong.ac.id/" target="_blank" rel="noopener noreferrer" class="h-16 border border-gray-200 rounded-[6px] flex items-center justify-center gap-2 hover:border-[#0284C7] hover:shadow-sm transition-all bg-white group overflow-hidden p-2" title="E-Proceeding IAIN Sorong">
-            <iconify-icon icon="lucide:library" class="text-2xl text-[#0284C7] group-hover:scale-110 transition-transform"></iconify-icon>
-            <span class="font-sans font-bold text-[13px] text-center text-[#0284C7] leading-tight">E-Proceeding<br/>IAIN Sorong</span>
-          </a>
+        <div class="hidden md:grid mt-10 grid-cols-5 gap-4">
+          {localResources.map(res => (
+            res.type === "icon" ? (
+              <a href={res.url} target="_blank" rel="noopener noreferrer" class="h-16 border border-gray-200 rounded-[6px] flex items-center justify-center gap-2 hover:border-[#0284C7] hover:shadow-sm transition-all bg-white group overflow-hidden p-2" title={res.name}>
+                <iconify-icon icon={res.icon} class="text-2xl text-[#0284C7] group-hover:scale-110 transition-transform"></iconify-icon>
+                <span class="font-sans font-bold text-[13px] text-center text-[#0284C7] leading-tight" set:html={res.htmlName}></span>
+              </a>
+            ) : (
+              <a href={res.url} target="_blank" rel="noopener noreferrer" class="h-16 border border-gray-200 rounded-[6px] flex items-center justify-center hover:border-[#0284C7] hover:shadow-sm transition-all bg-white group overflow-hidden p-2" title={res.name}>
+                <img src={res.logo} alt={res.name} class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" loading="lazy" />
+              </a>
+            )
+          ))}
         </div>
 
 

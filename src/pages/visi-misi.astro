@@ -8,6 +8,7 @@ const sidebarMenu = {
 
 // Fetch dynamic page from Laravel API
 let pageData = null;
+/*
 try {
     const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/pages/visi-misi');
     if (response.ok) {
@@ -16,6 +17,7 @@ try {
 } catch (e) {
     // Fail silently, fallback to static HTML
 }
+*/
 ---
 
 <LayoutSidebar title="Visi & Misi" sidebarMenu={sidebarMenu}>
@@ -30,7 +32,7 @@ try {
             </div>
             <h2 class="text-lg md:text-xl font-bold tracking-widest uppercase text-[#168940] mb-4 border-b border-[#dadada] pb-2">Visi Perpustakaan</h2>
             <p class="text-xl md:text-2xl font-serif leading-relaxed text-[#222222]">
-                "Menjadi pusat referensi dan informasi rujukan utama yang unggul dalam menyediakan literatur studi keislaman, sains, dan teknologi untuk mendukung tercapainya visi IAIN Sorong sebagai perguruan tinggi terkemuka di Papua dan Indonesia Timur."
+                "Menjadi perpustakaan perguruan tinggi yang unggul, berbasis digital, dan berstandar nasional dalam mendukung tri dharma perguruan tinggi tahun 2030"
             </p>
         </div>
 
@@ -49,8 +51,7 @@ try {
                             <iconify-icon icon="flat-color-icons:database" ></iconify-icon>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold text-[#222222] mb-2 mt-0">Penyediaan Akses Cepat & Tepat</h3>
-                            <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Membangun dan mengembangkan sistem informasi perpustakaan yang terintegrasi untuk memudahkan pemustaka mengakses sumber literasi.</p>
+                            <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Mengembangkan koleksi perpustakaan yang unggul, muktahir, dan integrative (keislaman, sains, dan kearifan local).</p>
                         </div>
                     </div>
                 </div>
@@ -59,11 +60,10 @@ try {
                 <div class="group bg-white border border-[#dadada] rounded-[8px] p-6 hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] flex items-center justify-center text-[#168940] shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">
-                            <iconify-icon icon="flat-color-icons:bookmark" ></iconify-icon>
+                            <iconify-icon icon="flat-color-icons:online-support" ></iconify-icon>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold text-[#222222] mb-2 mt-0">Pengembangan Koleksi Mutakhir</h3>
-                            <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Menyediakan bahan pustaka cetak dan digital (e-resources) yang relevan dan terkini guna menunjang kegiatan pendidikan dan riset.</p>
+                            <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Menyelenggarakan layanan perpustakaan berbasis digital yang inklusif, cepat, dan mudah diakses.</p>
                         </div>
                     </div>
                 </div>
@@ -72,11 +72,10 @@ try {
                 <div class="group bg-white border border-[#dadada] rounded-[8px] p-6 hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] flex items-center justify-center text-[#168940] shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">
-                            <iconify-icon icon="flat-color-icons:collaboration" ></iconify-icon>
+                            <iconify-icon icon="flat-color-icons:reading" ></iconify-icon>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold text-[#222222] mb-2 mt-0">Peningkatan Budaya Literasi</h3>
-                            <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Menyelenggarakan program edukasi dan literasi informasi guna meningkatkan kemampuan riset mahasiswa dan dosen.</p>
+                            <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Mendukung Tri Dharma Perguruan Tinggi melalui penyediaan sumber informasi berkualitas dan inovatif.</p>
                         </div>
                     </div>
                 </div>
@@ -85,11 +84,22 @@ try {
                 <div class="group bg-white border border-[#dadada] rounded-[8px] p-6 hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300">
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] flex items-center justify-center text-[#168940] shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">
-                            <iconify-icon icon="flat-color-icons:sms" ></iconify-icon>
+                            <iconify-icon icon="flat-color-icons:idea" ></iconify-icon>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold text-[#222222] mb-2 mt-0">Pelayanan Prima</h3>
-                            <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Memberikan layanan prima yang ramah, responsif, dan adaptif berbasis teknologi informasi kepada seluruh pengguna perpustakaan.</p>
+                            <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Meningkatkan literasi informasi civitas akademika yang moderat, kritis, dan kreatif dalam perspektif global.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Misi 5 -->
+                <div class="group bg-white border border-[#dadada] rounded-[8px] p-6 hover:border-[#BBF7D0] shadow-sm hover:shadow-md transition-all duration-300 md:col-span-2">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-[8px] bg-[#F0FDF4] flex items-center justify-center text-[#168940] shrink-0 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                            <iconify-icon icon="flat-color-icons:collaboration" ></iconify-icon>
+                        </div>
+                        <div>
+                            <p class="text-[#444444] font-serif leading-relaxed text-sm m-0">Menguatkan tata Kelola professional serta jejaring Kerjasama nasional dan internasional yang adaptif dan berdaya saing.</p>
                         </div>
                     </div>
                 </div>
