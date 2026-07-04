@@ -38,10 +38,9 @@ const testimonials = [
               <!-- Youtube Lazy Load Container (Trigger Modal) -->
               <div class="youtube-trigger relative w-full aspect-video bg-slate-100 cursor-pointer overflow-hidden" data-id={t.youtubeId}>
                 <img 
-                  src={`https://i.ytimg.com/vi/${t.youtubeId}/maxresdefault.jpg`} 
+                  src={`https://i.ytimg.com/vi/${t.youtubeId}/hqdefault.jpg`} 
                   alt={t.title} 
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                  onerror="this.src='https://i.ytimg.com/vi/'+this.parentNode.dataset.id+'/hqdefault.jpg'" 
                 />
                 <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
                   <div class="w-12 h-12 bg-red-600/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-red-600 transition-all duration-300">
