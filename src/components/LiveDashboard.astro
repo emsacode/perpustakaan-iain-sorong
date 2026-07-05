@@ -95,7 +95,7 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
                         <div class="flex justify-center mb-2 text-[#168940]/80">
                             <iconify-icon icon="lucide:book-copy" width="1.75rem"></iconify-icon>
                         </div>
-                        <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+                        <h4 id="stat-eksemplar" class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
                             {formatNumber(liveStats.eksemplar_buku)}
                         </h4>
                         <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Eksemplar Buku</p>
@@ -107,7 +107,7 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
                         <div class="flex justify-center mb-2 text-[#168940]/80">
                             <iconify-icon icon="lucide:book-open" width="1.75rem"></iconify-icon>
                         </div>
-                        <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+                        <h4 id="stat-judul" class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
                             {formatNumber(liveStats.judul_buku)}
                         </h4>
                         <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Judul Buku</p>
@@ -119,7 +119,7 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
                         <div class="flex justify-center mb-2 text-[#168940]/80">
                             <iconify-icon icon="lucide:newspaper" width="1.75rem"></iconify-icon>
                         </div>
-                        <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+                        <h4 id="stat-jurnal" class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
                             {formatNumber(liveStats.jurnal_ilmiah)}
                         </h4>
                         <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Jurnal / Ilmiah</p>
@@ -131,7 +131,7 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
                         <div class="flex justify-center mb-2 text-[#168940]/80">
                             <iconify-icon icon="lucide:graduation-cap" width="1.75rem"></iconify-icon>
                         </div>
-                        <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+                        <h4 id="stat-skripsi" class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
                             {formatNumber(liveStats.dokumen_skripsi)}
                         </h4>
                         <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Dokumen Skripsi</p>
@@ -143,7 +143,7 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
                         <div class="flex justify-center mb-2 text-[#168940]/80">
                             <iconify-icon icon="lucide:users" width="1.75rem"></iconify-icon>
                         </div>
-                        <h4 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
+                        <h4 id="stat-anggota" class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#168940] mb-1.5 font-mono tracking-tighter">
                             {formatNumber(liveStats.total_anggota)}
                         </h4>
                         <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Anggota</p>
@@ -154,4 +154,56 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
         </div>
 
     </div>
+
+    <script>
+        async function fetchLiveStats() {
+            try {
+                const authResponse = await fetch('https://api.emsacode.com/oauth/token', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        grant_type: 'client_credentials',
+                        client_id: 'app-brim',
+                        client_secret: 'demo-secret-brim-001'
+                    })
+                });
+                if (!authResponse.ok) return;
+                const authData = await authResponse.json();
+                const token = authData.access_token;
+                
+                const statsResponse = await fetch('https://api.emsacode.com/api/v1/library/stats', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!statsResponse.ok) return;
+                const statsData = await statsResponse.json();
+                const data = statsData.data;
+                
+                if (data) {
+                    const format = (num) => typeof num === 'number' ? num.toLocaleString('id-ID') : num;
+                    
+                    const eksemplar = document.getElementById('stat-eksemplar');
+                    if (eksemplar && data.eksemplar_buku !== undefined) eksemplar.innerText = format(data.eksemplar_buku);
+                    
+                    const judul = document.getElementById('stat-judul');
+                    if (judul && data.judul_buku !== undefined) judul.innerText = format(data.judul_buku);
+                    
+                    const jurnal = document.getElementById('stat-jurnal');
+                    if (jurnal && data.jurnal_ilmiah !== undefined) jurnal.innerText = format(data.jurnal_ilmiah);
+                    
+                    const skripsi = document.getElementById('stat-skripsi');
+                    if (skripsi && data.dokumen_skripsi !== undefined) skripsi.innerText = format(data.dokumen_skripsi);
+                    
+                    const anggota = document.getElementById('stat-anggota');
+                    if (anggota && data.total_anggota !== undefined) anggota.innerText = format(data.total_anggota);
+                }
+            } catch (error) {
+                console.error("Failed to fetch live stats on frontend", error);
+            }
+        }
+        
+        // Execute on load
+        document.addEventListener('DOMContentLoaded', fetchLiveStats);
+        // Also execute immediately in case DOMContentLoaded already fired (Astro behavior)
+        fetchLiveStats();
+    </script>
 </section>
