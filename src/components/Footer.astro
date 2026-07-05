@@ -72,22 +72,22 @@ const currentYear = new Date().getFullYear();
                 <span class="text-[10px] text-[#BBF7D0]/50 uppercase tracking-wider font-semibold mb-1.5">Statistik Pengunjung</span>
                 <div class="flex items-start gap-3">
                   <div class="flex flex-col">
-                    <span class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none">256,748</span>
+                    <span id="ga-tahun-ini" class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none">256,748</span>
                     <span class="text-[8px] md:text-[9px] text-[#BBF7D0]/60 uppercase tracking-wide mt-0.5 whitespace-nowrap">Tahun Ini</span>
                   </div>
                   <div class="w-px h-auto self-stretch bg-white/10 my-0.5"></div>
                   <div class="flex flex-col">
-                    <span class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none">7,299</span>
+                    <span id="ga-bulan-ini" class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none">7,299</span>
                     <span class="text-[8px] md:text-[9px] text-[#BBF7D0]/60 uppercase tracking-wide mt-0.5 whitespace-nowrap">Bulan Ini</span>
                   </div>
                   <div class="w-px h-auto self-stretch bg-white/10 my-0.5"></div>
                   <div class="flex flex-col">
-                    <span class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none">1,222</span>
+                    <span id="ga-hari-ini" class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none">1,222</span>
                     <span class="text-[8px] md:text-[9px] text-[#BBF7D0]/60 uppercase tracking-wide mt-0.5 whitespace-nowrap">Hari Ini</span>
                   </div>
                   <div class="w-px h-auto self-stretch bg-white/10 my-0.5"></div>
                   <div class="flex flex-col">
-                    <span class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none flex items-center gap-1">
+                    <span id="ga-online" class="text-[#BBF7D0] font-bold text-xs md:text-sm leading-none flex items-center gap-1">
                       <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -207,6 +207,61 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
   </div>
+  <script>
+    async function fetchVisitorStats() {
+      try {
+        const authResponse = await fetch('https://api.emsacode.com/oauth/token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            grant_type: 'client_credentials',
+            client_id: 'app-brim',
+            client_secret: 'demo-secret-brim-001'
+          })
+        });
+        if (!authResponse.ok) return;
+        const authData = await authResponse.json();
+        const token = authData.access_token;
+        
+        const statsResponse = await fetch('https://api.emsacode.com/api/v1/analytics/visitors', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!statsResponse.ok) return;
+        const statsData = await statsResponse.json();
+        const data = statsData.data;
+        
+        if (data) {
+          const format = (num) => typeof num === 'number' ? num.toLocaleString('id-ID') : num;
+          
+          const elTahunIni = document.getElementById('ga-tahun-ini');
+          if (elTahunIni && data.tahun_ini !== undefined) elTahunIni.innerText = format(data.tahun_ini);
+          
+          const elBulanIni = document.getElementById('ga-bulan-ini');
+          if (elBulanIni && data.bulan_ini !== undefined) elBulanIni.innerText = format(data.bulan_ini);
+          
+          const elHariIni = document.getElementById('ga-hari-ini');
+          if (elHariIni && data.hari_ini !== undefined) elHariIni.innerText = format(data.hari_ini);
+          
+          // Note: Retaining the ping animation child elements
+          const elOnline = document.getElementById('ga-online');
+          if (elOnline && data.online !== undefined) {
+            elOnline.innerHTML = `
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              ${format(data.online)}
+            `;
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch GA visitor stats on frontend", error);
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', fetchVisitorStats);
+    fetchVisitorStats();
+  </script>
 </footer>
 
 <script>
