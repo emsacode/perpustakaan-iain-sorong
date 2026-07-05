@@ -1,8 +1,17 @@
 ---
-import dashboardData from '../data/dashboard_gold.json';
-import liveStats from '../data/live_stats.json';
+import { ddagApi } from '../utils/ddagApi.js';
+import fallbackStats from '../data/live_stats.json';
 
-const stats = dashboardData;
+let liveStats = { ...fallbackStats, reservasi_ruangan: 0 };
+
+try {
+    const statsResponse = await ddagApi.getStats();
+    if (statsResponse && statsResponse.success && statsResponse.data) {
+        liveStats = { ...liveStats, ...statsResponse.data };
+    }
+} catch (e) {
+    console.error("Failed to fetch live stats during SSR", e);
+}
 
 const formatNumber = (num) => typeof num === 'number' ? num.toLocaleString('id-ID') : num;
 
@@ -67,7 +76,7 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
                         <iconify-icon icon="lucide:door-open" class="text-2xl text-white"></iconify-icon>
                     </div>
                     <div>
-                        <div class="text-3xl font-extrabold leading-none tracking-tight">2</div>
+                        <div class="text-3xl font-extrabold leading-none tracking-tight">{liveStats.reservasi_ruangan || 0}</div>
                         <div class="text-[10px] font-bold uppercase tracking-wider text-red-100 mt-1">Reservasi Ruangan</div>
                     </div>
                 </div>
@@ -155,55 +164,4 @@ const formattedDate = new Date().toLocaleDateString('en-GB', {
 
     </div>
 
-    <script>
-        async function fetchLiveStats() {
-            try {
-                const authResponse = await fetch('https://api.emsacode.com/oauth/token', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({
-                        grant_type: 'client_credentials',
-                        client_id: 'app-brim',
-                        client_secret: 'demo-secret-brim-001'
-                    })
-                });
-                if (!authResponse.ok) return;
-                const authData = await authResponse.json();
-                const token = authData.access_token;
-                
-                const statsResponse = await fetch('https://api.emsacode.com/api/v1/library/stats', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (!statsResponse.ok) return;
-                const statsData = await statsResponse.json();
-                const data = statsData.data;
-                
-                if (data) {
-                    const format = (num) => typeof num === 'number' ? num.toLocaleString('id-ID') : num;
-                    
-                    const eksemplar = document.getElementById('stat-eksemplar');
-                    if (eksemplar && data.eksemplar_buku !== undefined) eksemplar.innerText = format(data.eksemplar_buku);
-                    
-                    const judul = document.getElementById('stat-judul');
-                    if (judul && data.judul_buku !== undefined) judul.innerText = format(data.judul_buku);
-                    
-                    const jurnal = document.getElementById('stat-jurnal');
-                    if (jurnal && data.jurnal_ilmiah !== undefined) jurnal.innerText = format(data.jurnal_ilmiah);
-                    
-                    const skripsi = document.getElementById('stat-skripsi');
-                    if (skripsi && data.dokumen_skripsi !== undefined) skripsi.innerText = format(data.dokumen_skripsi);
-                    
-                    const anggota = document.getElementById('stat-anggota');
-                    if (anggota && data.total_anggota !== undefined) anggota.innerText = format(data.total_anggota);
-                }
-            } catch (error) {
-                console.error("Failed to fetch live stats on frontend", error);
-            }
-        }
-        
-        // Execute on load
-        document.addEventListener('DOMContentLoaded', fetchLiveStats);
-        // Also execute immediately in case DOMContentLoaded already fired (Astro behavior)
-        fetchLiveStats();
-    </script>
 </section>

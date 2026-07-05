@@ -1,8 +1,25 @@
 ---
 import LayoutSidebar from '../layouts/LayoutSidebar.astro';
 import dashboardData from '../data/dashboard_gold.json';
+import { ddagApi } from '../utils/ddagApi.js';
 
-const stats = dashboardData;
+const stats = { ...dashboardData };
+// Deep copy nested objects to avoid mutating the original imported JSON if needed, though simple spread is fine for this use case since we just reassign primitives.
+stats.koleksi = { ...dashboardData.koleksi };
+stats.kunjungan = { ...dashboardData.kunjungan };
+
+try {
+    const liveResponse = await ddagApi.getStats();
+    if (liveResponse && liveResponse.success && liveResponse.data) {
+        const live = liveResponse.data;
+        if (live.judul_buku !== undefined) stats.koleksi.total_judul = live.judul_buku;
+        if (live.eksemplar_buku !== undefined) stats.koleksi.total_eksemplar = live.eksemplar_buku;
+        if (live.pengunjung_fisik !== undefined) stats.kunjungan.hari_ini = live.pengunjung_fisik;
+        if (live.akses_koleksi_digital !== undefined) stats.kunjungan.download_eresources_bulan = live.akses_koleksi_digital;
+    }
+} catch (e) {
+    console.error("Failed to fetch live stats for statistik page SSR", e);
+}
 
 const sidebarMenu = {
     title: "Transparansi Data",
