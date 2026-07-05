@@ -1,4 +1,5 @@
 import { getCollection } from 'astro:content';
+import { panduanList } from '../data/panduanEresources';
 
 export async function GET() {
   const berita = await getCollection('berita');
@@ -20,7 +21,14 @@ export async function GET() {
     link: `/berita/${post.slug}`
   }));
 
-  const searchIndex = [...internalPages, ...beritaIndex];
+  const panduanIndex = panduanList.map(panduan => ({
+    title: `Panduan E-Resource: ${panduan.title}`,
+    type: 'panduan',
+    icon: 'flat-color-icons:document',
+    link: panduan.url
+  }));
+
+  const searchIndex = [...internalPages, ...beritaIndex, ...panduanIndex];
 
   return new Response(JSON.stringify(searchIndex), {
     status: 200,
