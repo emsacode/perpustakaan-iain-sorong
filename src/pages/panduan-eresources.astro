@@ -1,0 +1,155 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const panduanList = [
+  { title: "Kompas Data", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1740969216_f22a11c5a3d7efb7375d.pdf" },
+  { title: "Tempo Data", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1760589307_0dd48106a35717c2fd76.pdf" },
+  { title: "Kompas.id", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1741051222_1218e67a523a051d68ed.pdf" },
+  { title: "Online library of open access books", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1710313660_87821206ccb6ec3cfb6d.pdf" },
+  { title: "Directory of Open Access Journals - DOAJ", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1721112095_cb24b08f55a134eae34d.pdf" },
+  { title: "Open University Press MGH IP Access Portal", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1650245540_d89b2b91b17f4e761aed.pdf" },
+  { title: "OpenStax", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1715054380_5791f41b33e8c2222bbd.pdf" },
+  { title: "Access Science", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1645779631_0aaad2c2b7f58dc88dc9.pdf" },
+  { title: "Taylor & Francis E-Book", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1645493203_8e18006c9c06cbd36094.pdf" },
+  { title: "World Scientific", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644830180_dff4f984d3c4e9d4158a.pdf" },
+  { title: "Bloomsbury Collections", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644549754_2cb0b3f3a8d480035e81.pdf" },
+  { title: "e-Book Sage", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644812496_8bfb89a18f2776e971e3.pdf" },
+  { title: "LexisNexis-LexRead", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644633170_3429ccc38f9b9c46612c.pdf" },
+  { title: "Lexis Nexis eJournal", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1645071777_feed94da129b205c4ebb.pdf" },
+  { title: "[neliti] Repositori Studi Kebijakan Indonesia", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644551326_8fd3062e782e11e1423f.pdf" },
+  { title: "Wiley Online Book", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644550737_d4bdd483a8a09064e00a.pdf" },
+  { title: "Britannica Library", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644549937_7a59765485c8d18cf620.pdf" },
+  { title: "Cambridge University Press", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644551245_4a49888cafb70d5f40d6.pdf" },
+  { title: "ScienceDirect", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644631083_d7e54ba2855a37648e17.pdf" },
+  { title: "Wiley Online Library", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644551790_2bf048adb9938bc2bf1f.pdf" },
+  { title: "Springer Nature", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644551390_310115d60500283293e5.pdf" },
+  { title: "McGraw Hill", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644563061_09c4074088514c777950.pdf" },
+  { title: "CABI", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644562923_e10145844cd2e623092e.pdf" },
+  { title: "Emerald Insight", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644551276_0148d4d8b31a3e24f65f.pdf" },
+  { title: "Britannica Ebooks", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1645071365_a2c0b43b876846f89eb9.pdf" },
+  { title: "Taylor and Francis", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1645062268_a4d1b1c5c9fd56d04f9d.pdf" },
+  { title: "IGI Global", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644550511_9ecd87d2a23dccadbdec.pdf" },
+  { title: "Balai Pustaka", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1590125750_b4d6a9bad8bec05b92b0.pdf" },
+  { title: "Cengage Learning", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644914117_84b912e912af05534763.pdf" },
+  { title: "Ebsco Host", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644563015_8f282cd584f8278b17c4.pdf" },
+  { title: "IG Publishing", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644825139_07889415f6296dbbf5c5.pdf" },
+  { title: "ebrary", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1645070543_ab9504719fe06647dc41.pdf" },
+  { title: "Alexander Street Press", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1590125917_b1c396f12cf8b5ac9c94.pdf" },
+  { title: "Alexander Street Video", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644549587_686c8c384940e139001e.pdf" },
+  { title: "Brill", url: "https://e-resources.perpusnas.go.id/assets/terbitan/panduan/1644562834_e8e69e613be6fc86e427.pdf" }
+];
+---
+
+<Layout title="Panduan E-Resources - Perpustakaan IAIN Sorong">
+  <Header />
+  
+  <main class="bg-[#FAF9F6] min-h-screen pb-16 font-sans text-slate-700">
+    <!-- Hero Banner Section -->
+    <div class="bg-gradient-to-r from-[#0B4226] to-[#168940] text-white py-10 md:py-14 border-b border-emerald-800">
+      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex gap-2 text-xs text-[#BBF7D0] mb-3 font-medium">
+          <a href="/" class="hover:underline">Beranda</a>
+          <span>/</span>
+          <span class="text-white">Panduan E-Resources</span>
+        </nav>
+        <h1 class="text-2xl md:text-4xl font-serif font-bold tracking-tight mb-3">
+          Panduan Penggunaan E-Resources
+        </h1>
+        <p class="text-sm md:text-base text-[#BBF7D0] max-w-3xl leading-relaxed font-serif">
+          Akses panduan langkah demi langkah menggunakan berbagai sumber daya elektronik (e-resources) dari Perpusnas dan mitra perpustakaan untuk mempermudah riset dan pembelajaran Anda.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+      
+      <!-- GRID PANDUAN -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {panduanList.map((item, index) => (
+          <div 
+            class="epaper-card group flex items-start gap-4 p-5 bg-white rounded-2xl shadow-sm border border-slate-200/60 hover:shadow-md hover:border-[#168940]/40 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+            data-source={item.url}
+            data-title={item.title}
+            role="button"
+            tabindex="0"
+          >
+            <div class="flex-shrink-0 w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors duration-300 shadow-sm border border-red-100">
+              <iconify-icon icon="lucide:file-text" width="1.5rem"></iconify-icon>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-[#0B4226] text-[15px] leading-snug group-hover:text-[#168940] transition-colors mb-1.5">
+                {item.title}
+              </h3>
+              <div class="flex items-center gap-1 text-xs text-slate-400 font-medium group-hover:text-[#168940]/70 transition-colors">
+                <span>Buka Panduan PDF</span>
+                <iconify-icon icon="lucide:arrow-right" width="0.8rem"></iconify-icon>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+    </div>
+  </main>
+  
+  <Footer />
+
+  <!-- DFlip Dependencies for PDF reading -->
+  <link href="https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/css/dflip.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/css/themify-icons.min.css" rel="stylesheet" type="text/css">
+  <script is:inline src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script is:inline>
+    window.dFlipLocation = "https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/";
+  </script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/js/dflip.min.js"></script>
+  
+  <script is:inline>
+    if (window.DFLIP && window.DFLIP.defaults) {
+      Object.assign(window.DFLIP.defaults, {
+        webgl: true,
+        zoomRatio: 1.5,
+        autoEnableOutline: false,
+        autoEnableThumbnail: true,
+        backgroundColor: "#FAF9F6",
+        threejsSrc: "https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/js/libs/three.min.js",
+        soundFile: "https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/sound/turn2.mp3"
+      });
+    }
+  </script>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.epaper-card');
+      
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          const pdfUrl = card.getAttribute('data-source');
+          const title = card.getAttribute('data-title');
+          if (pdfUrl) {
+            // Check if DFLIP is available globally
+            if (window.DFLIP && typeof window.DFLIP.showLightbox === 'function') {
+              window.DFLIP.showLightbox(pdfUrl, {
+                title: title || 'Panduan PDF',
+                webgl: true
+              });
+            } else {
+              // Fallback if DFLIP fails to load
+              window.open(pdfUrl, '_blank');
+            }
+          }
+        });
+
+        // Keyboard accessibility
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            (card as HTMLElement).click();
+          }
+        });
+      });
+    });
+  </script>
+</Layout>
