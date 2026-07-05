@@ -68,13 +68,13 @@ const panduanList = [
       
       <!-- GRID PANDUAN -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {panduanList.map((item, index) => (
-          <div 
-            class="epaper-card group flex items-start gap-4 p-5 bg-white rounded-2xl shadow-sm border border-slate-200/60 hover:shadow-md hover:border-[#168940]/40 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
-            data-source={item.url}
-            data-title={item.title}
-            role="button"
-            tabindex="0"
+        {panduanList.map((item) => (
+          <a 
+            href={item.url}
+            target="_blank"
+            class="_df_button group flex items-start gap-4 p-5 bg-white rounded-2xl shadow-sm border border-slate-200/60 hover:shadow-md hover:border-[#168940]/40 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+            source={item.url}
+            title={item.title}
           >
             <div class="flex-shrink-0 w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors duration-300 shadow-sm border border-red-100">
               <iconify-icon icon="lucide:file-text" width="1.5rem"></iconify-icon>
@@ -88,7 +88,7 @@ const panduanList = [
                 <iconify-icon icon="lucide:arrow-right" width="0.8rem"></iconify-icon>
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
       
@@ -118,38 +118,5 @@ const panduanList = [
         soundFile: "https://cdn.jsdelivr.net/npm/@dearhive/dearflip-jquery-flipbook@1.7.3/dflip/sound/turn2.mp3"
       });
     }
-  </script>
-
-  <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.epaper-card');
-      
-      cards.forEach(card => {
-        card.addEventListener('click', () => {
-          const pdfUrl = card.getAttribute('data-source');
-          const title = card.getAttribute('data-title');
-          if (pdfUrl) {
-            // Check if DFLIP is available globally
-            if (window.DFLIP && typeof window.DFLIP.showLightbox === 'function') {
-              window.DFLIP.showLightbox(pdfUrl, {
-                title: title || 'Panduan PDF',
-                webgl: true
-              });
-            } else {
-              // Fallback if DFLIP fails to load
-              window.open(pdfUrl, '_blank');
-            }
-          }
-        });
-
-        // Keyboard accessibility
-        card.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            (card as HTMLElement).click();
-          }
-        });
-      });
-    });
   </script>
 </Layout>
