@@ -210,29 +210,10 @@ const currentYear = new Date().getFullYear();
   <script is:inline>
     async function fetchVisitorStats() {
       try {
-        const authResponse = await fetch('https://api.emsacode.com/oauth/token', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({
-            grant_type: 'client_credentials',
-            client_id: 'app-brim',
-            client_secret: 'demo-secret-brim-001'
-          })
-        });
-        
-        if (!authResponse.ok) {
-          throw new Error(`Auth failed with status ${authResponse.status}`);
-        }
-        
-        const authData = await authResponse.json();
-        const token = authData.access_token;
-        
-        const statsResponse = await fetch('https://api.emsacode.com/api/v1/analytics/visitors', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        const statsResponse = await fetch('/api/live-analytics.json');
         
         if (!statsResponse.ok) {
-          throw new Error(`API failed with status ${statsResponse.status}`);
+          throw new Error(`Local API failed with status ${statsResponse.status}`);
         }
         
         const statsData = await statsResponse.json();
@@ -266,8 +247,10 @@ const currentYear = new Date().getFullYear();
       }
     }
     
-    // Call the function directly since we use is:inline
+    // Panggilan pertama saat dimuat
     fetchVisitorStats();
+    // Sinkronisasi otomatis tiap 2 menit
+    setInterval(fetchVisitorStats, 120000);
   </script>
 </footer>
 

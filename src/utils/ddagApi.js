@@ -87,5 +87,6 @@ export const ddagApi = {
   getTheses: (limit = 10, page = 1) => fetchFromGateway("/api/v1/library/repository", { limit, page }),
   getJournals: (limit = 10, page = 1) => fetchFromGateway("/api/v1/library/journals", { limit, page }),
   getStats: () => fetchFromGateway("/api/v1/library/stats"),
+  getAnalytics: () => fetchFromGateway("/api/v1/analytics/visitors"),
   logDownloadEvent: () => fetchFromGateway("/api/v1/library/stats/download-event", {}, { method: "POST" })
 };
