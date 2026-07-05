@@ -207,7 +207,7 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
   </div>
-  <script>
+  <script is:inline>
     async function fetchVisitorStats() {
       try {
         const authResponse = await fetch('https://api.emsacode.com/oauth/token', {
@@ -219,14 +219,22 @@ const currentYear = new Date().getFullYear();
             client_secret: 'demo-secret-brim-001'
           })
         });
-        if (!authResponse.ok) return;
+        
+        if (!authResponse.ok) {
+          throw new Error(`Auth failed with status ${authResponse.status}`);
+        }
+        
         const authData = await authResponse.json();
         const token = authData.access_token;
         
         const statsResponse = await fetch('https://api.emsacode.com/api/v1/analytics/visitors', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
-        if (!statsResponse.ok) return;
+        
+        if (!statsResponse.ok) {
+          throw new Error(`API failed with status ${statsResponse.status}`);
+        }
+        
         const statsData = await statsResponse.json();
         const data = statsData.data;
         
@@ -242,7 +250,6 @@ const currentYear = new Date().getFullYear();
           const elHariIni = document.getElementById('ga-hari-ini');
           if (elHariIni && data.hari_ini !== undefined) elHariIni.innerText = format(data.hari_ini);
           
-          // Note: Retaining the ping animation child elements
           const elOnline = document.getElementById('ga-online');
           if (elOnline && data.online !== undefined) {
             elOnline.innerHTML = `
@@ -255,11 +262,11 @@ const currentYear = new Date().getFullYear();
           }
         }
       } catch (error) {
-        console.error("Failed to fetch GA visitor stats on frontend", error);
+        console.error("Gagal memuat statistik GA4:", error);
       }
     }
     
-    document.addEventListener('DOMContentLoaded', fetchVisitorStats);
+    // Call the function directly since we use is:inline
     fetchVisitorStats();
   </script>
 </footer>
