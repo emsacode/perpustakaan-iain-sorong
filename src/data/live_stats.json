@@ -4,9 +4,9 @@
   "jurnal_ilmiah": 1072,
   "dokumen_skripsi": 68,
   "total_anggota": 1056,
-  "pengunjung_fisik": 1,
-  "peminjaman_buku": 0,
+  "pengunjung_fisik": 21,
+  "peminjaman_buku": 1,
   "akses_koleksi_digital": 3071,
-  "last_updated": "2026-07-05T15:07:45.507Z",
+  "last_updated": "2026-07-06T08:53:29.585Z",
   "status": "live"
 }
