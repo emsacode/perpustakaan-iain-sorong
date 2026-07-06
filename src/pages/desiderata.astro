@@ -3,16 +3,16 @@ import LayoutSidebar from '../layouts/LayoutSidebar.astro';
 
 const sidebarMenu = {
     title: "Literasi & Publikasi",
-    items: [{"label": "Kelas Literasi & HONAI", "href": "/literasi"}, {"label": "Turnitin", "href": "/turnitin"}, {"label": "Desiderata", "href": "/desiderata"}]
+    items: [{"label": "Kelas Literasi & HONAI", "href": "/literasi"}, {"label": "Turnitin", "href": "/turnitin"}, {"label": "Usulan Buku", "href": "/desiderata"}]
 };
 ---
 
-<LayoutSidebar title="Desiderata" sidebarMenu={sidebarMenu}>
+<LayoutSidebar title="Usulan Buku" sidebarMenu={sidebarMenu}>
     
     <div class="mb-10 text-left">
         <h2 class="text-2xl font-semibold text-[#222222] mb-4 tracking-tight">Usulan Pengadaan Koleksi</h2>
         <p class="font-serif text-[15px] text-[#444444] leading-relaxed">
-            Punya rekomendasi buku bagus yang belum ada di perpustakaan? Jangan ragu untuk mengisi formulir <strong>Desiderata</strong> di bawah ini agar kami dapat merencanakan pengadaannya.
+            Punya rekomendasi buku bagus yang belum ada di perpustakaan? Jangan ragu untuk mengisi formulir <strong>Usulan Buku</strong> di bawah ini agar kami dapat merencanakan pengadaannya.
         </p>
     </div>
 
@@ -20,8 +20,8 @@ const sidebarMenu = {
     <div class="bg-[#F0FDF4] border border-[#dadada] rounded-[8px] p-5 flex gap-4 items-start mb-8 shadow-sm">
         <iconify-icon icon="flat-color-icons:idea" width="24" class="shrink-0 mt-0.5"></iconify-icon>
         <div>
-            <h4 class="font-semibold text-[#222222] mb-1 m-0">Kenapa Desiderata Penting?</h4>
-            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Sistem Desiderata membantu kami memastikan anggaran pembelian buku tepat sasaran sesuai dengan kebutuhan aktual perkuliahan, riset dosen, maupun minat baca mahasiswa IAIN Sorong.</p>
+            <h4 class="font-semibold text-[#222222] mb-1 m-0">Kenapa Usulan Buku Penting?</h4>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">Sistem Usulan Buku membantu kami memastikan anggaran pembelian buku tepat sasaran sesuai dengan kebutuhan aktual perkuliahan, riset dosen, maupun minat baca mahasiswa IAIN Sorong.</p>
         </div>
     </div>
 
@@ -120,7 +120,7 @@ const sidebarMenu = {
             <!-- Submit -->
             <div class="pt-6 mt-6 border-t border-[#dadada] flex justify-center">
                 <button type="submit" id="des-submit-btn" class="w-full md:w-2/3 bg-[#168940] hover:bg-[#0B4226] text-white font-semibold py-3 px-8 rounded-[4px] transition-colors flex items-center justify-center gap-2 group focus:outline-none focus:ring-[3px] focus:ring-[#EAB308] disabled:opacity-70 disabled:cursor-not-allowed">
-                    <span id="des-btn-text">Kirim Usulan Desiderata</span>
+                    <span id="des-btn-text">Kirim Usulan Buku</span>
                     <iconify-icon id="des-btn-icon" icon="lucide:book-plus" class="group-hover:-translate-y-1 transition-transform" width="18"></iconify-icon>
                     <iconify-icon id="des-btn-spinner" icon="lucide:loader-2" class="animate-spin hidden" width="18"></iconify-icon>
                 </button>
@@ -219,7 +219,7 @@ const sidebarMenu = {
                 alert('Terjadi kesalahan saat mengirim form. Silakan coba lagi.');
                 if (submitBtn && btnText && btnIcon && btnSpinner) {
                     submitBtn.disabled = false;
-                    btnText.textContent = 'Kirim Usulan Desiderata';
+                    btnText.textContent = 'Kirim Usulan Buku';
                     btnIcon.classList.remove('hidden');
                     btnSpinner.classList.add('hidden');
                 }
