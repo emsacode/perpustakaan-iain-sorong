@@ -1,15 +1,26 @@
 ---
-import { getCollection } from 'astro:content';
 import LayoutSidebar from '../../layouts/LayoutSidebar.astro';
 
 export async function getStaticPaths({ paginate }) {
-    const allBerita = await getCollection('berita');
+    const apiBase = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000';
+    const apiUrl = `${apiBase}/api/v1/posts?all=true`;
     
-    // Sort by date descending
-    allBerita.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
-    
-    // Generate pages with 13 items per page (1 featured + 12 grid on page 1)
-    return paginate(allBerita, { pageSize: 13 });
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch articles: ${response.statusText}`);
+        }
+        const allBerita = await response.json();
+        
+        // Sort by date descending
+        allBerita.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+        
+        // Generate pages with 13 items per page (1 featured + 12 grid on page 1)
+        return paginate(allBerita, { pageSize: 13 });
+    } catch (error) {
+        console.error("Error fetching articles from API, using fallback empty array:", error);
+        return paginate([], { pageSize: 13 });
+    }
 }
 
 // All paginated data is passed on the "page" prop
