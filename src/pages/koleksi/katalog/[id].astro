@@ -272,7 +272,7 @@ const coverUrl = (coversData as Record<string, string>)[item.id] || null;
   // Capture click events on download/read buttons to track usage stats
   document.addEventListener('DOMContentLoaded', () => {
     const downloadButtons = document.querySelectorAll('.download-pdf-btn');
-    const API_URL = import.meta.env.PUBLIC_API_URL || "https://api.emsacode.com";
+    const API_URL = import.meta.env.PUBLIC_GATEWAY_URL || "https://api.emsacode.com";
     
     downloadButtons.forEach(btn => {
       btn.addEventListener('click', async () => {

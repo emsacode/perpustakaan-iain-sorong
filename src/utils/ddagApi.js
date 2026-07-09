@@ -1,6 +1,6 @@
 // src/utils/ddagApi.js
 
-const API_URL = import.meta.env.PUBLIC_API_URL || "https://api.emsacode.com";
+const API_URL = import.meta.env.PUBLIC_GATEWAY_URL || "https://api.emsacode.com";
 const CLIENT_ID = import.meta.env.API_CLIENT_ID || "app-brim";
 const CLIENT_SECRET = import.meta.env.API_CLIENT_SECRET || "demo-secret-brim-001";
 
