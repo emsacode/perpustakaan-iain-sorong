@@ -5,6 +5,8 @@ import Footer from '../../../components/Footer.astro';
 import catalogData from '../../../data/catalog.json';
 import coversData from '../../../data/covers.json';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   return catalogData.map(item => ({
     params: { id: item.id },
