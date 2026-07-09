@@ -1,0 +1,56 @@
+---
+import LayoutSidebar from '../../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Fasilitas Ruangan",
+    items: [
+        {"label": "Lantai 1", "href": "/fasilitas/lantai-1"},
+        {"label": "Lantai 2", "href": "/fasilitas/lantai-2"},
+        {"label": "Lantai 3", "href": "/fasilitas/lantai-3"},
+        {"label": "Reservasi Ruangan", "href": "/reservasi"}
+    ]
+};
+---
+
+<LayoutSidebar title="Fasilitas Lantai 3" sidebarMenu={sidebarMenu}>
+    
+    <div class="mb-8">
+        <p class="font-serif text-[15px] text-[#444444] leading-relaxed m-0 max-w-3xl">Area bersantai, pertemuan, dan ruang terbuka di atas gedung perpustakaan.</p>
+    </div>
+
+    <!-- Fasilitas Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:voice-presentation"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Pertemuan</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Fasilitas ruang serbaguna yang representatif, difungsikan secara khusus untuk menunjang berbagai agenda kegiatan seperti rapat koordinasi, diskusi kelompok, seminar skala kecil, hingga _workshop_.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:shop"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Kantin / Cafetaria</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Area rehat yang nyaman dengan berbagai sajian makanan dan minuman ringan. Menjadi tempat favorit pemustaka untuk beristirahat sejenak, memulihkan energi, dan berinteraksi dalam suasana yang lebih santai.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:landscape"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Rooftop</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Ruang komunal terbuka di puncak gedung perpustakaan. Menyuguhkan sirkulasi udara segar dan pandangan yang luas, sangat ideal digunakan sivitas akademika untuk bersantai maupun mencari inspirasi.
+            </p>
+        </div>
+
+    </div>
+
+</LayoutSidebar>

@@ -3,7 +3,12 @@ import LayoutSidebar from '../../layouts/LayoutSidebar.astro';
 
 const sidebarMenu = {
     title: "Fasilitas Ruangan",
-    items: [{"label": "Lantai 1", "href": "/fasilitas/lantai-1"}, {"label": "Lantai Atas", "href": "/fasilitas/lantai-atas"}, {"label": "Reservasi Ruangan", "href": "/reservasi"}]
+    items: [
+        {"label": "Lantai 1", "href": "/fasilitas/lantai-1"},
+        {"label": "Lantai 2", "href": "/fasilitas/lantai-2"},
+        {"label": "Lantai 3", "href": "/fasilitas/lantai-3"},
+        {"label": "Reservasi Ruangan", "href": "/reservasi"}
+    ]
 };
 ---
 
@@ -16,47 +21,113 @@ const sidebarMenu = {
     <!-- Fasilitas Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- Pojok Baca -->
         <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
             <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
-                <iconify-icon icon="flat-color-icons:vip" ></iconify-icon>
+                <iconify-icon icon="flat-color-icons:lock"></iconify-icon>
             </div>
-            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Pojok Baca & Lobi</h3>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Loker</h3>
             <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
-                Ruang santai dengan interior minimalis, dilengkapi kursi sofa empuk. Sangat cocok bagi Anda untuk membaca koran nasional terbaru atau majalah.
+                Tempat penyimpanan tas dan barang bawaan pengunjung. Disediakan secara khusus agar area membaca perpustakaan tetap rapi, nyaman, dan barang bawaan Anda terjamin keamanannya.
             </p>
         </div>
 
-        <!-- Loker -->
         <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
             <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
-                <iconify-icon icon="flat-color-icons:lock" ></iconify-icon>
+                <iconify-icon icon="flat-color-icons:bookmark"></iconify-icon>
             </div>
-            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Loker Otomatis</h3>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Pengolahan Bahan Pustaka</h3>
             <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
-                Tersedia lebih dari 100 laci penitipan barang (loker) yang menggunakan sistem kunci presisi untuk menjamin keamanan tas dan jaket Anda.
+                Pusat kerja di balik layar, tempat dilakukannya serangkaian proses penting seperti katalogisasi, klasifikasi, pelabelan, hingga penataan koleksi secara fisik sebelum dilayankan kepada publik.
             </p>
         </div>
 
-        <!-- Ruang Laktasi -->
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:print"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Fotocopy</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Layanan mandiri untuk kebutuhan fotokopi dan penggandaan dokumen rujukan. Dirancang untuk membantu kelancaran akses referensi akademik para sivitas akademika.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:water"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Mushola</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Fasilitas tempat ibadah yang senantiasa dijaga kebersihan dan kenyamanannya, didedikasikan bagi para pengunjung maupun staf operasional perpustakaan.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:conference-call"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Meeting</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Ruang pertemuan yang difungsikan sebagai pusat koordinasi internal. Sering digunakan untuk rapat rutin, diskusi, dan pembinaan pengembangan layanan perpustakaan.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:reading"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Pojok Baca</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Area dengan suasana yang lebih santai dan rileks. Tempat yang sangat tenang, kondusif, dan nyaman bagi pengunjung untuk membaca buku favoritnya.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:clock"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Tunggu</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Area persinggahan bagi pemustaka yang sedang menunggu giliran pelayanan, atau sekadar beristirahat dengan suasana ruangan yang nyaman dan sejuk.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:manager"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Kepala Perpustakaan</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Pusat manajemen dan administrasi di mana berbagai langkah koordinasi, serta pengambilan keputusan strategis terkait pengembangan layanan perpustakaan dilakukan.
+            </p>
+        </div>
+
         <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
             <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-blue-600 mb-4 border border-[#dadada] group-hover:border-blue-200">
-                <iconify-icon icon="flat-color-icons:like" ></iconify-icon>
+                <iconify-icon icon="flat-color-icons:like"></iconify-icon>
             </div>
-            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Fasilitas Inklusif</h3>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Laktasi</h3>
             <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
-                Dilengkapi dengan Ruang Laktasi (Menyusui) yang tertutup rapat dan privat. Terdapat juga jalur landai khusus kursi roda di area depan.
+                Fasilitas ruang privat yang dirancang untuk memberikan kenyamanan dan keamanan khusus bagi ibu menyusui di lingkungan perpustakaan.
             </p>
         </div>
 
-        <!-- Musala -->
         <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
-            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-amber-600 mb-4 border border-[#dadada] group-hover:border-amber-200">
-                <iconify-icon icon="flat-color-icons:water" ></iconify-icon>
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:collaborator-male"></iconify-icon>
             </div>
-            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Musala & Tempat Wudu</h3>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Staf</h3>
             <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
-                Menyediakan musala mini yang sejuk, lengkap dengan tempat wudu bersih agar ibadah tetap terjaga tanpa harus keluar dari gedung.
+                Pusat operasional dan tata usaha, di mana para staf perpustakaan menjalankan tugas administrasi harian, manajemen layanan, serta pengelolaan institusi perpustakaan.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:webcam"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Server dan CCTV</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Pusat kontrol infrastruktur keamanan dan jaringan perpustakaan. Berfungsi sebagai area pengawasan area membaca melalui CCTV serta pangkalan data server lokal.
             </p>
         </div>
 

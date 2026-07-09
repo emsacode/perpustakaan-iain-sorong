@@ -1,12 +1,12 @@
 {
-  "eksemplar_buku": 11476,
-  "judul_buku": 3631,
-  "jurnal_ilmiah": 1072,
+  "eksemplar_buku": 11480,
+  "judul_buku": 3633,
+  "jurnal_ilmiah": 1075,
   "dokumen_skripsi": 68,
-  "total_anggota": 1056,
-  "pengunjung_fisik": 21,
-  "peminjaman_buku": 1,
+  "total_anggota": 1057,
+  "pengunjung_fisik": 14,
+  "peminjaman_buku": 0,
   "akses_koleksi_digital": 3071,
-  "last_updated": "2026-07-06T09:03:57.081Z",
+  "last_updated": "2026-07-09T10:24:14.416Z",
   "status": "live"
 }

@@ -1,6 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
-
 const parseIndoDate = (dateStr: string) => {
   const months: Record<string, number> = {
     'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5,
@@ -16,10 +14,22 @@ const parseIndoDate = (dateStr: string) => {
   return new Date(0);
 };
 
-const berita = await getCollection('berita');
-const sortedBerita = berita
-  .sort((a, b) => parseIndoDate(b.data.date).getTime() - parseIndoDate(a.data.date).getTime())
-  .slice(0, 3);
+let sortedBerita = [];
+try {
+  const apiBase = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000';
+  const apiUrl = `${apiBase}/api/v1/posts?all=true`;
+  const response = await fetch(apiUrl);
+  if (response.ok) {
+    const allBerita = await response.json();
+    sortedBerita = allBerita
+      .sort((a: any, b: any) => parseIndoDate(b.data.date).getTime() - parseIndoDate(a.data.date).getTime())
+      .slice(0, 3);
+  } else {
+    console.error(`Failed to fetch articles: ${response.statusText}`);
+  }
+} catch (error) {
+  console.error("Error fetching articles from API, using fallback empty array:", error);
+}
 ---
 <section id="berita" class="py-16 bg-white border-b border-[#dadada]">
   <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">

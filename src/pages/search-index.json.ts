@@ -10,8 +10,9 @@ export async function GET() {
     { title: 'Visi dan Misi Perpustakaan', type: 'informasi', icon: 'flat-color-icons:document', link: '/visi-misi' },
     { title: 'Struktur Organisasi Perpustakaan', type: 'informasi', icon: 'flat-color-icons:document', link: '/struktur' },
     { title: 'Profil Singkat Perpustakaan', type: 'informasi', icon: 'flat-color-icons:document', link: '/profil' },
-    { title: 'Fasilitas: Ruang Loker, Laktasi, & Multimedia Lantai 1', type: 'fasilitas', icon: 'flat-color-icons:department', link: '/fasilitas/lantai-1' },
-    { title: 'Fasilitas: Ruang Home Theater & Referensi Lantai Atas', type: 'fasilitas', icon: 'flat-color-icons:department', link: '/fasilitas/lantai-atas' },
+    { title: 'Fasilitas: Loker, Mushola, Meeting, Pojok Baca - Lantai 1', type: 'fasilitas', icon: 'flat-color-icons:department', link: '/fasilitas/lantai-1' },
+    { title: 'Fasilitas: Ruang Baca, Multimedia, Koleksi, Home Teater - Lantai 2', type: 'fasilitas', icon: 'flat-color-icons:department', link: '/fasilitas/lantai-2' },
+    { title: 'Fasilitas: Ruang Pertemuan, Kantin, Rooftop - Lantai 3', type: 'fasilitas', icon: 'flat-color-icons:department', link: '/fasilitas/lantai-3' },
   ];
 
   const beritaIndex = berita.map(post => ({

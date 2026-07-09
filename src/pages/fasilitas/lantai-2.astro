@@ -1,0 +1,86 @@
+---
+import LayoutSidebar from '../../layouts/LayoutSidebar.astro';
+
+const sidebarMenu = {
+    title: "Fasilitas Ruangan",
+    items: [
+        {"label": "Lantai 1", "href": "/fasilitas/lantai-1"},
+        {"label": "Lantai 2", "href": "/fasilitas/lantai-2"},
+        {"label": "Lantai 3", "href": "/fasilitas/lantai-3"},
+        {"label": "Reservasi Ruangan", "href": "/reservasi"}
+    ]
+};
+---
+
+<LayoutSidebar title="Fasilitas Lantai 2" sidebarMenu={sidebarMenu}>
+    
+    <div class="mb-8">
+        <p class="font-serif text-[15px] text-[#444444] leading-relaxed m-0 max-w-3xl">Area koleksi utama dan ruang belajar yang tenang untuk mendukung kegiatan akademik Anda.</p>
+    </div>
+
+    <!-- Fasilitas Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:reading"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Baca</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Area studi sentral dengan suasana yang tenang dan kondusif. Menyediakan ruang yang luas dan nyaman bagi sivitas akademika untuk membaca, belajar mandiri, atau berdiskusi sembari didukung oleh akses langsung ke koleksi buku yang lengkap.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:multiple-devices"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Multimedia</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Fasilitas modern yang terintegrasi dengan perangkat teknologi informasi dan jaringan. Difungsikan secara khusus untuk menunjang kegiatan pembelajaran, penelusuran digital, serta keperluan presentasi akademik.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:books"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Koleksi</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Pusat penyimpanan utama untuk koleksi buku dan berbagai bahan pustaka. Seluruh koleksi diklasifikasikan dan ditata secara sistematis di rak untuk memudahkan proses temu kembali informasi oleh pemustaka.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:video-projector"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Home Teater</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Fasilitas pemutaran audio-visual yang nyaman untuk menonton film edukasi, dokumenter, dan tayangan akademik. Bertujuan untuk memperkaya wawasan serta menghadirkan pengalaman belajar yang lebih interaktif.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:dictionary"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Referensi</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Area rujukan akademik yang secara khusus menyediakan koleksi referensi tidak untuk dipinjamkan, mencakup kamus, ensiklopedia, jurnal ilmiah, hingga berbagai kumpulan karya ilmiah mahasiswa dan dosen.
+            </p>
+        </div>
+
+        <div class="bg-white rounded-[8px] p-6 border border-[#dadada] shadow-sm hover:shadow-md hover:border-[#BBF7D0] transition-all group">
+            <div class="w-12 h-12 bg-[#F0FDF4] rounded-[8px] flex items-center justify-center text-[#168940] mb-4 border border-[#dadada] group-hover:border-[#BBF7D0]">
+                <iconify-icon icon="flat-color-icons:refresh"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-semibold text-[#222222] mb-2 m-0 tracking-tight">Ruang Sirkulasi</h3>
+            <p class="font-serif text-sm text-[#444444] leading-relaxed m-0">
+                Pusat layanan sirkulasi yang menjadi garda terdepan perpustakaan. Melayani seluruh transaksi peminjaman, pengembalian koleksi, perpanjangan, serta penyediaan informasi umum untuk mendukung layanan perpustakaan.
+            </p>
+        </div>
+
+    </div>
+
+</LayoutSidebar>
