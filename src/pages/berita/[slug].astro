@@ -5,7 +5,7 @@ import Footer from '../../components/Footer.astro';
 
 export async function getStaticPaths() {
   const apiBase = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000';
-  const apiUrl = `${apiBase}/api/v1/posts?all=true`;
+  const apiUrl = `${apiBase}/api/v1/berita?all=true`;
   
   try {
     const response = await fetch(apiUrl);
