@@ -14,7 +14,7 @@ const sidebarMenu = {
 // Fetch dynamic FAQs from Laravel API
 let apiFaqs = null;
 try {
-    const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/faqs');
+    const response = await fetch((import.meta.env.PUBLIC_API_URL || 'https://dash-perpus.emsacode.com') + '/api/v1/faqs');
     if (response.ok) {
         const data = await response.json();
         if (data && data.length > 0) {

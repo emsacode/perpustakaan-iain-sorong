@@ -9,7 +9,7 @@ const sidebarMenu = {
 // Fetch dynamic page from Laravel API
 let pageData = null;
 try {
-    const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/pages/tata-tertib');
+    const response = await fetch((import.meta.env.PUBLIC_API_URL || 'https://dash-perpus.emsacode.com') + '/api/v1/pages/tata-tertib');
     if (response.ok) {
         pageData = await response.json();
     }

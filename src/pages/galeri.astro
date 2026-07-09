@@ -13,7 +13,7 @@ const sidebarMenu = {
 // Fetch dynamic galleries from Laravel API
 let apiGalleries = null;
 try {
-    const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/galleries');
+    const response = await fetch((import.meta.env.PUBLIC_API_URL || 'https://dash-perpus.emsacode.com') + '/api/v1/galleries');
     if (response.ok) {
         const data = await response.json();
         if (data && data.length > 0) {

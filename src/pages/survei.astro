@@ -187,7 +187,7 @@ const likertScale = [
                     feedback: `Status: ${formData.get('status')}, ID: ${formData.get('id_pengguna')}, Fak: ${formData.get('fakultas') || '-'}, Saran: ${formData.get('saran') || '-'}`
                 };
 
-                const response = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/surveys', {
+                const response = await fetch((import.meta.env.PUBLIC_API_URL || 'https://dash-perpus.emsacode.com') + '/api/v1/surveys', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

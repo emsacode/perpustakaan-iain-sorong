@@ -3,7 +3,7 @@ import LayoutSidebar from '../../layouts/LayoutSidebar.astro';
 const { page: pageParam } = Astro.params;
 const currentPageNum = pageParam ? parseInt(pageParam, 10) : 1;
 
-const apiBase = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000';
+const apiBase = import.meta.env.PUBLIC_API_URL || 'https://dash-perpus.emsacode.com';
 const apiUrl = `${apiBase}/api/v1/berita?page=${currentPageNum}`;
 
 let page = {

@@ -361,7 +361,7 @@ import Footer from '../../../components/Footer.astro';
 
       try {
         // Fetch from local Laravel proxy endpoint to bypass CORS and hide API secrets
-        const dataResponse = await fetch((import.meta.env.PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1/newspapers');
+        const dataResponse = await fetch((import.meta.env.PUBLIC_API_URL || 'https://dash-perpus.emsacode.com') + '/api/v1/newspapers');
 
         if (!dataResponse.ok) throw new Error('Data fetch failed');
         const result = await dataResponse.json();
