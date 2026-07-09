@@ -2,10 +2,12 @@
 let sortedBerita = [];
 try {
   const apiBase = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000';
-  const apiUrl = `${apiBase}/api/v1/berita?all=true`;
+  const apiUrl = `${apiBase}/api/v1/berita`;
   const response = await fetch(apiUrl);
   if (response.ok) {
-    const allBerita = await response.json();
+    const jsonResponse = await response.json();
+    // Gunakan data dari struktur paginasi Laravel (.data)
+    const allBerita = jsonResponse.data || [];
     sortedBerita = allBerita
       .sort((a: any, b: any) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
       .slice(0, 3);
