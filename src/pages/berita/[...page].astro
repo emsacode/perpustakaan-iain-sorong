@@ -4,12 +4,10 @@ const { page: pageParam } = Astro.params;
 
 let currentPageNum = 1;
 if (pageParam) {
-    if (pageParam.startsWith('page/')) {
-        currentPageNum = parseInt(pageParam.substring(5), 10) || 1;
-    } else {
-        currentPageNum = parseInt(pageParam, 10) || 1;
-    }
+    const match = pageParam.match(/^(?:page\/)?(\d+)$/);
+    currentPageNum = match ? parseInt(match[1], 10) : 1;
 }
+currentPageNum = Math.max(1, currentPageNum);
 
 const apiBase = import.meta.env.PUBLIC_API_URL || 'https://dash-perpus.emsacode.com';
 const apiUrl = `${apiBase}/api/v1/berita?page=${currentPageNum}`;
